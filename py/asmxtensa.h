@@ -29,8 +29,6 @@
 #include "py/misc.h"
 #include "py/asmbase.h"
 
-extern "C"
-{
 
 // calling conventions:
 // up to 6 args in a2-a7
@@ -411,5 +409,4 @@ void asm_xtensa_call_ind_win(asm_xtensa_t *as, uint idx);
 
 #endif // GENERIC_ASM_API
 
-}
 #endif // MICROPY_INCLUDED_PY_ASMXTENSA_H

@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "*.xc": "cpp",
+        "gc.h": "c"
+    }
+}

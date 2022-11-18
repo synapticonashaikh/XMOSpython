@@ -16,7 +16,7 @@ build/uart_core.o: uart_core.c /usr/include/newlib/unistd.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h \
  /usr/include/newlib/sys/stdio.h /usr/include/newlib/string.h \
  /usr/include/newlib/sys/string.h /usr/include/newlib/stdlib.h \
- /usr/include/newlib/machine/stdlib.h /usr/include/newlib/ctype.h
+ /usr/include/newlib/machine/stdlib.h
 uart_core.c /usr/include/newlib/unistd.h :
  /usr/include/newlib/sys/unistd.h /usr/include/newlib/_ansi.h :
  /usr/include/newlib/newlib.h /usr/include/newlib/_newlib_version.h :
@@ -35,4 +35,4 @@ uart_core.c /usr/include/newlib/unistd.h :
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdarg.h :
  /usr/include/newlib/sys/stdio.h /usr/include/newlib/string.h :
  /usr/include/newlib/sys/string.h /usr/include/newlib/stdlib.h :
- /usr/include/newlib/machine/stdlib.h /usr/include/newlib/ctype.h :
+ /usr/include/newlib/machine/stdlib.h :

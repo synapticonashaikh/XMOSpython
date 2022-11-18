@@ -29,9 +29,6 @@
 #include "py/parse.h"
 #include "py/emitglue.h"
 
-extern "C"
-{
-
 typedef enum {
     ID_INFO_KIND_UNDECIDED,
     ID_INFO_KIND_GLOBAL_IMPLICIT,
@@ -100,5 +97,4 @@ id_info_t *scope_find(scope_t *scope, qstr qstr);
 id_info_t *scope_find_global(scope_t *scope, qstr qstr);
 void scope_check_to_close_over(scope_t *scope, id_info_t *id);
 
-}
 #endif // MICROPY_INCLUDED_PY_SCOPE_H

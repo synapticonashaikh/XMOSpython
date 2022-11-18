@@ -28,8 +28,6 @@
 
 #include "py/obj.h"
 
-extern "C"
-{
 
 // instance object
 // creating an instance of a class makes one of these objects
@@ -55,5 +53,5 @@ mp_obj_t mp_obj_instance_call(mp_obj_t self_in, size_t n_args, size_t n_kw, cons
 // this needs to be exposed for mp_getiter
 mp_obj_t mp_obj_instance_getiter(mp_obj_t self_in, mp_obj_iter_buf_t *iter_buf);
 
-}
+
 #endif // MICROPY_INCLUDED_PY_OBJTYPE_H

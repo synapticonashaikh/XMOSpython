@@ -28,8 +28,6 @@
 
 #include "py/obj.h"
 
-extern "C"
-{
 
 typedef struct _mp_obj_stringio_t {
     mp_obj_base_t base;
@@ -40,5 +38,4 @@ typedef struct _mp_obj_stringio_t {
     mp_obj_t ref_obj;
 } mp_obj_stringio_t;
 
-}
 #endif // MICROPY_INCLUDED_PY_OBJSTRINGIO_H

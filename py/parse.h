@@ -31,8 +31,6 @@
 
 #include "py/obj.h"
 
-extern "C"
-{
 
 struct _mp_lexer_t;
 
@@ -117,5 +115,4 @@ mp_parse_tree_t mp_parse(struct _mp_lexer_t *lex, mp_parse_input_kind_t input_ki
 void mp_parse_tree_clear(mp_parse_tree_t *tree);
 
 
-}
 #endif // MICROPY_INCLUDED_PY_PARSE_H

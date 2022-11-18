@@ -28,8 +28,6 @@
 
 #include "py/mpconfig.h"
 
-extern "C"
-{
 size_t mp_parse_num_base(const char *str, size_t len, int *base);
-}
+
 #endif // MICROPY_INCLUDED_PY_PARSENUMBASE_H

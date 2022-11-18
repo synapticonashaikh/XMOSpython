@@ -29,8 +29,6 @@
 
 #include "py/emitglue.h"
 
-extern "C"
-{
 
 #if MICROPY_PY_SYS_SETTRACE
 
@@ -82,5 +80,5 @@ void mp_prof_print_instr(const byte *ip, mp_code_state_t *code_state);
 
 #endif // MICROPY_PY_SYS_SETTRACE
 
-}
+
 #endif // MICROPY_INCLUDED_PY_PROFILING_H

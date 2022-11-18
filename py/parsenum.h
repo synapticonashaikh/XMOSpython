@@ -30,9 +30,6 @@
 #include "py/lexer.h"
 #include "py/obj.h"
 
-extern "C"
-{
-
 // these functions raise a SyntaxError if lex!=NULL, else a ValueError
 
 mp_obj_t mp_parse_num_integer(const char *restrict str, size_t len, int base, mp_lexer_t *lex);
@@ -50,5 +47,5 @@ static inline mp_obj_t mp_parse_num_complex(const char *str, size_t len, mp_lexe
 #else
 mp_obj_t mp_parse_num_float(const char *str, size_t len, bool allow_imag, mp_lexer_t *lex);
 #endif
-}
+
 #endif // MICROPY_INCLUDED_PY_PARSENUM_H

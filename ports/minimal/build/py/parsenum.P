@@ -20,7 +20,7 @@ build/py/parsenum.o: ../../py/parsenum.c \
  ../../py/objlist.h ../../py/objexcept.h ../../py/objtuple.h \
  build/genhdr/root_pointers.h ../../py/pystack.h ../../py/parsenumbase.h \
  ../../py/parsenum.h ../../py/lexer.h ../../py/reader.h \
- ../../py/smallint.h
+ ../../py/smallint.h /usr/include/newlib/math.h
 ../../py/parsenum.c :
  /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdbool.h :
  /usr/include/newlib/stdlib.h /usr/include/newlib/machine/ieeefp.h :
@@ -43,4 +43,4 @@ build/py/parsenum.o: ../../py/parsenum.c \
  ../../py/objlist.h ../../py/objexcept.h ../../py/objtuple.h :
  build/genhdr/root_pointers.h ../../py/pystack.h ../../py/parsenumbase.h :
  ../../py/parsenum.h ../../py/lexer.h ../../py/reader.h :
- ../../py/smallint.h :
+ ../../py/smallint.h /usr/include/newlib/math.h :

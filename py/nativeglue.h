@@ -31,8 +31,6 @@
 #include "py/persistentcode.h"
 #include "py/stream.h"
 
-extern "C"
-{
 
 typedef enum {
     MP_F_CONST_NONE_OBJ = 0,
@@ -183,5 +181,5 @@ extern const mp_fun_table_t mp_fun_table;
 extern const int mp_fun_table;
 #endif
 
-}
+
 #endif // MICROPY_INCLUDED_PY_NATIVEGLUE_H

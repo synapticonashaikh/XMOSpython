@@ -34,9 +34,6 @@
 
 #include "py/mpconfig.h"
 
-extern "C"
-{
-
 #define MICROPY_NLR_NUM_REGS_X86            (6)
 #define MICROPY_NLR_NUM_REGS_X64            (8)
 #define MICROPY_NLR_NUM_REGS_X64_WIN        (10)
@@ -180,5 +177,4 @@ NORETURN void nlr_jump_fail(void *val);
 
 #endif
 
-}
 #endif // MICROPY_INCLUDED_PY_NLR_H

@@ -29,8 +29,6 @@
 #include "py/bc.h"
 #include "py/obj.h"
 
-extern "C"
-{
 
 typedef struct _mp_obj_fun_bc_t {
     mp_obj_base_t base;
@@ -51,5 +49,5 @@ mp_obj_t mp_obj_new_fun_native(const mp_obj_t *def_args, const void *fun_data, c
 mp_obj_t mp_obj_new_fun_asm(size_t n_args, const void *fun_data, mp_uint_t type_sig);
 void mp_obj_fun_bc_attr(mp_obj_t self_in, qstr attr, mp_obj_t *dest);
 
-}
+
 #endif // MICROPY_INCLUDED_PY_OBJFUN_H

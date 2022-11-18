@@ -29,9 +29,6 @@
 
 #include "py/obj.h"
 
-extern "C"
-{
-
 // Used only for memoryview types, set in "typecode" to indicate a writable memoryview
 #define MP_OBJ_ARRAY_TYPECODE_FLAG_RW (0x80)
 
@@ -67,5 +64,4 @@ MP_DECLARE_CONST_FUN_OBJ_2(mp_obj_array_append_obj);
 MP_DECLARE_CONST_FUN_OBJ_2(mp_obj_array_extend_obj);
 #endif
 
-}
 #endif // MICROPY_INCLUDED_PY_OBJARRAY_H

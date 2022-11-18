@@ -29,8 +29,6 @@
 
 #include "py/runtime.h"
 
-extern "C"
-{
 
 // bytecode layout:
 //
@@ -338,5 +336,4 @@ static inline size_t mp_bytecode_get_source_line(const byte *line_info, const by
     return source_line;
 }
 
-}
 #endif // MICROPY_INCLUDED_PY_BC_H

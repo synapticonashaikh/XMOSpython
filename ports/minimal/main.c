@@ -9,7 +9,7 @@
 #include "py/gc.h"
 #include "py/mperrno.h"
 #include "shared/runtime/pyexec.h"
-#include "STdriver.h"
+//#include "STdriver.h"
 
 //this heap memroy stores the data
 #define _STATIC_HEAP_SIZE  (uint16_t)3072
@@ -45,7 +45,8 @@ static char *stack_top;
 #endif
 
 int main(int argc, char **argv) 
-{
+//int mp_main(void) 
+{ 
     int stack_dummy;
     stack_top = (char *)&stack_dummy;
 
@@ -53,8 +54,9 @@ int main(int argc, char **argv)
     gc_init(heap, heap + sizeof(heap));
     #endif
     mp_init();
-    //do_str("print('hello world!', list(x+1 for x in range(10)), end='eol\\n')", MP_PARSE_SINGLE_INPUT);
-    //do_str("for i in range(10):\r\n  print(i)", MP_PARSE_FILE_INPUT);    
+    do_str("print('hello world!', list(x+1 for x in range(10)), end='eol\\n')", MP_PARSE_SINGLE_INPUT);
+    do_str("for i in range(10):\r\n  print(i)", MP_PARSE_FILE_INPUT); 
+    do_str("3 * 5", MP_PARSE_FILE_INPUT);        
     #if MICROPY_ENABLE_COMPILER
         #if MICROPY_REPL_EVENT_DRIVEN
             pyexec_event_repl_init();
@@ -67,7 +69,7 @@ int main(int argc, char **argv)
                 }
             }
         #else
-            pyexec_friendly_repl();
+          //  pyexec_friendly_repl();
         #endif
      //do_str("print('hello world!', list(x+1 for x in range(10)), end='eol\\n')", MP_PARSE_SINGLE_INPUT);
      //do_str("for i in range(10):\r\n  print(i)", MP_PARSE_FILE_INPUT);

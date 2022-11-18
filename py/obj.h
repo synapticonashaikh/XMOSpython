@@ -34,10 +34,6 @@
 #include "py/mpprint.h"
 #include "py/runtime0.h"
 
-extern "C" 
-{
-
-
 
 // This is the definition of the opaque MicroPython object type.
 // All concrete objects have an encoding within this type and the
@@ -1264,5 +1260,5 @@ mp_obj_t mp_seq_extract_slice(size_t len, const mp_obj_t *seq, mp_bound_slice_t 
 #define MP_MAP_SLOT_IS_FILLED mp_map_slot_is_filled
 #define MP_SET_SLOT_IS_FILLED mp_set_slot_is_filled
 
-}
+
 #endif // MICROPY_INCLUDED_PY_OBJ_H

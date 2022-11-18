@@ -29,9 +29,6 @@
 #include "py/obj.h"
 #include "py/objtuple.h"
 
-extern "C"
-{
-
 typedef struct _mp_obj_exception_t {
     mp_obj_base_t base;
     size_t traceback_alloc : (8 * sizeof(size_t) / 2);
@@ -51,5 +48,4 @@ void mp_obj_exception_attr(mp_obj_t self_in, qstr attr, mp_obj_t *dest);
     parent, &mp_type_##base_name \
     );
 
-}
 #endif // MICROPY_INCLUDED_PY_OBJEXCEPT_H

@@ -26,8 +26,7 @@ build/main.o: main.c /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
  build/genhdr/root_pointers.h ../../py/pystack.h ../../py/repl.h \
  ../../py/gc.h ../../py/mperrno.h /usr/include/newlib/errno.h \
  /usr/include/newlib/sys/errno.h ../../shared/runtime/pyexec.h STdriver.h \
- /usr/include/newlib/stdlib.h /usr/include/newlib/machine/stdlib.h \
- /usr/include/newlib/ctype.h
+ /usr/include/newlib/stdlib.h /usr/include/newlib/machine/stdlib.h
 main.c /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h :
  /usr/include/newlib/stdio.h /usr/include/newlib/_ansi.h :
  /usr/include/newlib/newlib.h /usr/include/newlib/_newlib_version.h :
@@ -57,4 +56,3 @@ main.c /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h :
  ../../py/gc.h ../../py/mperrno.h /usr/include/newlib/errno.h :
  /usr/include/newlib/sys/errno.h ../../shared/runtime/pyexec.h STdriver.h :
  /usr/include/newlib/stdlib.h /usr/include/newlib/machine/stdlib.h :
- /usr/include/newlib/ctype.h :

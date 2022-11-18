@@ -30,8 +30,6 @@
 #include "py/misc.h"
 #include "py/asmbase.h"
 
-extern "C"
-{
 
 #define ASM_ARM_REG_R0  (0)
 #define ASM_ARM_REG_R1  (1)
@@ -218,5 +216,4 @@ void asm_arm_bx_reg(asm_arm_t *as, uint reg_src);
 
 #endif // GENERIC_ASM_API
 
-}
 #endif // MICROPY_INCLUDED_PY_ASMARM_H

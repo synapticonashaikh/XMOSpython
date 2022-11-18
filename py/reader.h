@@ -28,9 +28,6 @@
 
 #include "py/obj.h"
 
-extern "C"
-{
-
 // the readbyte function must return the next byte in the input stream
 // it must return MP_READER_EOF if end of stream
 // it can be called again after returning MP_READER_EOF, and in that case must return MP_READER_EOF
@@ -46,5 +43,4 @@ void mp_reader_new_mem(mp_reader_t *reader, const byte *buf, size_t len, size_t 
 void mp_reader_new_file(mp_reader_t *reader, const char *filename);
 void mp_reader_new_file_from_fd(mp_reader_t *reader, int fd, bool close_fd);
 
-}
 #endif // MICROPY_INCLUDED_PY_READER_H

@@ -28,9 +28,6 @@
 
 #include "py/objtuple.h"
 
-extern "C"
-{
-    
 typedef struct _mp_obj_namedtuple_type_t {
     // This is a mp_obj_type_t with eight slots.
     mp_obj_empty_type_t base;
@@ -46,5 +43,4 @@ typedef struct _mp_obj_namedtuple_t {
 size_t mp_obj_namedtuple_find_field(const mp_obj_namedtuple_type_t *type, qstr name);
 mp_obj_namedtuple_type_t *mp_obj_new_namedtuple_base(size_t n_fields, mp_obj_t *fields);
 
-}
 #endif // MICROPY_INCLUDED_PY_OBJNAMEDTUPLE_H

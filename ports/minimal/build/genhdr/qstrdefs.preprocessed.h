@@ -1,5 +1,5 @@
 # 1 "<stdin>"
-# 1 "/home/synapticon/Desktop/XMOSpython/ports/minimal//"
+# 1 "/home/synapticon/Desktop/micropython/ports/minimal//"
 # 1 "<built-in>"
 # 1 "<command-line>"
 # 1 "<stdin>"
@@ -565,6 +565,8 @@ typedef intptr_t mp_int_t;
 typedef uintptr_t mp_uint_t;
 typedef long mp_off_t;
 # 76 "../../py/mpconfig.h" 2
+# 788 "../../py/mpconfig.h"
+typedef float mp_float_t;
 # 30 "<stdin>" 2
 
 
@@ -733,6 +735,8 @@ Q(__class__)
 
 Q(__class__)
 
+Q(__complex__)
+
 Q(__contains__)
 
 Q(__delitem__)
@@ -746,6 +750,8 @@ Q(__eq__)
 Q(__eq__)
 
 Q(__exit__)
+
+Q(__float__)
 
 Q(__ge__)
 
@@ -790,6 +796,10 @@ Q(__main__)
 Q(__main__)
 
 Q(__module__)
+
+Q(__name__)
+
+Q(__name__)
 
 Q(__name__)
 
@@ -891,6 +901,8 @@ Q(_star_)
 
 Q(abs)
 
+Q(add)
+
 Q(all)
 
 Q(any)
@@ -900,6 +912,10 @@ Q(append)
 Q(args)
 
 Q(bin)
+
+Q(board)
+
+Q(board)
 
 Q(bool)
 
@@ -929,11 +945,17 @@ Q(clear)
 
 Q(clear)
 
+Q(clockinfo)
+
 Q(close)
 
 Q(close)
 
 Q(closure)
+
+Q(complex)
+
+Q(complex)
 
 Q(const)
 
@@ -969,6 +991,10 @@ Q(extend)
 
 Q(find)
 
+Q(float)
+
+Q(float)
+
 Q(format)
 
 Q(from_bytes)
@@ -1001,6 +1027,8 @@ Q(hasattr)
 
 Q(hash)
 
+Q(healthinfo)
+
 Q(heap_lock)
 
 Q(heap_unlock)
@@ -1009,11 +1037,15 @@ Q(hex)
 
 Q(id)
 
-Q(index)
+Q(imag)
 
 Q(index)
 
 Q(index)
+
+Q(index)
+
+Q(info)
 
 Q(insert)
 
@@ -1083,6 +1115,14 @@ Q(micropython)
 
 Q(module)
 
+Q(mul)
+
+Q(mul10)
+
+Q(myport)
+
+Q(myport)
+
 Q(next)
 
 Q(object)
@@ -1110,6 +1150,8 @@ Q(range)
 Q(range)
 
 Q(range)
+
+Q(real)
 
 Q(remove)
 
@@ -1156,6 +1198,8 @@ Q(staticmethod)
 Q(str)
 
 Q(str)
+
+Q(strcat)
 
 Q(strip)
 

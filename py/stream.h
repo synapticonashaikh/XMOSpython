@@ -30,8 +30,6 @@
 #include "py/obj.h"
 #include "py/mperrno.h"
 
-extern "C"
-{
 
 #define MP_STREAM_ERROR ((mp_uint_t)-1)
 
@@ -135,5 +133,4 @@ int mp_stream_posix_fsync(void *stream);
 #define mp_is_nonblocking_error(errno) (0)
 #endif
 
-}
 #endif // MICROPY_INCLUDED_PY_STREAM_H

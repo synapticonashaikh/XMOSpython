@@ -19,7 +19,8 @@ build/py/objint_longlong.o: ../../py/objint_longlong.c \
  ../../py/runtime.h ../../py/mpstate.h ../../py/mpthread.h ../../py/nlr.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h \
  ../../py/objlist.h ../../py/objexcept.h ../../py/objtuple.h \
- build/genhdr/root_pointers.h ../../py/pystack.h
+ build/genhdr/root_pointers.h ../../py/pystack.h \
+ /usr/include/newlib/math.h
 ../../py/objint_longlong.c :
  /usr/include/newlib/stdlib.h /usr/include/newlib/machine/ieeefp.h :
  /usr/include/newlib/_ansi.h /usr/include/newlib/newlib.h :
@@ -42,3 +43,4 @@ build/py/objint_longlong.o: ../../py/objint_longlong.c \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h :
  ../../py/objlist.h ../../py/objexcept.h ../../py/objtuple.h :
  build/genhdr/root_pointers.h ../../py/pystack.h :
+ /usr/include/newlib/math.h :

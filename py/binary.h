@@ -29,9 +29,6 @@
 
 #include "py/obj.h"
 
-extern "C"
-{
-
 // Use special typecode to differentiate repr() of bytearray vs array.array('B')
 // (underlyingly they're same).  Can't use 0 here because that's used to detect
 // type-specification errors due to end-of-string.
@@ -46,5 +43,4 @@ void mp_binary_set_val(char struct_type, char val_type, mp_obj_t val_in, byte *p
 long long mp_binary_get_int(size_t size, bool is_signed, bool big_endian, const byte *src);
 void mp_binary_set_int(size_t val_sz, bool big_endian, byte *dest, mp_uint_t val);
 
-}
 #endif // MICROPY_INCLUDED_PY_BINARY_H

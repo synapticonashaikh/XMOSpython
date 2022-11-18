@@ -28,8 +28,6 @@
 
 #include "py/mpconfig.h"
 
-extern "C"
-{
 
 #if MICROPY_PY_THREAD
 
@@ -61,5 +59,4 @@ void mp_thread_mutex_unlock(mp_thread_mutex_t *mutex);
 #define MP_THREAD_GIL_EXIT()
 #endif
 
-}
 #endif // MICROPY_INCLUDED_PY_MPTHREAD_H

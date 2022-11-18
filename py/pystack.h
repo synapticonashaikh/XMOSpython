@@ -28,9 +28,6 @@
 
 #include "py/mpstate.h"
 
-extern "C"
-{
-
 // Enable this debugging option to check that the amount of memory freed is
 // consistent with amounts that were previously allocated.
 #define MP_PYSTACK_DEBUG (0)
@@ -123,5 +120,4 @@ static inline void mp_nonlocal_free(void *ptr, size_t n_bytes) {
 
 #endif
 
-}
 #endif // MICROPY_INCLUDED_PY_PYSTACK_H

@@ -22,7 +22,8 @@ build/py/objint_mpz.o: ../../py/objint_mpz.c /usr/include/newlib/string.h \
  ../../py/mpstate.h ../../py/mpthread.h ../../py/nlr.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h \
  ../../py/objlist.h ../../py/objexcept.h ../../py/objtuple.h \
- build/genhdr/root_pointers.h ../../py/pystack.h
+ build/genhdr/root_pointers.h ../../py/pystack.h \
+ /usr/include/newlib/math.h
 ../../py/objint_mpz.c /usr/include/newlib/string.h :
  /usr/include/newlib/_ansi.h /usr/include/newlib/newlib.h :
  /usr/include/newlib/_newlib_version.h /usr/include/newlib/sys/config.h :
@@ -48,3 +49,4 @@ build/py/objint_mpz.o: ../../py/objint_mpz.c /usr/include/newlib/string.h \
  /usr/lib/gcc/arm-none-eabi/10.3.1/include-fixed/limits.h :
  ../../py/objlist.h ../../py/objexcept.h ../../py/objtuple.h :
  build/genhdr/root_pointers.h ../../py/pystack.h :
+ /usr/include/newlib/math.h :

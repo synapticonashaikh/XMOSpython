@@ -36,8 +36,6 @@
 #include "py/objlist.h"
 #include "py/objexcept.h"
 
-extern "C"
-{
 
 // This file contains structures defining the state of the MicroPython
 // memory system, runtime and virtual machine.  The state is a global
@@ -304,5 +302,4 @@ extern mp_state_thread_t *mp_thread_get_state(void);
 #define MP_STATE_THREAD(x)  MP_STATE_MAIN_THREAD(x)
 #endif
 
-}
 #endif // MICROPY_INCLUDED_PY_MPSTATE_H

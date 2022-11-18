@@ -33,8 +33,7 @@ typedef enum {
     PYEXEC_MODE_RAW_REPL,
 } pyexec_mode_kind_t;
 
-extern "C"
-{
+
 extern pyexec_mode_kind_t pyexec_mode_kind;
 
 // Set this to the value (eg PYEXEC_FORCED_EXIT) that will be propagated through
@@ -60,5 +59,5 @@ mp_obj_t pyb_set_repl_info(mp_obj_t o_value);
 MP_DECLARE_CONST_FUN_OBJ_1(pyb_set_repl_info_obj);
 #endif
 
-}
+
 #endif // MICROPY_INCLUDED_LIB_UTILS_PYEXEC_H

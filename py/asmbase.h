@@ -29,8 +29,6 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-extern "C"
-{
 
 #define MP_ASM_PASS_COMPUTE (1)
 #define MP_ASM_PASS_EMIT    (2)
@@ -78,5 +76,4 @@ static inline void *mp_asm_base_get_code(mp_asm_base_t *as) {
     #endif
 }
 
-}
 #endif // MICROPY_INCLUDED_PY_ASMBASE_H

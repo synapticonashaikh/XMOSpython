@@ -30,16 +30,16 @@ typedef long mp_off_t;
 //#define MICROPY_FLOAT_IMPL          (MICROPY_FLOAT_IMPL_FLOAT)
 //#endif
 
-#define MICROPY_HW_BOARD_NAME "NUCLEOF446RE"
-#define MICROPY_HW_MCU_NAME "STM32F446RE"
+#define MICROPY_HW_BOARD_NAME "INTEGERO"
+#define MICROPY_HW_MCU_NAME "XCORE-200"
 
 #ifdef __linux__
-#define MICROPY_MIN_USE_STDOUT (0)
+#define MICROPY_MIN_USE_STDOUT (1)
 #endif
 
-//#ifdef __thumb__
-#define MICROPY_MIN_USE_CORTEX_CPU (1)
-#define MICROPY_MIN_USE_STM32_MCU (1)
-//#endif
+#ifdef __thumb__
+#define MICROPY_MIN_USE_CORTEX_CPU (0)
+#define MICROPY_MIN_USE_STM32_MCU (0)
+#endif
 
 #define MP_STATE_PORT MP_STATE_VM

@@ -72,9 +72,7 @@ typedef struct _mp_sched_node_t {
 extern const byte mp_unary_op_method_name[];
 extern const byte mp_binary_op_method_name[];
 
-extern "C"
-{
-    
+
 void mp_init(void);
 void mp_deinit(void);
 
@@ -232,5 +230,4 @@ void mp_warning(const char *category, const char *msg, ...);
 #define mp_warning(...)
 #endif
 
-}
 #endif // MICROPY_INCLUDED_PY_RUNTIME_H

@@ -35,8 +35,6 @@
 #include <mphalport.h>
 #endif
 
-extern "C"
-{
 
 #ifndef mp_hal_stdio_poll
 uintptr_t mp_hal_stdio_poll(uintptr_t poll_flags);
@@ -93,5 +91,4 @@ uint64_t mp_hal_time_ns(void);
 #include "extmod/virtpin.h"
 #endif
 
-}
 #endif // MICROPY_INCLUDED_PY_MPHAL_H

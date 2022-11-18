@@ -30,8 +30,6 @@
 #include "py/misc.h"
 #include "py/asmbase.h"
 
-extern "C"
-{
 
 // AMD64 calling convention is:
 //  - args pass in: RDI, RSI, RDX, RCX, R08, R09
@@ -221,5 +219,4 @@ void asm_x64_call_ind(asm_x64_t *as, size_t fun_id, int temp_r32);
 
 #endif // GENERIC_ASM_API
 
-}
 #endif // MICROPY_INCLUDED_PY_ASMX64_H

@@ -1,0 +1,34 @@
+
+#include the python envirmental variables
+include ../../py/mkenv.mk
+
+# include py core make definitions
+include $(TOP)/py/py.mk
+
+#include the all required path
+INC += -I.
+INC += -I$(TOP)
+INC += -I$(BUILD)
+INC += -Ipy
+
+SRC_C = \
+	led.xc \
+	main.c \
+	../../py/gc.c \
+	../../shared/libc/printf.c \
+	../../shared/readline/readline.c \
+	../../shared/runtime/pyexec.c \
+	../../shared/runtime/stdout_helpers.c \
+
+
+
+FILES = $(shell xcc -target=XCORE-200-EXPLORER $(SRC_C) -o ledtoggle.xe $(INC) -Wno-unused-variable   &> reportm.txt)
+
+
+echo $(FILES) 
+OBJ += $(PY_CORE_O)
+ifeq ($(ENABLE_DISABLE_FLOAT), 1)
+OBJ += $(LIBM_O)
+endif
+OBJ += $(addprefix $(BUILD)/, $(SRC_C:.c=.o))
+OBJ += $(addprefix $(BUILD)/, $(SRC_CXX:.cpp=.o))

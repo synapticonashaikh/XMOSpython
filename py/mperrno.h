@@ -28,9 +28,6 @@
 
 #include "py/mpconfig.h"
 
-extern "C"
-{
-
 
 #if MICROPY_USE_INTERNAL_ERRNO
 
@@ -153,6 +150,5 @@ qstr mp_errno_to_str(mp_obj_t errno_val);
 
 #endif
 
-}
 
 #endif // MICROPY_INCLUDED_PY_MPERRNO_H

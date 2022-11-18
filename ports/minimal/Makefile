@@ -1,236 +1,163 @@
-#include the python envirmental variables
-include ../../py/mkenv.mk
-
-#to build for either STM board or Linux env
-CROSS = 0
-
 #enable/ disable debugg message 
 ENABLE_DISABLE_DEBUGG_MESSAGE = 1
 
-#enable/ disable float functionality
-ENABLE_DISABLE_FLOAT = 0
-
-#enable/ disable self created module
-ENABLE_DISABLE_OWN_MODULE = 0
-
-# qstr definitions (must come before including py.mk)
-QSTR_DEFS = qstrdefsport.h
-
-# MicroPython feature configurations
-MICROPY_ROM_TEXT_COMPRESSION ?= 1
-
-#C standard library
-_C_STD_LIB = -std=c99
-
-#board linking file 
-_BOARD_LINKING_FILE = stm32_flash.ld #stm32f405.ld
-
-# include py core make definitions
-include $(TOP)/py/py.mk
-
-#check if the CROSS is enable
-ifeq ($(CROSS), 1)
-CROSS_COMPILE ?= arm-none-eabi-
-endif
-
-#print of the debugg is enable
-ifeq ($(ENABLE_DISABLE_DEBUGG_MESSAGE), 1)
-$(info Debugg: Debugg message enable!)
-endif
+CMP = xcc -target=XCORE-200-EXPLORER
 
 #include the all required path
 INC += -I.
-INC += -I$(TOP)
-INC += -I$(BUILD)
-
-#print of the debugg is enable
-ifeq ($(ENABLE_DISABLE_DEBUGG_MESSAGE), 1)
-$(info Debugg: INC paths are $(INC))
-endif
-
-
-#if the CROSS = 1 build add the compilation and linking flag
-ifeq ($(CROSS), 1)
-#python code to build the firmware file for stm32
-DFU = $(TOP)/tools/dfu.py
-PYDFU = $(TOP)/tools/pydfu.py
-#check and add the float related functionality
-ifeq ($(ENABLE_DISABLE_FLOAT), 1)
-#add the ARM core flags
-ifeq ($(ENABLE_DISABLE_DEBUGG_MESSAGE), 1)
-$(info Debugg: Compliation Flag, float is enabled!)
-$(info Debugg: Size of the output file will be increased!)
-endif
-#note* -mfloat-abi=hard is not working
-# MICROPY_FLOAT_IMPL_FLOAT for float and MICROPY_FLOAT_IMPL_NONE to remove float functionality
-#c standard library can be changed to -std=gnu99, -std=c11 
-CFLAGS_CORTEX_M4 = -mthumb -mtune=cortex-m4 -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=soft -fsingle-precision-constant -Wdouble-promotion -Wfloat-conversion
-CFLAGS += -DMICROPY_FLOAT_IMPL=MICROPY_FLOAT_IMPL_FLOAT
-CFLAGS += $(INC) -Wall -Werror -nostdlib -Wpointer-arith $(_C_STD_LIB) $(CFLAGS_CORTEX_M4) $(COPT)
-else
-ifeq ($(ENABLE_DISABLE_DEBUGG_MESSAGE), 1)
-$(info Compliation Flag, float is disabled)
-endif
-CFLAGS_CORTEX_M4 = -mthumb -mtune=cortex-m4 -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=soft -fsingle-precision-constant -Wdouble-promotion -Wfloat-conversion
-CFLAGS += $(INC) -Wall -Werror -nostdlib -Wpointer-arith $(_C_STD_LIB) $(CFLAGS_CORTEX_M4) $(COPT)
-endif
-LDFLAGS += -nostdlib -T $(_BOARD_LINKING_FILE) -Map=$@.map --cref --gc-sections
-else
-#compiler for linux enviroment 
-LD = gcc
-CFLAGS += $(INC) -Wall -Werror -Wdouble-promotion -Wfloat-conversion $(_C_STD_LIB) $(COPT)
-LDFLAGS += -Wl,-Map=$@.map,--cref -Wl,--gc-sections
-endif
-
-CSUPEROPT = -Os # save some code space
-
-# Tune for Debugging or Optimization
-CFLAGS += -g  # always include debug info in the ELF
-ifeq ($(DEBUG), 1)
-CFLAGS += -O0
-else
-CFLAGS += -Os -DNDEBUG
-CFLAGS += -fdata-sections -ffunction-sections
-endif
-
-# Flags for optional C++ source code
-CXXFLAGS += $(filter-out $(_C_STD_LIB),$(CFLAGS))
-
-ifeq ($(ENABLE_DISABLE_DEBUGG_MESSAGE), 1)
-$(info Debugg: The compliation flags are $(CFLAGS)) 
-$(info Debugg: Compiler is $(CC)) 
-endif
-
-ifeq ($(ENABLE_DISABLE_FLOAT), 1)
-LIBS += "$(shell $(CC) $(CFLAGS) -print-libgcc-file-name)"
-#adding the python library
-SRC_LIB += $(addprefix lib/,\
-        libm/math.c \
-        libm/fmodf.c \
-        libm/nearbyintf.c \
-        libm/ef_sqrt.c \
-        libm/kf_rem_pio2.c \
-        libm/kf_sin.c \
-        libm/kf_cos.c \
-        libm/kf_tan.c \
-        libm/ef_rem_pio2.c \
-        libm/sf_sin.c \
-        libm/sf_cos.c \
-        libm/sf_tan.c \
-        libm/sf_frexp.c \
-        libm/sf_modf.c \
-        libm/sf_ldexp.c \
-        libm/asinfacosf.c \
-        libm/acoshf.c \
-        libm/asinhf.c \
-        libm/atanf.c \
-        libm/atan2f.c \
-        libm/atanhf.c \
-        libm/log1pf.c \
-        libm/sf_erf.c \
-        libm/erf_lgamma.c \
-        libm/wf_lgamma.c \
-        libm/wf_tgamma.c \
-        libm/roundf.c \
-	)
-LIBM_O = $(addprefix $(BUILD)/, $(SRC_LIB:.c=.o))
-else
-LIBS = 
-endif
-ifeq ($(ENABLE_DISABLE_DEBUGG_MESSAGE), 1)
-$(info Debugg: float library path is $(LIBS)) 
-endif
+INC += -I../../
+INC += -Ibuild
+INC += -Ibuild/genhdr/
 
 SRC_C = \
 	main.c \
 	uart_core.c \
-	STdriver.c \
-	shared/libc/printf.c \
-	shared/readline/readline.c \
-	shared/runtime/pyexec.c \
-	shared/runtime/stdout_helpers.c \
-	$(BUILD)/_frozen_mpy.c \
+	modmyport.c \
+	build/_frozen_mpy.c \
 
-ifeq ($(ENABLE_DISABLE_OWN_MODULE), 1)
-SRC_C += modmyport.c 
-endif        
+SRC_C += ../../shared/libc/printf.c 
+SRC_C += ../../shared/readline/readline.c  
+SRC_C += ../../shared/runtime/pyexec.c 
+SRC_C += ../../shared/runtime/stdout_helpers.c 
 
-ifeq ($(CROSS), 1)
-SRC_C += shared/libc/string0.c
-endif
 
-#add the library for reading the commands at interpretor
-SRC_QSTR += shared/readline/readline.c shared/runtime/pyexec.c
-ifeq ($(ENABLE_DISABLE_OWN_MODULE), 1)
-SRC_QSTR += modmyport.c
-endif
+SRC_PY += ../../py/argcheck.c
+SRC_PY += ../../py/asmarm.c
+SRC_PY += ../../py/asmbase.c
+SRC_PY += ../../py/asmthumb.c
+SRC_PY += ../../py/asmx64.c
+SRC_PY += ../../py/asmx86.c
+SRC_PY += ../../py/asmxtensa.c
+SRC_PY += ../../py/bc.c
+SRC_PY += ../../py/binary.c
+SRC_PY += ../../py/builtinevex.c
+SRC_PY += ../../py/builtinhelp.c
+SRC_PY += ../../py/builtinimport.c
+SRC_PY += ../../py/compile.c
+SRC_PY += ../../py/emitbc.c
+SRC_PY += ../../py/emitcommon.c
+SRC_PY += ../../py/emitglue.c
+SRC_PY += ../../py/emitinlinethumb.c
+SRC_PY += ../../py/emitinlinextensa.c
+SRC_PY += ../../py/emitnarm.c
+SRC_PY += ../../py/emitnthumb.c
+SRC_PY += ../../py/emitnx64.c
+SRC_PY += ../../py/emitnx86.c
+SRC_PY += ../../py/emitnxtensa.c
+SRC_PY += ../../py/emitnxtensawin.c
+SRC_PY += ../../py/formatfloat.c
+SRC_PY += ../../py/frozenmod.c
+SRC_PY += ../../py/gc.c
+SRC_PY += ../../py/lexer.c
+SRC_PY += ../../py/malloc.c
+SRC_PY += ../../py/map.c
+SRC_PY += ../../py/modarray.c
+SRC_PY += ../../py/modbuiltins.c
+SRC_PY += ../../py/modcmath.c
+SRC_PY += ../../py/modcollections.c
+SRC_PY += ../../py/modgc.c
+SRC_PY += ../../py/modio.c
+SRC_PY += ../../py/modmath.c
+SRC_PY += ../../py/modmicropython.c
+SRC_PY += ../../py/modstruct.c
+SRC_PY += ../../py/modsys.c
+SRC_PY += ../../py/modthread.c
+SRC_PY += ../../py/moduerrno.c
+SRC_PY += ../../py/mpprint.c
+SRC_PY += ../../py/mpstate.c
+SRC_PY += ../../py/mpz.c
+SRC_PY += ../../py/nativeglue.c
+SRC_PY += ../../py/nlr.c
+SRC_PY += ../../py/nlrpowerpc.c
+SRC_PY += ../../py/nlrsetjmp.c
+SRC_PY += ../../py/nlrthumb.c
+SRC_PY += ../../py/nlrx64.c
+SRC_PY += ../../py/nlrx86.c
+SRC_PY += ../../py/nlrxtensa.c
+SRC_PY += ../../py/obj.c
+SRC_PY += ../../py/objarray.c
+SRC_PY += ../../py/objattrtuple.c
+SRC_PY += ../../py/objbool.c
+SRC_PY += ../../py/objboundmeth.c
+SRC_PY += ../../py/objcell.c
+SRC_PY += ../../py/objclosure.c
+SRC_PY += ../../py/objcomplex.c
+SRC_PY += ../../py/objdeque.c
+SRC_PY += ../../py/objdict.c
+SRC_PY += ../../py/objenumerate.c
+SRC_PY += ../../py/objexcept.c
+SRC_PY += ../../py/objfilter.c
+SRC_PY += ../../py/objfloat.c
+SRC_PY += ../../py/objfun.c
+SRC_PY += ../../py/objgenerator.c
+SRC_PY += ../../py/objgetitemiter.c
+SRC_PY += ../../py/objint.c
+SRC_PY += ../../py/objint_longlong.c
+SRC_PY += ../../py/objint_mpz.c
+SRC_PY += ../../py/objlist.c
+SRC_PY += ../../py/objmap.c
+SRC_PY += ../../py/objmodule.c
+SRC_PY += ../../py/objnamedtuple.c
+SRC_PY += ../../py/objnone.c
+SRC_PY += ../../py/objobject.c
+SRC_PY += ../../py/objpolyiter.c
+SRC_PY += ../../py/objproperty.c
+SRC_PY += ../../py/objrange.c
+SRC_PY += ../../py/objreversed.c
+SRC_PY += ../../py/objset.c
+SRC_PY += ../../py/objsingleton.c
+SRC_PY += ../../py/objslice.c
+SRC_PY += ../../py/objstr.c
+SRC_PY += ../../py/objstringio.c
+SRC_PY += ../../py/objstrunicode.c
+SRC_PY += ../../py/objtuple.c
+SRC_PY += ../../py/objtype.c
+SRC_PY += ../../py/objzip.c
+SRC_PY += ../../py/opmethods.c
+SRC_PY += ../../py/pairheap.c
+SRC_PY += ../../py/parse.c
+SRC_PY += ../../py/parsenum.c
+SRC_PY += ../../py/parsenumbase.c
+SRC_PY += ../../py/persistentcode.c
+SRC_PY += ../../py/profile.c
+SRC_PY += ../../py/pystack.c
+SRC_PY += ../../py/qstr.c
+SRC_PY += ../../py/reader.c
+SRC_PY += ../../py/repl.c
+SRC_PY += ../../py/ringbuf.c
+SRC_PY += ../../py/runtime.c
+SRC_PY += ../../py/runtime_utils.c
+SRC_PY += ../../py/scheduler.c
+SRC_PY += ../../py/scope.c
+SRC_PY += ../../py/sequence.c
+SRC_PY += ../../py/showbc.c
+SRC_PY += ../../py/smallint.c
+SRC_PY += ../../py/stackctrl.c
+SRC_PY += ../../py/stream.c
+SRC_PY += ../../py/unicode.c
+SRC_PY += ../../py/vm.c
+SRC_PY += ../../py/vstr.c
+SRC_PY += ../../py/warning.c
 
-OBJ += $(PY_CORE_O)
-ifeq ($(ENABLE_DISABLE_FLOAT), 1)
-OBJ += $(LIBM_O)
-endif
-OBJ += $(addprefix $(BUILD)/, $(SRC_C:.c=.o))
-OBJ += $(addprefix $(BUILD)/, $(SRC_CXX:.cpp=.o))
 
+LDFLAGS = -Wno-unused-variable $(INC) 
+
+all: output.xe
 ifeq ($(ENABLE_DISABLE_DEBUGG_MESSAGE), 1)
-$(info Debugg: Final build info)
-$(info Debugg: PYTHON is $(PYTHON))
-$(info Debugg: Q is $(Q))
-$(info Debugg: LD is $(LD))
-$(info Debugg: LDFLAGS is $(LDFLAGS))
-$(info Debugg: LIBS is $(LIBS))
-$(info Debugg: SIZE is $(SIZE))
-$(info Debugg: CC is $(CC))
-$(info Debugg: GEN is $(GEN))
-$(info Debugg: CMD is $(Q)$(LD) $(LDFLAGS) -o $(LIBS))
-$(info Debugg: OBJCOPY is $(OBJCOPY))
-$(info Debugg: BIN is $(Q)$(OBJCOPY) -O binary -j .isr_vector -j .text -j .data -o $(BUILD)/firmware.bin)
-#$(info Debugg: OBJ is $(OBJ))
+	$(info Debugg: Final build info)
+	$(info Debugg: PYTHON is $(PYTHON))
+	$(info Debugg: Q is $(Q))
+	$(info Debugg: LD is $(LD))
+	$(info Debugg: LDFLAGS is $(LDFLAGS))
+	$(info Debugg: LIBS is $(LIBS))
+	$(info Debugg: SIZE is $(SIZE))
+	$(info Debugg: CC is $(CC))
+	$(info Debugg: GEN is $(GEN))
+	$(info Debugg: CMD is $(CMP) $(LDFLAGS))
 endif   
 
+output.xe:
+	$(CMP) $(LDFLAGS) $(SRC_C) $(SRC_PY) -o $@
 
-ifeq ($(CROSS), 1)
-all: $(BUILD)/firmware.dfu
-ifeq ($(ENABLE_DISABLE_DEBUGG_MESSAGE), 1)
-$(info Debugg: Building all $(BUILD)/firmware.dfu )
-endif
-else
-all: $(BUILD)/firmware.elf
-ifeq ($(ENABLE_DISABLE_DEBUGG_MESSAGE), 1)
-$(info Debugg: Building all $(BUILD)/firmware.elf )
-endif
-endif
-
-$(BUILD)/_frozen_mpy.c: $(TOP)/tests/frozen/frozentest.mpy $(BUILD)/genhdr/qstrdefs.generated.h
-	$(ECHO) "MISC freezing bytecode"
-	$(Q)$(TOP)/tools/mpy-tool.py -f -q $(BUILD)/genhdr/qstrdefs.preprocessed.h -mlongint-impl=none $< > $@    
-
-$(BUILD)/firmware.elf: $(OBJ)
-	$(ECHO) "LINK $@"
-	$(Q)$(LD) $(LDFLAGS) -o $@ $^ $(LIBS)
-	$(Q)$(SIZE) $@
-
-$(BUILD)/firmware.bin: $(BUILD)/firmware.elf
-	$(Q)$(OBJCOPY) -O binary -j .isr_vector -j .text -j .data $^ $(BUILD)/firmware.bin
-
-$(BUILD)/firmware.dfu: $(BUILD)/firmware.bin
-	$(ECHO) "Create $@"
-	$(Q)$(PYTHON) $(DFU) -b 0x08000000:$(BUILD)/firmware.bin $@
-
-deploy: $(BUILD)/firmware.dfu
-	$(ECHO) "Writing $< to the board"
-	$(Q)$(PYTHON) $(PYDFU) -u $<
-
-# Run emulation build on a POSIX system with suitable terminal settings
-run:
-	@saved_=`stty -g`; \
-	  stty raw opost -echo; \
-	  $(BUILD)/firmware.elf; \
-	  echo "Exit status: $$?"; \
-	  stty $$saved_
-
-test: $(BUILD)/firmware.elf
-	$(Q)/bin/echo -e "print('hello world!', list(x+1 for x in range(10)), end='eol\\\\n')\\r\\n\\x04" | $(BUILD)/firmware.elf | tail -n2 | grep "^hello world! \\[1, 2, 3, 4, 5, 6, 7, 8, 9, 10\\]eol"
-
-
-include $(TOP)/py/mkrules.mk
+clean:
+	rm -rf output.xe

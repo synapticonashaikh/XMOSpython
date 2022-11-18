@@ -31,8 +31,6 @@
 #include "py/asmbase.h"
 #include "py/persistentcode.h"
 
-extern "C"
-{
 
 #define ASM_THUMB_REG_R0  (0)
 #define ASM_THUMB_REG_R1  (1)
@@ -435,5 +433,4 @@ void asm_thumb_b_rel12(asm_thumb_t *as, int rel);
 
 #endif // GENERIC_ASM_API
 
-}
 #endif // MICROPY_INCLUDED_PY_ASMTHUMB_H

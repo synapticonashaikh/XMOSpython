@@ -30,16 +30,15 @@
 
 /** types *******************************************************/
 
-//#include <stdbool.h>
+#include <stdbool.h>
 #include <stdint.h>
 #include <stddef.h>
 
-extern "C" {
 
-typedef uint8_t _Bool;
-typedef uint8_t  bool;
+//typedef uint8_t _Bool;
+//typedef uint8_t  bool;
 typedef unsigned char byte;
-//typedef unsigned int uint;
+typedef unsigned int uint;
 
 /** generic ops *************************************************/
 
@@ -340,5 +339,4 @@ typedef const char *mp_rom_error_text_t;
 // For now, forward directly to MP_COMPRESSED_ROM_TEXT.
 #define MP_ERROR_TEXT(x) (mp_rom_error_text_t)MP_COMPRESSED_ROM_TEXT(x)
 
-}
 #endif // MICROPY_INCLUDED_PY_MISC_H

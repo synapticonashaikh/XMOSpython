@@ -34,8 +34,6 @@
 #include "py/objstr.h"
 #include "py/objtype.h"
 
-extern "C"
-{
 
 #if !MICROPY_ENABLE_DYNRUNTIME
 #error "dynruntime.h included in non-dynamic-module build."
@@ -293,5 +291,4 @@ static inline void mp_obj_get_array_dyn(mp_obj_t o, size_t *len, mp_obj_t **item
     }
 }
 
-}
 #endif // MICROPY_INCLUDED_PY_DYNRUNTIME_H

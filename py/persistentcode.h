@@ -30,8 +30,6 @@
 #include "py/reader.h"
 #include "py/emitglue.h"
 
-extern "C"
-{
     
 // The current version of .mpy files. A bytecode-only .mpy file can be loaded
 // as long as MPY_VERSION matches, but a native .mpy (i.e. one with an arch
@@ -123,5 +121,4 @@ void mp_raw_code_save_file(mp_compiled_module_t *cm, const char *filename);
 
 void mp_native_relocate(void *reloc, uint8_t *text, uintptr_t reloc_text);
 
-}
 #endif // MICROPY_INCLUDED_PY_PERSISTENTCODE_H

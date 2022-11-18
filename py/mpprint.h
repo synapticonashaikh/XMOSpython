@@ -48,6 +48,7 @@
 
 typedef void (*mp_print_strn_t)(void *data, const char *str, size_t len);
 
+
 typedef struct _mp_print_t {
     void *data;
     mp_print_strn_t print_strn;
@@ -69,9 +70,6 @@ extern const mp_print_t mp_plat_print;
 extern const mp_print_t mp_sys_stdout_print;
 #endif
 
-extern "C"
-{
-    
 int mp_print_str(const mp_print_t *print, const char *str);
 int mp_print_strn(const mp_print_t *print, const char *str, size_t len, int flags, char fill, int width);
 #if MICROPY_PY_BUILTINS_FLOAT
@@ -83,5 +81,4 @@ int mp_printf(const mp_print_t *print, const char *fmt, ...);
 int mp_vprintf(const mp_print_t *print, const char *fmt, va_list args);
 #endif
 
-}
 #endif // MICROPY_INCLUDED_PY_MPPRINT_H

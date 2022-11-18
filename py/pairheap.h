@@ -38,8 +38,6 @@
 #include <assert.h>
 #include "py/obj.h"
 
-extern "C"
-{
     
 // This struct forms the nodes of the heap and is intended to be extended, by
 // placing it first in another struct, to include additional information for the
@@ -100,5 +98,4 @@ static inline mp_pairheap_t *mp_pairheap_pop(mp_pairheap_lt_t lt, mp_pairheap_t 
     return mp_pairheap_pairing(lt, child);
 }
 
-}
 #endif // MICROPY_INCLUDED_PY_PAIRHEAP_H

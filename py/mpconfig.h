@@ -27,9 +27,6 @@
 #define MICROPY_INCLUDED_PY_MPCONFIG_H
 
 
-extern "C"
-{
-
 // Current version of MicroPython
 #define MICROPY_VERSION_MAJOR 1
 #define MICROPY_VERSION_MINOR 19
@@ -1934,5 +1931,4 @@ typedef double mp_float_t;
 #endif
 #endif
 
-}
 #endif // MICROPY_INCLUDED_PY_MPCONFIG_H

@@ -37,8 +37,6 @@
  * Uses (byte) length instead of null termination.
  * Tokens are the same - UTF-8 with (byte) length.
  */
-extern "C"
-{
 
 typedef enum _mp_token_kind_t {
     MP_TOKEN_END,
@@ -202,5 +200,5 @@ mp_lexer_t *mp_lexer_new_from_fd(qstr filename, int fd, bool close_fd);
 void mp_lexer_free(mp_lexer_t *lex);
 void mp_lexer_to_next(mp_lexer_t *lex);
 
-}
+
 #endif // MICROPY_INCLUDED_PY_LEXER_H

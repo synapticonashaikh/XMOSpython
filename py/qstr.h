@@ -29,9 +29,6 @@
 #include "py/mpconfig.h"
 #include "py/misc.h"
 
-extern "C"
-{
-
 // See qstrdefs.h for a list of qstr's that are available as constants.
 // Reference them as MP_QSTR_xxxx.
 //
@@ -100,5 +97,4 @@ void mp_decompress_rom_string(byte *dst, const mp_rom_error_text_t src);
 #define MP_IS_COMPRESSED_ROM_STRING(s) (*(byte *)(s) == 0xff)
 #endif
 
-}
 #endif // MICROPY_INCLUDED_PY_QSTR_H
