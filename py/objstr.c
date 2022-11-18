@@ -1845,7 +1845,7 @@ MP_DEFINE_CONST_FUN_OBJ_2(str_rpartition_obj, str_rpartition);
 #endif
 
 // Supposedly not too critical operations, so optimize for code size
-STATIC mp_obj_t str_caseconv(unichar (*op)(unichar), mp_obj_t self_in) {
+STATIC mp_obj_t str_caseconv(__attribute__(( fptrgroup("Aatif") ))unichar (*op)(unichar),__attribute__(( fptrgroup("Aatif") ))mp_obj_t self_in) {
     GET_STR_DATA_LEN(self_in, self_data, self_len);
     vstr_t vstr;
     vstr_init_len(&vstr, self_len);
@@ -1866,7 +1866,7 @@ STATIC mp_obj_t str_upper(mp_obj_t self_in) {
 }
 MP_DEFINE_CONST_FUN_OBJ_1(str_upper_obj, str_upper);
 
-STATIC mp_obj_t str_uni_istype(bool (*f)(unichar), mp_obj_t self_in) {
+STATIC mp_obj_t str_uni_istype(__attribute__(( fptrgroup("Aatif") ))bool (*f)(unichar), mp_obj_t self_in) {
     GET_STR_DATA_LEN(self_in, self_data, self_len);
 
     if (self_len == 0) {

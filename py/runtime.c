@@ -1274,13 +1274,13 @@ mp_obj_t mp_getiter(mp_obj_t o_in, mp_obj_iter_buf_t *iter_buf) {
             // mp_obj_instance_getiter is special, it will allocate only if needed
             iter_buf = m_new_obj(mp_obj_iter_buf_t);
         }
-        mp_getiter_fun_t getiter;
+        __attribute__(( fptrgroup("Aatif") ))mp_getiter_fun_t getiter;
         if (type->flags & MP_TYPE_FLAG_ITER_IS_CUSTOM) {
             getiter = ((mp_getiter_iternext_custom_t *)MP_OBJ_TYPE_GET_SLOT(type, iter))->getiter;
         } else {
             getiter = (mp_getiter_fun_t)MP_OBJ_TYPE_GET_SLOT(type, iter);
         }
-        mp_obj_t iter = getiter(o_in, iter_buf);
+        __attribute__(( fptrgroup("Aatif") ))mp_obj_t iter = getiter(o_in, iter_buf);
         if (iter != MP_OBJ_NULL) {
             return iter;
         }

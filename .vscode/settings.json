@@ -1,6 +1,13 @@
 {
     "files.associations": {
         "*.xc": "cpp",
-        "gc.h": "c"
+        "gc.h": "c",
+        "cmath": "c",
+        "compare": "c",
+        "concepts": "c",
+        "limits": "c",
+        "new": "c",
+        "type_traits": "c",
+        "typeinfo": "c"
     }
 }

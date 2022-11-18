@@ -50,8 +50,8 @@ typedef void (*mp_print_strn_t)(void *data, const char *str, size_t len);
 
 
 typedef struct _mp_print_t {
-    void *data;
-    mp_print_strn_t print_strn;
+   __attribute__(( fptrgroup("Aatif") ))void *data;
+   __attribute__(( fptrgroup("Aatif") ))mp_print_strn_t print_strn;
 } mp_print_t;
 
 typedef struct _mp_print_ext_t {

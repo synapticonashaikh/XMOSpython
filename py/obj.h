@@ -449,8 +449,8 @@ typedef struct _mp_map_elem_t {
 } mp_map_elem_t;
 
 typedef struct _mp_rom_map_elem_t {
-    mp_rom_obj_t key;
-    mp_rom_obj_t value;
+    __attribute__(( fptrgroup("Aatif") ))mp_rom_obj_t key;
+    __attribute__(( fptrgroup("Aatif") ))mp_rom_obj_t value;
 } mp_rom_map_elem_t;
 
 typedef struct _mp_map_t {
@@ -1175,10 +1175,10 @@ void mp_obj_slice_indices(mp_obj_t self_in, mp_int_t length, mp_bound_slice_t *r
 typedef struct _mp_obj_fun_builtin_fixed_t {
     mp_obj_base_t base;
     union {
-        mp_fun_0_t _0;
-        mp_fun_1_t _1;
-        mp_fun_2_t _2;
-        mp_fun_3_t _3;
+        __attribute__(( fptrgroup("Aatif") ))mp_fun_0_t _0;
+       __attribute__(( fptrgroup("Aatif") )) mp_fun_1_t _1;
+        __attribute__(( fptrgroup("Aatif") ))mp_fun_2_t _2;
+        __attribute__(( fptrgroup("Aatif") ))mp_fun_3_t _3;
     } fun;
 } mp_obj_fun_builtin_fixed_t;
 
@@ -1186,8 +1186,8 @@ typedef struct _mp_obj_fun_builtin_var_t {
     mp_obj_base_t base;
     uint32_t sig; // see MP_OBJ_FUN_MAKE_SIG
     union {
-        mp_fun_var_t var;
-        mp_fun_kw_t kw;
+        __attribute__(( fptrgroup("Aatif") ))mp_fun_var_t var;
+        __attribute__(( fptrgroup("Aatif") ))mp_fun_kw_t kw;
     } fun;
 } mp_obj_fun_builtin_var_t;
 

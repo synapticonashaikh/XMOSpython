@@ -36,7 +36,7 @@
 // Any instance should have these 2 fields at the beginning
 typedef struct _mp_obj_polymorph_iter_t {
     mp_obj_base_t base;
-    mp_fun_1_t iternext;
+    __attribute__(( fptrgroup("Aatif") ))mp_fun_1_t iternext;
 } mp_obj_polymorph_iter_t;
 
 STATIC mp_obj_t polymorph_it_iternext(mp_obj_t self_in) {

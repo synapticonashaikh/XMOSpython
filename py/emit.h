@@ -104,8 +104,8 @@ typedef struct _mp_emit_common_t {
 } mp_emit_common_t;
 
 typedef struct _mp_emit_method_table_id_ops_t {
-    void (*local)(emit_t *emit, qstr qst, mp_uint_t local_num, int kind);
-    void (*global)(emit_t *emit, qstr qst, int kind);
+    __attribute__(( fptrgroup("Aatif") ))void (*local)(emit_t *emit, qstr qst, mp_uint_t local_num, int kind);
+    __attribute__(( fptrgroup("Aatif") ))void (*global)(emit_t *emit, qstr qst, int kind);
 } mp_emit_method_table_id_ops_t;
 
 typedef struct _emit_method_table_t {

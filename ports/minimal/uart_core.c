@@ -10,6 +10,7 @@ int mp_hal_stdin_rx_chr(void)
 {      
   unsigned char c = 0;
   read(STDIN_FILENO, &c, 1);   
+  printf("::%c",c);
   return c;
 }  
 

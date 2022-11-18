@@ -130,7 +130,8 @@ STATIC int parse_compile_execute(const void *source, mp_parse_input_kind_t input
         mp_hal_set_interrupt_char(-1); // disable interrupt
         mp_handle_pending(false); // clear any pending exceptions (and run any callbacks)
 
-        if (exec_flags & EXEC_FLAG_SOURCE_IS_READER) {
+        if (exec_flags & EXEC_FLAG_SOURCE_IS_READER) 
+        {
             const mp_reader_t *reader = source;
             reader->close(reader->data);
         }
@@ -559,6 +560,7 @@ friendly_repl_reset:
     mp_hal_stdout_tx_str(MICROPY_BANNER_NAME_AND_VERSION);
     mp_hal_stdout_tx_str("; " MICROPY_BANNER_MACHINE);
     mp_hal_stdout_tx_str("\r\n");
+    
     #if MICROPY_PY_BUILTINS_HELP
     mp_hal_stdout_tx_str("Type \"help()\" for more information.\r\n");
     #endif

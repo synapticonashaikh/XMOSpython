@@ -879,7 +879,7 @@ mp_lexer_t *mp_lexer_new_from_fd(qstr filename, int fd, bool close_fd) {
 
 #endif
 
-void mp_lexer_free(mp_lexer_t *lex) {
+void mp_lexer_free(__attribute__(( fptrgroup("Aatif") ))mp_lexer_t *lex) {
     if (lex) {
         lex->reader.close(lex->reader.data);
         vstr_clear(&lex->vstr);

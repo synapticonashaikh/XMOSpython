@@ -2,12 +2,15 @@
 ENABLE_DISABLE_DEBUGG_MESSAGE = 1
 
 CMP = xcc -target=XCORE-200-EXPLORER
-
+#-Wno-xcore-fptrgroup
 #include the all required path
 INC += -I.
 INC += -I../../
 INC += -Ibuild
 INC += -Ibuild/genhdr/
+
+
+LDFLAGS = -Wno-unused-variable -Os -report $(INC) 
 
 SRC_C = \
 	main.c \
@@ -19,7 +22,6 @@ SRC_C += ../../shared/libc/printf.c
 SRC_C += ../../shared/readline/readline.c  
 SRC_C += ../../shared/runtime/pyexec.c 
 SRC_C += ../../shared/runtime/stdout_helpers.c 
-
 
 SRC_PY += ../../py/argcheck.c
 SRC_PY += ../../py/asmarm.c
@@ -138,9 +140,6 @@ SRC_PY += ../../py/unicode.c
 SRC_PY += ../../py/vm.c
 SRC_PY += ../../py/vstr.c
 SRC_PY += ../../py/warning.c
-
-
-LDFLAGS = -Wno-unused-variable -report $(INC) 
 
 all: output.xe
 ifeq ($(ENABLE_DISABLE_DEBUGG_MESSAGE), 1)

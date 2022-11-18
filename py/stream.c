@@ -46,7 +46,7 @@ STATIC mp_obj_t stream_readall(mp_obj_t self_in);
 mp_uint_t mp_stream_rw(mp_obj_t stream, void *buf_, mp_uint_t size, int *errcode, byte flags) {
     byte *buf = buf_;
     typedef mp_uint_t (*io_func_t)(mp_obj_t obj, void *buf, mp_uint_t size, int *errcode);
-    io_func_t io_func;
+    __attribute__(( fptrgroup("Aatif") ))io_func_t io_func;
     const mp_stream_p_t *stream_p = mp_get_stream(stream);
     if (flags & MP_STREAM_RW_WRITE) {
         io_func = (io_func_t)stream_p->write;
