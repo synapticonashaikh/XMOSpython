@@ -45,7 +45,6 @@ static char *stack_top;
 #endif
 
 int main(int argc, char **argv) 
-//int mp_main(void) 
 { 
     int stack_dummy;
     stack_top = (char *)&stack_dummy;
@@ -54,9 +53,14 @@ int main(int argc, char **argv)
     gc_init(heap, heap + sizeof(heap));
     #endif
     mp_init();
-    do_str("print('hello world!', list(x+1 for x in range(10)), end='eol\\n')", MP_PARSE_SINGLE_INPUT);
-    do_str("for i in range(10):\r\n  print(i)", MP_PARSE_FILE_INPUT); 
-    do_str("3 * 5", MP_PARSE_FILE_INPUT);        
+//    do_str("print('hello world!', list(x+1 for x in range(10)), end='eol\\n')", MP_PARSE_FILE_INPUT);
+//    do_str("for i in range(10):\r\n  print(i)", MP_PARSE_FILE_INPUT); 
+//    do_str("3 * 5", MP_PARSE_FILE_INPUT);        
+
+//      do_str("for i in range(10):\r\n", MP_PARSE_SINGLE_INPUT); //  print(i)
+      do_str("print('Hello World')", MP_PARSE_SINGLE_INPUT);       
+
+
     #if MICROPY_ENABLE_COMPILER
         #if MICROPY_REPL_EVENT_DRIVEN
             pyexec_event_repl_init();
@@ -69,7 +73,7 @@ int main(int argc, char **argv)
                 }
             }
         #else
-          //  pyexec_friendly_repl();
+            pyexec_friendly_repl();
         #endif
      //do_str("print('hello world!', list(x+1 for x in range(10)), end='eol\\n')", MP_PARSE_SINGLE_INPUT);
      //do_str("for i in range(10):\r\n  print(i)", MP_PARSE_FILE_INPUT);
@@ -115,72 +119,3 @@ void MP_WEAK __assert_func(const char *file, int line, const char *func, const c
 }
 #endif
 
-#if MICROPY_MIN_USE_CORTEX_CPU
-
-// this is a minimal IRQ and reset framework for any Cortex-M CPU
-extern uint32_t _estack, _sidata, _sdata, _edata, _sbss, _ebss;
-
-void Reset_Handler(void) __attribute__((naked));
-void Reset_Handler(void) 
-{
-    // set stack pointer
-    __asm volatile ("ldr sp, =_estack");
-    // copy .data section from flash to RAM
-    for (uint32_t *src = &_sidata, *dest = &_sdata; dest < &_edata;) 
-        {  *dest++ = *src++;   }
-    // zero out .bss section
-    for (uint32_t *dest = &_sbss; dest < &_ebss;) 
-        {  *dest++ = 0;    }
-    // jump to board initialisation
-    void _start(void);
-         _start();
-}
-
-void Default_Handler(void) 
-{ for (;;) { } }
-
-const uint32_t isr_vector[] __attribute__((section(".isr_vector"))) = 
-{
-    (uint32_t)&_estack,
-    (uint32_t)&Reset_Handler,
-    (uint32_t)&Default_Handler, // NMI_Handler
-    (uint32_t)&Default_Handler, // HardFault_Handler
-    (uint32_t)&Default_Handler, // MemManage_Handler
-    (uint32_t)&Default_Handler, // BusFault_Handler
-    (uint32_t)&Default_Handler, // UsageFault_Handler
-    0,   0,    0,    0,
-    (uint32_t)&Default_Handler, // SVC_Handler
-    (uint32_t)&Default_Handler, // DebugMon_Handler
-    0,
-    (uint32_t)&Default_Handler, // PendSV_Handler
-    (uint32_t)&Default_Handler, // SysTick_Handler
-};
-
-void _start(void) 
-{
-    // initialise the cpu and peripherals
-    #if MICROPY_MIN_USE_STM32_MCU
-    void stm32_init(void);
-         stm32_init();
-    #endif
-
-    // now that we have a basic system up and running we can call main
-    main(0, NULL);
-
-    // we must not return
-    for (;;) { }
-}
-#endif
-
-#if MICROPY_MIN_USE_STM32_MCU
-    void stm32_init(void)
-    {
-        /*init the system clock to 100mhz*/
-        FnClockConfigInit();
-        /*init the led gpio*/
-        FnGPIOInit ();
-        STBlink();
-        /*init the serail port(uart2) at 115200 baudrate*/
-        FnSerialInit ();
-    }
-#endif

@@ -8,16 +8,14 @@
 // Receive single character
 int mp_hal_stdin_rx_chr(void) 
 {      
-    printf("Here!");
-    return getchar();
+  unsigned char c = 0;
+  read(STDIN_FILENO, &c, 1);   
+  return c;
 }  
 
 // Send string of given length
 void mp_hal_stdout_tx_strn(const char *str, mp_uint_t len) 
 {  
-      mp_uint_t loop;
-      for(loop = 0 ; loop < len; loop++)
-         putchar(str[loop]);
-
+    write(STDOUT_FILENO, str, len);
 }
 

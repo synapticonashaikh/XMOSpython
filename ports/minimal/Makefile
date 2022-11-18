@@ -140,19 +140,13 @@ SRC_PY += ../../py/vstr.c
 SRC_PY += ../../py/warning.c
 
 
-LDFLAGS = -Wno-unused-variable $(INC) 
+LDFLAGS = -Wno-unused-variable -report $(INC) 
 
 all: output.xe
 ifeq ($(ENABLE_DISABLE_DEBUGG_MESSAGE), 1)
 	$(info Debugg: Final build info)
-	$(info Debugg: PYTHON is $(PYTHON))
-	$(info Debugg: Q is $(Q))
-	$(info Debugg: LD is $(LD))
 	$(info Debugg: LDFLAGS is $(LDFLAGS))
-	$(info Debugg: LIBS is $(LIBS))
-	$(info Debugg: SIZE is $(SIZE))
-	$(info Debugg: CC is $(CC))
-	$(info Debugg: GEN is $(GEN))
+	$(info Debugg: CMP is $(CMP))
 	$(info Debugg: CMD is $(CMP) $(LDFLAGS))
 endif   
 
