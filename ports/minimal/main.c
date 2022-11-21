@@ -44,7 +44,7 @@ static char *stack_top;
     static char heap[_STATIC_HEAP_SIZE];
 #endif
 
-int main(int argc, char **argv) 
+int mp_main(void) 
 { 
     int stack_dummy;
     stack_top = (char *)&stack_dummy;
@@ -53,16 +53,14 @@ int main(int argc, char **argv)
     gc_init(heap, heap + sizeof(heap));
     #endif
     mp_init();
-//    do_str("print('hello world!', list(x+1 for x in range(10)), end='eol\\n')", MP_PARSE_FILE_INPUT);
-//    do_str("for i in range(10):\r\n  print(i)", MP_PARSE_FILE_INPUT); 
-//    do_str("3 * 5", MP_PARSE_FILE_INPUT);        
-
-//      do_str("for i in range(10):\r\n", MP_PARSE_SINGLE_INPUT); //  print(i)
-      do_str("print('Hello World')", MP_PARSE_SINGLE_INPUT);       
-
+// do_str("print('hello world!', list(x+1 for x in range(10)), end='eol\\n')", MP_PARSE_FILE_INPUT);
+// do_str("for i in range(10):\r\n  print(i)", MP_PARSE_FILE_INPUT); 
+// do_str("3 * 5", MP_PARSE_FILE_INPUT);        
+// do_str("for i in range(10):\r\n", MP_PARSE_SINGLE_INPUT); //  print(i)
+// do_str("print('Hello World')", MP_PARSE_SINGLE_INPUT);       
 
     #if MICROPY_ENABLE_COMPILER
-        #if MICROPY_REPL_EVENT_DRIVEN
+        #if MICROPY_REPL_EVENT_DRIVEN         
             pyexec_event_repl_init();
             for (;;) 
             {

@@ -138,12 +138,19 @@ STATIC size_t cursor_count_word(int forward) {
 }
 #endif
 
-int readline_process_char(int c) {
+int readline_process_char(int c) 
+{
     size_t last_line_len = rl.line->len;
     int redraw_step_back = 0;
     bool redraw_from_cursor = false;
     int redraw_step_forward = 0;
-    if (rl.escape_seq == ESEQ_NONE) {
+
+    #ifdef MPY_DEBUGG_ENABLE
+           // printf("DEBUGG: in readline_process_char function!\n\r");
+    #endif 
+
+    if (rl.escape_seq == ESEQ_NONE) 
+    {
         if (CHAR_CTRL_A <= c && c <= CHAR_CTRL_E && vstr_len(rl.line) == rl.orig_line_len) {
             // control character with empty line
             return c;
@@ -477,6 +484,9 @@ redraw:
     rl.auto_indent_state &= ~AUTO_INDENT_JUST_ADDED;
     #endif
 
+    #ifdef MPY_DEBUGG_ENABLE
+           // printf("DEBUGG: -1 returning!\n\r");
+    #endif 
     return -1;
 }
 
@@ -536,7 +546,11 @@ void readline_note_newline(const char *prompt) {
     #endif
 }
 
-void readline_init(vstr_t *line, const char *prompt) {
+void readline_init(vstr_t *line, const char *prompt) 
+{
+   #ifdef MPY_DEBUGG_ENABLE
+          //printf("DEBUGG: in readline_init function!\n\r");
+   #endif      
     rl.line = line;
     rl.orig_line_len = line->len;
     rl.escape_seq = ESEQ_NONE;
@@ -552,16 +566,20 @@ void readline_init(vstr_t *line, const char *prompt) {
     }
     readline_auto_indent();
     #endif
+
 }
 
-int readline(vstr_t *line, const char *prompt) {
+
+int readline(vstr_t *line, const char *prompt) 
+{
     readline_init(line, prompt);
-    for (;;) {
-        int c = mp_hal_stdin_rx_chr();
+    uint8_t ucBuffer[100];
+    for (;;)
+    {
+        int c = mp_hal_stdin_rx_chr( ); if (c == 10)c = 13; 
         int r = readline_process_char(c);
-        if (r >= 0) {
-            return r;
-        }
+        if (r >= 0) 
+        {   return r;  }
     }
 }
 

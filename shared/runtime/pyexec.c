@@ -560,10 +560,6 @@ friendly_repl_reset:
     mp_hal_stdout_tx_str(MICROPY_BANNER_NAME_AND_VERSION);
     mp_hal_stdout_tx_str("; " MICROPY_BANNER_MACHINE);
     mp_hal_stdout_tx_str("\r\n");
-    
-    #if MICROPY_PY_BUILTINS_HELP
-    mp_hal_stdout_tx_str("Type \"help()\" for more information.\r\n");
-    #endif
 
     // to test ctrl-C
     /*
@@ -607,7 +603,7 @@ friendly_repl_reset:
 
         vstr_reset(&line);
         int ret = readline(&line, mp_repl_get_ps1());
-        mp_parse_input_kind_t parse_input_kind = MP_PARSE_SINGLE_INPUT;
+        mp_parse_input_kind_t parse_input_kind = MP_PARSE_SINGLE_INPUT;  
 
         if (ret == CHAR_CTRL_A) {
             // change to raw REPL
@@ -633,7 +629,7 @@ friendly_repl_reset:
             mp_hal_stdout_tx_str("\r\npaste mode; Ctrl-C to cancel, Ctrl-D to finish\r\n=== ");
             vstr_reset(&line);
             for (;;) {
-                char c = mp_hal_stdin_rx_chr();
+                char c = mp_hal_stdin_rx_chr( );
                 if (c == CHAR_CTRL_C) {
                     // cancel everything
                     mp_hal_stdout_tx_str("\r\n");
