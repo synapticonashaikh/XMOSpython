@@ -71,7 +71,7 @@ int mp_main(void)
                 }
             }
         #else
-            pyexec_friendly_repl();
+            pyexec_friendly_repl( );
         #endif
      //do_str("print('hello world!', list(x+1 for x in range(10)), end='eol\\n')", MP_PARSE_SINGLE_INPUT);
      //do_str("for i in range(10):\r\n  print(i)", MP_PARSE_FILE_INPUT);
@@ -83,6 +83,34 @@ int mp_main(void)
     return 0;
 
 }
+
+#pragma stackfunction 5000
+char * FnRunTheCommand(char *commad, uint8_t type)
+{
+    int stack_dummy;
+    stack_top = (char *)&stack_dummy;
+
+    static char * ret = "Sucess!";
+
+    #if MICROPY_ENABLE_GC
+    gc_init(heap, heap + sizeof(heap));
+    #endif
+
+    printf("MP init");
+
+    /*init the mp stack*/
+    mp_init( );
+
+    printf("Command =%s\n\r",commad);
+
+    /*execute the commad*/
+    do_str(commad, type);
+    /*deinit*/
+    mp_deinit();
+    /*return the feedback*/    
+    return ret;
+}
+
 
 #if MICROPY_ENABLE_GC
 void gc_collect(void) 

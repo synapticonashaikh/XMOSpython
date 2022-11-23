@@ -4,6 +4,12 @@ ENABLE_DISABLE_DEBUGG_MESSAGE = 1
 #enable disable micropython debug
 #MPY_DEBUGG_FLAG = -DMPY_DEBUGG_ENABLE
 
+#define the code version
+#for the terminal interperter use DCODE_VERSION_0_0_1
+#without terminal use DCODE_VERSION_0_1_0
+DEFINE_CODE_VERSION	= -DCODE_VERSION_0_0_1
+
+
 CMP = xcc -target=XCORE-200-EXPLORER
 #-Wno-xcore-fptrgroup
 #include the all required path
@@ -13,8 +19,7 @@ INC += -Ibuild
 INC += -Ibuild/genhdr/
 
 
-LDFLAGS = -Wno-unused-variable -Os -report $(INC) $(MPY_DEBUGG_FLAG)
-
+LDFLAGS = -Wno-unused-variable -Os -report $(INC) $(MPY_DEBUGG_FLAG) $(DEFINE_CODE_VERSION)
 
 SRC_C = \
 	run.xc \

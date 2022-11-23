@@ -81,33 +81,112 @@
  * ----------------------------------------------------------------------------
 */
 
+    #define  PARSE_SINGLE_INPUT   0
+    #define  PARSE_FILE_INPUT     1
+    #define  PARSE_EVAL_INPUT     2
 
 /* ----------------------------------------------------------------------------
- *                           Includes
+ *                           INCLUDE
  * ----------------------------------------------------------------------------
 */
 
-	/*Standard Header files*/
-	#include "header.h"
-        
-    extern "C"
-    { extern int mp_main(void); }
+  	/*Standard Header files*/
+	  #include "header.h"
+
+/* ----------------------------------------------------------------------------
+ *                          EXTERNAL FUNCTION
+ * ----------------------------------------------------------------------------
+*/
+
+  #ifdef CODE_VERSION_0_0_1
+      extern "C"{ extern int mp_main(void); }
+  #endif
+
+  #ifdef CODE_VERSION_0_1_0
+      extern "C"{ char * FnRunTheCommand(char *commad, uint8_t type); }
+  #endif
 
 /* ----------------------------------------------------------------------------
  *                          GLOBAL VARIABLE DECLARATION
  * ----------------------------------------------------------------------------
 */
-int main()
+
+
+/* ----------------------------------------------------------------------------
+ *                          GLOBAL VARIABLE DECLARATION
+ * ----------------------------------------------------------------------------
+*/
+#ifdef CODE_VERSION_0_1_0
+  void FnSender(chanend SendCommand, chanend ReceiveCommad)
+  {
+    unsafe
+    {
+      char * unsafe command = "print('Hello')";
+      char * unsafe ret;
+
+       SendCommand <: command;        
+    
+        select 
+        {
+            case ReceiveCommad :> ret:
+            printf("ret value = %s\n",ret);
+            break ;
+            //default: break;
+        }      
+    }
+  }
+
+  void FnReceiver(chanend ReceiveCommad, chanend SendCommand)
+  {
+
+    unsafe 
+    {  
+      char * unsafe command;
+
+      while (SET)
+      {
+        select 
+        {
+            case ReceiveCommad :> command:        
+            printf ("RECEIVED CMD= %s\n\r",command);
+            //SendCommand <: FnRunTheCommand(command,PARSE_SINGLE_INPUT);
+            break ;
+
+            default: break; // to make the select non-blockable 
+        }
+      }
+    } 
+  }
+#endif
+
+/* ----------------------------------------------------------------------------
+ *                          GLOBAL VARIABLE DECLARATION
+ * ----------------------------------------------------------------------------
+*/
+
+int main( )
 {
 
-    par
-    {
-       on tile[TILE0]: mp_main( );
+#ifdef CODE_VERSION_0_1_0
+      printf("Warning! Terminal interpreter is not available!\n\r");      
+      chan ReceiveCommad, SendCommand; 
+        par
+        {  
+          FnSender(ReceiveCommad,SendCommand );
+          FnReceiver(ReceiveCommad,SendCommand);    
+        }
 
-    }
+#endif
 
-return 0;
+#ifdef CODE_VERSION_0_0_1
+        //printf("Warning! Terminal interpreter is activated!\n\r");  
+        par
+        { 
+         on tile[TILE0] : mp_main( );  
+        }  
+#endif  
+
+  return 0;
+
 }
-
-
 
