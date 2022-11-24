@@ -123,7 +123,7 @@
     {
       //char * unsafe command = "print('Hello')";
       //char * unsafe command = "import myport\nfor i in range(10):\n  myport.info()";      
-      char * unsafe command = "import board\nval=board.mul(10,20)\nprint(val)";      
+      char * unsafe command = "import board\nval=board.mul10(20)\nprint(val)";      
       char * unsafe ret;
 
        SendCommand <: command;        

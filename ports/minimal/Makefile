@@ -23,8 +23,8 @@ INC += -Ibuild/genhdr/
 LDFLAGS = -Wno-unused-variable -Os -report $(INC) $(MPY_DEBUGG_FLAG) $(DEFINE_CODE_VERSION) $(FLOAT_FLAG)
 
 SRC_C = \
-	run.c \
 	main.xc \
+	run.c \
 	uart_core.c \
 	modmyport.c \
 	build/_frozen_mpy.c \
@@ -162,7 +162,7 @@ ifeq ($(ENABLE_DISABLE_DEBUGG_MESSAGE), 1)
 endif   
 
 output.xe:
-	$(CMP) $(LDFLAGS) $(SRC_C) $(SRC_PY) $(SRC_FLOAT) -o $@
+	$(CMP) $(LDFLAGS) $(SRC_C) $(SRC_PY) -o $@
 
 clean:
 	rm -rf output.xe
