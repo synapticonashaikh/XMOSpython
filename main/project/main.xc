@@ -98,11 +98,11 @@
  * ----------------------------------------------------------------------------
 */
 
-  #ifdef CODE_VERSION_0_0_1
+  #ifdef CODE_WITH_PYTHON_INTRACTIVE_TERMINAL
       extern "C"{ extern int mp_main(void); }
   #endif
 
-  #ifdef CODE_VERSION_0_1_0
+  #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
       extern "C"{ char * FnRunTheCommand(char *commad, uint8_t type); }
   #endif
 
@@ -116,7 +116,7 @@
  *                          GLOBAL VARIABLE DECLARATION
  * ----------------------------------------------------------------------------
 */
-#ifdef CODE_VERSION_0_1_0
+#ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
   void FnSender(chanend SendCommand, chanend ReceiveCommad)
   {
     unsafe
@@ -169,7 +169,7 @@
 int main( )
 {
 
-#ifdef CODE_VERSION_0_1_0
+#ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
       printf("Warning! Terminal interpreter is not available!\n\r");      
       chan ReceiveCommad, SendCommand; 
       par
@@ -180,7 +180,7 @@ int main( )
 
 #endif
 
-#ifdef CODE_VERSION_0_0_1
+#ifdef CODE_WITH_PYTHON_INTRACTIVE_TERMINAL
         //printf("Warning! Terminal interpreter is activated!\n\r");  
         par
         { 

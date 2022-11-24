@@ -1,16 +1,13 @@
 #enable/ disable debugg message 
 ENABLE_DISABLE_DEBUGG_MESSAGE = 1
 
-#enable disable micropython debug
-#MPY_DEBUGG_FLAG = -DMPY_DEBUGG_ENABLE
-
 #define the code version
-#for the terminal interperter use DCODE_VERSION_0_0_1
-#without terminal use DCODE_VERSION_0_1_0
-DEFINE_CODE_VERSION	= -DCODE_VERSION_0_1_0
+#for the terminal interperter use DCODE_WITH_PYTHON_INTRACTIVE_TERMINAL
+#without terminal use DCODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
+DEFINE_CODE_VERSION=-DCODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
 
 # MICROPY_FLOAT_IMPL_NONE MICROPY_FLOAT_IMPL_FLOAT MICROPY_FLOAT_IMPL_DOUBLE 
-FLOAT_FLAG = -DMICROPY_FLOAT_IMPL=MICROPY_FLOAT_IMPL_FLOAT
+FLOAT_FLAG=-DMICROPY_FLOAT_IMPL=MICROPY_FLOAT_IMPL_FLOAT
 
 CMP = xcc -target=XCORE-200-EXPLORER
 #-Wno-xcore-fptrgroup
@@ -20,8 +17,9 @@ INC += -I../../
 INC += -Ibuild
 INC += -Ibuild/genhdr/
 
-LDFLAGS = -Wno-unused-variable -Os -report $(INC) $(MPY_DEBUGG_FLAG) $(DEFINE_CODE_VERSION) $(FLOAT_FLAG)
+LDFLAGS = -Wno-unused-variable -Os -report $(INC) $(DEFINE_CODE_VERSION) $(FLOAT_FLAG)
 
+#defined/add the main code files!
 SRC_C = \
 	main.xc \
 	run.c \
@@ -29,7 +27,8 @@ SRC_C = \
 	modmyport.c \
 	build/_frozen_mpy.c \
 
-SRC_C += ../../shared/libc/printf.c 
+#defined/add the support interactive files!
+#SRC_C += ../../shared/libc/printf.c 
 SRC_C += ../../shared/readline/readline.c  
 SRC_C += ../../shared/runtime/pyexec.c 
 SRC_C += ../../shared/runtime/stdout_helpers.c 
