@@ -48,8 +48,8 @@
 #endif
 
 typedef struct _mp_obj_float_t {
-    mp_obj_base_t base;
-    mp_float_t value;
+   mp_obj_base_t base;
+   mp_float_t value;
 } mp_obj_float_t;
 
 const mp_obj_float_t mp_const_float_e_obj = {{&mp_type_float}, (mp_float_t)M_E};
@@ -200,8 +200,9 @@ mp_obj_t mp_obj_new_float(mp_float_t value) {
     return MP_OBJ_FROM_PTR(o);
 }
 
+#pragma stackfunction 1000   
 mp_float_t mp_obj_float_get(mp_obj_t self_in) {
-    assert(mp_obj_is_float(self_in));
+    //assert(mp_obj_is_float(self_in));
     mp_obj_float_t *self = MP_OBJ_TO_PTR(self_in);
     return self->value;
 }

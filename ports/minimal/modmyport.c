@@ -3,7 +3,6 @@
 #include "stdint.h"
 #include "string.h"
 #include "stdlib.h"
-#include "STdriver.h"
 #include <stdarg.h>
 #include <stddef.h>
 
@@ -82,8 +81,8 @@ STATIC mp_obj_t board_mul10(mp_obj_t a)
    bool value; 
    value = mp_obj_get_float_maybe(a,&f);
    r = f * 10 ;
-   mp_printf(&mp_plat_print, "[%d]Multiplication of %.2f and 10.00 is %.2f\n\r",
-   value, (double)f,(double)r ); 
+   //mp_printf(&mp_plat_print, "[%d]Multiplication of %.2f and 10.00 is %.2f\n\r",
+   //value, (double)f,(double)r ); 
    return mp_obj_new_float(r);
 
 }

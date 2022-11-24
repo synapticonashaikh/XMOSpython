@@ -121,7 +121,9 @@
   {
     unsafe
     {
-      char * unsafe command = "print('Hello')";
+      //char * unsafe command = "print('Hello')";
+      //char * unsafe command = "import myport\nfor i in range(10):\n  myport.info()";      
+      char * unsafe command = "import board\nval=board.mul(10,20)\nprint(val)";      
       char * unsafe ret;
 
        SendCommand <: command;        
@@ -148,8 +150,8 @@
         select 
         {
             case ReceiveCommad :> command:        
-            printf ("RECEIVED CMD= %s\n\r",command);
-            //SendCommand <: FnRunTheCommand(command,PARSE_SINGLE_INPUT);
+            printf ("RECEIVED CMD=\n\r%s\n\r",command);
+            SendCommand <: FnRunTheCommand(command,PARSE_FILE_INPUT);
             break ;
 
             default: break; // to make the select non-blockable 
@@ -170,11 +172,11 @@ int main( )
 #ifdef CODE_VERSION_0_1_0
       printf("Warning! Terminal interpreter is not available!\n\r");      
       chan ReceiveCommad, SendCommand; 
-        par
-        {  
-          FnSender(ReceiveCommad,SendCommand );
-          FnReceiver(ReceiveCommad,SendCommand);    
-        }
+      par
+      {  
+        FnSender  (ReceiveCommad,SendCommand);
+        FnReceiver(ReceiveCommad,SendCommand);    
+      }
 
 #endif
 

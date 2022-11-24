@@ -7,8 +7,10 @@ ENABLE_DISABLE_DEBUGG_MESSAGE = 1
 #define the code version
 #for the terminal interperter use DCODE_VERSION_0_0_1
 #without terminal use DCODE_VERSION_0_1_0
-DEFINE_CODE_VERSION	= -DCODE_VERSION_0_0_1
+DEFINE_CODE_VERSION	= -DCODE_VERSION_0_1_0
 
+# MICROPY_FLOAT_IMPL_NONE MICROPY_FLOAT_IMPL_FLOAT MICROPY_FLOAT_IMPL_DOUBLE 
+FLOAT_FLAG = -DMICROPY_FLOAT_IMPL=MICROPY_FLOAT_IMPL_FLOAT
 
 CMP = xcc -target=XCORE-200-EXPLORER
 #-Wno-xcore-fptrgroup
@@ -18,12 +20,11 @@ INC += -I../../
 INC += -Ibuild
 INC += -Ibuild/genhdr/
 
-
-LDFLAGS = -Wno-unused-variable -Os -report $(INC) $(MPY_DEBUGG_FLAG) $(DEFINE_CODE_VERSION)
+LDFLAGS = -Wno-unused-variable -Os -report $(INC) $(MPY_DEBUGG_FLAG) $(DEFINE_CODE_VERSION) $(FLOAT_FLAG)
 
 SRC_C = \
-	run.xc \
-	main.c \
+	run.c \
+	main.xc \
 	uart_core.c \
 	modmyport.c \
 	build/_frozen_mpy.c \
@@ -151,6 +152,7 @@ SRC_PY += ../../py/vm.c
 SRC_PY += ../../py/vstr.c
 SRC_PY += ../../py/warning.c
 
+
 all: output.xe
 ifeq ($(ENABLE_DISABLE_DEBUGG_MESSAGE), 1)
 	$(info Debugg: Final build info)
@@ -160,7 +162,7 @@ ifeq ($(ENABLE_DISABLE_DEBUGG_MESSAGE), 1)
 endif   
 
 output.xe:
-	$(CMP) $(LDFLAGS) $(SRC_C) $(SRC_PY) -o $@
+	$(CMP) $(LDFLAGS) $(SRC_C) $(SRC_PY) $(SRC_FLOAT) -o $@
 
 clean:
 	rm -rf output.xe

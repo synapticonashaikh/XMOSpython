@@ -84,25 +84,18 @@ int mp_main(void)
 
 }
 
-#pragma stackfunction 5000
+#pragma stackfunction 10000
 char * FnRunTheCommand(char *commad, uint8_t type)
 {
     int stack_dummy;
     stack_top = (char *)&stack_dummy;
-
     static char * ret = "Sucess!";
 
     #if MICROPY_ENABLE_GC
-    gc_init(heap, heap + sizeof(heap));
+        gc_init(heap, heap + sizeof(heap));
     #endif
-
-    printf("MP init");
-
     /*init the mp stack*/
     mp_init( );
-
-    printf("Command =%s\n\r",commad);
-
     /*execute the commad*/
     do_str(commad, type);
     /*deinit*/
