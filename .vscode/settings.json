@@ -10,6 +10,10 @@
         "type_traits": "c",
         "typeinfo": "c",
         "stdio.h": "c",
-        "assert.h": "c"
+        "assert.h": "c",
+        "utime_mphal.h": "c",
+        "mphalport.h": "c",
+        "mphal.h": "c",
+        "mpconfig.h": "c"
     }
 }

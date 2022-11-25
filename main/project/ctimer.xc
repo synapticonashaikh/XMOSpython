@@ -1,3 +1,4 @@
+
 /**************************************************************************************
  **************************************************************************************
  ______________________________________________________________________________________
@@ -7,12 +8,11 @@
  ______________________________________________________________________________________
 
   File Name:
-	Datatype.xc
+	hello.xc
  ______________________________________________________________________________________
 
   Summary:
-    This file contains the source code for testing all the data types and 
-    their memory allocated size assigned by the xc compiler.
+    This file contains the source code for printing "Hello world" on the terminal.
  ______________________________________________________________________________________
 
   Description:
@@ -81,115 +81,130 @@
  * ----------------------------------------------------------------------------
 */
 
-    #define  PARSE_SINGLE_INPUT   0
-    #define  PARSE_FILE_INPUT     1
-    #define  PARSE_EVAL_INPUT     2
 
 /* ----------------------------------------------------------------------------
- *                           INCLUDE
+ *                           Includes
  * ----------------------------------------------------------------------------
 */
 
-  	/*Standard Header files*/
-	  #include "header.h"
-
-/* ----------------------------------------------------------------------------
- *                          EXTERNAL FUNCTION
- * ----------------------------------------------------------------------------
-*/
-
-  #ifdef CODE_WITH_PYTHON_INTRACTIVE_TERMINAL
-      extern "C"{ extern int mp_main(void); }
-  #endif
-
-  #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
-      extern "C"{ char * FnRunTheCommand(char *commad, uint8_t type); }
-  #endif
+	/**********Standard Header Files*********/		
+  #include "header.h"
 
 /* ----------------------------------------------------------------------------
  *                          GLOBAL VARIABLE DECLARATION
  * ----------------------------------------------------------------------------
 */
 
-
 /* ----------------------------------------------------------------------------
- *                          GLOBAL VARIABLE DECLARATION
- * ----------------------------------------------------------------------------
-*/
-#ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
-  void FnSender(chanend SendCommand, chanend ReceiveCommad)
-  {
-    unsafe
-    {
-      //char * unsafe command = "print('Hello')";
-      //char * unsafe command = "import myport\nfor i in range(10):\n  myport.info()";      
-      //char * unsafe command = "import board\nval=board.mul10(20)\nprint(val)";     
-      char * unsafe command = "from delay import *\nfor i in range(10):\n  print('time=' + str(i))\n  delay1s()";      
-      char * unsafe ret;
-
-       SendCommand <: command;        
-    
-        select 
-        {
-            case ReceiveCommad :> ret:
-            printf("ret value = %s\n",ret);
-            break ;
-            //default: break;
-        }      
-    }
-  }
-
-  void FnReceiver(chanend ReceiveCommad, chanend SendCommand)
-  {
-
-    unsafe 
-    {  
-      char * unsafe command;
-
-      while (SET)
-      {
-        select 
-        {
-            case ReceiveCommad :> command:        
-            printf ("RECEIVED CMD=\n\r%s\n\r",command);
-            SendCommand <: FnRunTheCommand(command,PARSE_FILE_INPUT);
-            break ;
-
-            default: break; // to make the select non-blockable 
-        }
-      }
-    } 
-  }
-#endif
-
-/* ----------------------------------------------------------------------------
- *                          GLOBAL VARIABLE DECLARATION
+ *                           Fnction Definitions
  * ----------------------------------------------------------------------------
 */
 
-int main( )
+    /*set the timer for 100ns */
+    timer    stTime; 
+
+/* ----------------------------------------------------------------------------
+ *                           important command
+ * ----------------------------------------------------------------------------
+*/
+	//xcc -target=XCORE-200-EXPLORER file_location/timer1sec.xc -o output_location/timer1sec.xe
+	//xsim output_location/helloworld.xe
+	//xrun --io output_location/helloworld.xe
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
+inline void Fndelay1us(void)
 {
-
-#ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
-      printf("Warning! Terminal interpreter is not available!\n\r");      
-      chan ReceiveCommad, SendCommand; 
-      par
-      {  
-        FnSender  (ReceiveCommad,SendCommand);
-        FnReceiver(ReceiveCommad,SendCommand);    
-      }
-
-#endif
-
-#ifdef CODE_WITH_PYTHON_INTRACTIVE_TERMINAL
-        //printf("Warning! Terminal interpreter is activated!\n\r");  
-        par
-        { 
-         on tile[TILE0] : mp_main( );  
-        }  
-#endif  
-
-  return 0;
-
+   uint64_t uiTimeTotal;
+   stTime :> uiTimeTotal;
+   uiTimeTotal = uiTimeTotal + ui1uSec ;  
+   stTime when timerafter(uiTimeTotal) :> void;  
 }
 
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
+inline void Fndelay10us(void)
+{
+   uint64_t uiTimeTotal;
+   stTime :> uiTimeTotal;
+   uiTimeTotal = uiTimeTotal + ui10uSec ;  
+   stTime when timerafter(uiTimeTotal) :> void;  
+}
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
+inline void Fndelay100us(void)
+{
+   uint64_t uiTimeTotal;
+   stTime :> uiTimeTotal;
+   uiTimeTotal = uiTimeTotal + ui100uSec ;  
+   stTime when timerafter(uiTimeTotal) :> void;  
+}
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
+inline void Fndelay1ms(void)
+{
+   uint64_t uiTimeTotal;
+   stTime :> uiTimeTotal;
+   uiTimeTotal = uiTimeTotal + ui1mSec ;  
+   stTime when timerafter(uiTimeTotal) :> void;  
+}
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
+inline void Fndelay10ms(void)
+{
+   uint64_t uiTimeTotal;
+   stTime :> uiTimeTotal;
+   uiTimeTotal = uiTimeTotal + ui10mSec ;  
+   stTime when timerafter(uiTimeTotal) :> void;  
+}
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
+inline void Fndelay100ms(void)
+{
+   uint64_t uiTimeTotal;
+   stTime :> uiTimeTotal;
+   uiTimeTotal = uiTimeTotal + ui100mSec ;  
+   stTime when timerafter(uiTimeTotal) :> void;  
+}
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
+inline void Fndelay1s(void)
+{
+   uint64_t uiTimeTotal;
+   stTime :> uiTimeTotal;
+   uiTimeTotal = uiTimeTotal + ui1Sec ;  
+   stTime when timerafter(uiTimeTotal) :> void;  
+}

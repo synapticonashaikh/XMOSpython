@@ -12,6 +12,10 @@ extern const struct _mp_obj_module_t mp_module_builtins;
 #undef MODULE_DEF_MP_QSTR_BUILTINS
 #define MODULE_DEF_MP_QSTR_BUILTINS { MP_ROM_QSTR(MP_QSTR_builtins), MP_ROM_PTR(&mp_module_builtins) },
 
+extern const struct _mp_obj_module_t delay_module;
+#undef MODULE_DEF_MP_QSTR_DELAY
+#define MODULE_DEF_MP_QSTR_DELAY { MP_ROM_QSTR(MP_QSTR_delay), MP_ROM_PTR(&delay_module) },
+
 extern const struct _mp_obj_module_t mp_module_micropython;
 #undef MODULE_DEF_MP_QSTR_MICROPYTHON
 #define MODULE_DEF_MP_QSTR_MICROPYTHON { MP_ROM_QSTR(MP_QSTR_micropython), MP_ROM_PTR(&mp_module_micropython) },
@@ -24,6 +28,7 @@ extern const struct _mp_obj_module_t myport_module;
 #define MICROPY_REGISTERED_MODULES \
     MODULE_DEF_MP_QSTR_BOARD \
     MODULE_DEF_MP_QSTR_BUILTINS \
+    MODULE_DEF_MP_QSTR_DELAY \
     MODULE_DEF_MP_QSTR_MICROPYTHON \
     MODULE_DEF_MP_QSTR_MYPORT \
     MODULE_DEF_MP_QSTR___MAIN__ \

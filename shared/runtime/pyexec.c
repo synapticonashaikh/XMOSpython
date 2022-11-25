@@ -43,6 +43,7 @@
 #include "shared/runtime/pyexec.h"
 #include "genhdr/mpversion.h"
 
+
 pyexec_mode_kind_t pyexec_mode_kind = PYEXEC_MODE_FRIENDLY_REPL;
 int pyexec_system_exit = 0;
 

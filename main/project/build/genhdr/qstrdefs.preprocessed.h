@@ -817,6 +817,8 @@ Q(__name__)
 
 Q(__name__)
 
+Q(__name__)
+
 Q(__ne__)
 
 Q(__new__)
@@ -966,6 +968,24 @@ Q(copy)
 Q(count)
 
 Q(count)
+
+Q(delay)
+
+Q(delay)
+
+Q(delay100ms)
+
+Q(delay100us)
+
+Q(delay10ms)
+
+Q(delay10us)
+
+Q(delay1ms)
+
+Q(delay1s)
+
+Q(delay1us)
 
 Q(dict)
 

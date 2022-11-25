@@ -241,7 +241,7 @@
 	typedef struct 
 	{
 
-		timer    stTime;
+		//timer    stTime;
 		uint64_t uiCompareTime;
 		TIMERF	 TimerFlag;
 
@@ -275,6 +275,14 @@
 *                           FUNCTIONS DECLARATION
 * ----------------------------------------------------------------------------
 */
+
+	void Fndelay1us	(void);
+	void Fndelay10us (void);
+	void Fndelay100us(void);	
+    void Fndelay1ms  (void);
+    void Fndelay10ms (void);
+    void Fndelay100ms(void);
+    void Fndelay1s   (void); 
 
 
 
