@@ -126,7 +126,7 @@ $(BUILD_DIRS):
 
 # Preprocess all source files to generate $(CONFIG_H)
 $(CONFIG_H): $(SRC)
-	$(ECHO) "GEN $@"
+#	$(ECHO) "GEN $@"
 	$(Q)$(MPY_LD) --arch $(ARCH) --preprocess -o $@ $^
 
 # Build .o from .c source files
@@ -151,5 +151,5 @@ $(BUILD)/$(MOD).native.mpy: $(SRC_O)
 
 # Build final .mpy from all intermediate .mpy files
 $(MOD).mpy: $(BUILD)/$(MOD).native.mpy $(SRC_MPY)
-	$(ECHO) "GEN $@"
+#	$(ECHO) "GEN $@"
 	$(Q)$(MPY_TOOL) --merge -o $@ $^

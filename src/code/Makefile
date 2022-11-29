@@ -9,7 +9,7 @@ CROSS = 1
 include ../../py/mkenv.mk
 
 #enable/ disable debugg message 
-ENABLE_DISABLE_DEBUGG_MESSAGE = 1
+ENABLE_DISABLE_DEBUGG_MESSAGE = 0
 
 ENABLE_DISABLE_OWN_MODULE = 1
 
@@ -206,11 +206,10 @@ output.xe:
 	rm -rf ../py
 	rm -rf build	
 
-$(BUILD)/_frozen_mpy.c: $(TOP)/tests/frozen/frozentest.mpy $(BUILD)/genhdr/qstrdefs.generated.h 
-	$(ECHO) "MISC freezing bytecode"
-	$(Q)$(TOP)/tools/mpy-tool.py -f -q $(BUILD)/genhdr/qstrdefs.preprocessed.h -mlongint-impl=none $< > $@ 
+$(BUILD)/_frozen_mpy.c: frozentest.mpy $(BUILD)/genhdr/qstrdefs.generated.h 
+	$(Q)$(TOP)/py/mpy-tool.py -f -q $(BUILD)/genhdr/qstrdefs.preprocessed.h -mlongint-impl=none $< > $@ 
 
-delete:
+clean:
 	rm -rf output.xe
 	rm -rf build
 

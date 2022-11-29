@@ -20,7 +20,7 @@ ifeq ("$(origin V)", "command line")
 BUILD_VERBOSE=$(V)
 endif
 ifndef BUILD_VERBOSE
-$(info Use make V=1 or set BUILD_VERBOSE in your environment to increase build verbosity.)
+#$(info Use make V=1 or set BUILD_VERBOSE in your environment to increase build verbosity.)
 BUILD_VERBOSE = 0
 endif
 ifeq ($(BUILD_VERBOSE),0)

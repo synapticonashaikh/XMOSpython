@@ -54,8 +54,8 @@ $(BUILD)/%.o: %.s
 	$(ECHO) "AS $<"
 	$(Q)$(AS) -o $@ $<
 
+#$(ECHO) "CC $<"
 define compile_c
-$(ECHO) "CC $<"
 $(Q)$(CC) $(CFLAGS) -c -MD -o $@ $< || (echo -e $(HELP_BUILD_ERROR); false)
 @# The following fixes the dependency file.
 @# See http://make.paulandlesley.org/autodep.html for details.
@@ -107,46 +107,46 @@ $(OBJ): | $(HEADER_BUILD)/qstrdefs.generated.h $(HEADER_BUILD)/mpversion.h $(OBJ
 # - else, process all source files ($^) [this covers "make -B" which can set $? to empty]
 # See more information about this process in docs/develop/qstr.rst.
 $(HEADER_BUILD)/qstr.i.last: $(SRC_QSTR) $(QSTR_GLOBAL_DEPENDENCIES) | $(QSTR_GLOBAL_REQUIREMENTS)
-	$(ECHO) "GEN $@"
+#	$(ECHO) "GEN $@"
 	$(Q)$(PYTHON) $(PY_SRC)/makeqstrdefs.py pp $(CPP) output $(HEADER_BUILD)/qstr.i.last cflags $(QSTR_GEN_CFLAGS) cxxflags $(QSTR_GEN_CXXFLAGS) sources $^ dependencies $(QSTR_GLOBAL_DEPENDENCIES) changed_sources $?
 
 $(HEADER_BUILD)/qstr.split: $(HEADER_BUILD)/qstr.i.last
-	$(ECHO) "GEN $@"
+#	$(ECHO) "GEN $@"
 	$(Q)$(PYTHON) $(PY_SRC)/makeqstrdefs.py split qstr $< $(HEADER_BUILD)/qstr _
 	$(Q)$(TOUCH) $@
 
 $(QSTR_DEFS_COLLECTED): $(HEADER_BUILD)/qstr.split
-	$(ECHO) "GEN $@"
+#	$(ECHO) "GEN $@"
 	$(Q)$(PYTHON) $(PY_SRC)/makeqstrdefs.py cat qstr _ $(HEADER_BUILD)/qstr $@
 
 # Module definitions via MP_REGISTER_MODULE.
 $(HEADER_BUILD)/moduledefs.split: $(HEADER_BUILD)/qstr.i.last
-	$(ECHO) "GEN $@"
+#	$(ECHO) "GEN $@"
 	$(Q)$(PYTHON) $(PY_SRC)/makeqstrdefs.py split module $< $(HEADER_BUILD)/module _
 	$(Q)$(TOUCH) $@
 
 $(HEADER_BUILD)/moduledefs.collected: $(HEADER_BUILD)/moduledefs.split
-	$(ECHO) "GEN $@"
+#	$(ECHO) "GEN $@"
 	$(Q)$(PYTHON) $(PY_SRC)/makeqstrdefs.py cat module _ $(HEADER_BUILD)/module $@
 
 # Module definitions via MP_REGISTER_ROOT_POINTER.
 $(HEADER_BUILD)/root_pointers.split: $(HEADER_BUILD)/qstr.i.last
-	$(ECHO) "GEN $@"
+#	$(ECHO) "GEN $@"
 	$(Q)$(PYTHON) $(PY_SRC)/makeqstrdefs.py split root_pointer $< $(HEADER_BUILD)/root_pointer _
 	$(Q)$(TOUCH) $@
 
 $(HEADER_BUILD)/root_pointers.collected: $(HEADER_BUILD)/root_pointers.split
-	$(ECHO) "GEN $@"
+#	$(ECHO) "GEN $@"
 	$(Q)$(PYTHON) $(PY_SRC)/makeqstrdefs.py cat root_pointer _ $(HEADER_BUILD)/root_pointer $@
 
 # Compressed error strings.
 $(HEADER_BUILD)/compressed.split: $(HEADER_BUILD)/qstr.i.last
-	$(ECHO) "GEN $@"
+#	$(ECHO) "GEN $@"
 	$(Q)$(PYTHON) $(PY_SRC)/makeqstrdefs.py split compress $< $(HEADER_BUILD)/compress _
 	$(Q)$(TOUCH) $@
 
 $(HEADER_BUILD)/compressed.collected: $(HEADER_BUILD)/compressed.split
-	$(ECHO) "GEN $@"
+#	$(ECHO) "GEN $@"
 	$(Q)$(PYTHON) $(PY_SRC)/makeqstrdefs.py cat compress _ $(HEADER_BUILD)/compress $@
 
 # $(sort $(var)) removes duplicates
@@ -238,8 +238,8 @@ lib $(BUILD)/$(LIBMICROPYTHON): $(OBJ)
 	$(Q)$(AR) rcs $(BUILD)/$(LIBMICROPYTHON) $^
 	$(LIBMICROPYTHON_EXTRA_CMD)
 
-clean:
-	$(RM) -rf $(BUILD) $(CLEAN_EXTRA)
+#clean:
+#	$(RM) -rf $(BUILD) $(CLEAN_EXTRA)
 .PHONY: clean
 
 print-cfg:

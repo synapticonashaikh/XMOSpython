@@ -227,22 +227,22 @@ MPCONFIGPORT_MK = $(wildcard mpconfigport.mk)
 # the lines in "" and then unwrap after the preprocessor is finished.
 # See more information about this process in docs/develop/qstr.rst.
 $(HEADER_BUILD)/qstrdefs.generated.h: $(PY_QSTR_DEFS) $(QSTR_DEFS) $(QSTR_DEFS_COLLECTED) $(PY_SRC)/makeqstrdata.py mpconfigport.h $(MPCONFIGPORT_MK) $(PY_SRC)/mpconfig.h | $(HEADER_BUILD)
-	$(ECHO) "GEN $@"
+#	$(ECHO) "GEN $@"
 	$(Q)$(CAT) $(PY_QSTR_DEFS) $(QSTR_DEFS) $(QSTR_DEFS_COLLECTED) | $(SED) 's/^Q(.*)/"&"/' | $(CPP) $(CFLAGS) - | $(SED) 's/^\"\(Q(.*)\)\"/\1/' > $(HEADER_BUILD)/qstrdefs.preprocessed.h
 	$(Q)$(PYTHON) $(PY_SRC)/makeqstrdata.py $(HEADER_BUILD)/qstrdefs.preprocessed.h > $@
 
 $(HEADER_BUILD)/compressed.data.h: $(HEADER_BUILD)/compressed.collected
-	$(ECHO) "GEN $@"
+#	$(ECHO) "GEN $@"
 	$(Q)$(PYTHON) $(PY_SRC)/makecompresseddata.py $< > $@
 
 # build a list of registered modules for py/objmodule.c.
 $(HEADER_BUILD)/moduledefs.h: $(HEADER_BUILD)/moduledefs.collected
-	@$(ECHO) "GEN $@"
+#	@$(ECHO) "GEN $@"
 	$(Q)$(PYTHON) $(PY_SRC)/makemoduledefs.py $< > $@
 
 # build a list of registered root pointers for py/mpstate.h.
 $(HEADER_BUILD)/root_pointers.h: $(HEADER_BUILD)/root_pointers.collected $(PY_SRC)/make_root_pointers.py
-	@$(ECHO) "GEN $@"
+#	@$(ECHO) "GEN $@"
 	$(Q)$(PYTHON) $(PY_SRC)/make_root_pointers.py $< > $@
 
 # Standard C functions like memset need to be compiled with special flags so
