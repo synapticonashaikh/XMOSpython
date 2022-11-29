@@ -28,9 +28,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "py/mpconfig.h"
-#include "py/misc.h"
-#include "py/mpstate.h"
+#include "mpconfig.h"
+#include "misc.h"
+#include "mpstate.h"
 
 #if MICROPY_DEBUG_VERBOSE // print debugging info
 #define DEBUG_printf DEBUG_printf
@@ -46,7 +46,7 @@
 #endif
 
 #if MICROPY_ENABLE_GC
-#include "py/gc.h"
+#include "gc.h"
 
 // We redirect standard alloc functions to GC heap - just for the rest of
 // this module. In the rest of MicroPython source, system malloc can be

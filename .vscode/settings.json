@@ -14,6 +14,17 @@
         "utime_mphal.h": "c",
         "mphalport.h": "c",
         "mphal.h": "c",
-        "mpconfig.h": "c"
+        "mpconfig.h": "c",
+        "obj.h": "c",
+        "runtime.h": "c",
+        "machine_i2c.h": "c",
+        "compile.h": "c",
+        "mpconfigport.h": "c",
+        "mpversion.h": "c",
+        "mpstate.h": "c",
+        "readline.h": "c",
+        "repl.h": "c",
+        "frozenmod.h": "c",
+        "pyexec.h": "c"
     }
 }

@@ -27,7 +27,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#include "py/obj.h"
+#include "obj.h"
 
 /******************************************************************************/
 /* singleton objects defined by Python                                        */

@@ -28,9 +28,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "py/smallint.h"
-#include "py/objint.h"
-#include "py/runtime.h"
+#include "smallint.h"
+#include "objint.h"
+#include "runtime.h"
 
 #if MICROPY_PY_BUILTINS_FLOAT
 #include <math.h>

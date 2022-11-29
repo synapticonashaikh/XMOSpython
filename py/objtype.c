@@ -30,8 +30,8 @@
 #include <string.h>
 #include <assert.h>
 
-#include "py/objtype.h"
-#include "py/runtime.h"
+#include "objtype.h"
+#include "runtime.h"
 
 #if MICROPY_DEBUG_VERBOSE // print debugging info
 #define DEBUG_PRINT (1)

@@ -29,8 +29,8 @@
 #include <string.h>
 #include <stdint.h>
 
-#include "py/lexer.h"
-#include "py/frozenmod.h"
+#include "lexer.h"
+#include "frozenmod.h"
 
 #if MICROPY_MODULE_FROZEN
 
@@ -55,7 +55,7 @@ extern const char mp_frozen_str_content[];
 
 #if MICROPY_MODULE_FROZEN_MPY
 
-#include "py/emitglue.h"
+#include "emitglue.h"
 
 extern const mp_frozen_module_t *const mp_frozen_mpy_content[];
 

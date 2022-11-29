@@ -27,8 +27,8 @@
 #include <assert.h>
 #include <string.h>
 
-#include "py/obj.h"
-#include "py/mperrno.h"
+#include "obj.h"
+#include "mperrno.h"
 
 #if MICROPY_PY_UERRNO
 

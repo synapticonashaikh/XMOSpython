@@ -27,9 +27,9 @@
 #include <assert.h>
 #include <string.h>
 
-#include "py/obj.h"
-#include "py/misc.h"
-#include "py/asmbase.h"
+#include "obj.h"
+#include "misc.h"
+#include "asmbase.h"
 
 #if MICROPY_EMIT_MACHINE_CODE
 

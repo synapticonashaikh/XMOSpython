@@ -26,7 +26,7 @@
 #ifndef MICROPY_INCLUDED_PY_OBJNAMEDTUPLE_H
 #define MICROPY_INCLUDED_PY_OBJNAMEDTUPLE_H
 
-#include "py/objtuple.h"
+#include "objtuple.h"
 
 typedef struct _mp_obj_namedtuple_type_t {
     // This is a mp_obj_type_t with eight slots.

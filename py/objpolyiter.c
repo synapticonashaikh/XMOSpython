@@ -26,7 +26,7 @@
 
 #include <stdlib.h>
 
-#include "py/runtime.h"
+#include "runtime.h"
 
 // This is universal iterator type which calls "iternext" method stored in
 // particular object instance. (So, each instance of this time can have its
@@ -36,7 +36,11 @@
 // Any instance should have these 2 fields at the beginning
 typedef struct _mp_obj_polymorph_iter_t {
     mp_obj_base_t base;
+#ifdef __XC__         
     __attribute__(( fptrgroup("Aatif") ))mp_fun_1_t iternext;
+#else
+    mp_fun_1_t iternext;
+#endif    
 } mp_obj_polymorph_iter_t;
 
 STATIC mp_obj_t polymorph_it_iternext(mp_obj_t self_in) {

@@ -26,8 +26,8 @@
 #ifndef MICROPY_INCLUDED_PY_EMIT_H
 #define MICROPY_INCLUDED_PY_EMIT_H
 
-#include "py/lexer.h"
-#include "py/scope.h"
+#include "lexer.h"
+#include "scope.h"
 
 
 /* Notes on passes:
@@ -103,9 +103,15 @@ typedef struct _mp_emit_common_t {
     mp_obj_list_t const_obj_list;
 } mp_emit_common_t;
 
-typedef struct _mp_emit_method_table_id_ops_t {
+typedef struct _mp_emit_method_table_id_ops_t 
+{
+    #ifdef __XC__
     __attribute__(( fptrgroup("Aatif") ))void (*local)(emit_t *emit, qstr qst, mp_uint_t local_num, int kind);
     __attribute__(( fptrgroup("Aatif") ))void (*global)(emit_t *emit, qstr qst, int kind);
+   #else
+    void (*local)(emit_t *emit, qstr qst, mp_uint_t local_num, int kind);
+    void (*global)(emit_t *emit, qstr qst, int kind);
+   #endif 
 } mp_emit_method_table_id_ops_t;
 
 typedef struct _emit_method_table_t {

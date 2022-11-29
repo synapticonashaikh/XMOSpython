@@ -26,8 +26,8 @@
 #ifndef MICROPY_INCLUDED_PY_OBJFUN_H
 #define MICROPY_INCLUDED_PY_OBJFUN_H
 
-#include "py/bc.h"
-#include "py/obj.h"
+#include "bc.h"
+#include "obj.h"
 
 
 typedef struct _mp_obj_fun_bc_t {

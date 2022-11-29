@@ -24,7 +24,7 @@
  * THE SOFTWARE.
  */
 
-#include "py/runtime.h"
+#include "runtime.h"
 
 #if MICROPY_PY_BUILTINS_FILTER
 

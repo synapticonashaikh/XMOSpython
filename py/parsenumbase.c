@@ -24,9 +24,9 @@
  * THE SOFTWARE.
  */
 
-#include "py/mpconfig.h"
-#include "py/misc.h"
-#include "py/parsenumbase.h"
+#include "mpconfig.h"
+#include "misc.h"
+#include "parsenumbase.h"
 
 // find real radix base, and strip preceding '0x', '0o' and '0b'
 // puts base in *base, and returns number of bytes to skip the prefix

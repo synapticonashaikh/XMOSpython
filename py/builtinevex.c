@@ -26,10 +26,10 @@
 
 #include <stdint.h>
 
-#include "py/objfun.h"
-#include "py/compile.h"
-#include "py/runtime.h"
-#include "py/builtin.h"
+#include "objfun.h"
+#include "compile.h"
+#include "runtime.h"
+#include "builtin.h"
 
 #if MICROPY_PY_BUILTINS_COMPILE
 

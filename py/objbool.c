@@ -26,7 +26,7 @@
 
 #include <stdlib.h>
 
-#include "py/runtime.h"
+#include "runtime.h"
 
 #if MICROPY_OBJ_IMMEDIATE_OBJS
 

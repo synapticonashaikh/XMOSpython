@@ -26,9 +26,9 @@
 #ifndef MICROPY_INCLUDED_PY_ASMX86_H
 #define MICROPY_INCLUDED_PY_ASMX86_H
 
-#include "py/mpconfig.h"
-#include "py/misc.h"
-#include "py/asmbase.h"
+#include "mpconfig.h"
+#include "misc.h"
+#include "asmbase.h"
 
 
 // x86 cdecl calling convention is:

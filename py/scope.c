@@ -26,7 +26,7 @@
 
 #include <assert.h>
 
-#include "py/scope.h"
+#include "scope.h"
 
 #if MICROPY_ENABLE_COMPILER
 

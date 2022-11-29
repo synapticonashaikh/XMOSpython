@@ -27,12 +27,12 @@
 #define MICROPY_INCLUDED_PY_DYNRUNTIME_H
 
 // This header file contains definitions to dynamically implement the static
-// MicroPython runtime API defined in py/obj.h and py/runtime.h.
+// MicroPython runtime API defined in obj.h and runtime.h.
 
-#include "py/nativeglue.h"
-#include "py/objfun.h"
-#include "py/objstr.h"
-#include "py/objtype.h"
+#include "nativeglue.h"
+#include "objfun.h"
+#include "objstr.h"
+#include "objtype.h"
 
 
 #if !MICROPY_ENABLE_DYNRUNTIME

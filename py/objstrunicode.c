@@ -28,9 +28,9 @@
 #include <string.h>
 #include <assert.h>
 
-#include "py/objstr.h"
-#include "py/objlist.h"
-#include "py/runtime.h"
+#include "objstr.h"
+#include "objlist.h"
+#include "runtime.h"
 
 #if MICROPY_PY_BUILTINS_STR_UNICODE
 

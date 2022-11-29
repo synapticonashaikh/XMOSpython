@@ -27,7 +27,7 @@
 #ifndef MICROPY_INCLUDED_PY_OBJARRAY_H
 #define MICROPY_INCLUDED_PY_OBJARRAY_H
 
-#include "py/obj.h"
+#include "obj.h"
 
 // Used only for memoryview types, set in "typecode" to indicate a writable memoryview
 #define MP_OBJ_ARRAY_TYPECODE_FLAG_RW (0x80)

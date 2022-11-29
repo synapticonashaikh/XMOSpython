@@ -31,7 +31,7 @@
 
 
 #ifdef _MSC_VER
-#include "py/mpconfig.h" // For inline.
+#include "mpconfig.h" // For inline.
 #endif
 
 typedef struct _ringbuf_t {

@@ -16,7 +16,7 @@
  *
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
- *
+ *$(ROOTL)
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -30,12 +30,12 @@
 #include <string.h>
 #include <assert.h>
 
-#include "py/compile.h"
-#include "py/objmodule.h"
-#include "py/persistentcode.h"
-#include "py/runtime.h"
-#include "py/builtin.h"
-#include "py/frozenmod.h"
+#include "compile.h"
+#include "objmodule.h"
+#include "persistentcode.h"
+#include "runtime.h"
+#include "builtin.h"
+#include "frozenmod.h"
 
 #if MICROPY_DEBUG_VERBOSE // print debugging info
 #define DEBUG_PRINT (1)

@@ -27,8 +27,8 @@
 #ifndef MICROPY_INCLUDED_PY_STREAM_H
 #define MICROPY_INCLUDED_PY_STREAM_H
 
-#include "py/obj.h"
-#include "py/mperrno.h"
+#include "obj.h"
+#include "mperrno.h"
 
 
 #define MP_STREAM_ERROR ((mp_uint_t)-1)
@@ -70,9 +70,15 @@ struct mp_stream_seek_t {
 typedef struct _mp_stream_p_t {
     // On error, functions should return MP_STREAM_ERROR and fill in *errcode (values
     // are implementation-dependent, but will be exposed to user, e.g. via exception).
+#ifdef __XC__       
     __attribute__(( fptrgroup("Aatif") ))mp_uint_t (*read)(mp_obj_t obj, void *buf, mp_uint_t size, int *errcode);
     __attribute__(( fptrgroup("Aatif") ))mp_uint_t (*write)(mp_obj_t obj, const void *buf, mp_uint_t size, int *errcode);
     __attribute__(( fptrgroup("Aatif") ))mp_uint_t (*ioctl)(mp_obj_t obj, mp_uint_t request, uintptr_t arg, int *errcode);
+#else
+    mp_uint_t (*read)(mp_obj_t obj, void *buf, mp_uint_t size, int *errcode);
+    mp_uint_t (*write)(mp_obj_t obj, const void *buf, mp_uint_t size, int *errcode);
+    mp_uint_t (*ioctl)(mp_obj_t obj, mp_uint_t request, uintptr_t arg, int *errcode);
+#endif
     mp_uint_t is_text : 1; // default is bytes, set this for text stream
 } mp_stream_p_t;
 

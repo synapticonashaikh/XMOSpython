@@ -25,11 +25,11 @@
  */
 
 #include <string.h>
-#include "py/obj.h"
-#include "py/objmodule.h"
-#include "py/runtime.h"
-#include "py/builtin.h"
-#include "py/repl.h"
+#include "obj.h"
+#include "objmodule.h"
+#include "runtime.h"
+#include "builtin.h"
+#include "repl.h"
 
 #if MICROPY_HELPER_REPL
 

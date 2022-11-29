@@ -27,8 +27,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "py/builtin.h"
-#include "py/objmodule.h"
+#include "builtin.h"
+#include "objmodule.h"
 
 #if MICROPY_PY_BUILTINS_HELP
 

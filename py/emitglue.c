@@ -31,11 +31,11 @@
 #include <string.h>
 #include <assert.h>
 
-#include "py/emitglue.h"
-#include "py/runtime0.h"
-#include "py/bc.h"
-#include "py/objfun.h"
-#include "py/profile.h"
+#include "emitglue.h"
+#include "runtime0.h"
+#include "bc.h"
+#include "objfun.h"
+#include "profile.h"
 
 #if MICROPY_DEBUG_VERBOSE // print debugging info
 #define DEBUG_PRINT (1)

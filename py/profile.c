@@ -24,10 +24,10 @@
  * THE SOFTWARE.
  */
 
-#include "py/profile.h"
-#include "py/bc0.h"
-#include "py/gc.h"
-#include "py/objfun.h"
+#include "profile.h"
+#include "bc0.h"
+#include "gc.h"
+#include "objfun.h"
 
 #if MICROPY_PY_SYS_SETTRACE
 
@@ -438,8 +438,8 @@ mp_obj_t mp_prof_instr_tick(mp_code_state_t *code_state, bool is_exception) {
 
 // This section is for debugging the settrace feature itself, and is not intended
 // to be included in production/release builds.  The code structure for this block
-// was taken from py/showbc.c and should not be used as a reference.  To enable
-// this debug feature enable MICROPY_PROF_INSTR_DEBUG_PRINT_ENABLE in py/profile.h.
+// was taken from showbc.c and should not be used as a reference.  To enable
+// this debug feature enable MICROPY_PROF_INSTR_DEBUG_PRINT_ENABLE in profile.h.
 #if MICROPY_PROF_INSTR_DEBUG_PRINT_ENABLE
 
 #include "runtime0.h"

@@ -29,9 +29,9 @@
 #include <string.h>
 #include <assert.h>
 
-#include "py/bc0.h"
-#include "py/bc.h"
-#include "py/objfun.h"
+#include "bc0.h"
+#include "bc.h"
+#include "objfun.h"
 
 #if MICROPY_DEBUG_VERBOSE // print debugging info
 #define DEBUG_PRINT (1)
@@ -40,7 +40,12 @@
 #define DEBUG_printf(...) (void)0
 #endif
 
-void mp_encode_uint(void *env,  __attribute__(( fptrgroup("Aatif") ))mp_encode_uint_allocator_t allocator, mp_uint_t val) {
+#ifdef __XC__
+void mp_encode_uint(void *env,  __attribute__(( fptrgroup("Aatif") ))mp_encode_uint_allocator_t allocator, mp_uint_t val) 
+#else
+void mp_encode_uint(void *env,mp_encode_uint_allocator_t allocator, mp_uint_t val) 
+#endif
+{
     // We store each 7 bits in a separate byte, and that's how many bytes needed
     byte buf[MP_ENCODE_UINT_MAX_BYTES];
     byte *p = buf + sizeof(buf);

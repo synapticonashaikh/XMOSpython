@@ -26,7 +26,7 @@
 #ifndef MICROPY_INCLUDED_PY_MPERRNO_H
 #define MICROPY_INCLUDED_PY_MPERRNO_H
 
-#include "py/mpconfig.h"
+#include "mpconfig.h"
 
 
 #if MICROPY_USE_INTERNAL_ERRNO
@@ -144,7 +144,7 @@
 
 #if MICROPY_PY_UERRNO
 
-#include "py/obj.h"
+#include "obj.h"
 
 qstr mp_errno_to_str(mp_obj_t errno_val);
 

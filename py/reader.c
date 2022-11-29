@@ -27,10 +27,10 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include "py/runtime.h"
-#include "py/mperrno.h"
-#include "py/mpthread.h"
-#include "py/reader.h"
+#include "runtime.h"
+#include "mperrno.h"
+#include "mpthread.h"
+#include "reader.h"
 
 typedef struct _mp_reader_mem_t {
     size_t free_len; // if >0 mem is freed on close by: m_free(beg, free_len)

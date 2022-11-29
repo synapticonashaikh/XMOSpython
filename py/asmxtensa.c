@@ -27,12 +27,12 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include "py/runtime.h"
+#include "runtime.h"
 
 // wrapper around everything in this file
 #if MICROPY_EMIT_XTENSA || MICROPY_EMIT_INLINE_XTENSA || MICROPY_EMIT_XTENSAWIN
 
-#include "py/asmxtensa.h"
+#include "asmxtensa.h"
 
 #define WORD_SIZE (4)
 #define SIGNED_FIT8(x) ((((x) & 0xffffff80) == 0) || (((x) & 0xffffff80) == 0xffffff80))

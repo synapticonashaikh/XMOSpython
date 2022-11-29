@@ -27,13 +27,13 @@
 #include <assert.h>
 #include <string.h>
 
-#include "py/runtime.h"
-#include "py/builtin.h"
-#include "py/stream.h"
-#include "py/binary.h"
-#include "py/objarray.h"
-#include "py/objstringio.h"
-#include "py/frozenmod.h"
+#include "runtime.h"
+#include "builtin.h"
+#include "stream.h"
+#include "binary.h"
+#include "objarray.h"
+#include "objstringio.h"
+#include "frozenmod.h"
 
 #if MICROPY_PY_IO
 

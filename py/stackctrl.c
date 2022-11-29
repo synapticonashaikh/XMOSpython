@@ -24,8 +24,8 @@
  * THE SOFTWARE.
  */
 
-#include "py/runtime.h"
-#include "py/stackctrl.h"
+#include "runtime.h"
+#include "stackctrl.h"
 
 void mp_stack_ctrl_init(void) {
     volatile int stack_dummy;

@@ -1,6 +1,0 @@
-build/shared/libc/string0.o: ../../shared/libc/string0.c \
- /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
- /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h
-../../shared/libc/string0.c :
- /usr/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h :
- /usr/lib/gcc/arm-none-eabi/10.3.1/include/stddef.h :

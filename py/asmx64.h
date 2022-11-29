@@ -26,9 +26,9 @@
 #ifndef MICROPY_INCLUDED_PY_ASMX64_H
 #define MICROPY_INCLUDED_PY_ASMX64_H
 
-#include "py/mpconfig.h"
-#include "py/misc.h"
-#include "py/asmbase.h"
+#include "mpconfig.h"
+#include "misc.h"
+#include "asmbase.h"
 
 
 // AMD64 calling convention is:

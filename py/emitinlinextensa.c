@@ -30,8 +30,8 @@
 #include <stdarg.h>
 #include <assert.h>
 
-#include "py/emit.h"
-#include "py/asmxtensa.h"
+#include "emit.h"
+#include "asmxtensa.h"
 
 #if MICROPY_EMIT_INLINE_XTENSA
 

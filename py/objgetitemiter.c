@@ -26,7 +26,7 @@
 
 #include <stdlib.h>
 
-#include "py/runtime.h"
+#include "runtime.h"
 
 // this is a wrapper object that turns something that has a __getitem__ method into an iterator
 

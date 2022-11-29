@@ -27,7 +27,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#include "py/runtime.h"
+#include "runtime.h"
 
 typedef struct _mp_obj_map_t {
     mp_obj_base_t base;

@@ -26,9 +26,9 @@
 #ifndef MICROPY_INCLUDED_PY_PERSISTENTCODE_H
 #define MICROPY_INCLUDED_PY_PERSISTENTCODE_H
 
-#include "py/mpprint.h"
-#include "py/reader.h"
-#include "py/emitglue.h"
+#include "mpprint.h"
+#include "reader.h"
+#include "emitglue.h"
 
     
 // The current version of .mpy files. A bytecode-only .mpy file can be loaded

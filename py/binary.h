@@ -27,7 +27,7 @@
 #ifndef MICROPY_INCLUDED_PY_BINARY_H
 #define MICROPY_INCLUDED_PY_BINARY_H
 
-#include "py/obj.h"
+#include "obj.h"
 
 // Use special typecode to differentiate repr() of bytearray vs array.array('B')
 // (underlyingly they're same).  Can't use 0 here because that's used to detect

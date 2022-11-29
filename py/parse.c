@@ -31,13 +31,13 @@
 #include <assert.h>
 #include <string.h>
 
-#include "py/lexer.h"
-#include "py/parse.h"
-#include "py/parsenum.h"
-#include "py/runtime.h"
-#include "py/objint.h"
-#include "py/objstr.h"
-#include "py/builtin.h"
+#include "lexer.h"
+#include "parse.h"
+#include "parsenum.h"
+#include "runtime.h"
+#include "objint.h"
+#include "objstr.h"
+#include "builtin.h"
 
 #if MICROPY_ENABLE_COMPILER
 
@@ -61,7 +61,7 @@ enum {
 // define rules with a compile function
 #define DEF_RULE(rule, comp, kind, ...) RULE_##rule,
 #define DEF_RULE_NC(rule, kind, ...)
-#include "py/grammar.h"
+#include "grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
     RULE_const_object, // special node for a constant, generic Python object
@@ -69,7 +69,7 @@ enum {
 // define rules without a compile function
 #define DEF_RULE(rule, comp, kind, ...)
 #define DEF_RULE_NC(rule, kind, ...) RULE_##rule,
-#include "py/grammar.h"
+#include "grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
 };
@@ -86,7 +86,7 @@ STATIC const uint8_t rule_act_table[] = {
 
 #define DEF_RULE(rule, comp, kind, ...) kind,
 #define DEF_RULE_NC(rule, kind, ...)
-#include "py/grammar.h"
+#include "grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
 
@@ -94,7 +94,7 @@ STATIC const uint8_t rule_act_table[] = {
 
 #define DEF_RULE(rule, comp, kind, ...)
 #define DEF_RULE_NC(rule, kind, ...) kind,
-#include "py/grammar.h"
+#include "grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
 
@@ -115,13 +115,13 @@ STATIC const uint16_t rule_arg_combined_table[] = {
 
 #define DEF_RULE(rule, comp, kind, ...) __VA_ARGS__,
 #define DEF_RULE_NC(rule, kind, ...)
-#include "py/grammar.h"
+#include "grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
 
 #define DEF_RULE(rule, comp, kind, ...)
 #define DEF_RULE_NC(rule, kind, ...)  __VA_ARGS__,
-#include "py/grammar.h"
+#include "grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
 
@@ -141,12 +141,12 @@ STATIC const uint16_t rule_arg_combined_table[] = {
 enum {
 #define DEF_RULE(rule, comp, kind, ...) RULE_PADDING(rule, __VA_ARGS__)
 #define DEF_RULE_NC(rule, kind, ...)
-#include "py/grammar.h"
+#include "grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
 #define DEF_RULE(rule, comp, kind, ...)
 #define DEF_RULE_NC(rule, kind, ...) RULE_PADDING(rule, __VA_ARGS__)
-#include "py/grammar.h"
+#include "grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
 };
@@ -164,13 +164,13 @@ enum {
 STATIC const uint8_t rule_arg_offset_table[] = {
 #define DEF_RULE(rule, comp, kind, ...) RULE_ARG_OFFSET(rule, __VA_ARGS__) & 0xff,
 #define DEF_RULE_NC(rule, kind, ...)
-#include "py/grammar.h"
+#include "grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
     0, // RULE_const_object
 #define DEF_RULE(rule, comp, kind, ...)
 #define DEF_RULE_NC(rule, kind, ...) RULE_ARG_OFFSET(rule, __VA_ARGS__) & 0xff,
-#include "py/grammar.h"
+#include "grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
 };
@@ -179,12 +179,12 @@ STATIC const uint8_t rule_arg_offset_table[] = {
 static const size_t FIRST_RULE_WITH_OFFSET_ABOVE_255 =
 #define DEF_RULE(rule, comp, kind, ...) RULE_ARG_OFFSET(rule, __VA_ARGS__) >= 0x100 ? RULE_##rule :
 #define DEF_RULE_NC(rule, kind, ...)
-#include "py/grammar.h"
+#include "grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
 #define DEF_RULE(rule, comp, kind, ...)
 #define DEF_RULE_NC(rule, kind, ...) RULE_ARG_OFFSET(rule, __VA_ARGS__) >= 0x100 ? RULE_##rule :
-#include "py/grammar.h"
+#include "grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
 0;
@@ -194,13 +194,13 @@ static const size_t FIRST_RULE_WITH_OFFSET_ABOVE_255 =
 STATIC const char *const rule_name_table[] = {
 #define DEF_RULE(rule, comp, kind, ...) #rule,
 #define DEF_RULE_NC(rule, kind, ...)
-#include "py/grammar.h"
+#include "grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
     "", // RULE_const_object
 #define DEF_RULE(rule, comp, kind, ...)
 #define DEF_RULE_NC(rule, kind, ...) #rule,
-#include "py/grammar.h"
+#include "grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
 };

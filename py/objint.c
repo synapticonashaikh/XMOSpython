@@ -28,12 +28,12 @@
 #include <assert.h>
 #include <string.h>
 
-#include "py/parsenum.h"
-#include "py/smallint.h"
-#include "py/objint.h"
-#include "py/objstr.h"
-#include "py/runtime.h"
-#include "py/binary.h"
+#include "parsenum.h"
+#include "smallint.h"
+#include "objint.h"
+#include "objstr.h"
+#include "runtime.h"
+#include "binary.h"
 
 #if MICROPY_PY_BUILTINS_FLOAT
 #include <math.h>

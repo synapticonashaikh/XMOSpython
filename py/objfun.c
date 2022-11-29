@@ -28,11 +28,11 @@
 #include <string.h>
 #include <assert.h>
 
-#include "py/objtuple.h"
-#include "py/objfun.h"
-#include "py/runtime.h"
-#include "py/bc.h"
-#include "py/stackctrl.h"
+#include "objtuple.h"
+#include "objfun.h"
+#include "runtime.h"
+#include "bc.h"
+#include "stackctrl.h"
 
 #if MICROPY_DEBUG_VERBOSE // print debugging info
 #define DEBUG_PRINT (1)
@@ -64,7 +64,11 @@ MP_DEFINE_CONST_OBJ_TYPE(
 
 STATIC mp_obj_t fun_builtin_1_call(mp_obj_t self_in, size_t n_args, size_t n_kw, const mp_obj_t *args) {
     assert(mp_obj_is_type(self_in, &mp_type_fun_builtin_1));
+#ifdef __XC__     
     __attribute__(( fptrgroup("Aatif") ))mp_obj_fun_builtin_fixed_t *self = MP_OBJ_TO_PTR(self_in);
+#else
+    mp_obj_fun_builtin_fixed_t *self = MP_OBJ_TO_PTR(self_in);
+#endif    
     mp_arg_check_num(n_args, n_kw, 1, 1, false);
     return self->fun._1(args[0]);
 }

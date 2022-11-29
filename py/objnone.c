@@ -26,7 +26,7 @@
 
 #include <stdlib.h>
 
-#include "py/obj.h"
+#include "obj.h"
 
 #if !MICROPY_OBJ_IMMEDIATE_OBJS
 typedef struct _mp_obj_none_t {

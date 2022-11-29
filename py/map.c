@@ -29,9 +29,9 @@
 #include <string.h>
 #include <assert.h>
 
-#include "py/mpconfig.h"
-#include "py/misc.h"
-#include "py/runtime.h"
+#include "mpconfig.h"
+#include "misc.h"
+#include "runtime.h"
 
 #if MICROPY_DEBUG_VERBOSE // print debugging info
 #define DEBUG_PRINT (1)

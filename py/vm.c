@@ -29,12 +29,12 @@
 #include <string.h>
 #include <assert.h>
 
-#include "py/emitglue.h"
-#include "py/objtype.h"
-#include "py/objfun.h"
-#include "py/runtime.h"
-#include "py/bc0.h"
-#include "py/profile.h"
+#include "emitglue.h"
+#include "objtype.h"
+#include "objfun.h"
+#include "runtime.h"
+#include "bc0.h"
+#include "profile.h"
 
 // *FORMAT-OFF*
 
@@ -227,7 +227,7 @@ mp_vm_return_kind_t MICROPY_WRAP_MP_EXECUTE_BYTECODE(mp_execute_bytecode)(mp_cod
 #endif
 
 #if MICROPY_OPT_COMPUTED_GOTO
-    #include "py/vmentrytable.h"
+    #include "vmentrytable.h"
     #define DISPATCH() do { \
         TRACE(ip); \
         MARK_EXC_IP_GLOBAL(); \

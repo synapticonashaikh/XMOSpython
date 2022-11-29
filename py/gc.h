@@ -28,7 +28,7 @@
 
 #include <stdbool.h>
 #include <stddef.h>
-#include "py/mpconfig.h"
+#include "mpconfig.h"
 
 
 void gc_init(void *start, void *end);

@@ -29,13 +29,13 @@
 #include <string.h>
 #include <assert.h>
 
-#include "py/parsenum.h"
-#include "py/runtime.h"
+#include "parsenum.h"
+#include "runtime.h"
 
 #if MICROPY_PY_BUILTINS_FLOAT
 
 #include <math.h>
-#include "py/formatfloat.h"
+#include "formatfloat.h"
 
 #if MICROPY_OBJ_REPR != MICROPY_OBJ_REPR_C && MICROPY_OBJ_REPR != MICROPY_OBJ_REPR_D
 
@@ -200,7 +200,9 @@ mp_obj_t mp_obj_new_float(mp_float_t value) {
     return MP_OBJ_FROM_PTR(o);
 }
 
+#ifdef __XC__ 
 #pragma stackfunction 1000   
+#endif
 mp_float_t mp_obj_float_get(mp_obj_t self_in) {
     //assert(mp_obj_is_float(self_in));
     mp_obj_float_t *self = MP_OBJ_TO_PTR(self_in);

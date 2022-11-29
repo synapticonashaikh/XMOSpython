@@ -30,8 +30,8 @@
 #include <stdarg.h>
 #include <assert.h>
 
-#include "py/emit.h"
-#include "py/asmthumb.h"
+#include "emit.h"
+#include "asmthumb.h"
 
 #if MICROPY_EMIT_INLINE_THUMB
 
@@ -39,14 +39,14 @@ typedef enum {
 // define rules with a compile function
 #define DEF_RULE(rule, comp, kind, ...) PN_##rule,
 #define DEF_RULE_NC(rule, kind, ...)
-    #include "py/grammar.h"
+    #include "grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
     PN_const_object, // special node for a constant, generic Python object
 // define rules without a compile function
 #define DEF_RULE(rule, comp, kind, ...)
 #define DEF_RULE_NC(rule, kind, ...) PN_##rule,
-    #include "py/grammar.h"
+    #include "grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
 } pn_kind_t;

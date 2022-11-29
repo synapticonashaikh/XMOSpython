@@ -26,7 +26,7 @@
 
 #include <stdio.h>
 
-#include "py/runtime.h"
+#include "runtime.h"
 
 // Schedules an exception on the main thread (for exceptions "thrown" by async
 // sources such as interrupts and UNIX signal handlers).

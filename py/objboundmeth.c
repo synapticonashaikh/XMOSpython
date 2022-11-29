@@ -26,8 +26,8 @@
 
 #include <string.h>
 
-#include "py/obj.h"
-#include "py/runtime.h"
+#include "obj.h"
+#include "runtime.h"
 
 typedef struct _mp_obj_bound_meth_t {
     mp_obj_base_t base;

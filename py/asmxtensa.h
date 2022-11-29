@@ -26,8 +26,8 @@
 #ifndef MICROPY_INCLUDED_PY_ASMXTENSA_H
 #define MICROPY_INCLUDED_PY_ASMXTENSA_H
 
-#include "py/misc.h"
-#include "py/asmbase.h"
+#include "misc.h"
+#include "asmbase.h"
 
 
 // calling conventions:

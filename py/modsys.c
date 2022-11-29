@@ -25,23 +25,23 @@
  * THE SOFTWARE.
  */
 
-#include "py/builtin.h"
-#include "py/objlist.h"
-#include "py/objmodule.h"
-#include "py/objtuple.h"
-#include "py/objstr.h"
-#include "py/objint.h"
-#include "py/objtype.h"
-#include "py/stream.h"
-#include "py/smallint.h"
-#include "py/runtime.h"
-#include "py/persistentcode.h"
-#include "extmod/moduplatform.h"
-#include "genhdr/mpversion.h"
+#include "builtin.h"
+#include "objlist.h"
+#include "objmodule.h"
+#include "objtuple.h"
+#include "objstr.h"
+#include "objint.h"
+#include "objtype.h"
+#include "stream.h"
+#include "smallint.h"
+#include "runtime.h"
+#include "persistentcode.h"
+#include "moduplatform.h"
+#include "mpversion.h"
 
 #if MICROPY_PY_SYS_SETTRACE
-#include "py/objmodule.h"
-#include "py/profile.h"
+#include "objmodule.h"
+#include "profile.h"
 #endif
 
 #if MICROPY_PY_SYS

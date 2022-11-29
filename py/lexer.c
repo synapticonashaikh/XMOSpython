@@ -28,9 +28,9 @@
 #include <string.h>
 #include <assert.h>
 
-#include "py/reader.h"
-#include "py/lexer.h"
-#include "py/runtime.h"
+#include "reader.h"
+#include "lexer.h"
+#include "runtime.h"
 
 #if MICROPY_ENABLE_COMPILER
 
@@ -879,7 +879,12 @@ mp_lexer_t *mp_lexer_new_from_fd(qstr filename, int fd, bool close_fd) {
 
 #endif
 
-void mp_lexer_free(__attribute__(( fptrgroup("Aatif") ))mp_lexer_t *lex) {
+#ifdef __XC__
+void mp_lexer_free(__attribute__(( fptrgroup("Aatif") ))mp_lexer_t *lex) 
+#else
+void mp_lexer_free(mp_lexer_t *lex) 
+#endif
+{
     if (lex) {
         lex->reader.close(lex->reader.data);
         vstr_clear(&lex->vstr);

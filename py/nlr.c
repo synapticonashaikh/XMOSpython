@@ -24,7 +24,7 @@
  * THE SOFTWARE.
  */
 
-#include "py/mpstate.h"
+#include "mpstate.h"
 
 #if !MICROPY_NLR_SETJMP
 // When not using setjmp, nlr_push_tail is called from inline asm so needs special care

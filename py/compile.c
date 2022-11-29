@@ -30,14 +30,14 @@
 #include <string.h>
 #include <assert.h>
 
-#include "py/scope.h"
-#include "py/emit.h"
-#include "py/compile.h"
-#include "py/runtime.h"
-#include "py/asmbase.h"
-#include "py/nativeglue.h"
-#include "py/persistentcode.h"
-#include "py/smallint.h"
+#include "scope.h"
+#include "emit.h"
+#include "compile.h"
+#include "runtime.h"
+#include "asmbase.h"
+#include "nativeglue.h"
+#include "persistentcode.h"
+#include "smallint.h"
 
 #if MICROPY_ENABLE_COMPILER
 
@@ -49,14 +49,14 @@ typedef enum {
 // define rules with a compile function
 #define DEF_RULE(rule, comp, kind, ...) PN_##rule,
 #define DEF_RULE_NC(rule, kind, ...)
-    #include "py/grammar.h"
+    #include "grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
     PN_const_object, // special node for a constant, generic Python object
 // define rules without a compile function
 #define DEF_RULE(rule, comp, kind, ...)
 #define DEF_RULE_NC(rule, kind, ...) PN_##rule,
-    #include "py/grammar.h"
+    #include "grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
 } pn_kind_t;
@@ -314,8 +314,12 @@ STATIC scope_t *scope_new_and_link(compiler_t *comp, scope_kind_t kind, mp_parse
 }
 
 typedef void (*apply_list_fun_t)(compiler_t *comp, mp_parse_node_t pn);
-
-STATIC void apply_to_single_or_list(compiler_t *comp, mp_parse_node_t pn, pn_kind_t pn_list_kind, __attribute__(( fptrgroup("Aatif") ))apply_list_fun_t f) {
+#ifdef __XC__
+STATIC void apply_to_single_or_list(compiler_t *comp, mp_parse_node_t pn, pn_kind_t pn_list_kind, __attribute__(( fptrgroup("Aatif") ))apply_list_fun_t f) 
+#else
+STATIC void apply_to_single_or_list(compiler_t *comp, mp_parse_node_t pn, pn_kind_t pn_list_kind,apply_list_fun_t f) 
+#endif
+{
     if (MP_PARSE_NODE_IS_STRUCT_KIND(pn, pn_list_kind)) {
         mp_parse_node_struct_t *pns = (mp_parse_node_struct_t *)pn;
         int num_nodes = MP_PARSE_NODE_STRUCT_NUM_NODES(pns);
@@ -2751,7 +2755,7 @@ STATIC const compile_function_t compile_function[] = {
 #define c(f) compile_##f
 #define DEF_RULE(rule, comp, kind, ...) comp,
 #define DEF_RULE_NC(rule, kind, ...)
-    #include "py/grammar.h"
+    #include "grammar.h"
 #undef c
 #undef DEF_RULE
 #undef DEF_RULE_NC
@@ -2788,7 +2792,11 @@ STATIC void compile_node(compiler_t *comp, mp_parse_node_t pn) {
         mp_parse_node_struct_t *pns = (mp_parse_node_struct_t *)pn;
         EMIT_ARG(set_source_line, pns->source_line);
         assert(MP_PARSE_NODE_STRUCT_KIND(pns) <= PN_const_object);
+        #ifdef __XC__
          __attribute__(( fptrgroup("Aatif") ))compile_function_t f = compile_function[MP_PARSE_NODE_STRUCT_KIND(pns)];
+        #else
+        compile_function_t f = compile_function[MP_PARSE_NODE_STRUCT_KIND(pns)];       
+        #endif 
         f(comp, pns);
     }
 }

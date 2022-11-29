@@ -31,10 +31,10 @@
 #include <unistd.h>
 #include <assert.h>
 
-#include "py/mpstate.h"
-#include "py/smallint.h"
-#include "py/emit.h"
-#include "py/bc0.h"
+#include "mpstate.h"
+#include "smallint.h"
+#include "emit.h"
+#include "bc0.h"
 
 #if MICROPY_ENABLE_COMPILER
 

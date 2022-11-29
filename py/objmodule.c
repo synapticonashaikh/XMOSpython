@@ -29,10 +29,10 @@
 #include <string.h>
 #include <assert.h>
 
-#include "py/bc.h"
-#include "py/objmodule.h"
-#include "py/runtime.h"
-#include "py/builtin.h"
+#include "bc.h"
+#include "objmodule.h"
+#include "runtime.h"
+#include "builtin.h"
 
 #ifndef NO_QSTR
 // Only include module definitions when not doing qstr extraction, because the

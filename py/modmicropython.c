@@ -26,11 +26,11 @@
 
 #include <stdio.h>
 
-#include "py/builtin.h"
-#include "py/stackctrl.h"
-#include "py/runtime.h"
-#include "py/gc.h"
-#include "py/mphal.h"
+#include "builtin.h"
+#include "stackctrl.h"
+#include "runtime.h"
+#include "gc.h"
+#include "mphal.h"
 
 // Various builtins specific to MicroPython runtime,
 // living in micropython module

@@ -24,7 +24,7 @@
  * THE SOFTWARE.
  */
 
-#include "py/mpstate.h" // needed for NLR defs
+#include "mpstate.h" // needed for NLR defs
 
 #if MICROPY_NLR_AARCH64
 

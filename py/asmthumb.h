@@ -27,9 +27,9 @@
 #define MICROPY_INCLUDED_PY_ASMTHUMB_H
 
 #include <assert.h>
-#include "py/misc.h"
-#include "py/asmbase.h"
-#include "py/persistentcode.h"
+#include "misc.h"
+#include "asmbase.h"
+#include "persistentcode.h"
 
 
 #define ASM_THUMB_REG_R0  (0)

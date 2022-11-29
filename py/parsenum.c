@@ -27,10 +27,10 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include "py/runtime.h"
-#include "py/parsenumbase.h"
-#include "py/parsenum.h"
-#include "py/smallint.h"
+#include "runtime.h"
+#include "parsenumbase.h"
+#include "parsenum.h"
+#include "smallint.h"
 
 #if MICROPY_PY_BUILTINS_FLOAT
 #include <math.h>

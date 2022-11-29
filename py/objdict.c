@@ -28,10 +28,10 @@
 #include <string.h>
 #include <assert.h>
 
-#include "py/runtime.h"
-#include "py/builtin.h"
-#include "py/objtype.h"
-#include "py/objstr.h"
+#include "runtime.h"
+#include "builtin.h"
+#include "objtype.h"
+#include "objstr.h"
 
 bool mp_obj_is_dict_or_ordereddict(mp_obj_t o) {
     return mp_obj_is_obj(o) && MP_OBJ_TYPE_GET_SLOT_OR_NULL(((mp_obj_base_t *)MP_OBJ_TO_PTR(o))->type, make_new) == mp_obj_dict_make_new;

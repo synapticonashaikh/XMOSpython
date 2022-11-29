@@ -30,13 +30,13 @@
 #include <assert.h>
 #include <stdio.h>
 
-#include "py/objlist.h"
-#include "py/objstr.h"
-#include "py/objtuple.h"
-#include "py/objtype.h"
-#include "py/runtime.h"
-#include "py/gc.h"
-#include "py/mperrno.h"
+#include "objlist.h"
+#include "objstr.h"
+#include "objtuple.h"
+#include "objtype.h"
+#include "runtime.h"
+#include "gc.h"
+#include "mperrno.h"
 
 #if MICROPY_ROM_TEXT_COMPRESSION && !defined(NO_QSTR)
 // Extract the MP_MAX_UNCOMPRESSED_TEXT_LEN macro from "genhdr/compressed.data.h".

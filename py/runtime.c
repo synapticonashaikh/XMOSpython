@@ -31,19 +31,19 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "py/parsenum.h"
-#include "py/compile.h"
-#include "py/objstr.h"
-#include "py/objtuple.h"
-#include "py/objlist.h"
-#include "py/objtype.h"
-#include "py/objmodule.h"
-#include "py/objgenerator.h"
-#include "py/smallint.h"
-#include "py/runtime.h"
-#include "py/builtin.h"
-#include "py/stackctrl.h"
-#include "py/gc.h"
+#include "parsenum.h"
+#include "compile.h"
+#include "objstr.h"
+#include "objtuple.h"
+#include "objlist.h"
+#include "objtype.h"
+#include "objmodule.h"
+#include "objgenerator.h"
+#include "smallint.h"
+#include "runtime.h"
+#include "builtin.h"
+#include "stackctrl.h"
+#include "gc.h"
 
 #if MICROPY_DEBUG_VERBOSE // print debugging info
 #define DEBUG_PRINT (1)
@@ -1274,13 +1274,21 @@ mp_obj_t mp_getiter(mp_obj_t o_in, mp_obj_iter_buf_t *iter_buf) {
             // mp_obj_instance_getiter is special, it will allocate only if needed
             iter_buf = m_new_obj(mp_obj_iter_buf_t);
         }
+#ifdef __XC__         
         __attribute__(( fptrgroup("Aatif") ))mp_getiter_fun_t getiter;
+#else
+        mp_getiter_fun_t getiter;
+#endif
         if (type->flags & MP_TYPE_FLAG_ITER_IS_CUSTOM) {
             getiter = ((mp_getiter_iternext_custom_t *)MP_OBJ_TYPE_GET_SLOT(type, iter))->getiter;
         } else {
             getiter = (mp_getiter_fun_t)MP_OBJ_TYPE_GET_SLOT(type, iter);
         }
+#ifdef __XC__         
         __attribute__(( fptrgroup("Aatif") ))mp_obj_t iter = getiter(o_in, iter_buf);
+#else
+        mp_obj_t iter = getiter(o_in, iter_buf);
+#endif        
         if (iter != MP_OBJ_NULL) {
             return iter;
         }

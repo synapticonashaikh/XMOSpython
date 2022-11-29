@@ -26,7 +26,7 @@
 #ifndef MICROPY_INCLUDED_PY_OBJMODULE_H
 #define MICROPY_INCLUDED_PY_OBJMODULE_H
 
-#include "py/obj.h"
+#include "obj.h"
 
 // Place at the very end of a module's globals_table.
 #define MP_MODULE_ATTR_DELEGATION_ENTRY(ptr) { MP_ROM_QSTR(MP_QSTRnull), MP_ROM_PTR(ptr) }

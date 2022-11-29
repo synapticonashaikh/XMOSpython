@@ -24,7 +24,7 @@
  * THE SOFTWARE.
  */
 
-#include "py/mpstate.h"
+#include "mpstate.h"
 
 #if MICROPY_NLR_POWERPC
 

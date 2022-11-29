@@ -29,13 +29,13 @@
 #include <stdarg.h>
 #include <assert.h>
 
-#include "py/obj.h"
-#include "py/objtype.h"
-#include "py/objint.h"
-#include "py/objstr.h"
-#include "py/runtime.h"
-#include "py/stackctrl.h"
-#include "py/stream.h" // for mp_obj_print
+#include "obj.h"
+#include "objtype.h"
+#include "objint.h"
+#include "objstr.h"
+#include "runtime.h"
+#include "stackctrl.h"
+#include "stream.h" // for mp_obj_print
 
 // Allocates an object and also sets type, for mp_obj_malloc{,_var} macros.
 void *mp_obj_malloc_helper(size_t num_bytes, const mp_obj_type_t *type) {

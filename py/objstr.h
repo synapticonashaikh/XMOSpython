@@ -26,8 +26,8 @@
 #ifndef MICROPY_INCLUDED_PY_OBJSTR_H
 #define MICROPY_INCLUDED_PY_OBJSTR_H
 
-#include "py/obj.h"
-#include "py/objarray.h"
+#include "obj.h"
+#include "objarray.h"
 
 
 typedef struct _mp_obj_str_t {

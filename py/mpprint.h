@@ -26,7 +26,7 @@
 #ifndef MICROPY_INCLUDED_PY_MPPRINT_H
 #define MICROPY_INCLUDED_PY_MPPRINT_H
 
-#include "py/mpconfig.h"
+#include "mpconfig.h"
 
 #define PF_FLAG_LEFT_ADJUST       (0x001)
 #define PF_FLAG_SHOW_SIGN         (0x002)
@@ -49,9 +49,15 @@
 typedef void (*mp_print_strn_t)(void *data, const char *str, size_t len);
 
 
-typedef struct _mp_print_t {
+typedef struct _mp_print_t 
+{
+#ifdef __XC__ 
    __attribute__(( fptrgroup("Aatif") ))void *data;
    __attribute__(( fptrgroup("Aatif") ))mp_print_strn_t print_strn;
+#else
+   void *data;
+   mp_print_strn_t print_strn;
+#endif   
 } mp_print_t;
 
 typedef struct _mp_print_ext_t {

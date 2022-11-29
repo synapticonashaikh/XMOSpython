@@ -28,11 +28,11 @@
 #include <assert.h>
 #include <string.h>
 
-#include "py/runtime.h"
-#include "py/builtin.h"
-#include "py/objtuple.h"
-#include "py/binary.h"
-#include "py/parsenum.h"
+#include "runtime.h"
+#include "builtin.h"
+#include "objtuple.h"
+#include "binary.h"
+#include "parsenum.h"
 
 #if MICROPY_PY_STRUCT
 
