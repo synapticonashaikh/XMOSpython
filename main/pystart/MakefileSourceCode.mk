@@ -2,11 +2,11 @@
 
 #defined/add the main code files!
 SRC_C +=  main.xc
-SRC_C +=  ctimer.xc
 SRC_C +=  PythonRun.c
-SRC_C +=  InputOutput.c
-SRC_C +=  modmyport.c
-SRC_C +=  modtimer.c
+SRC_C +=  $(HARDWAREL)ctimer.xc
+SRC_C +=  $(HARDWAREL)InputOutput.c
+SRC_C +=  $(MODULEL)modmyport.c
+SRC_C +=  $(MODULEL)modtimer.c
 SRC_C +=  $(BUILD_DIR)/_frozen_mpy.c
 
 #defined/add the support interactive files!
@@ -18,6 +18,6 @@ SRC_C += $(ROOTL)py/stdout_helpers.c
 SRC_QSTR += $(ROOTL)py/readline.c 
 SRC_QSTR += $(ROOTL)py/pyexec.c
 ifeq ($(ENABLE_DISABLE_OWN_MODULE), 1)
-SRC_QSTR += modmyport.c
-SRC_QSTR += modtimer.c
+SRC_QSTR += $(MODULEL)modmyport.c
+SRC_QSTR += $(MODULEL)modtimer.c
 endif

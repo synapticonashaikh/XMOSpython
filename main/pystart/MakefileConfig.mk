@@ -2,6 +2,11 @@
 #define root locations
 ROOTL = ../../
 
+#define the distribution location
+MODULEL   = ../modules/
+HARDWAREL = ../hardware/
+HEADERSL  = ../headers/
+
 #enable/ disable debugg message 
 ENABLE_DISABLE_DEBUGG_MESSAGE = 0
 
@@ -28,7 +33,8 @@ CMP = xcc -target=XCORE-200-EXPLORER
 
 #include the all required path
 INC += -I.
-INC += -I../..
+INC += -I$(ROOTL)
+INC += -I$(HEADERSL)
 INC += -I$(BUILD_DIR)
 INC += -I$(BUILD_DIR)/genhdr/
 

@@ -282,14 +282,4 @@
 	void FndelaymSec (uint32_t uiTime);
 	void FndelaySec	 (uint32_t uiTime);
 
-	void Fndelay1us	 (void);
-	void Fndelay10us (void);
-	void Fndelay100us(void);	
-    void Fndelay1ms  (void);
-    void Fndelay10ms (void);
-    void Fndelay100ms(void);
-    void Fndelay1s   (void); 
-
-
-
 #endif /*__HEADER_H_*/
