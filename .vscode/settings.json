@@ -25,6 +25,7 @@
         "readline.h": "c",
         "repl.h": "c",
         "frozenmod.h": "c",
-        "pyexec.h": "c"
+        "pyexec.h": "c",
+        "header.h": "c"
     }
 }

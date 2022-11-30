@@ -45,13 +45,12 @@ MICROPY_ROM_TEXT_COMPRESSION ?= 1
 # include py core make definitions
 include $(TOP)/py/py.mk
 
-
 #defined/add the main code files!
 SRC_C = \
 	main.xc \
 	ctimer.xc \
-	run.c \
-	uart_core.c \
+	PythonRun.c \
+	InputOutput.c \
 	modmyport.c \
 	modtimer.c \
 	$(BUILD_DIR)/_frozen_mpy.c \
@@ -207,7 +206,7 @@ output.xe:
 	rm -rf build	
 
 $(BUILD)/_frozen_mpy.c: frozentest.mpy $(BUILD)/genhdr/qstrdefs.generated.h 
-	$(Q)$(TOP)/py/mpy-tool.py -f -q $(BUILD)/genhdr/qstrdefs.preprocessed.h -mlongint-impl=none $< > $@ 
+	$(Q)$(TOP)/py/mpy-tool.py -f -q    $(BUILD)/genhdr/qstrdefs.preprocessed.h -mlongint-impl=none $< > $@ 
 
 clean:
 	rm -rf output.xe

@@ -3,6 +3,30 @@
 
 
 /*************************************************************************/
+STATIC mp_obj_t delay_delayuSec(mp_obj_t a) 
+{
+  FndelayuSec(MP_OBJ_SMALL_INT_VALUE(a));
+  return mp_const_none; 
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(delay_delayuSec_obj, delay_delayuSec);
+
+/*************************************************************************/
+STATIC mp_obj_t delay_delaymSec(mp_obj_t a) 
+{
+  FndelayuSec(MP_OBJ_SMALL_INT_VALUE(a));
+  return mp_const_none; 
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(delay_delaymSec_obj, delay_delaymSec);
+
+/*************************************************************************/
+STATIC mp_obj_t delay_delaySec(mp_obj_t a) 
+{
+  FndelaySec(MP_OBJ_SMALL_INT_VALUE(a));
+  return mp_const_none; 
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(delay_delaySec_obj, delay_delaySec);
+
+/*************************************************************************/
 STATIC mp_obj_t delay_delay1us(void) 
 {
     Fndelay1us();
@@ -72,7 +96,9 @@ STATIC const mp_rom_map_elem_t delay_module_globals_table[] =
     { MP_ROM_QSTR(MP_QSTR_delay10ms),  MP_ROM_PTR(&delay_delay10ms_obj) },        
     { MP_ROM_QSTR(MP_QSTR_delay100ms), MP_ROM_PTR(&delay_delay100ms_obj) },
     { MP_ROM_QSTR(MP_QSTR_delay1s),    MP_ROM_PTR(&delay_delay1s_obj) },
-
+    { MP_ROM_QSTR(MP_QSTR_delayuSec),  MP_ROM_PTR(&delay_delayuSec_obj) },
+    { MP_ROM_QSTR(MP_QSTR_delaymSec),  MP_ROM_PTR(&delay_delaymSec_obj) },
+    { MP_ROM_QSTR(MP_QSTR_delaySec),   MP_ROM_PTR(&delay_delaySec_obj) },
 };
 STATIC MP_DEFINE_CONST_DICT(delay_module_globals, delay_module_globals_table);
 

@@ -124,6 +124,49 @@
  * Return Type	: int
  * Details	    : main function, start of the code
  * *********************************************************************/
+inline void FndelayuSec(uint32_t uiTime)
+{
+   uint64_t  uiTimeTotal;
+   stTime :> uiTimeTotal;
+   uiTimeTotal = uiTimeTotal + (uiTime * ui1uSec) ;  
+   stTime when timerafter(uiTimeTotal) :> void;  
+}
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
+inline void FndelaymSec(uint32_t uiTime)
+{
+   uint64_t  uiTimeTotal;
+   stTime :> uiTimeTotal;
+   uiTimeTotal = uiTimeTotal + (uiTime * ui1mSec) ;  
+   stTime when timerafter(uiTimeTotal) :> void;  
+}
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
+inline void FndelaySec(uint32_t uiTime)
+{
+   uint64_t uiTimeTotal;
+   stTime :> uiTimeTotal;
+   uiTimeTotal = uiTimeTotal + (uiTime * ui1Sec) ;  
+   stTime when timerafter(uiTimeTotal) :> void;  
+}
+
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
 inline void Fndelay1us(void)
 {
    uint64_t uiTimeTotal;

@@ -124,18 +124,18 @@
       //char * unsafe command = "print('Hello')";
       //char * unsafe command = "import myport\nfor i in range(10):\n  myport.info()";      
       //char * unsafe command = "import board\nval=board.mul10(20)\nprint(val)";     
-      char * unsafe command = "from delay import *\nfor i in range(10):\n  print('time=' + str(i))\n  delay1s()";      
+      char * unsafe command = "from delay import *\nfor i in range(10):\n  print('time=' + str(i))\n  delaySec(i)";      
       char * unsafe ret;
 
        SendCommand <: command;        
     
-        select 
-        {
-            case ReceiveCommad :> ret:
-            printf("ret value = %s\n",ret);
-            break ;
-            //default: break;
-        }      
+       select 
+       {
+          case ReceiveCommad :> ret:
+          printf("ret value = %s\n",ret);
+          break ;
+          //default: break;
+       }      
     }
   }
 
