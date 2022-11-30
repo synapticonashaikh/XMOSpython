@@ -92,6 +92,7 @@
 	#define  ERROR 	   (int8_t)-1	
 
 	/*IO ports-1BIT*/
+#ifdef __XC__ 	
     #define PORT1A  XS1_PORT_1A
     #define PORT1B  XS1_PORT_1B
     #define PORT1C  XS1_PORT_1C
@@ -143,6 +144,7 @@
 	#define CORE5		(uint8_t)5
 	#define CORE6		(uint8_t)6	
 	#define CORE7		(uint8_t)7
+#endif
 
     /*Timer constant*/
     //as the system is working on 100Mhz, the unit time of a cycle is 10ns
@@ -275,6 +277,7 @@
 *                           FUNCTIONS DECLARATION
 * ----------------------------------------------------------------------------
 */
+
 	void FndelayuSec (uint32_t uiTime);
 	void FndelaymSec (uint32_t uiTime);
 	void FndelaySec	 (uint32_t uiTime);
