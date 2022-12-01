@@ -99,7 +99,7 @@
 */
 
   #ifdef CODE_WITH_PYTHON_INTRACTIVE_TERMINAL
-      extern "C"{ extern int mp_main(void); }
+      extern "C"{ extern int FnMPInterpreterConsole(void); }
   #endif
 
   #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
@@ -113,9 +113,15 @@
 
 
 /* ----------------------------------------------------------------------------
- *                          GLOBAL VARIABLE DECLARATION
+ *                          FUNCTION DEFINITION
  * ----------------------------------------------------------------------------
 */
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
 #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
   void FnSender(chanend SendCommand, chanend ReceiveCommad)
   {
@@ -124,7 +130,7 @@
       //char * unsafe command = "print('Hello')";
       //char * unsafe command = "import myport\nfor i in range(10):\n  myport.info()";      
       //char * unsafe command = "import board\nval=board.mul10(20)\nprint(val)";     
-      char * unsafe command = "from delay import *\nfor i in range(10):\n  print('time=' + str(i))\n  delaySec(i)";      
+      char * unsafe command = "from delay import *\nfrom gpio import *\nwhile True:\n  PortWrite(PORT4A,0x0E)\n  delaymSec(10)\n  PortWrite(PORT4A,0x0F)\n  delaymSec(10)";      
       char * unsafe ret;
 
        SendCommand <: command;        
@@ -139,6 +145,12 @@
     }
   }
 
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
   void FnReceiver(chanend ReceiveCommad, chanend SendCommand)
   {
 
@@ -163,10 +175,15 @@
 #endif
 
 /* ----------------------------------------------------------------------------
- *                          GLOBAL VARIABLE DECLARATION
+ *                         START OF THE CODE
  * ----------------------------------------------------------------------------
 */
-
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
 int main( )
 {
 
@@ -185,11 +202,12 @@ int main( )
         //printf("Warning! Terminal interpreter is activated!\n\r");  
         par
         { 
-         on tile[TILE0] : mp_main( );  
+          FnMPInterpreterConsole( );  
         }  
 #endif  
 
   return 0;
 
 }
+
 

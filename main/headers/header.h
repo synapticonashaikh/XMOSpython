@@ -91,45 +91,48 @@
 	#define FALSE		RESET	
 	#define  ERROR 	   (int8_t)-1	
 
-	/*IO ports-1BIT*/
-#ifdef __XC__ 	
-    #define PORT1A  XS1_PORT_1A
-    #define PORT1B  XS1_PORT_1B
-    #define PORT1C  XS1_PORT_1C
-    #define PORT1D  XS1_PORT_1D
-    #define PORT1E  XS1_PORT_1E
-    #define PORT1F  XS1_PORT_1F
-    #define PORT1G  XS1_PORT_1G
-    #define PORT1H  XS1_PORT_1H
-    #define PORT1I  XS1_PORT_1I
-    #define PORT1J  XS1_PORT_1J
-    #define PORT1K  XS1_PORT_1K
-    #define PORT1L  XS1_PORT_1L
-    #define PORT1M  XS1_PORT_1M
-    #define PORT1N  XS1_PORT_1N
-    #define PORT1O  XS1_PORT_1O
-    #define PORT1P  XS1_PORT_1P
+
+	#define PORT_MODE_INPUT   1
+	#define PORT_MODE_OUTPUT  2
+
+	/*IO ports-1BIT*/	
+    #define PORT1A  0x10200//XS1_PORT_1A
+    #define PORT1B  0x10000//XS1_PORT_1B
+    #define PORT1C  0x10100//XS1_PORT_1C
+    #define PORT1D  0x10300//XS1_PORT_1D
+    #define PORT1E  0x10600//XS1_PORT_1E
+    #define PORT1F  0x10400//XS1_PORT_1F
+    #define PORT1G  0x10500//XS1_PORT_1G
+    #define PORT1H  0x10700//XS1_PORT_1H
+    #define PORT1I  0x10a00//XS1_PORT_1I
+    #define PORT1J  0x10800//XS1_PORT_1J
+    #define PORT1K  0x10900//XS1_PORT_1K
+    #define PORT1L  0x10b00//XS1_PORT_1L
+    #define PORT1M  0x10c00//XS1_PORT_1M
+    #define PORT1N  0x10d00//XS1_PORT_1N
+    #define PORT1O  0x10e00//XS1_PORT_1O
+    #define PORT1P  0x10f00//XS1_PORT_1P
 
 	/*IO ports-4BITS*/
-    #define PORT4A  XS1_PORT_4A
-    #define PORT4B  XS1_PORT_4B
-    #define PORT4C  XS1_PORT_4C
-    #define PORT4D  XS1_PORT_4D
-    #define PORT4E  XS1_PORT_4E
-    #define PORT4F  XS1_PORT_4F
+    #define PORT4A  0x40000//XS1_PORT_4A
+    #define PORT4B  0x40100//XS1_PORT_4B
+    #define PORT4C  0x40200//XS1_PORT_4C
+    #define PORT4D  0x40300//XS1_PORT_4D
+    #define PORT4E  0x40400//XS1_PORT_4E
+    #define PORT4F  0x40500//XS1_PORT_4F
 
 	/*IO ports-8BITS*/
-    #define PORT8A  XS1_PORT_8A
-    #define PORT8B  XS1_PORT_8B
-    #define PORT8C  XS1_PORT_8C
-    #define PORT8D  XS1_PORT_8D
+    #define PORT8A  0x80000//XS1_PORT_8A
+    #define PORT8B  0x80100//XS1_PORT_8B
+    #define PORT8C  0x80200//XS1_PORT_8C
+    #define PORT8D  0x80300//XS1_PORT_8D
 
 	/*IO ports-16BITS*/
-    #define PORT16A  XS1_PORT_16A
-    #define PORT16B  XS1_PORT_16B
+    #define PORT16A  0x100000//XS1_PORT_16A
+    #define PORT16B  0x100100//XS1_PORT_16B
 
 	/*IO ports-32BITS*/
-    #define PORT32A  XS1_PORT_32A	
+    #define PORT32A  0x200000//XS1_PORT_32A	
 
 	/*tile nuumber*/
 	#define TILE0		(uint8_t)0
@@ -144,7 +147,6 @@
 	#define CORE5		(uint8_t)5
 	#define CORE6		(uint8_t)6	
 	#define CORE7		(uint8_t)7
-#endif
 
     /*Timer constant*/
     //as the system is working on 100Mhz, the unit time of a cycle is 10ns
@@ -179,6 +181,8 @@
 		#include <math.h>
 		#include <time.h>
 		#include <errno.h>           			
+		#include <stdarg.h>
+		#include <stddef.h>
 
 #ifdef __XC__ 
         /*XMOS related hedaer*/
@@ -271,6 +275,7 @@
  *                          GLOBAL VARIABLE DECLARATION
  * ----------------------------------------------------------------------------
 */
+ 
 
 
 /* ---------------------------------------------------------------------------
@@ -282,4 +287,6 @@
 	void FndelaymSec (uint32_t uiTime);
 	void FndelaySec	 (uint32_t uiTime);
 
+	int32_t FnPortWrite(uint32_t uiport,uint32_t state);
+	int32_t FnPortRead (uint32_t uiport);
 #endif /*__HEADER_H_*/

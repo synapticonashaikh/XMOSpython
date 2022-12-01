@@ -1,10 +1,5 @@
 #include "../../py/runtime.h"
-#include <stdio.h>
-#include "stdint.h"
-#include "string.h"
-#include "stdlib.h"
-#include <stdarg.h>
-#include <stddef.h>
+#include "header.h"
 
 //#######################################################################################
 STATIC mp_obj_t myport_info(void) 

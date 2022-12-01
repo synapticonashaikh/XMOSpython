@@ -21,7 +21,7 @@ include $(ROOTL)/py/mkrules.mk
 
 #build the frozen code that required duuring the compilation
 $(BUILD)/_frozen_mpy.c: ../headers/frozentest.mpy $(BUILD)/genhdr/qstrdefs.generated.h 
-	$(Q)$(ROOTL)/py/mpy-tool.py -f -q    $(BUILD)/genhdr/qstrdefs.preprocessed.h -mlongint-impl=none $< > $@ 
+	$(Q)$(ROOTL)/py/mpy-tool.py -f -q $(BUILD)/genhdr/qstrdefs.preprocessed.h -mlongint-impl=none $< > $@ 
 
 all:  dependency output.xe
 ifeq ($(ENABLE_DISABLE_DEBUGG_MESSAGE), 1)
