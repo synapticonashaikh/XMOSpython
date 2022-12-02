@@ -130,7 +130,8 @@
       //char * unsafe command = "print('Hello')";
       //char * unsafe command = "import myport\nfor i in range(10):\n  myport.info()";      
       //char * unsafe command = "import board\nval=board.mul10(20)\nprint(val)";     
-      char * unsafe command = "from delay import *\nfrom gpio import *\nwhile True:\n  PortWrite(PORT4A,0x0E)\n  delaymSec(10)\n  PortWrite(PORT4A,0x0F)\n  delaymSec(10)";      
+      char * unsafe command = "from delay import *\nfrom gpio import *\nwhile True:\n  PortWrite(PORT4A,0x0C)\n  delaymSec(100)\n  PortWrite(PORT4A,0x0F)\n  delaymSec(100)";      
+      //char * unsafe command = "from delay import*\ncount=1\nwhile True:\n  print(count)\n  delaymSec(1000)\n  count = count+1\n";
       char * unsafe ret;
 
        SendCommand <: command;        
@@ -157,16 +158,14 @@
     unsafe 
     {  
       char * unsafe command;
-
       while (SET)
       {
         select 
         {
             case ReceiveCommad :> command:        
             printf ("RECEIVED CMD=\n\r%s\n\r",command);
-            SendCommand <: FnRunTheCommand(command,PARSE_FILE_INPUT);
+            SendCommand <: FnRunTheCommand(command,PARSE_FILE_INPUT); 
             break ;
-
             default: break; // to make the select non-blockable 
         }
       }
@@ -186,6 +185,7 @@
  * *********************************************************************/
 int main( )
 {
+
 
 #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
       printf("Warning! Terminal interpreter is not available!\n\r");      

@@ -1,16 +1,131 @@
-#include "../../py/runtime.h"
-#include "header.h"
+
+/**************************************************************************************
+ **************************************************************************************
+ ______________________________________________________________________________________
+
+  Company:
+	Synapticon GmbH (https://www.synapticon.com/)
+ ______________________________________________________________________________________
+
+  File Name:
+	hello.xc
+ ______________________________________________________________________________________
+
+  Summary:
+    This file contains the source code for printing "Hello world" on the terminal.
+ ______________________________________________________________________________________
+
+  Description:
+	This file contains the source code for a self-practice task by Synapticon GmbH. 
+    It implements the logic of the application's requirements, and it may call API 
+    routines from a different section of the code, such as drivers, system services, 
+    and middleware (if applicable). However, at present, this code is not calling 
+    any of the system-specified APIs (such as the "USARTInitialize" and "TimerTasks"
+    functions) of any of the modules in the system. To make the code development 
+    environment-friendly, the majority of the code shall be using self-created drivers.
+
+ **************************************************************************************
+ **************************************************************************************/
+
+ /**************************************************************************************
+   No-Copyright (c):
+	 No copyrights are being imposed on these software files. Information shall have
+	 to be freely available for the rapid development of science to benefit humanity.
+	 When the information is free, this is not a barrier to their progress. Therefore,
+	 I, Aatif Shaikh, license you the right to use, modify, copy and distribute this
+	 software however you desire.
+
+	 Note*
+	 Software and documentation are provided "as is" without warranty of any kind,
+	 either express or implied, including without limitation, any warranty of
+	 merchantability, title, non-infringement and fitness for a particular purpose.
+	 In no event shall, I (Aatif Shaikh) liable or obligated under contract,
+	 negligence, strict liability, contribution, breach of warranty, or other legal
+	 equitable theory any direct or indirect damages or expenses including but not
+	 limited to any incidental, special, indirect, punitive or consequential damages,
+	 lost profits or lost data, cost of procurement of substitute goods, technology,
+	 services, or any claims by third parties (including but not limited to any
+	 defence thereof), or other similar costs.
+
+  ************************************************************************************/
+
+  /************************************************************************************
+  ______                                            __      __                                     
+ /      \                                          |  \    |  \                                    
+|  $$$$$$\ __    __  _______    ______    ______  _| $$_    \$$  _______   ______   _______        
+| $$___\$$|  \  |  \|       \  |      \  /      \|   $$ \  |  \ /       \ /      \ |       \       
+ \$$    \ | $$  | $$| $$$$$$$\  \$$$$$$\|  $$$$$$\\$$$$$$  | $$|  $$$$$$$|  $$$$$$\| $$$$$$$\      
+ _\$$$$$$\| $$  | $$| $$  | $$ /      $$| $$  | $$ | $$ __ | $$| $$      | $$  | $$| $$  | $$      
+|  \__| $$| $$__/ $$| $$  | $$|  $$$$$$$| $$__/ $$ | $$|  \| $$| $$_____ | $$__/ $$| $$  | $$      
+ \$$    $$ \$$    $$| $$  | $$ \$$    $$| $$    $$  \$$  $$| $$ \$$     \ \$$    $$| $$  | $$      
+  \$$$$$$  _\$$$$$$$ \$$   \$$  \$$$$$$$| $$$$$$$    \$$$$  \$$  \$$$$$$$  \$$$$$$  \$$   \$$      
+          |  \__| $$                    | $$                                                       
+           \$$    $$                    | $$                                                       
+            \$$$$$$                      \$$                                                       
+                          ______                 __        __    __                                
+                         /      \               |  \      |  \  |  \                               
+                        |  $$$$$$\ ______ ____  | $$____  | $$  | $$                               
+                        | $$ __\$$|      \    \ | $$    \ | $$__| $$                               
+                        | $$|    \| $$$$$$\$$$$\| $$$$$$$\| $$    $$                               
+                        | $$ \$$$$| $$ | $$ | $$| $$  | $$| $$$$$$$$                               
+                        | $$__| $$| $$ | $$ | $$| $$__/ $$| $$  | $$                               
+                         \$$    $$| $$ | $$ | $$| $$    $$| $$  | $$                               
+                          \$$$$$$  \$$  \$$  \$$ \$$$$$$$  \$$   \$$                               
+                                                                                                   
+                                                                                                                                                                                                   
+		        In order to be irreplaceable, one must always be different
+  *************************************************************************************/
+
+/* ----------------------------------------------------------------------------
+ *                           MACROS
+ * ----------------------------------------------------------------------------
+*/
 
 
+/* ----------------------------------------------------------------------------
+ *                           Includes
+ * ----------------------------------------------------------------------------
+*/
 
-//#######################################################################################
+    #include "../../py/runtime.h"
+    #include "header.h"
+
+
+/* ----------------------------------------------------------------------------
+ *                          GLOBAL VARIABLE DECLARATION
+ * ----------------------------------------------------------------------------
+*/
+
+/* ----------------------------------------------------------------------------
+ *                           important command
+ * ----------------------------------------------------------------------------
+*/
+
+
+/* ----------------------------------------------------------------------------
+ *                           Fnction Definitions
+ * ----------------------------------------------------------------------------
+*/
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code 
+ * *********************************************************************/
 STATIC mp_obj_t gpio_PortRead(mp_obj_t a) 
 { 
     //return MP_OBJ_SMALL_INT_VALUE(FnPortWrite(MP_OBJ_SMALL_INT_VALUE(a)));
-    return mp_const_none; 
+    return MP_OBJ_NEW_SMALL_INT( FnPortRead(MP_OBJ_SMALL_INT_VALUE(a)));
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(gpio_PortRead_obj, gpio_PortRead);
 
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code 
+ * *********************************************************************/
 STATIC mp_obj_t gpio_PortWrite(mp_obj_t a, mp_obj_t b) 
 {
    //return MP_OBJ_NEW_SMALL_INT(FnPortWrite(MP_OBJ_SMALL_INT_VALUE(a),MP_OBJ_SMALL_INT_VALUE(b)));
@@ -19,7 +134,12 @@ STATIC mp_obj_t gpio_PortWrite(mp_obj_t a, mp_obj_t b)
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_2(gpio_PortWrite_obj, gpio_PortWrite);
 
-
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code 
+ * *********************************************************************/
 STATIC const mp_rom_map_elem_t gpio_module_globals_table[] = 
 {
     /*Module head*/

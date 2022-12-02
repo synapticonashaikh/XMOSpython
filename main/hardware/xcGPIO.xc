@@ -93,7 +93,7 @@
  *                          GLOBAL VARIABLE DECLARATION
  * ----------------------------------------------------------------------------
 */
- 	port _Port1A  = PORT1A  ;
+ 	  port _Port1A  = PORT1A  ;
     port _Port1B  = PORT1B  ;
     port _Port1C  = PORT1C  ;
     port _Port1D  = PORT1D  ;
@@ -132,15 +132,14 @@
     port _Port32A = PORT32A  ;   
 
 /* ----------------------------------------------------------------------------
- *                           Fnction Definitions
- * ----------------------------------------------------------------------------
-*/
-
-/* ----------------------------------------------------------------------------
  *                           important command
  * ----------------------------------------------------------------------------
 */
 
+/* ----------------------------------------------------------------------------
+ *                           Fnction Definitions
+ * ----------------------------------------------------------------------------
+*/
 
 /***********************************************************************
  * Function Name: main 
@@ -201,5 +200,43 @@ inline int32_t FnPortWrite(uint32_t uiport,uint32_t state)
 inline int32_t FnPortRead(uint32_t uiport)
 {
 
-    return RESET;
+ int support, state = ERROR;
+ switch (uiport)
+    {
+        /*IO ports-1BIT*/	
+        case PORT1A:   _Port1A @ support :> state ; break;
+        case PORT1B:   _Port1B @ support :> state ; break;
+        case PORT1C:   _Port1C @ support :> state ; break;  
+        case PORT1D:   _Port1D @ support :> state ; break;  
+        case PORT1E:   _Port1E @ support :> state ; break;  
+        case PORT1F:   _Port1F @ support :> state ; break;  
+        case PORT1G:   _Port1G @ support :> state ; break;  
+        case PORT1H:   _Port1H @ support :> state ; break;  
+        case PORT1I:   _Port1I @ support :> state ; break;  
+        case PORT1J:   _Port1J @ support :> state ; break;  
+        case PORT1K:   _Port1K @ support :> state ; break;  
+        case PORT1L:   _Port1L @ support :> state ; break;  
+        case PORT1M:   _Port1M @ support :> state ; break;  
+        case PORT1N:   _Port1N @ support :> state ; break;  
+        case PORT1O:   _Port1O @ support :> state ; break;  
+        case PORT1P:   _Port1P @ support :> state ; break;  
+        /*IO ports-4BITS*/
+        case PORT4A:   _Port4A @ support :> state ; break; 
+        case PORT4B:   _Port4B @ support :> state ; break; 
+        case PORT4C:   _Port4C @ support :> state ; break; 
+        case PORT4D:   _Port4D @ support :> state ; break; 
+        case PORT4E:   _Port4E @ support :> state ; break; 
+        case PORT4F:   _Port4F @ support :> state ; break; 
+        /*IO ports-8BITS*/
+        case PORT8A:   _Port8A @ support :> state ; break; 
+        case PORT8B:   _Port8B @ support :> state ; break; 
+        case PORT8C:   _Port8C @ support :> state ; break; 
+        case PORT8D:   _Port8D @ support :> state ; break; 
+        /*IO ports-16BITS*/
+        case PORT16A: _Port16A @ support :> state ; break; 
+        case PORT16B: _Port16B @ support :> state ; break; 
+        /*IO ports-32BITS*/
+        case PORT32A: _Port32A @ support :> state ; break; 
+    }
+  return state;
 }
