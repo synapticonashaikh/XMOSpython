@@ -122,7 +122,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_1(gpio_PortRead_obj, gpio_PortRead);
 
 /***********************************************************************
  * Function Name: main 
- * Arguments	  : void
+ * Arguments	: void
  * Return Type	: int
  * Details	    : main function, start of the code 
  * *********************************************************************/
@@ -140,12 +140,35 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(gpio_PortWrite_obj, gpio_PortWrite);
  * Return Type	: int
  * Details	    : main function, start of the code 
  * *********************************************************************/
+STATIC mp_obj_t gpio_PrintGM(void) 
+{
+  mp_printf(&mp_plat_print,"****GPIO MODULES****\n");
+  mp_printf(&mp_plat_print,"1) PrintGM\n");    
+  mp_printf(&mp_plat_print,"2) PortRead\n");  
+  mp_printf(&mp_plat_print,"3) PortWrite\n");  
+  mp_printf(&mp_plat_print,"****GPIO DEFINITION****\n");
+  mp_printf(&mp_plat_print,"1) PORT1A\n2) PORT1B\n3) PORT1C\n4) PORT1D\n5) PORT1E\n6) PORT1F\n7) PORT1G\n8) PORT1H\n");
+  mp_printf(&mp_plat_print,"9) PORT1I\n10) PORT1J\n11) PORT1K\n12) PORT1L\n13) PORT1M\n14) PORT1N\n15) PORT1O\n16) PORT1P\n");  
+  mp_printf(&mp_plat_print,"17) PORT4A\n18) PORT4B\n19) PORT4C\n20) PORT4D\n21) PORT4E\n22) PORT4F\n23) PORT8A\n24) PORT8B\n");
+  mp_printf(&mp_plat_print,"25) PORT8C\n26) PORT8D\n27) PORT16A\n28) PORT16B\n29) PORT32A\n");  
+
+  return mp_const_none; 
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_0(gpio_PrintGM_obj, gpio_PrintGM);
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code 
+ * *********************************************************************/
 STATIC const mp_rom_map_elem_t gpio_module_globals_table[] = 
 {
     /*Module head*/
     { MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_gpio) },
     { MP_ROM_QSTR(MP_QSTR_PortRead),  MP_ROM_PTR(&gpio_PortRead_obj)  },
     { MP_ROM_QSTR(MP_QSTR_PortWrite), MP_ROM_PTR(&gpio_PortWrite_obj) },
+    { MP_ROM_QSTR(MP_QSTR_PrintGM), MP_ROM_PTR(&gpio_PrintGM_obj) },    
 
     /*ports pin definition*/
     { MP_ROM_QSTR(MP_QSTR_PORT1A), MP_ROM_INT(PORT1A) },

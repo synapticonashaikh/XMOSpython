@@ -101,7 +101,6 @@
  * ----------------------------------------------------------------------------
 */
 
-
 /* ----------------------------------------------------------------------------
  *                           Fnction Definitions
  * ----------------------------------------------------------------------------
@@ -146,6 +145,24 @@ STATIC mp_obj_t delay_delaySec(mp_obj_t a)
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(delay_delaySec_obj, delay_delaySec);
 
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code 
+ * *********************************************************************/
+STATIC mp_obj_t delay_PrintTM(void) 
+{
+  mp_printf(&mp_plat_print,"****TIMER MODULES****\n");
+  mp_printf(&mp_plat_print,"1) PrintTM\n");    
+  mp_printf(&mp_plat_print,"2) delayuSec\n");  
+  mp_printf(&mp_plat_print,"3) delaymSec\n");  
+  mp_printf(&mp_plat_print,"4) delaySec\n");    
+  return mp_const_none; 
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_0(delay_PrintTM_obj, delay_PrintTM);
+
 /***********************************************************************
  * Function Name: main 
  * Arguments	  : void
@@ -154,11 +171,11 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_1(delay_delaySec_obj, delay_delaySec);
  * *********************************************************************/
 STATIC const mp_rom_map_elem_t delay_module_globals_table[] = 
 {
-
     { MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_delay) },
-    { MP_ROM_QSTR(MP_QSTR_delayuSec),  MP_ROM_PTR(&delay_delayuSec_obj) },
-    { MP_ROM_QSTR(MP_QSTR_delaymSec),  MP_ROM_PTR(&delay_delaymSec_obj) },
-    { MP_ROM_QSTR(MP_QSTR_delaySec),   MP_ROM_PTR(&delay_delaySec_obj) },
+    { MP_ROM_QSTR(MP_QSTR_delayuSec), MP_ROM_PTR(&delay_delayuSec_obj) },
+    { MP_ROM_QSTR(MP_QSTR_delaymSec), MP_ROM_PTR(&delay_delaymSec_obj) },
+    { MP_ROM_QSTR(MP_QSTR_delaySec),  MP_ROM_PTR(&delay_delaySec_obj)  },
+    { MP_ROM_QSTR(MP_QSTR_PrintTM),   MP_ROM_PTR(&delay_PrintTM_obj)   },
 };
 STATIC MP_DEFINE_CONST_DICT(delay_module_globals, delay_module_globals_table);
 

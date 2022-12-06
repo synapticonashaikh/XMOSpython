@@ -11,10 +11,13 @@ HEADERSL  = ../headers/
 ENABLE_DISABLE_DEBUGG_MESSAGE = 0
 
 #enable/ disable self created modules 
-ENABLE_DISABLE_OWN_MODULE = 1
+ENABLE_DISABLE_OWN_MODULE = 0
 
 #enable/ disable float functionality
-ENABLE_DISABLE_FLOAT_FUNCTIONALITY = 1
+ENABLE_DISABLE_FLOAT_FUNCTIONALITY = 0
+
+#enable/ disable float functionality
+#PROCESSING_FLAG = -DREMOVE_PROCESSING_TIME
 
 #define the code version
 #for the terminal interperter use DCODE_WITH_PYTHON_INTRACTIVE_TERMINAL
@@ -31,8 +34,11 @@ endif
 #supoort folder (generated header folder)
 BUILD_DIR = build
 
+XCTarget = ../targets/C2X.xn
+
 #define the compiler
-CMP = xcc -target=XCORE-200-EXPLORER
+CMP = xcc -target= $(XCTarget)
+#xflash --verbose --target XCORE-200-EXPLORER --boot-partition-size 0x90000  output.xe
 
 #include the all required path
 INC += -I.
@@ -42,4 +48,4 @@ INC += -I$(BUILD_DIR)
 INC += -I$(BUILD_DIR)/genhdr/
 
 #flags with respect to XMOS core
-LDFLAGS = -Wno-unused-variable -Wno-xcore-fptrgroup -Os -report $(INC) $(DEFINE_CODE_VERSION) $(FLOAT_FLAG)
+LDFLAGS = -Wno-unused-variable -Wno-xcore-fptrgroup -Os -report $(INC) $(DEFINE_CODE_VERSION) $(FLOAT_FLAG) $(PROCESSING_FLAG)

@@ -289,4 +289,6 @@
 
 	int32_t FnPortWrite(uint32_t uiport,uint32_t state);
 	int32_t FnPortRead (uint32_t uiport);
+	void FnToggle(void);
+	void FnToggleDelay(void);	
 #endif /*__HEADER_H_*/

@@ -122,7 +122,11 @@ inline void FndelayuSec(uint32_t uiTime)
 {
    uint64_t  uiTimeTotal;
    stTime :> uiTimeTotal;
-   uiTimeTotal = uiTimeTotal + (uiTime * ui1uSec) ;  
+   uiTimeTotal = uiTimeTotal + (uiTime * ui1uSec) ;
+#ifdef REMOVE_PROCESSING_TIME  
+  //To remove the processing time!
+   uiTimeTotal = uiTimeTotal - (ui1uSec * (uint8_t)34);
+#endif    
    stTime when timerafter(uiTimeTotal) :> void;  
 }
 
@@ -136,7 +140,11 @@ inline void FndelaymSec(uint32_t uiTime)
 {
    uint64_t  uiTimeTotal;
    stTime :> uiTimeTotal;
-   uiTimeTotal = uiTimeTotal + (uiTime * ui1mSec) ;  
+   uiTimeTotal = uiTimeTotal + (uiTime * ui1mSec) ; 
+#ifdef REMOVE_PROCESSING_TIME  
+  //To remove the processing time!
+   uiTimeTotal = uiTimeTotal - (ui1uSec * (uint8_t)34);
+#endif      
    stTime when timerafter(uiTimeTotal) :> void;  
 }
 
@@ -151,5 +159,9 @@ inline void FndelaySec(uint32_t uiTime)
    uint64_t uiTimeTotal;
    stTime :> uiTimeTotal;
    uiTimeTotal = uiTimeTotal + (uiTime * ui1Sec) ;  
+#ifdef REMOVE_PROCESSING_TIME  
+  //To remove the processing time!
+   uiTimeTotal = uiTimeTotal - (ui1uSec * (uint8_t)34);
+#endif     
    stTime when timerafter(uiTimeTotal) :> void;  
 }

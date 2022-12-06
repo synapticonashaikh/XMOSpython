@@ -130,10 +130,37 @@
       //char * unsafe command = "print('Hello')";
       //char * unsafe command = "import myport\nfor i in range(10):\n  myport.info()";      
       //char * unsafe command = "import board\nval=board.mul10(20)\nprint(val)";     
-      char * unsafe command = "from delay import *\nfrom gpio import *\nwhile True:\n  PortWrite(PORT4A,0x0C)\n  delaymSec(100)\n  PortWrite(PORT4A,0x0F)\n  delaymSec(100)";      
+      //char * unsafe command = "from delay import *\nfrom gpio import *\nwhile True:\n  PortWrite(PORT1L,0x01)\n  PortWrite(PORT1L,0x00)\n"; 
+      //char * unsafe command = "from gpio import *\nToggleDelay()";            
       //char * unsafe command = "from delay import*\ncount=1\nwhile True:\n  print(count)\n  delaymSec(1000)\n  count = count+1\n";
-      char * unsafe ret;
+      /*
+      char * unsafe command = 
+      "from delay import *\n"
+      "from gpio import *\n"
+      "\n"
+      "GPIOStatus = 0\n"
+      "\n"
+      "def FnToggleLed( ):\n"
+      "    global GPIOStatus\n"
+      "    PortWrite(PORT1L,int(GPIOStatus))\n"
+      "    GPIOStatus = not GPIOStatus\n"
+      "\n"
+      "while True:\n"
+      "  delayuSec(100,25)\n"
+      "  FnToggleLed()\n"; */
+      
+      char * unsafe command = 
+      "from delay import *\n"
+      "from gpio import *\n"
+      "\n"
+      "while True:\n"
+      "  delayuSec(100)\n"
+      "  PortWrite(PORT1L,0x00)\n"
+      "  delayuSec(100)\n"
+      "  PortWrite(PORT1L,0x01)\n";
 
+
+      char * unsafe ret;
        SendCommand <: command;        
     
        select 

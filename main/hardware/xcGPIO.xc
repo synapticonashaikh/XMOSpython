@@ -240,3 +240,23 @@ inline int32_t FnPortRead(uint32_t uiport)
     }
   return state;
 }
+
+void FnToggle(void)
+{
+  while (SET)
+  {
+    _Port1L <: 1 ;
+    _Port1L <: 0 ;  
+  }
+}
+
+void FnToggleDelay(void)
+{
+  while (SET)
+  {
+    _Port1L <: 1   ;
+     FndelaymSec(1);
+    _Port1L <: 0   ;
+    FndelaymSec(1) ;  
+  }
+}
