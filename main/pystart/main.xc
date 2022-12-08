@@ -149,7 +149,7 @@
       "  delayuSec(100,25)\n"
       "  FnToggleLed()\n"; */
       
-      char * unsafe command = 
+       char * unsafe command = 
       "from delay import *\n"
       "from gpio import *\n"
       "\n"
@@ -157,8 +157,16 @@
       "  delayuSec(100)\n"
       "  PortWrite(PORT1L,0x00)\n"
       "  delayuSec(100)\n"
-      "  PortWrite(PORT1L,0x01)\n";
+      "  PortWrite(PORT1L,0x01)\n"; 
 
+      /*
+      char * unsafe command = 
+      "a = 123\n"
+      "b = 123.123\n"
+      "C = a * b\n"
+      "D = a / 12.1\n"
+      "print('C =' + str(C))\n"
+      "print('D =' + str(D))\n"; */
 
       char * unsafe ret;
        SendCommand <: command;        

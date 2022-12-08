@@ -196,7 +196,7 @@ int FnMPInterpreterConsole(void)
  * Return Type	: int
  * Details	    : main function, start of the code
  * *********************************************************************/
-#pragma stackfunction 10000
+#pragma stackfunction 1000
 char * FnRunTheCommand(char *commad, uint8_t type)
 {
     int stack_dummy;

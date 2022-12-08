@@ -80,7 +80,8 @@
  *                           MACROS
  * ----------------------------------------------------------------------------
 */
-
+	//#define PORT_MODE_INPUT   1
+	//#define PORT_MODE_OUTPUT  2
 
 /* ----------------------------------------------------------------------------
  *                           Includes
@@ -205,8 +206,8 @@ STATIC const mp_rom_map_elem_t gpio_module_globals_table[] =
 
     { MP_ROM_QSTR(MP_QSTR_PORT32A), MP_ROM_INT(PORT32A) },    
 
-    { MP_ROM_QSTR(MP_QSTR_MODE_INPUT),  MP_ROM_INT(PORT_MODE_INPUT)  },    
-    { MP_ROM_QSTR(MP_QSTR_MODE_OUTPUT), MP_ROM_INT(PORT_MODE_OUTPUT) },    
+    //{ MP_ROM_QSTR(MP_QSTR_MODE_INPUT),  MP_ROM_INT(PORT_MODE_INPUT)  },    
+    //{ MP_ROM_QSTR(MP_QSTR_MODE_OUTPUT), MP_ROM_INT(PORT_MODE_OUTPUT) },    
   
 };
 STATIC MP_DEFINE_CONST_DICT(gpio_module_globals, gpio_module_globals_table);

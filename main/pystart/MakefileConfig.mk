@@ -7,22 +7,25 @@ MODULEL   = ../modules/
 HARDWAREL = ../hardware/
 HEADERSL  = ../headers/
 
-#enable/ disable debugg message 
+#enable/ disable debug message 
 ENABLE_DISABLE_DEBUGG_MESSAGE = 0
 
-#enable/ disable self created modules 
-ENABLE_DISABLE_OWN_MODULE = 0
+#enable/ disable our own created modules 
+ENABLE_DISABLE_OWN_MODULE = 1
 
 #enable/ disable float functionality
-ENABLE_DISABLE_FLOAT_FUNCTIONALITY = 0
+ENABLE_DISABLE_FLOAT_FUNCTIONALITY = 1
 
-#enable/ disable float functionality
-#PROCESSING_FLAG = -DREMOVE_PROCESSING_TIME
+#enable or disable the XC extension, not complete yet
+USE_FILE_EXTENSION_C_ONLY = 0
 
 #define the code version
-#for the terminal interperter use DCODE_WITH_PYTHON_INTRACTIVE_TERMINAL
+#for the terminal interpreter, use DCODE_WITH_PYTHON_INTRACTIVE_TERMINAL
 #without terminal use DCODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
-DEFINE_CODE_VERSION=-DCODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
+DEFINE_CODE_VERSION=-DCODE_WITH_PYTHON_INTRACTIVE_TERMINAL
+
+#adjust the process timing
+#PROCESSING_FLAG = -DREMOVE_PROCESSING_TIME
 
 # MICROPY_FLOAT_IMPL_NONE MICROPY_FLOAT_IMPL_FLOAT MICROPY_FLOAT_IMPL_DOUBLE 
 ifeq ($(ENABLE_DISABLE_FLOAT_FUNCTIONALITY), 1)
@@ -34,6 +37,7 @@ endif
 #supoort folder (generated header folder)
 BUILD_DIR = build
 
+#target file which has the clock and other definitions
 XCTarget = ../targets/C2X.xn
 
 #define the compiler

@@ -1,4 +1,3 @@
-
 /**************************************************************************************
  **************************************************************************************
  ______________________________________________________________________________________
@@ -8,11 +7,12 @@
  ______________________________________________________________________________________
 
   File Name:
-	hello.xc
+	Datatype.xc
  ______________________________________________________________________________________
 
   Summary:
-    This file contains the source code for printing "Hello world" on the terminal.
+    This file contains the source code for testing all the data types and 
+    their memory allocated size assigned by the xc compiler.
  ______________________________________________________________________________________
 
   Description:
@@ -81,174 +81,59 @@
  * ----------------------------------------------------------------------------
 */
 
+    #define  PARSE_SINGLE_INPUT   0
+    #define  PARSE_FILE_INPUT     1
+    #define  PARSE_EVAL_INPUT     2
 
 /* ----------------------------------------------------------------------------
- *                           Includes
+ *                           INCLUDE
  * ----------------------------------------------------------------------------
 */
 
-    #include "../../py/runtime.h"
-    #include "header.h"
-
+  	/*Standard Header files*/
+	  #include "header.h"    
 
 /* ----------------------------------------------------------------------------
- *                          GLOBAL VARIABLE DECLARATION
+ *                          GLOBAL VERIABLE
  * ----------------------------------------------------------------------------
 */
 
+      char *command = 
+      "print('hello')";
+
 /* ----------------------------------------------------------------------------
- *                           important command
+ *                          EXTERNAL FUNCTION
  * ----------------------------------------------------------------------------
 */
 
+  #ifdef CODE_WITH_PYTHON_INTRACTIVE_TERMINAL
+       extern int FnMPInterpreterConsole(void); 
+  #endif
+
+  #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
+      extern char * FnRunTheCommand(char *commad, uint8_t type); 
+  #endif
+
 
 /* ----------------------------------------------------------------------------
- *                           Fnction Definitions
+ *                         START OF THE CODE
  * ----------------------------------------------------------------------------
 */
-
-/***********************************************************************
- * Function Name: main 
- * Arguments	: void
- * Return Type	: int
- * Details	    : main function, start of the code 
- * *********************************************************************/
-STATIC mp_obj_t myport_info(void) 
-{
-    mp_printf(&mp_plat_print, "Just a debugg message to print\n");
-    return mp_const_none;
-}
-STATIC MP_DEFINE_CONST_FUN_OBJ_0(myport_info_obj, myport_info);
-
-/***********************************************************************
- * Function Name: main 
- * Arguments	: void
- * Return Type	: int
- * Details	    : main function, start of the code 
- * *********************************************************************/
-STATIC const mp_rom_map_elem_t myport_module_globals_table[] = 
-{
-    { MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_myport) },
-    { MP_ROM_QSTR(MP_QSTR_info), MP_ROM_PTR(&myport_info_obj) },
-};
-STATIC MP_DEFINE_CONST_DICT(myport_module_globals, myport_module_globals_table);
-
-const mp_obj_module_t myport_module = 
-{
-    .base    = { &mp_type_module },
-    .globals = (mp_obj_dict_t *)&myport_module_globals,
-};
-MP_REGISTER_MODULE(MP_QSTR_myport, myport_module);
-
-/***********************************************************************
- * Function Name: main 
- * Arguments	: void
- * Return Type	: int
- * Details	    : main function, start of the code 
- * *********************************************************************/
-STATIC mp_obj_t board_clockinfo(void) 
-{
-    char buffer [50]= {'\0'}; 
-    int a = 1;
-    sprintf(buffer,"this is just for test=%d\n\r",a);
-    mp_printf(&mp_plat_print, buffer);
-    return mp_const_none;
-}
-STATIC MP_DEFINE_CONST_FUN_OBJ_0(board_clockinfo_obj, board_clockinfo);
-
-/***********************************************************************
- * Function Name: main 
- * Arguments	: void
- * Return Type	: int
- * Details	    : main function, start of the code 
- * *********************************************************************/
-STATIC mp_obj_t board_healthinfo(mp_obj_t a) 
-{
-   return MP_OBJ_NEW_SMALL_INT(100);
-}
-STATIC MP_DEFINE_CONST_FUN_OBJ_1(board_healthinfo_obj, board_healthinfo);
-
-/***********************************************************************
- * Function Name : main 
- * Arguments	  : void
- * Return Type	: int
- * Details	    : main function, start of the code 
- * *********************************************************************/
-STATIC mp_obj_t board_add(mp_obj_t a, mp_obj_t b) 
-{
-   return MP_OBJ_NEW_SMALL_INT(MP_OBJ_SMALL_INT_VALUE(a) + MP_OBJ_SMALL_INT_VALUE(b));
-}
-STATIC MP_DEFINE_CONST_FUN_OBJ_2(board_add_obj, board_add);
-
 /***********************************************************************
  * Function Name: main 
  * Arguments	  : void
  * Return Type	: int
- * Details	    : main function, start of the code 
+ * Details	    : main function, start of the code
  * *********************************************************************/
-#if MICROPY_FLOAT_IMPL == MICROPY_FLOAT_IMPL_FLOAT
-STATIC mp_obj_t board_mul(mp_obj_t a, mp_obj_t b) 
-{    
-   return mp_obj_new_float((mp_float_t)(mp_obj_float_get(a) * mp_obj_float_get(b) ));
+int main( )
+{
+    #ifdef CODE_WITH_PYTHON_INTRACTIVE_TERMINAL
+           FnMPInterpreterConsole( );
+    #endif
+
+    #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
+           //printf(command); 
+           FnRunTheCommand(command,PARSE_FILE_INPUT);   
+    #endif
+    
 }
-STATIC MP_DEFINE_CONST_FUN_OBJ_2(board_mul_obj, board_mul);
-#endif
-
-/***********************************************************************
- * Function Name: main 
- * Arguments	  : void
- * Return Type	: int
- * Details	    : main function, start of the code 
- * *********************************************************************/
-#if MICROPY_FLOAT_IMPL == MICROPY_FLOAT_IMPL_FLOAT
-STATIC mp_obj_t board_mul10(mp_obj_t a) 
-{
-   mp_float_t f;
-   mp_obj_get_float_maybe(a,&f);
-   return mp_obj_new_float(f * 10);
-}
-STATIC MP_DEFINE_CONST_FUN_OBJ_1(board_mul10_obj, board_mul10);
-#endif
-
-/***********************************************************************
- * Function Name: main 
- * Arguments	  : void
- * Return Type	: int
- * Details	    : main function, start of the code 
- * *********************************************************************/
-STATIC mp_obj_t board_strcat(mp_obj_t a, mp_obj_t b) 
-{
-  strcat((char *)mp_obj_str_get_str(a),mp_obj_str_get_str(b));
-  return mp_obj_new_str(mp_obj_str_get_str(a),strlen(mp_obj_str_get_str(a)));
-
-}
-STATIC MP_DEFINE_CONST_FUN_OBJ_2(board_strcat_obj, board_strcat);
-
-
-/***********************************************************************
- * Function Name: main 
- * Arguments	  : void
- * Return Type	: int
- * Details	    : main function, start of the code 
- * *********************************************************************/
-STATIC const mp_rom_map_elem_t board_module_globals_table[] = 
-{
-     { MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_board) },
-     { MP_ROM_QSTR(MP_QSTR_clockinfo), MP_ROM_PTR(&board_clockinfo_obj) },
-     { MP_ROM_QSTR(MP_QSTR_healthinfo), MP_ROM_PTR(&board_healthinfo_obj) },
-     { MP_ROM_QSTR(MP_QSTR_add), MP_ROM_PTR(&board_add_obj) },
-    #if MICROPY_FLOAT_IMPL == MICROPY_FLOAT_IMPL_FLOAT   
-        { MP_ROM_QSTR(MP_QSTR_mul), MP_ROM_PTR(&board_mul_obj) },    
-        { MP_ROM_QSTR(MP_QSTR_mul10),  MP_ROM_PTR(&board_mul10_obj) },
-    #endif    
-     { MP_ROM_QSTR(MP_QSTR_strcat), MP_ROM_PTR(&board_strcat_obj)},
-
-};
-STATIC MP_DEFINE_CONST_DICT(board_module_globals, board_module_globals_table);
-
-const mp_obj_module_t board_module = 
-{
-    .base    = { &mp_type_module },
-    .globals = (mp_obj_dict_t *)&board_module_globals,
-};
-MP_REGISTER_MODULE(MP_QSTR_board, board_module);

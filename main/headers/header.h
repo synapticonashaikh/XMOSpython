@@ -91,10 +91,6 @@
 	#define FALSE		RESET	
 	#define  ERROR 	   (int8_t)-1	
 
-
-	#define PORT_MODE_INPUT   1
-	#define PORT_MODE_OUTPUT  2
-
 	/*IO ports-1BIT*/	
     #define PORT1A  0x10200//XS1_PORT_1A
     #define PORT1B  0x10000//XS1_PORT_1B
