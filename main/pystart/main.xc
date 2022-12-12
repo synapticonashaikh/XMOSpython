@@ -133,6 +133,7 @@
       //char * unsafe command = "from delay import *\nfrom gpio import *\nwhile True:\n  PortWrite(PORT1L,0x01)\n  PortWrite(PORT1L,0x00)\n"; 
       //char * unsafe command = "from gpio import *\nToggleDelay()";            
       //char * unsafe command = "from delay import*\ncount=1\nwhile True:\n  print(count)\n  delaymSec(1000)\n  count = count+1\n";
+      
       /*
       char * unsafe command = 
       "from delay import *\n"
@@ -146,18 +147,31 @@
       "    GPIOStatus = not GPIOStatus\n"
       "\n"
       "while True:\n"
-      "  delayuSec(100,25)\n"
-      "  FnToggleLed()\n"; */
+      "  delayuSec(10)\n"
+      "  FnToggleLed( )\n"; */
+
+      char * unsafe command = 
+//      "from gpio import *\n"          
+      "import gpio\n"  
+      "\n"
+      "while True:\n"
+      "   gpio.Toggle()\n";      
       
+      /*
        char * unsafe command = 
       "from delay import *\n"
       "from gpio import *\n"
       "\n"
-      "while True:\n"
-      "  delayuSec(100)\n"
+      "i=5\n"
+      "while True:\n"  
+      "  for x in range(1,1):\n"
+      "     i = bool(x) ^ bool(x)\n"
       "  PortWrite(PORT1L,0x00)\n"
-      "  delayuSec(100)\n"
-      "  PortWrite(PORT1L,0x01)\n"; 
+      "  for x in range(1,1):\n"
+      "     i = bool(x) ^ bool(x)\n"
+      "  PortWrite(PORT1L,0x01)\n"; */
+
+
 
       /*
       char * unsafe command = 

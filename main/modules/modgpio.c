@@ -116,7 +116,6 @@
  * *********************************************************************/
 STATIC mp_obj_t gpio_PortRead(mp_obj_t a) 
 { 
-    //return MP_OBJ_SMALL_INT_VALUE(FnPortWrite(MP_OBJ_SMALL_INT_VALUE(a)));
     return MP_OBJ_NEW_SMALL_INT( FnPortRead(MP_OBJ_SMALL_INT_VALUE(a)));
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(gpio_PortRead_obj, gpio_PortRead);
@@ -129,11 +128,24 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_1(gpio_PortRead_obj, gpio_PortRead);
  * *********************************************************************/
 STATIC mp_obj_t gpio_PortWrite(mp_obj_t a, mp_obj_t b) 
 {
-   //return MP_OBJ_NEW_SMALL_INT(FnPortWrite(MP_OBJ_SMALL_INT_VALUE(a),MP_OBJ_SMALL_INT_VALUE(b)));
    FnPortWrite(MP_OBJ_SMALL_INT_VALUE(a),MP_OBJ_SMALL_INT_VALUE(b));
    return mp_const_none; 
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_2(gpio_PortWrite_obj, gpio_PortWrite);
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code 
+ * *********************************************************************/
+STATIC mp_obj_t gpio_Toggle(void) 
+{
+  FnToggle();
+  return mp_const_none; 
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_0(gpio_Toggle_obj, gpio_Toggle);
+
 
 /***********************************************************************
  * Function Name: main 
@@ -170,6 +182,7 @@ STATIC const mp_rom_map_elem_t gpio_module_globals_table[] =
     { MP_ROM_QSTR(MP_QSTR_PortRead),  MP_ROM_PTR(&gpio_PortRead_obj)  },
     { MP_ROM_QSTR(MP_QSTR_PortWrite), MP_ROM_PTR(&gpio_PortWrite_obj) },
     { MP_ROM_QSTR(MP_QSTR_PrintGM), MP_ROM_PTR(&gpio_PrintGM_obj) },    
+    { MP_ROM_QSTR(MP_QSTR_Toggle), MP_ROM_PTR(&gpio_Toggle_obj) },        
 
     /*ports pin definition*/
     { MP_ROM_QSTR(MP_QSTR_PORT1A), MP_ROM_INT(PORT1A) },

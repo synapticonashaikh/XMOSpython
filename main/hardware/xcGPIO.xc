@@ -241,22 +241,19 @@ inline int32_t FnPortRead(uint32_t uiport)
   return state;
 }
 
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments    : void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
 void FnToggle(void)
 {
-  while (SET)
-  {
-    _Port1L <: 1 ;
-    _Port1L <: 0 ;  
-  }
-}
+  static uint8_t toggy = 1;
 
-void FnToggleDelay(void)
-{
-  while (SET)
-  {
-    _Port1L <: 1   ;
-     FndelaymSec(1);
-    _Port1L <: 0   ;
-    FndelaymSec(1) ;  
-  }
-}
+       toggy = !toggy;
+      _Port1L <: toggy;   
+      //FndelayuSec(1);
+ }
+
