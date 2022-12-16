@@ -1,6 +1,7 @@
 
+
 # qstr definitions (must come before including py.mk)
-QSTR_DEFS = ../headers/qstrdefsport.h
+QSTR_DEFS = $(HEADERSL)/qstrdefsport.h
 
 # MicroPython feature configurations
 MICROPY_ROM_TEXT_COMPRESSION ?= 1
@@ -9,6 +10,6 @@ MICROPY_ROM_TEXT_COMPRESSION ?= 1
 OBJ += $(PY_CORE_O)
 
 #flags required to compile python
-CFLAGS += $(INC) -Wall -Werror -Wdouble-promotion -Wfloat-conversion  $(FLOAT_FLAG)
+CFLAGS += $(INC) -Wall -Werror -Wdouble-promotion -Wfloat-conversion $(FLOAT_FLAG)
 CXXFLAGS += $(CFLAGS) $(FLOAT_FLAG)
 

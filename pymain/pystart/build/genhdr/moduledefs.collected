@@ -1,0 +1,13 @@
+MP_REGISTER_MODULE(MP_QSTR___main__, mp_module___main__);
+
+MP_REGISTER_MODULE(MP_QSTR_board, board_module);
+
+MP_REGISTER_MODULE(MP_QSTR_builtins, mp_module_builtins);
+
+MP_REGISTER_MODULE(MP_QSTR_delay, delay_module);
+
+MP_REGISTER_MODULE(MP_QSTR_gpio, gpio_module);
+
+MP_REGISTER_MODULE(MP_QSTR_micropython, mp_module_micropython);
+
+MP_REGISTER_MODULE(MP_QSTR_myport, myport_module);

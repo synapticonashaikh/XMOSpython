@@ -20,11 +20,11 @@ include $(ROOTL)/py/py.mk
 include $(ROOTL)/py/mkrules.mk
 
 #build the frozen code that required duuring the compilation
-$(BUILD)/_frozen_mpy.c: ../headers/frozentest.mpy $(BUILD)/genhdr/qstrdefs.generated.h 
+$(BUILD)/_frozen_mpy.c: $(HEADERSL)/frozentest.mpy $(BUILD)/genhdr/qstrdefs.generated.h 
 	$(Q)$(ROOTL)/py/mpy-tool.py -f -q $(BUILD)/genhdr/qstrdefs.preprocessed.h -mlongint-impl=none $< > $@ 
 
 all:  dependency output.xe
-ifeq ($(ENABLE_DISABLE_DEBUGG_MESSAGE), 1)
+ifeq ($(ENABLE_DISABLE_DEBUGG_MESSAGE), 1) 
 	$(info Debugg: Final build info)
 	$(info Debugg: LDFLAGS is $(LDFLAGS))
 	$(info Debugg: CMP is $(CMP))
@@ -36,7 +36,7 @@ dependency: $(OBJ) $(BUILD)/_frozen_mpy.c
 output.xe:
 	$(CMP) $(LDFLAGS) $(SRC_C) $(SRC_PY) -o $@
 	rm -rf ../py
-	rm -rf build	
+#	rm -rf build	
 
 clean:
 	rm -rf output.xe

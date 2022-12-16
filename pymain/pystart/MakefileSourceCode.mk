@@ -8,9 +8,9 @@ endif
 SRC_C +=  PythonRun.c
 SRC_C +=  $(BUILD_DIR)/_frozen_mpy.c
 #defined/add the support interactive files!
-SRC_C += $(ROOTL)py/readline.c  
-SRC_C += $(ROOTL)py/pyexec.c 
-SRC_C += $(ROOTL)py/stdout_helpers.c 
+SRC_C += $(PYLIBL)/readline.c  
+SRC_C += $(PYLIBL)/pyexec.c 
+SRC_C += $(PYLIBL)/stdout_helpers.c 
 
 
 #add all the hardware interface file
@@ -25,8 +25,8 @@ SRC_C +=  $(MODULEL)modtimer.c
 endif
 
 #add the library for reading the commands at interpretor
-SRC_QSTR += $(ROOTL)py/readline.c 
-SRC_QSTR += $(ROOTL)py/pyexec.c
+SRC_QSTR += $(PYLIBL)/readline.c 
+SRC_QSTR += $(PYLIBL)/pyexec.c
 ifeq ($(ENABLE_DISABLE_OWN_MODULE), 1)
 SRC_QSTR += $(MODULEL)modmyport.c
 SRC_QSTR += $(MODULEL)modtimer.c
