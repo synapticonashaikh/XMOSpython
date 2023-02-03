@@ -27,7 +27,8 @@
         "frozenmod.h": "c",
         "pyexec.h": "c",
         "header.h": "c",
-        "softtimer.h": "c"
+        "softtimer.h": "c",
+        "mpirq.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

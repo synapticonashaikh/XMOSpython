@@ -127,61 +127,14 @@
   {
     unsafe
     {
-      //char * unsafe command = "print('Hello')";
-      //char * unsafe command = "import myport\nfor i in range(10):\n  myport.info()";      
-      //char * unsafe command = "import board\nval=board.mul10(20)\nprint(val)";     
-      //char * unsafe command = "from delay import *\nfrom gpio import *\nwhile True:\n  PortWrite(PORT1L,0x01)\n  PortWrite(PORT1L,0x00)\n"; 
-      //char * unsafe command = "from gpio import *\nToggleDelay()";            
-      //char * unsafe command = "from delay import*\ncount=1\nwhile True:\n  print(count)\n  delaymSec(1000)\n  count = count+1\n";
-      
-      /*
       char * unsafe command = 
-      "from delay import *\n"
-      "from gpio import *\n"
-      "\n"
-      "GPIOStatus = 0\n"
-      "\n"
-      "def FnToggleLed( ):\n"
-      "    global GPIOStatus\n"
-      "    PortWrite(PORT1L,int(GPIOStatus))\n"
-      "    GPIOStatus = not GPIOStatus\n"
-      "\n"
+      "import gpio\n"
+      "def callback( ):\n"
+      "    print('Hello')\n"
+      "val=gpio.pirq(hard=False,trigger=gpio.IRQ_FALLING,handler=callback)\n"
       "while True:\n"
-      "  delayuSec(10)\n"
-      "  FnToggleLed( )\n"; */
-
-      char * unsafe command = 
-//      "from gpio import *\n"          
-      "import gpio\n"  
-      "\n"
-      "while True:\n"
-      "   gpio.Toggle()\n";      
+      "    pass\n";
       
-      /*
-       char * unsafe command = 
-      "from delay import *\n"
-      "from gpio import *\n"
-      "\n"
-      "i=5\n"
-      "while True:\n"  
-      "  for x in range(1,1):\n"
-      "     i = bool(x) ^ bool(x)\n"
-      "  PortWrite(PORT1L,0x00)\n"
-      "  for x in range(1,1):\n"
-      "     i = bool(x) ^ bool(x)\n"
-      "  PortWrite(PORT1L,0x01)\n"; */
-
-
-
-      /*
-      char * unsafe command = 
-      "a = 123\n"
-      "b = 123.123\n"
-      "C = a * b\n"
-      "D = a / 12.1\n"
-      "print('C =' + str(C))\n"
-      "print('D =' + str(D))\n"; */
-
       char * unsafe ret;
        SendCommand <: command;        
     
@@ -222,19 +175,14 @@
   }
 #endif
 
-/* ----------------------------------------------------------------------------
- *                         START OF THE CODE
- * ----------------------------------------------------------------------------
-*/
 /***********************************************************************
  * Function Name: main 
  * Arguments	  : void
  * Return Type	: int
  * Details	    : main function, start of the code
  * *********************************************************************/
-int main( )
+void FnCompleteCode (void)
 {
-
 
 #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
       printf("Warning! Terminal interpreter is not available!\n\r");      
@@ -254,7 +202,23 @@ int main( )
           FnMPInterpreterConsole( );  
         }  
 #endif  
+}
 
+
+/* ----------------------------------------------------------------------------
+ *                         START OF THE CODE
+ * ----------------------------------------------------------------------------
+*/
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
+int main( )
+{
+
+  FnCompleteCode();
   return 0;
 
 }

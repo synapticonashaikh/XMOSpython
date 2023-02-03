@@ -287,4 +287,6 @@
 	int32_t FnPortRead (uint32_t uiport);
 	void FnToggle(void);
 	
+	void FnCompleteCode(void);
+	
 #endif /*__HEADER_H_*/

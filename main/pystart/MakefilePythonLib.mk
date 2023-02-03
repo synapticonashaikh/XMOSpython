@@ -117,3 +117,4 @@ SRC_PY += $(ROOTL)py/unicode.c
 SRC_PY += $(ROOTL)py/vm.c
 SRC_PY += $(ROOTL)py/vstr.c
 SRC_PY += $(ROOTL)py/warning.c
+SRC_PY += $(ROOTL)py/mpirq.c

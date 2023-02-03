@@ -6,6 +6,7 @@ ROOTL = ../../
 MODULEL   = ../modules/
 HARDWAREL = ../hardware/
 HEADERSL  = ../headers/
+IRQHANDLE = ../irq_handle/
 
 #enable/ disable debug message 
 ENABLE_DISABLE_DEBUGG_MESSAGE = 0
@@ -38,10 +39,11 @@ endif
 BUILD_DIR = build
 
 #target file which has the clock and other definitions
-XCTarget = ../targets/C2X.xn
+#XCTarget = -target= ../targets/C2X.xn
+XCTarget = -target=XCORE-AI-EXPLORER
 
 #define the compiler
-CMP = xcc -target= $(XCTarget)
+CMP = xcc $(XCTarget)
 #xflash --verbose --target XCORE-200-EXPLORER --boot-partition-size 0x90000  output.xe
 
 #include the all required path
@@ -53,3 +55,4 @@ INC += -I$(BUILD_DIR)/genhdr/
 
 #flags with respect to XMOS core
 LDFLAGS = -Wno-unused-variable -Wno-xcore-fptrgroup -Os -report $(INC) $(DEFINE_CODE_VERSION) $(FLOAT_FLAG) $(PROCESSING_FLAG)
+
