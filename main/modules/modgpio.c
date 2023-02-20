@@ -280,12 +280,12 @@ STATIC mp_obj_t gpiopin_irq(size_t n_args, const mp_obj_t *pos_args, mp_map_t *k
 
 
   //mp_irq_handler(&irq->base);
-    mp_sched_lock( );
-    gc_lock( );
-    printf("before the IRQ function\n\r");    
-    mp_call_function_1(irq->base.handler, irq->base.parent);
-    nlr_pop( );
-    printf("after the IRQ function\n\r");
+    // mp_sched_lock( );
+    // gc_lock( );
+    // printf("before the IRQ function\n\r");    
+    // mp_call_function_1(irq->base.handler, irq->base.parent);
+    // nlr_pop( );
+    // printf("after the IRQ function\n\r");
     /*TODO should return an IRQ object*/
     return mp_const_none;
 
