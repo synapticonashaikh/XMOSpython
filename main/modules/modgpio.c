@@ -235,7 +235,6 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_0(gpio_PrintGM_obj, gpio_PrintGM);
 STATIC mp_obj_t gpiopin_irq(size_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_args) 
 {
 
-    printf("in the gpiopin_irq function \n\r");
     enum { ARG_handler, ARG_trigger, ARG_hard };
     static const mp_arg_t allowed_args[] = {
         { MP_QSTR_handler, MP_ARG_OBJ,  {.u_rom_obj = MP_ROM_NONE} },
@@ -245,7 +244,7 @@ STATIC mp_obj_t gpiopin_irq(size_t n_args, const mp_obj_t *pos_args, mp_map_t *k
     
     pin_obj_t *self = MP_OBJ_TO_PTR(pos_args[0]);
     mp_arg_val_t args[MP_ARRAY_SIZE(allowed_args)];
-    mp_arg_parse_all(n_args , pos_args , kw_args, MP_ARRAY_SIZE(allowed_args), allowed_args, args);
+    mp_arg_parse_all(n_args , pos_args, kw_args, MP_ARRAY_SIZE(allowed_args), allowed_args, args);
 
      // Get the IRQ object.
      uint8_t eic_id = 1;//get_pin_obj_ptr(self->pin_id)->eic;
@@ -257,7 +256,6 @@ STATIC mp_obj_t gpiopin_irq(size_t n_args, const mp_obj_t *pos_args, mp_map_t *k
 
     if (irq == NULL) 
     {
-        printf("a new IRQ!\n\r");
         irq = m_new_obj(machine_pin_irq_obj_t);
         irq->base.base.type = &mp_irq_type;
         irq->base.parent  = MP_OBJ_FROM_PTR(self);
@@ -270,7 +268,6 @@ STATIC mp_obj_t gpiopin_irq(size_t n_args, const mp_obj_t *pos_args, mp_map_t *k
 
     if (n_args > 1 || kw_args->used != 0) 
      {  
-        printf("2nd if\n\r");
         // Update IRQ data.
         irq->base.handler = args[ARG_handler].u_obj;
         irq->base.ishard  = args[ARG_hard].u_bool  ;
@@ -279,14 +276,14 @@ STATIC mp_obj_t gpiopin_irq(size_t n_args, const mp_obj_t *pos_args, mp_map_t *k
      }
 
 
-  //mp_irq_handler(&irq->base);
-    // mp_sched_lock( );
-    // gc_lock( );
-    // printf("before the IRQ function\n\r");    
-    // mp_call_function_1(irq->base.handler, irq->base.parent);
-    // nlr_pop( );
-    // printf("after the IRQ function\n\r");
-    /*TODO should return an IRQ object*/
+        machine_pin_irq_obj_t *irq1 = 
+        MP_STATE_PORT(machine_pin_irq_objects[eic_id]);
+    if (irq1 != NULL) 
+        {
+            irq1->flags = irq1->trigger;
+            mp_irq_handler(&irq1->base);
+        }
+
     return mp_const_none;
 
 }
@@ -294,74 +291,24 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_KW(pin_irq_obj, 0, gpiopin_irq);
 
 // Common EIC handler for all events.
 void EIC_Handler(void) 
-{
-    // uint32_t mask = 1;
-    // uint32_t isr = EIC->INTFLAG.reg;
-    // for (int eic_id = 0; eic_id < 16; eic_id++, mask <<= 1) {
-    //     // Did the ISR fire?
-    //     if (isr & mask) {
-    //         EIC_occured = true;
-    //         EIC->INTFLAG.reg |= mask; // clear the ISR flag
-    //         machine_pin_irq_obj_t *irq = MP_STATE_PORT(machine_pin_irq_objects[eic_id]);
-    //         if (irq != NULL) {
-    //             irq->flags = irq->trigger;
-    //             mp_irq_handler(&irq->base);
-    //             break;
-    //         }
-    //     }
-    // }
+ {
+//     uint32_t mask = 1;
+//     uint32_t isr = EIC->INTFLAG.reg;
+//     for (int eic_id = 0; eic_id < 16; eic_id++, mask <<= 1) {
+//         // Did the ISR fire?
+//         if (isr & mask) {
+//             EIC_occured = true;
+//             EIC->INTFLAG.reg |= mask; // clear the ISR flag
+//             machine_pin_irq_obj_t *irq = MP_STATE_PORT(machine_pin_irq_objects[eic_id]);
+//             if (irq != NULL) {
+//                 irq->flags = irq->trigger;
+//                 mp_irq_handler(&irq->base);
+//                 break;
+//             }
+//         }
+//     }
 }
 
-
-STATIC mp_obj_t machine_pin_irq(size_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_args) {
-    enum  { ARG_handler, ARG_trigger, ARG_hard };
-    static const mp_arg_t allowed_args[] = 
-    {
-        { MP_QSTR_handler, MP_ARG_OBJ,  {.u_rom_obj = MP_ROM_NONE} },
-        { MP_QSTR_trigger, MP_ARG_INT,  {.u_int     = 3    } },
-        { MP_QSTR_hard,    MP_ARG_BOOL, {.u_bool    = false} },
-    };
-    machine_pin_obj_t *self = MP_OBJ_TO_PTR(pos_args[0]);
-    mp_arg_val_t args[MP_ARRAY_SIZE(allowed_args)];
-    mp_arg_parse_all(n_args - 1, pos_args + 1, kw_args, MP_ARRAY_SIZE(allowed_args), allowed_args, args);
-
-    // Get the IRQ object.
-     uint8_t eic_id = 1;//get_pin_obj_ptr(self->pin_id)->eic;
-     machine_pin_irq_obj_t *irq      = MP_STATE_PORT(machine_pin_irq_objects[eic_id]);
-     if (irq != NULL && irq->pin_id != self->pin_id) {
-         mp_raise_ValueError(MP_ERROR_TEXT("IRQ already used"));
-     }
-
-    // Allocate the IRQ object if it doesn't already exist.
-    if (irq == NULL) 
-    {
-        irq = m_new_obj(machine_pin_irq_obj_t);
-        irq->base.base.type = &mp_irq_type;
-        //irq->base.methods = (mp_irq_methods_t *)&machine_pin_irq_methods;
-        irq->base.parent  = MP_OBJ_FROM_PTR(self);
-        irq->base.handler = mp_const_none;
-        irq->base.ishard  = false;
-        irq->pin_id = 0xff;
-        MP_STATE_PORT(machine_pin_irq_objects[eic_id]) = irq;
-    }
-    // (Re-)configure the irq.
-    if (n_args > 1 || kw_args->used != 0) 
-        {
-            // Update IRQ data.
-            irq->base.handler = args[ARG_handler].u_obj;
-            irq->base.ishard  = args[ARG_hard].u_bool;
-            irq->flags   = 0;
-            irq->trigger = args[ARG_trigger].u_int;
-            irq->pin_id  = self->pin_id;
-
-            // Enable IRQ if a handler is given.
-            if (args[ARG_handler].u_obj != mp_const_none) 
-               {  }
-        }
-
-    return MP_OBJ_FROM_PTR(irq);
-}
-STATIC MP_DEFINE_CONST_FUN_OBJ_KW(machine_pin_irq_obj, 1, machine_pin_irq);
 
 /***********************************************************************
  * Function Name: main 
@@ -380,7 +327,6 @@ STATIC const mp_rom_map_elem_t gpio_module_globals_table[] =
     { MP_ROM_QSTR(MP_QSTR_pirq),       MP_ROM_PTR(&pin_irq_obj) },    
     { MP_ROM_QSTR(MP_QSTR_IRQ_RISING),  MP_ROM_INT(IRQ_FALLING) },
     { MP_ROM_QSTR(MP_QSTR_IRQ_FALLING), MP_ROM_INT(IRQ_RISING) },
-    { MP_ROM_QSTR(MP_QSTR_abc),   MP_ROM_PTR(&machine_pin_irq_obj) },
 
     /*ports pin definition*/
     { MP_ROM_QSTR(MP_QSTR_PORT1A), MP_ROM_INT(PORT1A) },
