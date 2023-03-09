@@ -18,7 +18,7 @@ ENABLE_DISABLE_OWN_MODULE = 1
 ENABLE_DISABLE_FLOAT_FUNCTIONALITY = 1
 
 #enable or disable the XC extension, not complete yet
-USE_FILE_EXTENSION_C_ONLY = 0
+#USE_FILE_EXTENSION_C_ONLY = 0
 
 #define the code version
 #for the terminal interpreter, use DCODE_WITH_PYTHON_INTRACTIVE_TERMINAL
@@ -39,8 +39,8 @@ endif
 BUILD_DIR = build
 
 #target file which has the clock and other definitions
-XCTarget = -target= ../targets/C2X.xn
-#XCTarget = -target=XCORE-AI-EXPLORER
+#XCTarget = -target= ../targets/C2X.xn
+XCTarget = -target=XCORE-AI-EXPLORER
 #XCTarget = -target=XCORE-200-EXPLORER
 
 #define the compiler
