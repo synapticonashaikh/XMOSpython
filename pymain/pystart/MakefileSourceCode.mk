@@ -1,17 +1,14 @@
 
 #defined/add the main code files!
-ifeq ($(USE_FILE_EXTENSION_C_ONLY), 1) 
-SRC_C +=  mainc.c
-else
-SRC_C +=  main.xc
-endif
+SRC_C +=  localmain.xc
 SRC_C +=  PythonRun.c
 SRC_C +=  $(BUILD_DIR)/_frozen_mpy.c
+SRC_C +=  $(IRQHANDLE)gpioirq.c
+
 #defined/add the support interactive files!
 SRC_C += $(PYLIBL)/readline.c  
 SRC_C += $(PYLIBL)/pyexec.c 
 SRC_C += $(PYLIBL)/stdout_helpers.c 
-
 
 #add all the hardware interface file
 SRC_C +=  $(HARDWAREL)cTerminal.c
@@ -31,4 +28,5 @@ ifeq ($(ENABLE_DISABLE_OWN_MODULE), 1)
 SRC_QSTR += $(MODULEL)modmyport.c
 SRC_QSTR += $(MODULEL)modtimer.c
 SRC_QSTR += $(MODULEL)modgpio.c
+SRC_QSTR += $(ROOTL)py/mpirq.c
 endif

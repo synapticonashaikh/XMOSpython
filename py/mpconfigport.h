@@ -43,3 +43,5 @@ typedef long mp_off_t;
 #endif
 
 #define MP_STATE_PORT MP_STATE_VM
+
+#define MICROPY_ENABLE_SCHEDULER (1) 

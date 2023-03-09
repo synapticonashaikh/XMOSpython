@@ -83,12 +83,20 @@
 	//#define PORT_MODE_INPUT   1
 	//#define PORT_MODE_OUTPUT  2
 
+    #define IRQ_FALLING (1)
+    #define IRQ_RISING (2)
+
 /* ----------------------------------------------------------------------------
  *                           Includes
  * ----------------------------------------------------------------------------
 */
 
-    #include "../../py/runtime.h"
+    #include "py/runtime.h"
+    #include "mpconfig.h"
+    #include "header.h"
+    #include "py/mphal.h"
+    #include "py/mpirq.h"
+    #include "py/obj.h"
     #include "header.h"
 
 
@@ -96,17 +104,65 @@
  *                          GLOBAL VARIABLE DECLARATION
  * ----------------------------------------------------------------------------
 */
-
+    //ypedef GPIO_TypeDef pin_gpio_t;
 /* ----------------------------------------------------------------------------
  *                           important command
  * ----------------------------------------------------------------------------
 */
+typedef struct _machine_pin_obj_t {
+    mp_obj_base_t base;
+    uint8_t pin_id;
+    char *name;
+    uint8_t eic;
+    uint8_t adc0;
+    uint8_t adc1;
+    uint8_t sercom1;
+    uint8_t sercom2;
+    uint8_t tc;
+    uint8_t tcc1;
+    uint8_t tcc2;
+} machine_pin_obj_t;
+
+typedef struct _machine_pin_irq_obj_t {
+    mp_irq_obj_t base;
+    uint32_t flags;
+    uint32_t trigger;
+    uint8_t pin_id;
+} machine_pin_irq_obj_t;
+
+
+typedef struct {
+    mp_obj_base_t base;
+    qstr name;
+    uint8_t idx;
+    uint8_t fn;
+    uint8_t unit;
+    uint8_t type;
+    void *reg; // The peripheral associated with this AF
+} pin_af_obj_t;
+
+typedef struct {
+    mp_obj_base_t base;
+    qstr name;
+    uint32_t port   : 4;
+    uint32_t pin    : 5;    // Some ARM processors use 32 bits/PORT
+    uint32_t num_af : 4;
+    uint32_t adc_channel : 5; // Some ARM processors use 32 bits/PORT
+    uint32_t adc_num  : 3;  // 1 bit per ADC
+    uint32_t pin_mask;
+    /*pin_gpio_t*/ machine_pin_obj_t *gpio;
+    const pin_af_obj_t *af;
+    uint8_t pin_id;
+} pin_obj_t; 
+
 
 
 /* ----------------------------------------------------------------------------
  *                           Fnction Definitions
  * ----------------------------------------------------------------------------
 */
+
+
 
 /***********************************************************************
  * Function Name: main 
@@ -171,7 +227,92 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_0(gpio_PrintGM_obj, gpio_PrintGM);
 
 /***********************************************************************
  * Function Name: main 
- * Arguments	  : void
+ * Arguments	: void
+ * Return Type	: int
+ * Details	    : main function, start of the code 
+ * *********************************************************************/
+#pragma stackfunction 1000
+STATIC mp_obj_t gpiopin_irq(size_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_args) 
+{
+
+    enum { ARG_handler, ARG_trigger, ARG_hard };
+    static const mp_arg_t allowed_args[] = {
+        { MP_QSTR_handler, MP_ARG_OBJ,  {.u_rom_obj = MP_ROM_NONE} },
+        { MP_QSTR_trigger, MP_ARG_INT,  {.u_int = 3} },
+        { MP_QSTR_hard   , MP_ARG_BOOL, {.u_bool = false} },
+    };
+    
+    pin_obj_t *self = MP_OBJ_TO_PTR(pos_args[0]);
+    mp_arg_val_t args[MP_ARRAY_SIZE(allowed_args)];
+    mp_arg_parse_all(n_args , pos_args, kw_args, MP_ARRAY_SIZE(allowed_args), allowed_args, args);
+
+     // Get the IRQ object.
+     uint8_t eic_id = 1;//get_pin_obj_ptr(self->pin_id)->eic;
+     machine_pin_irq_obj_t *irq = MP_STATE_PORT(machine_pin_irq_objects[eic_id]);
+     if (irq != NULL && irq->pin_id != self->pin_id) 
+     {
+        mp_raise_ValueError(MP_ERROR_TEXT("IRQ already used"));
+     }
+
+    if (irq == NULL) 
+    {
+        irq = m_new_obj(machine_pin_irq_obj_t);
+        irq->base.base.type = &mp_irq_type;
+        irq->base.parent  = MP_OBJ_FROM_PTR(self);
+        irq->base.handler = mp_const_none;
+        irq->base.ishard  = false;
+        irq->pin_id       = 0xff;
+        MP_STATE_PORT(machine_pin_irq_objects[eic_id]) = irq;
+    }
+
+
+    if (n_args > 1 || kw_args->used != 0) 
+     {  
+        // Update IRQ data.
+        irq->base.handler = args[ARG_handler].u_obj;
+        irq->base.ishard  = args[ARG_hard].u_bool  ;
+        if (args[ARG_handler].u_obj != mp_const_none) 
+            {   }
+     }
+
+
+        machine_pin_irq_obj_t *irq1 = 
+        MP_STATE_PORT(machine_pin_irq_objects[eic_id]);
+    if (irq1 != NULL) 
+        {
+            irq1->flags = irq1->trigger;
+            mp_irq_handler(&irq1->base);
+        }
+
+    return mp_const_none;
+
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_KW(pin_irq_obj, 0, gpiopin_irq);
+
+// Common EIC handler for all events.
+void EIC_Handler(void) 
+ {
+//     uint32_t mask = 1;
+//     uint32_t isr = EIC->INTFLAG.reg;
+//     for (int eic_id = 0; eic_id < 16; eic_id++, mask <<= 1) {
+//         // Did the ISR fire?
+//         if (isr & mask) {
+//             EIC_occured = true;
+//             EIC->INTFLAG.reg |= mask; // clear the ISR flag
+//             machine_pin_irq_obj_t *irq = MP_STATE_PORT(machine_pin_irq_objects[eic_id]);
+//             if (irq != NULL) {
+//                 irq->flags = irq->trigger;
+//                 mp_irq_handler(&irq->base);
+//                 break;
+//             }
+//         }
+//     }
+}
+
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	: void
  * Return Type	: int
  * Details	    : main function, start of the code 
  * *********************************************************************/
@@ -181,8 +322,11 @@ STATIC const mp_rom_map_elem_t gpio_module_globals_table[] =
     { MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_gpio) },
     { MP_ROM_QSTR(MP_QSTR_PortRead),  MP_ROM_PTR(&gpio_PortRead_obj)  },
     { MP_ROM_QSTR(MP_QSTR_PortWrite), MP_ROM_PTR(&gpio_PortWrite_obj) },
-    { MP_ROM_QSTR(MP_QSTR_PrintGM), MP_ROM_PTR(&gpio_PrintGM_obj) },    
-    { MP_ROM_QSTR(MP_QSTR_Toggle), MP_ROM_PTR(&gpio_Toggle_obj) },        
+    { MP_ROM_QSTR(MP_QSTR_PrintGM),   MP_ROM_PTR(&gpio_PrintGM_obj) },    
+    { MP_ROM_QSTR(MP_QSTR_Toggle),    MP_ROM_PTR(&gpio_Toggle_obj) },        
+    { MP_ROM_QSTR(MP_QSTR_pirq),       MP_ROM_PTR(&pin_irq_obj) },    
+    { MP_ROM_QSTR(MP_QSTR_IRQ_RISING),  MP_ROM_INT(IRQ_FALLING) },
+    { MP_ROM_QSTR(MP_QSTR_IRQ_FALLING), MP_ROM_INT(IRQ_RISING) },
 
     /*ports pin definition*/
     { MP_ROM_QSTR(MP_QSTR_PORT1A), MP_ROM_INT(PORT1A) },
@@ -219,8 +363,8 @@ STATIC const mp_rom_map_elem_t gpio_module_globals_table[] =
 
     { MP_ROM_QSTR(MP_QSTR_PORT32A), MP_ROM_INT(PORT32A) },    
 
-    //{ MP_ROM_QSTR(MP_QSTR_MODE_INPUT),  MP_ROM_INT(PORT_MODE_INPUT)  },    
-    //{ MP_ROM_QSTR(MP_QSTR_MODE_OUTPUT), MP_ROM_INT(PORT_MODE_OUTPUT) },    
+  //{ MP_ROM_QSTR(MP_QSTR_MODE_INPUT),  MP_ROM_INT(PORT_MODE_INPUT) },    
+  //{ MP_ROM_QSTR(MP_QSTR_MODE_OUTPUT), MP_ROM_INT(PORT_MODE_OUTPUT)},    
   
 };
 STATIC MP_DEFINE_CONST_DICT(gpio_module_globals, gpio_module_globals_table);
@@ -231,3 +375,6 @@ const mp_obj_module_t gpio_module =
     .globals = (mp_obj_dict_t *)&gpio_module_globals,
 };
 MP_REGISTER_MODULE(MP_QSTR_gpio, gpio_module);
+
+
+MP_REGISTER_ROOT_POINTER(void *machine_pin_irq_objects[16]);
