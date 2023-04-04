@@ -138,12 +138,15 @@
         "  PortWrite(PORT4C,0x00)\n";   
         */
       "from gpio import *\n"
+      "from delay import *\n"      
       "def callback(self):\n"
       "    print('Hello')\n"
       "val=pirq(handler=callback)\n"
+      "count = 0\n"a
       "while True:\n"
-      "    pass\n";
-
+      "    print('TimerCount=' + str(count))\n"
+      "    count = count+1\n"
+      "    delaySec(1)\n";
         upy.FnExecute(command);
       
       }
@@ -218,7 +221,7 @@ void FnCompleteCode (void)
  * *********************************************************************/
 int main( )
 {
-  FnCompleteCode();
+  FnCompleteCode( );
   return RESET;
 }
 

@@ -32,6 +32,10 @@ Q(GeneratorExit)
 
 Q(GeneratorExit)
 
+Q(IRQ_FALLING)
+
+Q(IRQ_RISING)
+
 Q(ImportError)
 
 Q(ImportError)
@@ -464,6 +468,8 @@ Q(extend)
 
 Q(find)
 
+Q(flags)
+
 Q(float)
 
 Q(float)
@@ -500,6 +506,14 @@ Q(gpio)
 
 Q(gpio)
 
+Q(handler)
+
+Q(handler)
+
+Q(hard)
+
+Q(hard)
+
 Q(hasattr)
 
 Q(hash)
@@ -529,6 +543,8 @@ Q(insert)
 Q(int)
 
 Q(int)
+
+Q(irq)
 
 Q(isalpha)
 
@@ -612,6 +628,8 @@ Q(opt_level)
 
 Q(ord)
 
+Q(pirq)
+
 Q(pop)
 
 Q(pop)
@@ -649,6 +667,8 @@ Q(round)
 Q(rsplit)
 
 Q(rstrip)
+
+Q(schedule)
 
 Q(send)
 
@@ -693,6 +713,12 @@ Q(throw)
 Q(throw)
 
 Q(to_bytes)
+
+Q(trigger)
+
+Q(trigger)
+
+Q(trigger)
 
 Q(tuple)
 

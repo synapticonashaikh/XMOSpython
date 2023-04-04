@@ -88,6 +88,7 @@ MP_MATCH_COMPRESSED("popitem(): dictionary is empty", "\377popitem(): dictionary
 MP_MATCH_COMPRESSED("positional arg after **", "\377\220\211\240\320")
 MP_MATCH_COMPRESSED("positional arg after keyword arg", "\377\220\211\240\212\211")
 MP_MATCH_COMPRESSED("rsplit(None,n)", "rsplit(None,n)")
+MP_MATCH_COMPRESSED("schedule queue full", "schedule queue full")
 MP_MATCH_COMPRESSED("small int overflow", "\377small\232\256")
 MP_MATCH_COMPRESSED("start/end indices", "\377start/end\264")
 MP_MATCH_COMPRESSED("stream operation not supported", "\377stream operation\203\207")
@@ -106,12 +107,12 @@ MP_MATCH_COMPRESSED("unsupported type for operator", "\377unsupported\234\222ope
 MP_MATCH_COMPRESSED("wrong number of arguments", "\377\230\221\226\251")
 MP_MATCH_COMPRESSED("wrong number of values to unpack", "\377\230\221\226\275\214unpack")
 MP_MATCH_COMPRESSED("zero step", "\377\253step")
-// Total input length:      3012
-// Total compressed length: 1298
+// Total input length:      3032
+// Total compressed length: 1319
 // Total data length:       1109
-// Predicted saving:        605
+// Predicted saving:        604
 
-// gzip length:             1829
+// gzip length:             1845
 // Percentage of gzip:      131.6%
-// zlib length:             1817
+// zlib length:             1833
 // Percentage of zlib:      132.5%
