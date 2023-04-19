@@ -27,8 +27,8 @@
 
 #include <stdio.h>
 
-#include "py/runtime.h"
-#include "py/gc.h"
+#include "runtime.h"
+#include "gc.h"
 #include "mpirq.h"
 
 #if MICROPY_ENABLE_SCHEDULER

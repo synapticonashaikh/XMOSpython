@@ -28,7 +28,8 @@
         "pyexec.h": "c",
         "header.h": "c",
         "softtimer.h": "c",
-        "mpirq.h": "c"
+        "mpirq.h": "c",
+        "interrupt.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

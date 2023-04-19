@@ -1,0 +1,24 @@
+{
+    "files.associations": {
+        "*.xc": "cpp",
+        "stdriver.h": "c",
+        "builtin.h": "c",
+        "*.tcc": "c",
+        "cstdio": "c",
+        "stdio.h": "c",
+        "array": "c",
+        "deque": "c",
+        "string": "c",
+        "unordered_map": "c",
+        "vector": "c",
+        "string_view": "c",
+        "initializer_list": "c",
+        "ranges": "c",
+        "random": "c",
+        "functional": "c",
+        "lexer.h": "c",
+        "parse.h": "c",
+        "emitglue.h": "c"
+    },
+    "C_Cpp.errorSquiggles": "Disabled"
+}
