@@ -285,12 +285,12 @@
 
 	int32_t FnPortWrite(uint32_t uiport,uint32_t state);
 	int32_t FnPortRead (uint32_t uiport);
-	void FnToggle(void);
+	void    FnToggle(void);
 	
 	int  FnStartTheTimerIrq(uint32_t duration);
 
-	void FnCompleteCode(void);
-	
+	void GPIOInterrupt  (void);
+    void GPIOINTRWrapper(void);	
 
 
 #endif /*__HEADER_H_*/

@@ -176,7 +176,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_0(gpio_PrintGM_obj, gpio_PrintGM);
 
 /***********************************************************************
  * Function Name: main 
- * Arguments	: void
+ * Arguments	  : void
  * Return Type	: int
  * Details	    : main function, start of the code 
  * *********************************************************************/
@@ -209,7 +209,6 @@ STATIC mp_obj_t gpiopin_irq(size_t n_args, const mp_obj_t *pos_args, mp_map_t *k
      }
 
     //GPIOInterrupt( );//args[ARG_trigger].u_int
-
     return mp_const_none;
 
 }

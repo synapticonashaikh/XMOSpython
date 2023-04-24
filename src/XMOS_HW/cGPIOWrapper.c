@@ -152,7 +152,7 @@ DEFINE_INTERRUPT_CALLBACK (interrupt_handlers, interrupt_task, button)
   //To manipulate the interrupt trigger to get the interrupt on the rising edge only.
    RisingFallingEdge = !RisingFallingEdge;
   port_set_trigger_in_not_equal(_Port4D, RisingFallingEdge); //change the trigger for the port/ pin
-  uifeedback = port_peek(_Port4D); //read the current status
+  uifeedback = SET & port_peek(_Port4D); //read the current status
 
   if (( uifeedback == SET ) 
   &&  ( uiStatus == RESET ))
@@ -165,7 +165,6 @@ DEFINE_INTERRUPT_CALLBACK (interrupt_handlers, interrupt_task, button)
       { uiStatus    = RESET; 
         CallbackFunction( );      
       }
-
 }
 
 /***********************************************************************

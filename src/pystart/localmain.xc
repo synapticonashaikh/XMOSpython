@@ -104,8 +104,6 @@
   #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
          extern "C"{ char * FnRunTheCommand(char *commad, uint8_t type); }
   #endif
-
-         extern "C"{ void GPIOInterrupt(void);}
   
 /* ----------------------------------------------------------------------------
  *                          GLOBAL VARIABLE DECLARATION
@@ -128,11 +126,11 @@
   //void FnSender(chanend SendCommand, chanend ReceiveCommad)
   void FnSender(client interface MicroPythonInterface upy)
   {
+     GPIOINTRWrapper( );
       unsafe
       {
         char * unsafe command = 
         "from gpio import *\n"
-        "from delay import *\n"
 
         "def GPOICallback(self):\n"
         "    print('callback function!')\n"
@@ -157,6 +155,8 @@
 // void FnReceiver(chanend ReceiveCommad, chanend SendCommand)
   void FnReceiver(server interface MicroPythonInterface upy)
   {
+
+     GPIOINTRWrapper( );
     unsafe 
     {  
       while (SET)
@@ -169,7 +169,7 @@
               break ;
               default: break; // to make the select non-blockable 
           }
-        }
+      }
     } 
   }
 #endif
@@ -195,7 +195,7 @@ int main( )
         
         par
         { 
-          GPIOInterrupt( );           
+          GPIOInterrupt( );
           FnSender  (upy);    
           FnReceiver(upy);          
         }
