@@ -91,6 +91,7 @@
 */
   	/*Standard Header files*/
 	  #include "header.h"    
+    #include "script.h"
 
 /* ----------------------------------------------------------------------------
  *                          EXTERNAL FUNCTION
@@ -112,6 +113,7 @@
   interface MicroPythonInterface { void FnExecute( char * unsafe string); };
   extern port _Port1D;
 
+
 /* ----------------------------------------------------------------------------
  *                          FUNCTION DEFINITION
  * ----------------------------------------------------------------------------
@@ -129,20 +131,8 @@
      GPIOINTRWrapper( );
       unsafe
       {
-        char * unsafe command = 
-        "from gpio import *\n"
-
-        "def GPOICallback(self):\n"
-        "    print('callback function!')\n"
-
-        "pirq(handler=GPOICallback)\n"
-        "count = 0\n"
-        "while True:\n"
-        "      pass\n";
-
-      upy.FnExecute(command);
-      
-      while (SET);
+        upy.FnExecute(scScript);      
+        while (SET);
       }
   }
 
