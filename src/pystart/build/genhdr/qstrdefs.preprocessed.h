@@ -347,6 +347,8 @@ Q(GeneratorExit)
 
 Q(GeneratorExit)
 
+Q(I2TEnDs)
+
 Q(IRQ_FALLING)
 
 Q(IRQ_RISING)
@@ -388,6 +390,10 @@ Q(NoneType)
 Q(NotImplementedError)
 
 Q(NotImplementedError)
+
+Q(OBJDITC)
+
+Q(OBJDITC)
 
 Q(OSError)
 
@@ -463,9 +469,23 @@ Q(PrintGM)
 
 Q(PrintTM)
 
+Q(ReadControlWord)
+
+Q(ReadErrorStatus)
+
+Q(ReadModesofOperation)
+
+Q(ReadObjectValue)
+
+Q(ReadTargetTorque)
+
 Q(RuntimeError)
 
 Q(RuntimeError)
+
+Q(SetObjectValue)
+
+Q(SetTargetTorque)
 
 Q(StopIteration)
 
@@ -488,6 +508,10 @@ Q(TypeError)
 Q(ValueError)
 
 Q(ValueError)
+
+Q(WriteControlWord)
+
+Q(WriteModesofOperation)
 
 Q(ZeroDivisionError)
 
@@ -574,6 +598,8 @@ Q(__main__)
 Q(__main__)
 
 Q(__module__)
+
+Q(__name__)
 
 Q(__name__)
 

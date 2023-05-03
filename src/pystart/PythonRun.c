@@ -81,32 +81,29 @@
  * ----------------------------------------------------------------------------
 */
     //this heap memroy stores the data
-    #define _STATIC_HEAP_SIZE  (uint16_t)3072
+    #define _STATIC_HEAP_SIZE (uint16_t)3000
  
 /* ----------------------------------------------------------------------------
  *                           INCLUDE
  * ----------------------------------------------------------------------------
 */
-    #include <stdint.h>
-    #include <stdio.h>
-    #include <string.h>
+    #include "header.h"
 
-    #include "py/builtin.h"
-    #include "py/compile.h"
-    #include "py/runtime.h"
-    #include "py/repl.h"
-    #include "py/gc.h"
-    #include "py/mperrno.h"
-    #include "py/pyexec.h"
-  //#include "STdriver.h"
+    #include "builtin.h"
+    #include "compile.h"
+    #include "runtime.h"
+    #include "repl.h"
+    #include "gc.h"
+    #include "mperrno.h"
+    #include "pyexec.h"
 
 /* ----------------------------------------------------------------------------
  *                          EXTERNAL FUNCTION
  * ----------------------------------------------------------------------------
 */
 
-extern void mp_hal_stdout_tx_strn(const char *str, mp_uint_t len);
-extern int  mp_hal_stdin_rx_chr  (void);
+    extern void mp_hal_stdout_tx_strn(const char *str, mp_uint_t len);
+    extern int  mp_hal_stdin_rx_chr  (void);
 
 /* ----------------------------------------------------------------------------
  *                          GLOBAL VARIABLE DECLARATION
@@ -155,6 +152,7 @@ void do_str(const char *src, mp_parse_input_kind_t input_kind)
  * Return Type	: int
  * Details	    : main function, start of the code
  * *********************************************************************/
+#pragma stackfunction 1000
 int FnMPInterpreterConsole(void) 
 { 
     int stack_dummy;
@@ -163,14 +161,14 @@ int FnMPInterpreterConsole(void)
     #if MICROPY_ENABLE_GC
     gc_init(heap, heap + sizeof(heap));
     #endif
-    mp_init();
+    mp_init( );
     
     #if MICROPY_ENABLE_COMPILER
         #if MICROPY_REPL_EVENT_DRIVEN         
-            pyexec_event_repl_init();
+            pyexec_event_repl_init( );
             for (;;) 
             {
-                int c = mp_hal_stdin_rx_chr();
+                int c = mp_hal_stdin_rx_chr( );
                 if (pyexec_event_repl_process_char(c)) 
                 {
                     break;
@@ -179,12 +177,10 @@ int FnMPInterpreterConsole(void)
         #else
             pyexec_friendly_repl( );
         #endif
-     //do_str("print('hello world!', list(x+1 for x in range(10)), end='eol\\n')", MP_PARSE_SINGLE_INPUT);
-     //do_str("for i in range(10):\r\n  print(i)", MP_PARSE_FILE_INPUT);
     #else
-    pyexec_frozen_module("frozentest.py");
+        pyexec_frozen_module("frozentest.py");
     #endif
-    mp_deinit();
+    mp_deinit( );
     printf("closing the code!\n\r");
     return 0;
 
@@ -202,6 +198,7 @@ char * FnRunTheCommand(char *commad, uint8_t type)
     int stack_dummy;
     stack_top = (char *)&stack_dummy;
     static char * ret = "Sucess!";
+    //printf("Commad:->\n%s\n\r",commad);
 
     #if MICROPY_ENABLE_GC
         gc_init(heap, heap + sizeof(heap));
@@ -211,14 +208,14 @@ char * FnRunTheCommand(char *commad, uint8_t type)
     /*execute the commad*/
     do_str(commad, type);
     /*deinit*/
-    mp_deinit();
+    mp_deinit( );
     /*return the feedback*/    
     return ret;
 }
 
 /***********************************************************************
  * Function Name: main 
- * Arguments	  : void
+ * Arguments	: void
  * Return Type	: int
  * Details	    : main function, start of the code
  * *********************************************************************/
@@ -231,8 +228,8 @@ void gc_collect(void)
     gc_collect_start( );
     gc_collect_root(&dummy, ((mp_uint_t)stack_top - (mp_uint_t)&dummy) / sizeof(mp_uint_t));
     gc_collect_end( );
-  //printing the memory remaining is not necessary   
-  //gc_dump_info( );
+    //printing the memory remaining is not necessary   
+    //gc_dump_info( );
 }
 #endif
 

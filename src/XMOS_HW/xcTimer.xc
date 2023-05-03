@@ -96,7 +96,7 @@
 */
 
     /*set the timer for 100ns */
-    timer    stTime; 
+    timer    stTime;
 
 /* ----------------------------------------------------------------------------
  *                           Fnction Definitions
@@ -123,7 +123,7 @@ inline void FndelayuSec(uint32_t uiTime)
    uint64_t  uiTimeTotal;
    stTime :> uiTimeTotal;
    uiTimeTotal = uiTimeTotal + (uiTime * ui1uSec) ;   
-   stTime when timerafter(uiTimeTotal) :> void;  
+   stTime when timerafter(uiTimeTotal) :> void;   
 }
 
 /***********************************************************************

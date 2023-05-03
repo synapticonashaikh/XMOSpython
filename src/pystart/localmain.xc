@@ -125,7 +125,6 @@
  * Details	    : main function, start of the code
  * *********************************************************************/
 #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
-  //void FnSender(chanend SendCommand, chanend ReceiveCommad)
   void FnSender(client interface MicroPythonInterface upy)
   {
      GPIOINTRWrapper( );
@@ -185,7 +184,7 @@ int main( )
         
         par
         { 
-          GPIOInterrupt( );
+          //GPIOInterrupt( );
           FnSender  (upy);    
           FnReceiver(upy);          
         }

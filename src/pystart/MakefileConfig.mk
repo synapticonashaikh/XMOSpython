@@ -8,6 +8,8 @@ HEADERSL  =../pyheader/
 HARDWAREL =../XMOS_HW/
 TARGETL	  =../XMOS_Target/
 PYLIBL	  =$(ROOTL)py
+SDOL 	  = $(SOMANET_SOFTWAREL)sc_drive/module_canopen_interface/object_dictionary
+COEL 	  = $(SOMANET_SOFTWAREL)sc_drive/module_communication_interface/include/
 
 #enable/ disable debug message 
 ENABLE_DISABLE_DEBUGG_MESSAGE = 0
@@ -52,6 +54,8 @@ INC += -I$(ROOTL)
 INC += -I$(PYLIBL)
 INC += -I$(HEADERSL)
 INC += -I$(BUILD_DIR)
+INC += -I$(SDOL)
+INC += -I$(COEL) 
 INC += -I$(BUILD_DIR)/genhdr/
 
 #remove the unwaned warning of unused variables
@@ -68,6 +72,7 @@ FLAG_SIGN_COMPARE 	 = -Wno-sign-compare
 FLAG_OPT 		     = -Os
 #geneterate the report of the compilation
 FLAG_REPORT 		 = -report
+
 
 #flags with respect to XMOS core
 LDFLAGS +=$(INC)

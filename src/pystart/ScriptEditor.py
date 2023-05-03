@@ -84,6 +84,8 @@ from   tkinter    import messagebox
 from   tkinter.filedialog import askopenfilename, asksaveasfilename
 import tkinter.ttk as ttk
 import subprocess
+import threading
+import time
 import os
 
 # * ----------------------------------------------------------------------------
@@ -100,6 +102,17 @@ CurrentFile = ""
 HandlerTextArea  = None
 HandlerPrintArea = None
 
+
+# * ----------------------------------------------------------------------------
+# *                           Manage the text area
+# * ----------------------------------------------------------------------------
+
+'''-------------------------------------------------------------------------------
+ Function Name: FnSaveTheFile
+ Argument: None
+ Return: None
+ Note: This function delete (trunc) the text area of the new file
+-------------------------------------------------------------------------------'''
 
 def highlight_python_code(event=None):
     keywords = ['and', 'as', 'assert', 'break', 'class', 'continue',
@@ -143,7 +156,6 @@ class TextScrollCombo(ttk.Frame):
         scrollb = ttk.Scrollbar(root, command=root.textboxhandler.yview)
         scrollb.grid(row=0, column=1, sticky='nsew')
         root.textboxhandler['yscrollcommand'] = scrollb.set
-
 
 
 # * ----------------------------------------------------------------------------

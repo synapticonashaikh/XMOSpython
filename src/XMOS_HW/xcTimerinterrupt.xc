@@ -94,7 +94,7 @@
 
     extern void FnTimerInterruptStart(hwtimer_t Var, uint32_t TimeInMsec); 
     extern void FnTimerInterruptInit (hwtimer_t Var);    
-    extern void FnTimerInterruptStop (hwtimer_t Var);  
+    extern void FnTimerInterruptStop (hwtimer_t Var);    
     extern void FnTimerIsrHandler    (void);
 
 /* ----------------------------------------------------------------------------
@@ -137,11 +137,10 @@ unsigned FnTimerInterruptGetTime(hwtimer_t Var)
  * Return Type	: int
  * Details	    : main function, start of the code
  * *********************************************************************/
-int FnStartTheTimerIrq(uint32_t duration)
+int FnStartTheTimerIrq(uint32_t uiTime)
 {
     /*start should come before init (to update the time)*/   
     FnTimerInterruptInit (varTimerInterrupt);     
-    FnTimerInterruptStart(varTimerInterrupt,duration);
-   //FnInfiniteLoop( );
+    FnTimerInterruptStart(varTimerInterrupt ,uiTime);
     return RESET;
 }

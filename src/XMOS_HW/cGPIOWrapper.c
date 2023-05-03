@@ -83,13 +83,14 @@
  *                           Includes
  * ----------------------------------------------------------------------------
 */
-  #include <stdio.h>
-  #include <xcore/triggerable.h>
-  #include <xcore/port.h>
-  #include <xcore/interrupt.h>
-  #include <xcore/interrupt_wrappers.h>
-  #include "header.h"
-  #include "interrupt.h"
+
+    #include <stdio.h>
+    #include <xcore/triggerable.h>
+    #include <xcore/port.h>
+    #include <xcore/interrupt.h>
+    #include <xcore/interrupt_wrappers.h>
+    #include "header.h"
+    #include "interrupt.h"
 
     #include "py/runtime.h"
     #include "mpconfig.h"
@@ -136,37 +137,37 @@ void CallbackFunction(void)
  * Return Type	: 
  * Details	    : 
  * *********************************************************************/
-DEFINE_INTERRUPT_PERMITTED(interrupt_handlers, void, interruptable_task, void)
-{
-  interrupt_unmask_all( ); 
-  //interrupt_mask_all( );
-}
+  DEFINE_INTERRUPT_PERMITTED(interrupt_handlers, void, interruptable_task, void)
+  {
+    interrupt_unmask_all( ); 
+    //interrupt_mask_all( );
+  }
+
 /***********************************************************************
  * Function Name: DEFINE_INTERRUPT_CALLBACK 
  * Arguments	  : 
  * Return Type	: 
  * Details	    : 
  * *********************************************************************/
-DEFINE_INTERRUPT_CALLBACK (interrupt_handlers, interrupt_task, button)
-{
-  //To manipulate the interrupt trigger to get the interrupt on the rising edge only.
-   RisingFallingEdge = !RisingFallingEdge;
-  port_set_trigger_in_not_equal(_Port4D, RisingFallingEdge); //change the trigger for the port/ pin
-  uifeedback = SET & port_peek(_Port4D); //read the current status
+  DEFINE_INTERRUPT_CALLBACK (interrupt_handlers, interrupt_task, button)
+  {
+    //To manipulate the interrupt trigger to get the interrupt on the rising edge only.
+    RisingFallingEdge = !RisingFallingEdge;
+    port_set_trigger_in_not_equal(_Port4D, RisingFallingEdge); //change the trigger for the port/ pin
+    uifeedback = SET & port_peek(_Port4D); //read the current status
 
-  if (( uifeedback == SET ) 
-  &&  ( uiStatus == RESET ))
-      { uiStatus  =   SET;
-      }
+    if (( uifeedback == SET ) 
+    &&  ( uiStatus == RESET ))
+        { uiStatus  =   SET;
+        }
 
-  else 
-  if (( uifeedback == RESET ) 
-  &&  ( uiStatus   ==   SET )) 
-      { uiStatus    = RESET; 
-        CallbackFunction( );      
-      }
-}
-
+    else 
+    if (( uifeedback == RESET ) 
+    &&  ( uiStatus   ==   SET )) 
+        { uiStatus    = RESET; 
+          CallbackFunction( );      
+        }
+  }
 /***********************************************************************
  * Function Name: FnGpioRead 
  * Arguments	  : void
@@ -174,8 +175,7 @@ DEFINE_INTERRUPT_CALLBACK (interrupt_handlers, interrupt_task, button)
  * Details	    : 
  * *********************************************************************/
 int FnGpioRead(port_t PortVar)
-{ return port_peek(PortVar); }
-
+{ return port_peek(PortVar);}
 /***********************************************************************
  * Function Name: GPIOINTRWrapper 
  * Arguments	  : void
@@ -192,12 +192,11 @@ void GPIOINTRWrapper(void)
  * *********************************************************************/
 void GPIOInterrupt(void)
 {
-  port_enable(_Port4D);
-  triggerable_setup_interrupt_callback
-  (_Port4D, &_Port4D, INTERRUPT_CALLBACK(interrupt_task));
-  port_set_trigger_in_not_equal(_Port4D, RESET);
-  port_clear_trigger_in(_Port4D);
-  triggerable_enable_trigger(_Port4D);
-  GPIOINTRWrapper( );
-  
+    port_enable(_Port4D);
+    triggerable_setup_interrupt_callback
+    (_Port4D, &_Port4D, INTERRUPT_CALLBACK(interrupt_task));
+    port_set_trigger_in_not_equal(_Port4D, RESET);
+    port_clear_trigger_in(_Port4D);
+    triggerable_enable_trigger(_Port4D);
+    GPIOINTRWrapper( );
 }

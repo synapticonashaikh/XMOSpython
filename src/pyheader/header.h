@@ -180,7 +180,12 @@
 		#include <stdarg.h>
 		#include <stddef.h>
 
-#ifdef __XC__ 
+	#ifdef USE_SDO_MODULES
+		#include "sdo.h"
+		#include <dictionary_symbols.h>
+	#endif
+
+#ifdef __XC__
         /*XMOS related hedaer*/
         #include <platform.h>
         #include <xs1.h>
@@ -290,7 +295,33 @@
 	int  FnStartTheTimerIrq(uint32_t duration);
 
 	void GPIOInterrupt  (void);
-    void GPIOINTRWrapper(void);	
+    	void GPIOINTRWrapper(void);	
 
+	#ifdef USE_SDO_MODULES
+			void FnSetObjectValue( uint16_t index_, uint8_t subindex, size_t capacity, uint8_t *value, 
+								CoeRequestOrigin request_origin  , int complete_access );
+	#else
+			void FnSetObjectValue( uint16_t index_, uint8_t subindex, size_t capacity, uint8_t *value, 
+								uint8_t request_origin, int complete_access );
+	#endif   
+
+			int  	 FnReadObject(uint16_t index_,uint16_t subindex, uint8_t capacity);
+			
+			void  	 FnSetControlword(uint16_t uiControlwrd);	
+			uint16_t FnGetControlword(void);
+			
+			uint16_t FnGetErrorStatus(void);
+
+			void     FnSetTargetTorque(int16_t Torque);
+			uint16_t FnGetTargetTorque(void);
+			
+			void 	 FnSetModesOfOperation(int8_t ucModes);
+			uint8_t  FnGetModesOfOperation(void);
+			
+			void FnSetI2TEnableDisable(uint8_t I2TEnDS);
+
+			int FnStartTheTimerIrq(uint32_t uiTime);
+
+			void FnGPIOInterruptEnable(void);
 
 #endif /*__HEADER_H_*/
