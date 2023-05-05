@@ -54,7 +54,7 @@ void mp_encode_uint(void *env,mp_encode_uint_allocator_t allocator, mp_uint_t va
         *--p = val & 0x7f;
         val >>= 7;
     } while (val != 0);
-   byte *c = allocator(env, buf + sizeof(buf) - p);
+    byte *c = allocator(env, buf + sizeof(buf) - p);
     if (c != NULL) {
         while (p != buf + sizeof(buf) - 1) {
             *c++ = *p++ | 0x80;

@@ -45,7 +45,6 @@
 #define MP_PYTHON_PRINTER &mp_plat_print
 #endif
 
-
 typedef void (*mp_print_strn_t)(void *data, const char *str, size_t len);
 
 

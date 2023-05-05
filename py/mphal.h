@@ -35,7 +35,6 @@
 #include "mphalport.h"
 #endif
 
-
 #ifndef mp_hal_stdio_poll
 uintptr_t mp_hal_stdio_poll(uintptr_t poll_flags);
 #endif

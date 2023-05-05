@@ -29,7 +29,6 @@
 
 #include "runtime.h"
 
-
 // bytecode layout:
 //
 //  func signature  : var uint

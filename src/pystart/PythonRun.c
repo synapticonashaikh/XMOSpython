@@ -96,6 +96,10 @@
     #include "gc.h"
     #include "mperrno.h"
     #include "pyexec.h"
+    #include "readline.h"
+    #include "interrupt_char.h"
+    #include "persistentcode.h"
+    #include "bc.h"
 
 /* ----------------------------------------------------------------------------
  *                          EXTERNAL FUNCTION
@@ -195,22 +199,47 @@ int FnMPInterpreterConsole(void)
 #pragma stackfunction 1000
 char * FnRunTheCommand(char *commad, uint8_t type)
 {
-    int stack_dummy;
-    stack_top = (char *)&stack_dummy;
-    static char * ret = "Sucess!";
-    //printf("Commad:->\n%s\n\r",commad);
+    // int stack_dummy;
+    // stack_top = (char *)&stack_dummy;
+    // static char * ret = "Sucess!";
+    // //printf("Commad:->\n%s\n\r",commad);
 
-    #if MICROPY_ENABLE_GC
-        gc_init(heap, heap + sizeof(heap));
-    #endif
-    /*init the mp stack*/
-    mp_init( );
-    /*execute the commad*/
-    do_str(commad, type);
-    /*deinit*/
-    mp_deinit( );
-    /*return the feedback*/    
-    return ret;
+    // #if MICROPY_ENABLE_GC
+    //     gc_init(heap, heap + sizeof(heap));
+    // #endif
+    // /*init the mp stack*/
+    // mp_init( );
+    // /*execute the commad*/
+    // do_str(commad, type);
+    // /*deinit*/
+    // mp_deinit( );
+    // /*return the feedback*/    
+    // return ret;
+    uint8_t ByteCode [] = 
+    {0x4d,0x06,0x00,0x1f,0x08,0x00,0x12,0x70,0x79,0x63,0x6f,0x64,0x65,0x2e,0x70,0x79,
+    0x00,0x0f,0x0b,0x08,0x67,0x70,0x69,0x6f,0x00,0x0a,0x64,0x65,0x6c,0x61,0x79,0x00,
+    0x12,0x50,0x6f,0x72,0x74,0x57,0x72,0x69,0x74,0x65,0x00,0x0c,0x50,0x4f,0x52,0x54,
+    0x34,0x43,0x00,0x10,0x64,0x65,0x6c,0x61,0x79,0x53,0x65,0x63,0x00,0x83,0x48,0x10,
+    0x0e,0x01,0x28,0x48,0x20,0x28,0x26,0x28,0x80,0x10,0x02,0x2a,0x01,0x1b,0x03,0x69,
+    0x80,0x10,0x02,0x2a,0x01,0x1b,0x04,0x69,0x11,0x05,0x11,0x06,0x8f,0x34,0x02,0x59,
+    0x11,0x07,0x81,0x34,0x01,0x59,0x11,0x05,0x11,0x06,0x80,0x34,0x02,0x59,0x11,0x07,
+    0x81,0x34,0x01,0x59,0x42,0x22,0x51,0x63};
+
+    mp_reader_t reader;
+    mp_vfs_map_minimal_t data;
+    mp_vfs_map_minimal_new_reader(&reader, &data, ByteCode, sizeof(ByteCode));
+    mp_module_context_t *context = m_new_obj(mp_module_context_t);
+    context->module.globals = mp_globals_get();
+    mp_compiled_module_t compiled_module;
+    compiled_module.context = context;
+    mp_raw_code_load(&reader, &compiled_module);
+    mp_obj_t module_fun = mp_make_function_from_raw_code(compiled_module.rc, context, NULL);
+
+    // Run the script while letting CTRL-C interrupt it.
+    mp_hal_set_interrupt_char(CHAR_CTRL_C);
+    mp_call_function_0(module_fun);
+    mp_hal_set_interrupt_char(-1);
+
 }
 
 /***********************************************************************
@@ -235,7 +264,7 @@ void gc_collect(void)
 
 /***********************************************************************
  * Function Name: main 
- * Arguments	  : void
+ * Arguments	: void
  * Return Type	: int
  * Details	    : main function, start of the code
  * *********************************************************************/

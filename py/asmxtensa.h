@@ -29,7 +29,6 @@
 #include "misc.h"
 #include "asmbase.h"
 
-
 // calling conventions:
 // up to 6 args in a2-a7
 // return value in a2

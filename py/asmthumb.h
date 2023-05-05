@@ -31,7 +31,6 @@
 #include "asmbase.h"
 #include "persistentcode.h"
 
-
 #define ASM_THUMB_REG_R0  (0)
 #define ASM_THUMB_REG_R1  (1)
 #define ASM_THUMB_REG_R2  (2)

@@ -29,7 +29,6 @@
 #include <stddef.h>
 #include <stdint.h>
 
-
 #ifdef _MSC_VER
 #include "mpconfig.h" // For inline.
 #endif

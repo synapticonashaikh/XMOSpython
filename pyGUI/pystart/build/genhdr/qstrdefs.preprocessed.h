@@ -6,7 +6,7 @@
 # 1 "<stdin>"
 # 29 "<stdin>"
 # 1 "../../py/mpconfig.h" 1
-# 76 "../../py/mpconfig.h"
+# 75 "../../py/mpconfig.h"
 # 1 "../pyheader/mpconfigport.h" 1
 # 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h" 1 3 4
 # 9 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h" 3 4
@@ -270,8 +270,8 @@ extern void *alloca (size_t __size) __attribute__ ((__nothrow__ , __leaf__));
 typedef intptr_t mp_int_t;
 typedef uintptr_t mp_uint_t;
 typedef long mp_off_t;
-# 77 "../../py/mpconfig.h" 2
-# 789 "../../py/mpconfig.h"
+# 76 "../../py/mpconfig.h" 2
+# 788 "../../py/mpconfig.h"
 typedef float mp_float_t;
 # 30 "<stdin>" 2
 

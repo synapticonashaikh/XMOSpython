@@ -65,15 +65,9 @@ void mp_irq_init(mp_irq_obj_t *self, const mp_irq_methods_t *methods, mp_obj_t p
     self->ishard = false;
 }
 
-#pragma stackfunction 1000
-void mp_irq_handler(mp_irq_obj_t *self)
-{
-
-    if (self->handler != mp_const_none) 
-    {
-    
-        if (self->ishard) 
-        {
+void mp_irq_handler(mp_irq_obj_t *self) {
+    if (self->handler != mp_const_none) {
+        if (self->ishard) {
             // When executing code within a handler we must lock the scheduler to
             // prevent any scheduled callbacks from running, and lock the GC to
             // prevent any memory allocations.
@@ -87,17 +81,16 @@ void mp_irq_handler(mp_irq_obj_t *self)
                 // Uncaught exception; disable the callback so that it doesn't run again
                 self->methods->trigger(self->parent, 0);
                 self->handler = mp_const_none;
-                mp_obj_print_exception(&mp_plat_print, MP_OBJ_FROM_PTR(nlr.ret_val));
+                mp_printf(MICROPY_ERROR_PRINTER, "Uncaught exception in IRQ callback handler\n");
+                mp_obj_print_exception(MICROPY_ERROR_PRINTER, MP_OBJ_FROM_PTR(nlr.ret_val));
             }
             gc_unlock();
             mp_sched_unlock();
-         } 
-        else {
+        } else {
             // Schedule call to user function
             mp_sched_schedule(self->handler, self->parent);
-            }
+        }
     }
-     else { }    
 }
 
 /******************************************************************************/

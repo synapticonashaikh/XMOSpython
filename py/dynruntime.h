@@ -34,7 +34,6 @@
 #include "objstr.h"
 #include "objtype.h"
 
-
 #if !MICROPY_ENABLE_DYNRUNTIME
 #error "dynruntime.h included in non-dynamic-module build."
 #endif

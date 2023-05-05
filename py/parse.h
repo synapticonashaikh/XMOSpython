@@ -31,7 +31,6 @@
 
 #include "obj.h"
 
-
 struct _mp_lexer_t;
 
 // a mp_parse_node_t is:

@@ -29,7 +29,6 @@
 
 #include "builtin.h"
 
-
 enum {
     MP_FROZEN_NONE,
     MP_FROZEN_STR,

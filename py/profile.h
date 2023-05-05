@@ -29,7 +29,6 @@
 
 #include "emitglue.h"
 
-
 #if MICROPY_PY_SYS_SETTRACE
 
 #define mp_prof_is_executing MP_STATE_THREAD(prof_callback_is_executing)

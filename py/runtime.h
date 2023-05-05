@@ -29,8 +29,6 @@
 #include "mpstate.h"
 #include "pystack.h"
 
-
-
 typedef enum {
     MP_VM_RETURN_NORMAL,
     MP_VM_RETURN_YIELD,
@@ -72,7 +70,6 @@ typedef struct _mp_sched_node_t {
 extern const byte mp_unary_op_method_name[];
 extern const byte mp_binary_op_method_name[];
 
-
 void mp_init(void);
 void mp_deinit(void);
 
@@ -87,8 +84,6 @@ void mp_sched_unlock(void);
 bool mp_sched_schedule(mp_obj_t function, mp_obj_t arg);
 bool mp_sched_schedule_node(mp_sched_node_t *node, mp_sched_callback_t callback);
 #endif
-
-
 
 // extra printing method specifically for mp_obj_t's which are integral type
 int mp_print_mp_int(const mp_print_t *print, mp_obj_t x, int base, int base_char, int flags, char fill, int width, int prec);

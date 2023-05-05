@@ -26,7 +26,6 @@
 #ifndef MICROPY_INCLUDED_PY_MPCONFIG_H
 #define MICROPY_INCLUDED_PY_MPCONFIG_H
 
-
 // Current version of MicroPython
 #define MICROPY_VERSION_MAJOR 1
 #define MICROPY_VERSION_MINOR 19

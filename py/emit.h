@@ -29,7 +29,6 @@
 #include "lexer.h"
 #include "scope.h"
 
-
 /* Notes on passes:
  * We don't know exactly the opcodes in pass 1 because they depend on the
  * closing over of variables (LOAD_CLOSURE, BUILD_TUPLE, MAKE_CLOSURE), which

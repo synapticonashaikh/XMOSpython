@@ -34,9 +34,6 @@
 #include <stdint.h>
 #include <stddef.h>
 
-
-//typedef uint8_t _Bool;
-//typedef uint8_t  bool;
 typedef unsigned char byte;
 typedef unsigned int uint;
 

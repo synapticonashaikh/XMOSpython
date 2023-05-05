@@ -30,7 +30,6 @@
 #include <stddef.h>
 #include "mpconfig.h"
 
-
 void gc_init(void *start, void *end);
 
 #if MICROPY_GC_SPLIT_HEAP
@@ -75,6 +74,5 @@ typedef struct _gc_info_t {
 void gc_info(gc_info_t *info);
 void gc_dump_info(void);
 void gc_dump_alloc_table(void);
-
 
 #endif // MICROPY_INCLUDED_PY_GC_H
