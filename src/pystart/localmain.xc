@@ -153,7 +153,7 @@
         select 
           {
               case upy.FnExecute(char * unsafe string): 
-              printf ("RECEIVED CMD=\n\r%s\n\r",string);
+              //printf ("RECEIVED CMD=\n\r%s\n\r",string);
               FnRunTheCommand(string,PARSE_FILE_INPUT); 
               break ;
               default: break; // to make the select non-blockable 
@@ -184,7 +184,6 @@ int main( )
         
         par
         { 
-          //GPIOInterrupt( );
           FnSender  (upy);    
           FnReceiver(upy);          
         }

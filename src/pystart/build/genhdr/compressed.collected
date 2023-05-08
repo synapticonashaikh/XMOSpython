@@ -18,7 +18,7 @@ argument name reused
 
 argument num/types mismatch
 
-attributes not supported yet
+attributes not supported
 
 bad format string
 
@@ -98,6 +98,12 @@ identifier redefined as global
 
 identifier redefined as nonlocal
 
+incompatible .mpy arch
+
+incompatible .mpy file
+
+incompatible .mpy file
+
 index out of range
 
 indices must be integers
@@ -150,6 +156,8 @@ name not defined
 
 name too long
 
+native code in .mpy unsupported
+
 negative shift count
 
 negative shift count
@@ -199,8 +207,6 @@ positional arg after **
 positional arg after keyword arg
 
 rsplit(None,n)
-
-schedule queue full
 
 small int overflow
 

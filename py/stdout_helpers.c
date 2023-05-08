@@ -25,7 +25,7 @@
  */
 
 #include <string.h>
-#include "py/mphal.h"
+#include "mphal.h"
 
 /*
  * Extra stdout functions

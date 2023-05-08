@@ -35,9 +35,9 @@ build/py/gc.o: ../../py/gc.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h /usr/include/alloca.h \
- ../../py/runtime.h ../../py/mpstate.h ../../py/mpthread.h \
- ../../py/misc.h build/genhdr/compressed.data.h ../../py/nlr.h \
- /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h \
+ ../../py/mpprint.h ../../py/runtime.h ../../py/mpstate.h \
+ ../../py/mpthread.h ../../py/misc.h build/genhdr/compressed.data.h \
+ ../../py/nlr.h /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h \
  /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
  /usr/include/x86_64-linux-gnu/bits/local_lim.h \
@@ -45,9 +45,9 @@ build/py/gc.o: ../../py/gc.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h \
  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min.h \
  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h ../../py/obj.h \
- ../../py/qstr.h build/genhdr/qstrdefs.generated.h ../../py/mpprint.h \
- ../../py/runtime0.h ../../py/objlist.h ../../py/objexcept.h \
- ../../py/objtuple.h build/genhdr/root_pointers.h ../../py/pystack.h
+ ../../py/qstr.h build/genhdr/qstrdefs.generated.h ../../py/runtime0.h \
+ ../../py/objlist.h ../../py/objexcept.h ../../py/objtuple.h \
+ build/genhdr/root_pointers.h ../../py/pystack.h
 ../../py/gc.c /usr/include/stdc-predef.h :
  /usr/include/assert.h /usr/include/features.h :
  /usr/include/features-time64.h :
@@ -85,9 +85,9 @@ build/py/gc.o: ../../py/gc.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h :
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h :
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h /usr/include/alloca.h :
- ../../py/runtime.h ../../py/mpstate.h ../../py/mpthread.h :
- ../../py/misc.h build/genhdr/compressed.data.h ../../py/nlr.h :
- /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h :
+ ../../py/mpprint.h ../../py/runtime.h ../../py/mpstate.h :
+ ../../py/mpthread.h ../../py/misc.h build/genhdr/compressed.data.h :
+ ../../py/nlr.h /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h :
  /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h :
  /usr/include/x86_64-linux-gnu/bits/local_lim.h :
@@ -95,6 +95,6 @@ build/py/gc.o: ../../py/gc.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min-dynamic.h :
  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min.h :
  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h ../../py/obj.h :
- ../../py/qstr.h build/genhdr/qstrdefs.generated.h ../../py/mpprint.h :
- ../../py/runtime0.h ../../py/objlist.h ../../py/objexcept.h :
- ../../py/objtuple.h build/genhdr/root_pointers.h ../../py/pystack.h :
+ ../../py/qstr.h build/genhdr/qstrdefs.generated.h ../../py/runtime0.h :
+ ../../py/objlist.h ../../py/objexcept.h ../../py/objtuple.h :
+ build/genhdr/root_pointers.h ../../py/pystack.h :

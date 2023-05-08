@@ -48,8 +48,8 @@
 #endif
 
 typedef struct _mp_obj_float_t {
-   mp_obj_base_t base;
-   mp_float_t value;
+    mp_obj_base_t base;
+    mp_float_t value;
 } mp_obj_float_t;
 
 const mp_obj_float_t mp_const_float_e_obj = {{&mp_type_float}, (mp_float_t)M_E};

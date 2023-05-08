@@ -41,7 +41,7 @@ BUILD_DIR = build
 #target file which has the clock and other definitions
 XCTarget  = $(TARGETL)C2X.xn
 #XCTarget = -target= ../targets/C2X.xn
-XCTarget  = -target=XCORE-AI-EXPLORER
+#XCTarget  = -target=XCORE-AI-EXPLORER
 #XCTarget = -target=XCORE-200-EXPLORER
 
 #define the compiler

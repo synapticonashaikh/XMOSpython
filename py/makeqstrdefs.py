@@ -86,7 +86,8 @@ def write_out(fname, output):
 
 
 def process_file(f):
-    re_line = re.compile(r"#[line]*\s\d+\s\"([^\"]+)\"")
+    # match gcc-like output (# n "file") and msvc-like output (#line n "file")
+    re_line = re.compile(r"^#(?:line)?\s+\d+\s\"([^\"]+)\"")
     if args.mode == _MODE_QSTR:
         re_match = re.compile(r"MP_QSTR_[_a-zA-Z0-9]+")
     elif args.mode == _MODE_COMPRESS:
@@ -100,10 +101,8 @@ def process_file(f):
     for line in f:
         if line.isspace():
             continue
-        # match gcc-like output (# n "file") and msvc-like output (#line n "file")
-        if line.startswith(("# ", "#line")):
-            m = re_line.match(line)
-            assert m is not None
+        m = re_line.match(line)
+        if m:
             fname = m.group(1)
             if not is_c_source(fname) and not is_cxx_source(fname):
                 continue
@@ -156,7 +155,7 @@ def cat_together():
     elif args.mode == _MODE_ROOT_POINTER:
         mode_full = "Root pointer registrations"
     if old_hash != new_hash:
-        #print(mode_full, "updated")
+        print(mode_full, "updated")
         try:
             # rename below might fail if file exists
             os.remove(args.output_file)

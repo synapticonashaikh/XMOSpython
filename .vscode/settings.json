@@ -29,7 +29,9 @@
         "header.h": "c",
         "softtimer.h": "c",
         "mpirq.h": "c",
-        "interrupt.h": "c"
+        "interrupt.h": "c",
+        "unistd.h": "c",
+        "persistentcode.h": "c"
     },
     "C_Cpp.errorSquiggles": "Disabled"
 }

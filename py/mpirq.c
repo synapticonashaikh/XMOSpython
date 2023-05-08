@@ -65,6 +65,9 @@ void mp_irq_init(mp_irq_obj_t *self, const mp_irq_methods_t *methods, mp_obj_t p
     self->ishard = false;
 }
 
+#ifdef __XC__ 
+#pragma stackfunction 1000   
+#endif
 void mp_irq_handler(mp_irq_obj_t *self) {
     if (self->handler != mp_const_none) {
         if (self->ishard) {

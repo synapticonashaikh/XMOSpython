@@ -78,6 +78,4 @@ void mp_prof_print_instr(const byte *ip, mp_code_state_t *code_state);
 #endif
 
 #endif // MICROPY_PY_SYS_SETTRACE
-
-
 #endif // MICROPY_INCLUDED_PY_PROFILING_H

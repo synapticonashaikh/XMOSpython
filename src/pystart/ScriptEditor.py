@@ -259,7 +259,7 @@ def FnPrintThetext(root,HandlerTextArea,HandlerPrintArea):
                  ScriptFile.write(UpdatedScript)
                  ScriptFile.close()    
                  os.system("make clean && make")
-                 os.system('xrun --io output.xe')
+                 #os.system('xrun --io output.xe')
                  
         else :
             messagebox.showerror('File Error', 'This File is either empty or has fewer commands')

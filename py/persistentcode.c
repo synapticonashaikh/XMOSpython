@@ -458,7 +458,7 @@ void mp_raw_code_load_file(const char *filename, mp_compiled_module_t *context) 
 
 #if MICROPY_PERSISTENT_CODE_SAVE
 
-#include "py/objstr.h"
+#include "objstr.h"
 
 STATIC void mp_print_bytes(mp_print_t *print, const byte *data, size_t len) {
     print->print_strn(print->data, (const char *)data, len);

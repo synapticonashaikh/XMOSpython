@@ -308,8 +308,6 @@ Q(__name__)
 
 Q(__name__)
 
-Q(__name__)
-
 Q(__ne__)
 
 Q(__new__)
@@ -450,8 +448,6 @@ Q(complex)
 
 Q(complex)
 
-Q(const)
-
 Q(copy)
 
 Q(copy)
@@ -548,10 +544,6 @@ Q(hash)
 
 Q(healthinfo)
 
-Q(heap_lock)
-
-Q(heap_unlock)
-
 Q(hex)
 
 Q(id)
@@ -630,10 +622,6 @@ Q(map)
 
 Q(micropython)
 
-Q(micropython)
-
-Q(micropython)
-
 Q(module)
 
 Q(mul)
@@ -651,8 +639,6 @@ Q(object)
 Q(object)
 
 Q(oct)
-
-Q(opt_level)
 
 Q(ord)
 
@@ -695,8 +681,6 @@ Q(round)
 Q(rsplit)
 
 Q(rstrip)
-
-Q(schedule)
 
 Q(send)
 
