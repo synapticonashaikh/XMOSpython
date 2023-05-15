@@ -247,18 +247,24 @@ def FnConvertTheScript(script):
  Return: None
  Note: This function delete (trunc) the text area of the new file
 -------------------------------------------------------------------------------'''
-def FnPrintThetext(root,HandlerTextArea,HandlerPrintArea):
-    
+def FnCompileTheCode(root,HandlerTextArea,HandlerPrintArea):    
 
     if ( CurrentFile == None): #check if the file is opened/ selected or not
          messagebox.showerror('File Error', 'File not saved or selected')
     else:
         if len(HandlerTextArea.get("1.0",END)) >= 10 : #check if there is minimum one like in the code file
-            UpdatedScript = FnConvertTheScript(HandlerTextArea.get("1.0",END))
-            with open('script.h', 'w') as ScriptFile:
-                 ScriptFile.write(UpdatedScript)
-                 ScriptFile.close()    
-                 os.system("make clean && make")
+            ShortFileName = str(os.path.basename(CurrentFile))
+            BuildCommand = "./mpy-cross " +  ShortFileName
+            os.system(BuildCommand)
+            PrintText = "Compiled Sucess: " + ShortFileName + " File Compiled!\n"  
+            HandlerPrintArea.insert(INSERT, PrintText)
+            PrintText = "Status: " + ShortFileName.replace(".py",".mpy") + " Generated.\n"  
+            HandlerPrintArea.insert(INSERT, PrintText)            
+            #UpdatedScript = FnConvertTheScript(HandlerTextArea.get("1.0",END))
+            #with open('script.h', 'w') as ScriptFile:
+            #     ScriptFile.write(UpdatedScript)
+            #     ScriptFile.close()    
+                 #os.system("make clean && make")
                  #os.system('xrun --io output.xe')
                  
         else :
@@ -366,7 +372,9 @@ if __name__ == '__main__':
 
     #run menu starts
     RunMenu = Menu(MenuBar, tearoff=0)
-    RunMenu.add_command(label = "Compile and Run", command= lambda: FnPrintThetext(root,HandlerTextArea,HandlerPrintArea))
+    RunMenu.add_command(label = "Compile Script", command= lambda: FnCompileTheCode(root,HandlerTextArea,HandlerPrintArea))
+    RunMenu.add_command(label = "Create xe File", command= lambda: FnCompileTheCode(root,HandlerTextArea,HandlerPrintArea)) 
+    RunMenu.add_command(label = "Run the Code", command= lambda: FnCompileTheCode(root,HandlerTextArea,HandlerPrintArea))        
     MenuBar.add_cascade(label="Run", menu=RunMenu)
 
     root.config(menu=MenuBar)

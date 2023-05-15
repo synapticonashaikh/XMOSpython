@@ -155,7 +155,7 @@ def cat_together():
     elif args.mode == _MODE_ROOT_POINTER:
         mode_full = "Root pointer registrations"
     if old_hash != new_hash:
-        print(mode_full, "updated")
+        #print(mode_full, "updated")
         try:
             # rename below might fail if file exists
             os.remove(args.output_file)

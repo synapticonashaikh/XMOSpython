@@ -18,7 +18,7 @@ ENABLE_DISABLE_DEBUGG_MESSAGE = 0
 ENABLE_DISABLE_OWN_MODULE = 1
 
 #enable/ disable float functionality
-ENABLE_DISABLE_FLOAT_FUNCTIONALITY = 1
+ENABLE_DISABLE_FLOAT_FUNCTIONALITY = 0
 
 #define the code version
 #for the terminal interpreter, use DCODE_WITH_PYTHON_INTRACTIVE_TERMINAL
@@ -39,10 +39,10 @@ endif
 BUILD_DIR = build
 
 #target file which has the clock and other definitions
-XCTarget  = $(TARGETL)C2X.xn
+#XCTarget  = $(TARGETL)C2X.xn
 #XCTarget = -target= ../targets/C2X.xn
-#XCTarget  = -target=XCORE-AI-EXPLORER
 #XCTarget = -target=XCORE-200-EXPLORER
+XCTarget  = -target=XCORE-AI-EXPLORER
 
 #define the compiler
 CMP = xcc $(XCTarget)

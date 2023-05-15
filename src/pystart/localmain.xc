@@ -103,7 +103,7 @@
   #endif
 
   #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
-         extern "C"{ char * FnRunTheCommand(char *commad, uint8_t type); }
+         extern "C"{ char * FnRunTheCommand(byte *ByteCode); }
   #endif
   
 /* ----------------------------------------------------------------------------
@@ -111,8 +111,6 @@
  * ----------------------------------------------------------------------------
 */
   interface MicroPythonInterface { void FnExecute( char * unsafe string); };
-  extern port _Port1D;
-
 
 /* ----------------------------------------------------------------------------
  *                          FUNCTION DEFINITION
@@ -154,7 +152,7 @@
           {
               case upy.FnExecute(char * unsafe string): 
               //printf ("RECEIVED CMD=\n\r%s\n\r",string);
-              FnRunTheCommand(string,PARSE_FILE_INPUT); 
+              FnRunTheCommand(string); 
               break ;
               default: break; // to make the select non-blockable 
           }
@@ -177,17 +175,9 @@
 int main( )
 {
 
-  #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
-        printf("Warning! Terminal interpreter is not available!\n\r");      
-        //chan ReceiveCommad, SendCommand; 
-        interface MicroPythonInterface upy;
-        
-        par
-        { 
-          FnSender  (upy);    
-          FnReceiver(upy);          
-        }
-
+ #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
+          printf("main code is running!\n\r");
+          FnRunTheCommand(scScript); 
   #endif
 
   #ifdef CODE_WITH_PYTHON_INTRACTIVE_TERMINAL
@@ -197,6 +187,8 @@ int main( )
             FnMPInterpreterConsole( );  
           }  
   #endif  
+
+  return RESET;
 
   return RESET;
 }
