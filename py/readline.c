@@ -550,7 +550,7 @@ void readline_init(vstr_t *line, const char *prompt) {
         // start with auto-indent enabled
         rl.auto_indent_state = AUTO_INDENT_ENABLED;
     }
-    readline_auto_indent();
+    readline_auto_indent( );
     #endif
 }
 

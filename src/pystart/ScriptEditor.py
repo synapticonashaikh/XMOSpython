@@ -7,7 +7,7 @@
  ______________________________________________________________________________________
 
   File Name:
-	Datatype.xc
+	ScriptEditor.py
  ______________________________________________________________________________________
 
   Summary:
@@ -86,6 +86,7 @@ import tkinter.ttk as ttk
 import subprocess
 import threading
 import time
+from time import sleep
 import os
 
 # * ----------------------------------------------------------------------------
@@ -98,10 +99,11 @@ Application_Title = "MicroPython On XMOS"
 # *                           Variables
 # * ----------------------------------------------------------------------------
 
+FifoFile    = None
 CurrentFile = ""
-HandlerTextArea  = None
-HandlerPrintArea = None
+PythonCodeCheck = None
 
+CodeStartedFlag = False
 
 # * ----------------------------------------------------------------------------
 # *                           Manage the text area
@@ -115,6 +117,7 @@ HandlerPrintArea = None
 -------------------------------------------------------------------------------'''
 
 def highlight_python_code(event=None):
+    global PythonCodeCheck
     keywords = ['and', 'as', 'assert', 'break', 'class', 'continue',
                 'def', 'del', 'elif', 'else', 'except', 'False',
                 'finally', 'for', 'from', 'global', 'if', 'import',
@@ -122,22 +125,21 @@ def highlight_python_code(event=None):
                 'or', 'pass', 'raise', 'return', 'True', 'try',
                 'while', 'with', 'yield',r'["\']([^"\']*)["\']']
 
-    HandlerTextArea.tag_remove('keyword', '1.0', 'end')
+    PythonCodeCheck.tag_remove('keyword', '1.0', 'end')
     for keyword in keywords:
         start = '1.0'
         while True:
-            pos = HandlerTextArea.search(keyword, start, stopindex='end', regexp = True)
+            pos = PythonCodeCheck.search(keyword, start, stopindex='end', regexp = True)
             if not pos:
                 break
             end = f'{pos}+{len(keyword)}c'
-            HandlerTextArea.tag_add('keyword', pos, end)
+            PythonCodeCheck.tag_add('keyword', pos, end)
             start = end
-
 
 # * ----------------------------------------------------------------------------
 # *                           Menul design
 # * ----------------------------------------------------------------------------
-class TextScrollCombo(ttk.Frame):
+class TextScrollTextArea(ttk.Frame):
 
     def __init__(root, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -157,6 +159,28 @@ class TextScrollCombo(ttk.Frame):
         scrollb.grid(row=0, column=1, sticky='nsew')
         root.textboxhandler['yscrollcommand'] = scrollb.set
 
+# * ----------------------------------------------------------------------------
+# *                           Menul design
+# * ----------------------------------------------------------------------------
+class TextScrollPrintArea(ttk.Frame):
+
+    def __init__(root, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+    # ensure a consistent GUI size
+        root.grid_propagate(False)
+    # implement stretchability
+        root.grid_rowconfigure   (0, weight=1)
+        root.grid_columnconfigure(0, weight=1)
+
+    # create a Text widget
+        root.textboxhandler = Text(root)
+        root.textboxhandler.grid(row=0, column=0, sticky="nsew", padx=2, pady=2)
+
+    # create a Scrollbar and associate it with txt
+        scrollb = ttk.Scrollbar(root, command=root.textboxhandler.yview)
+        scrollb.grid(row=0, column=1, sticky='nsew')
+        root.textboxhandler['yscrollcommand'] = scrollb.set
 
 # * ----------------------------------------------------------------------------
 # *                           Files handing feature
@@ -256,10 +280,12 @@ def FnCompileTheCode(root,HandlerTextArea,HandlerPrintArea):
             ShortFileName = str(os.path.basename(CurrentFile))
             BuildCommand = "./mpy-cross " +  ShortFileName
             os.system(BuildCommand)
+            #os.system("make clean && make && clear")
             PrintText = "Compiled Sucess: " + ShortFileName + " File Compiled!\n"  
             HandlerPrintArea.insert(INSERT, PrintText)
             PrintText = "Status: " + ShortFileName.replace(".py",".mpy") + " Generated.\n"  
-            HandlerPrintArea.insert(INSERT, PrintText)            
+            HandlerPrintArea.insert(INSERT, PrintText)
+            
             #UpdatedScript = FnConvertTheScript(HandlerTextArea.get("1.0",END))
             #with open('script.h', 'w') as ScriptFile:
             #     ScriptFile.write(UpdatedScript)
@@ -269,6 +295,77 @@ def FnCompileTheCode(root,HandlerTextArea,HandlerPrintArea):
                  
         else :
             messagebox.showerror('File Error', 'This File is either empty or has fewer commands')
+
+
+'''-------------------------------------------------------------------------------
+ Function Name: FnSaveTheFile
+ Argument: None
+ Return: None
+ Note: This function delete (trunc) the text area of the new file
+-------------------------------------------------------------------------------'''
+def FnSubprocessStart():  
+    #rocess   = #subprocess.Popen("./run.sh", stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+    #process   = os.system("./run.sh &")
+     process   = os.system("./tst.sh &")
+
+'''-------------------------------------------------------------------------------
+ Function Name: FnSaveTheFile
+ Argument: None
+ Return: None
+ Note: This function delete (trunc) the text area of the new file
+-------------------------------------------------------------------------------'''
+def FnStartTheCode(root,HandlerPrintArea):  
+    global FifoFile
+    global CodeStartedFlag
+
+    if  CodeStartedFlag == False:
+        CodeStartedFlag = True
+        ThreadHandler = threading.Thread(target=FnSubprocessStart)
+        ThreadHandler.start( ) 
+        sleep(5)
+        FifoFile  = open("myfifo", 'w')
+        HandlerPrintArea.insert(END, "^^code started!\n")
+    else:
+        messagebox.showerror('Run Error', 'Code is already running')
+
+'''-------------------------------------------------------------------------------
+ Function Name: FnSaveTheFile
+ Argument: None
+ Return: None
+ Note: This function delete (trunc) the text area of the new file
+-------------------------------------------------------------------------------'''
+def FnCheckTheDevice(root,HandlerPrintArea,numb):  
+    global FifoFile
+    global CodeStartedFlag
+    global CurrentFile
+
+    if  CodeStartedFlag == True:
+            if   numb == 1:
+                 FifoFile.write("# check $\n") 
+            elif numb == 2:
+                 FifoFile.write("# status $\n") 
+            elif numb == 3:
+                 FifoFile.write("# modechange $\n")
+            elif numb == 5:
+                 CheckFile = str(os.path.basename(CurrentFile)) 
+                 if os.path.exists(CheckFile) == True:
+                    Uploadcommand = "# upload &&" + CheckFile  +"%% $\n"
+                    FifoFile.write(Uploadcommand)
+            elif numb == 4:
+                 '''
+                 ShortFileName = str(os.path.basename(CurrentFile))             
+                 CheckFile = ShortFileName.replace(".py",".mpy")
+                 '''
+                 CheckFile = str(os.path.basename(CurrentFile)) 
+                 if os.path.exists(CheckFile) == True:
+                    sendcodesize = str("# codesize " + str(os.path.getsize(CheckFile)) + " $\n")
+                    FifoFile.write(sendcodesize)
+                 else:
+                    print("File doesn't exist!")    
+            sleep(.1)
+            FifoFile.flush( )
+    else:
+        messagebox.showerror('Run Error', 'Code is not running')
 
 # * ----------------------------------------------------------------------------
 # *                           Menu options
@@ -280,7 +377,7 @@ def FnCompileTheCode(root,HandlerTextArea,HandlerPrintArea):
  Note: This function delete (trunc) the text area of the new file
 -------------------------------------------------------------------------------'''
 def FnQuitTheApp(root):
-    root.destroy()
+    root.destroy( )
 '''-------------------------------------------------------------------------------
  Function Name: FnSaveTheFile
  Argument: None
@@ -325,32 +422,30 @@ if __name__ == '__main__':
     #root.geometry("2560x2000") # Geometry
     root.resizable(0, 0)
 
-    combo = TextScrollCombo(root)
+    combo = TextScrollTextArea(root)
     combo.pack(fill="both", expand=True)
-    combo.config(width=1800, height=650)
+    combo.config(width=1200, height=900)
     combo.textboxhandler.config(font=("consolas", 12), undo=True, wrap='word')
     combo.textboxhandler.config(borderwidth=3, relief="sunken")
+
     # Configure the tags for Python syntax highlighting
     combo.textboxhandler.tag_configure('keyword', foreground='blue')
     combo.textboxhandler.tag_configure('strings', foreground='green')
     combo.textboxhandler.bind('<KeyRelease>', highlight_python_code)
-
-    HandlerTextArea= combo.textboxhandler
-
-    combo1 = TextScrollCombo(root)
+    PythonCodeCheck = combo.textboxhandler
+     
+    combo1 = TextScrollPrintArea(root)
     combo1.pack(fill="both", expand=True)
-    combo1.config(width=1800, height=300)
+    combo1.config(width=1200, height=400)
     combo1.textboxhandler.config(font=("consolas", 12), undo=True, wrap='word')
     combo1.textboxhandler.config(borderwidth=3, relief="sunken", state=DISABLED)
-    HandlerPrintArea= combo.textboxhandler
-
 
     MenuBar  = Menu(root) #create a menubar
     FileMenu = Menu(MenuBar, tearoff=0) #File Menu Starts
 
-    FileMenu.add_command(label ="New",  command=lambda: FnCreateANewFile(root,HandlerTextArea))# To open new file
-    FileMenu.add_command(label ="Open", command=lambda: FnOpenTheFile(root,HandlerTextArea))#To Open already existing file
-    FileMenu.add_command(label ="Save", command=lambda: FnSaveTheFile(root,HandlerTextArea)) # To save the current file
+    FileMenu.add_command(label ="New",  command=lambda: FnCreateANewFile(root,combo.textboxhandler))# To open new file
+    FileMenu.add_command(label ="Open", command=lambda: FnOpenTheFile(root,combo.textboxhandler))#To Open already existing file
+    FileMenu.add_command(label ="Save", command=lambda: FnSaveTheFile(root,combo.textboxhandler)) # To save the current file
     FileMenu.add_separator( ) # adds a seperation line
     FileMenu.add_command(label ="Exit", command=lambda: FnQuitTheApp(root))
     MenuBar.add_cascade(label  ="File", menu=FileMenu) # File Menu ends
@@ -361,22 +456,30 @@ if __name__ == '__main__':
     EditMenu.add_command(label = "Cut",  command=cut  )
     EditMenu.add_command(label = "Copy", command=copy )
     EditMenu.add_command(label = "Paste",command=paste)
-    MenuBar.add_cascade(label="Edit", menu = EditMenu )
+    MenuBar.add_cascade (label = "Edit" , menu = EditMenu )
     # Edit Menu Ends
 
     # Help Menu Starts
     HelpMenu = Menu(MenuBar, tearoff=0)
     HelpMenu.add_command(label = "About Notepad", command=about)
-    MenuBar.add_cascade(label="Help", menu=HelpMenu)
+    MenuBar.add_cascade (label = "Help",menu=HelpMenu)
     # Help Menu Ends
 
     #run menu starts
     RunMenu = Menu(MenuBar, tearoff=0)
-    RunMenu.add_command(label = "Compile Script", command= lambda: FnCompileTheCode(root,HandlerTextArea,HandlerPrintArea))
-    RunMenu.add_command(label = "Create xe File", command= lambda: FnCompileTheCode(root,HandlerTextArea,HandlerPrintArea)) 
-    RunMenu.add_command(label = "Run the Code", command= lambda: FnCompileTheCode(root,HandlerTextArea,HandlerPrintArea))        
-    MenuBar.add_cascade(label="Run", menu=RunMenu)
+    RunMenu.add_command(label = "Compile Script", command= lambda: FnCompileTheCode(root, combo.textboxhandler, combo1.textboxhandler))
+    RunMenu.add_command(label = "Start the Code", command= lambda: FnStartTheCode  (root, combo1.textboxhandler)) 
+    RunMenu.add_command(label = "upload the Script", command= lambda: FnCheckTheDevice(root,combo1.textboxhandler,5))        
+    MenuBar.add_cascade(label = "Run", menu=RunMenu)
+
+
+    DeviceMenu = Menu(MenuBar, tearoff=0)
+    DeviceMenu.add_command(label = "Check device",   command= lambda: FnCheckTheDevice(root,combo1.textboxhandler,1))
+    DeviceMenu.add_command(label = "Check Status",   command= lambda: FnCheckTheDevice(root,combo1.textboxhandler,2)) 
+    DeviceMenu.add_command(label = "Mode Change",    command= lambda: FnCheckTheDevice(root,combo1.textboxhandler,3))     
+    DeviceMenu.add_command(label = "Send code size", command= lambda: FnCheckTheDevice(root,combo1.textboxhandler,4)) 
+    MenuBar.add_cascade(label="Device", menu=DeviceMenu)
+
 
     root.config(menu=MenuBar)
-
     root.mainloop( )

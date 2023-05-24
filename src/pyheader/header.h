@@ -148,10 +148,10 @@
     //as the system is working on 100Mhz, the unit time of a cycle is 10ns
     #define    uiUnitTimeMul (uint8_t)10
     #define    ui10nSec      (uint8_t)1 
-    #define    ui100nSec     (uint8_t)(ui10nSec   * uiUnitTimeMul)
+    #define    ui100nSec     (uint64_t)(ui10nSec   * uiUnitTimeMul)
 
-    #define    ui1uSec       (uint16_t)(ui100nSec * uiUnitTimeMul)
-    #define    ui10uSec      (uint16_t)(ui1uSec   * uiUnitTimeMul)
+    #define    ui1uSec       (uint64_t)(ui100nSec * uiUnitTimeMul)
+    #define    ui10uSec      (uint64_t)(ui1uSec   * uiUnitTimeMul)
     #define    ui100uSec     (uint64_t)(ui10uSec  * uiUnitTimeMul)
 
     #define    ui1mSec       (uint64_t)(ui100uSec * uiUnitTimeMul)
@@ -185,13 +185,13 @@
 		#include <dictionary_symbols.h>
 	#endif
 
+/*XMOS related hedaer*/
 #ifdef __XC__
-        /*XMOS related hedaer*/
-        #include <platform.h>
+	#include <platform.h>
         #include <xs1.h>
         #include <timer.h>
         #include <flash.h>
-	#include <print.h>							  
+	#include <print.h>
 #endif
 
 /* ----------------------------------------------------------------------------
@@ -246,9 +246,7 @@
 
 	/*********Timer structure **********/
 	typedef struct 
-	{
-
-		//timer    stTime;
+	{	
 		uint64_t uiCompareTime;
 		TIMERF	 TimerFlag;
 
@@ -256,12 +254,12 @@
 		uint8_t  uiTime10uSec ;     
 		uint8_t  uiTime100uSec ;     
 
-		uint8_t  uiTime1mSec  ;
-		uint8_t  uiTime10mSec ;		
-		uint8_t  uiTime100mSec;    
-		uint8_t  uiTime1Sec ;
-		uint8_t  uiTime1Min ;
-		uint8_t  uiTime1Hour;
+		uint8_t  uiTime1mSec   ;
+		uint8_t  uiTime10mSec  ;		
+		uint8_t  uiTime100mSec ;    
+		uint8_t  uiTime1Sec  ;
+		uint8_t  uiTime1Min  ;
+		uint8_t  uiTime1Hour ;
 
 	}TIMER0;
 
@@ -276,7 +274,6 @@
  *                          GLOBAL VARIABLE DECLARATION
  * ----------------------------------------------------------------------------
 */
- 
 
 
 /* ---------------------------------------------------------------------------

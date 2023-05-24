@@ -1,0 +1,7 @@
+MP_REGISTER_ROOT_POINTER(const char *readline_hist[(8)]);
+
+MP_REGISTER_ROOT_POINTER(mp_sched_item_t sched_queue[(4)]);
+
+MP_REGISTER_ROOT_POINTER(void *machine_pin_irq_objects[2]);
+
+MP_REGISTER_ROOT_POINTER(void *machine_timer_irq_objects[2]);

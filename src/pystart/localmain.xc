@@ -81,17 +81,12 @@
  * ----------------------------------------------------------------------------
 */
 
-    #define  PARSE_SINGLE_INPUT   0
-    #define  PARSE_FILE_INPUT     1
-    #define  PARSE_EVAL_INPUT     2
-
 /* ----------------------------------------------------------------------------
  *                           INCLUDE
  * ----------------------------------------------------------------------------
 */
   	/*Standard Header files*/
 	  #include "header.h"    
-    #include "script.h"
 
 /* ----------------------------------------------------------------------------
  *                          EXTERNAL FUNCTION
@@ -103,7 +98,8 @@
   #endif
 
   #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
-         extern "C"{ char * FnRunTheCommand(byte *ByteCode); }
+         extern "C"{ char * FnRunTheCommand(char *ByteCode, uint8_t BytecodeORStr);
+                     char * FnCommandReceive(void); }
   #endif
   
 /* ----------------------------------------------------------------------------
@@ -125,11 +121,10 @@
 #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
   void FnSender(client interface MicroPythonInterface upy)
   {
-     GPIOINTRWrapper( );
       unsafe
-      {
-        upy.FnExecute(scScript);      
-        while (SET);
+      { 
+        
+        upy.FnExecute(FnCommandReceive( ));      
       }
   }
 
@@ -142,8 +137,6 @@
 // void FnReceiver(chanend ReceiveCommad, chanend SendCommand)
   void FnReceiver(server interface MicroPythonInterface upy)
   {
-
-     GPIOINTRWrapper( );
     unsafe 
     {  
       while (SET)
@@ -151,8 +144,7 @@
         select 
           {
               case upy.FnExecute(char * unsafe string): 
-              //printf ("RECEIVED CMD=\n\r%s\n\r",string);
-              FnRunTheCommand(string); 
+              FnRunTheCommand(string,SET); 
               break ;
               default: break; // to make the select non-blockable 
           }
@@ -177,14 +169,20 @@ int main( )
 
  #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
           printf("main code is running!\n\r");
-          FnRunTheCommand(scScript); 
+          interface MicroPythonInterface mpy;
+          par
+          {
+            FnSender  (mpy);
+            FnReceiver(mpy);
+          }
+
   #endif
 
   #ifdef CODE_WITH_PYTHON_INTRACTIVE_TERMINAL
           printf("Warning! Terminal interpreter is activated!\n\r");  
           par
           { 
-            FnMPInterpreterConsole( );  
+            FnMPInterpreterConsole( );
           }  
   #endif  
 

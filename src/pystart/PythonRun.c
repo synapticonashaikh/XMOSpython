@@ -83,6 +83,10 @@
     //this heap memroy stores the data
     #define _STATIC_HEAP_SIZE (uint16_t)3000
  
+    #define  PARSE_SINGLE_INPUT   0
+    #define  PARSE_FILE_INPUT     1
+    #define  PARSE_EVAL_INPUT     2
+
 /* ----------------------------------------------------------------------------
  *                           INCLUDE
  * ----------------------------------------------------------------------------
@@ -197,8 +201,9 @@ int FnMPInterpreterConsole(void)
  * Details	    : main function, start of the code
  * *********************************************************************/
 #pragma stackfunction 1000
-char * FnRunTheCommand(byte *ByteCode)
+char * FnRunTheCommand(char *ByteCode,uint8_t BytecodeORStr)
 {
+    
     static char *ret  = "Sucess!";
     #if MICROPY_ENABLE_GC
         gc_init(heap, heap + sizeof(heap));
@@ -206,15 +211,25 @@ char * FnRunTheCommand(byte *ByteCode)
     /*init the mp stack*/
        mp_init( );
 
-    mp_reader_t reader;
-    mp_reader_new_mem(&reader, ByteCode, sizeof(ByteCode), 0);
-    mp_module_context_t *context = m_new_obj(mp_module_context_t);
-    context->module.globals = mp_globals_get();
-    mp_compiled_module_t compiled_module;
-    compiled_module.context = context;
-    mp_raw_code_load(&reader, &compiled_module);
-    mp_obj_t module_fun = mp_make_function_from_raw_code(compiled_module.rc, context, NULL);
-    mp_call_function_0(module_fun);
+    if (BytecodeORStr == SET)
+    {
+      do_str(ByteCode, PARSE_FILE_INPUT);
+    }
+    else
+    {
+        mp_reader_t reader;
+        mp_reader_new_mem(&reader,(byte *)ByteCode, sizeof(ByteCode), 0);
+        mp_module_context_t *context = m_new_obj(mp_module_context_t);
+        context->module.globals = mp_globals_get();
+        mp_compiled_module_t compiled_module;
+        compiled_module.context = context;
+        mp_raw_code_load(&reader, &compiled_module);
+        mp_obj_t module_fun = mp_make_function_from_raw_code(compiled_module.rc, context, NULL);
+        mp_call_function_0(module_fun);
+    }
+
+    /*deinit*/
+    mp_deinit( );
 
     return ret;
 }
