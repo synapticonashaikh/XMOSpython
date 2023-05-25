@@ -126,19 +126,29 @@
   //void FnSender(chanend SendCommand, chanend ReceiveCommad)
   void FnSender(client interface MicroPythonInterface upy)
   {
-     GPIOINTRWrapper( );
+     //GPIOINTRWrapper( );
       unsafe
       {
-        char * unsafe command = 
-        "from gpio import *\n"
+         char * unsafe command = 
+        // "from gpio import *\n"
 
-        "def GPOICallback(self):\n"
-        "    print('callback function!')\n"
+        // "def GPOICallback(self):\n"
+        // "    print('callback function!')\n"
 
-        "pirq(handler=GPOICallback)\n"
-        "count = 0\n"
-        "while True:\n"
-        "      pass\n";
+        // "pirq(handler=GPOICallback)\n"
+        // "count = 0\n"
+        // "while True:\n"
+        // "      pass\n";
+
+
+      "from gpio import *\n"
+      "from delay import *\n"
+
+      "while True:\n"
+      "  delaymSec(10)\n"
+      "  PortWrite(PORT4C,0x0F)\n"
+      "  delaymSec(10)\n"
+      "  PortWrite(PORT4C,0x00)\n";        
 
       upy.FnExecute(command);
       
@@ -156,7 +166,7 @@
   void FnReceiver(server interface MicroPythonInterface upy)
   {
 
-     GPIOINTRWrapper( );
+    //GPIOINTRWrapper( );
     unsafe 
     {  
       while (SET)
@@ -195,9 +205,22 @@ int main( )
         
         par
         { 
-          GPIOInterrupt( );
-          FnSender  (upy);    
-          FnReceiver(upy);          
+          unsafe
+                {
+                    char * unsafe command = 
+                    "from gpio import *\n"
+                    "from delay import *\n"
+
+                    "while True:\n"
+                    //"  delaymSec(10)\n"
+                    "  PortWrite(PORT4C,0x0F)\n"
+                    //"  delaymSec(10)\n"
+                    "  PortWrite(PORT4C,0x00)\n";        
+                    FnRunTheCommand(command,PARSE_FILE_INPUT); 
+                }     
+          //GPIOInterrupt( );
+          //FnSender  (upy);    
+          //FnReceiver(upy);          
         }
 
   #endif
