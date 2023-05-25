@@ -47,6 +47,7 @@ SRC_PY += $(ROOTL)py/mpstate.c
 SRC_PY += $(ROOTL)py/mpz.c
 SRC_PY += $(ROOTL)py/nativeglue.c
 SRC_PY += $(ROOTL)py/nlr.c
+SRC_PY += $(ROOTL)py/nlrmips.c
 SRC_PY += $(ROOTL)py/nlrpowerpc.c
 SRC_PY += $(ROOTL)py/nlrsetjmp.c
 SRC_PY += $(ROOTL)py/nlrthumb.c

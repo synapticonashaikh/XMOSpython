@@ -29,7 +29,6 @@
 #include "bc.h"
 #include "obj.h"
 
-
 typedef struct _mp_obj_fun_bc_t {
     mp_obj_base_t base;
     const mp_module_context_t *context;         // context within which this function was defined
@@ -48,6 +47,5 @@ mp_obj_t mp_obj_new_fun_bc(const mp_obj_t *def_args, const byte *code, const mp_
 mp_obj_t mp_obj_new_fun_native(const mp_obj_t *def_args, const void *fun_data, const mp_module_context_t *cm, struct _mp_raw_code_t *const *raw_code_table);
 mp_obj_t mp_obj_new_fun_asm(size_t n_args, const void *fun_data, mp_uint_t type_sig);
 void mp_obj_fun_bc_attr(mp_obj_t self_in, qstr attr, mp_obj_t *dest);
-
 
 #endif // MICROPY_INCLUDED_PY_OBJFUN_H

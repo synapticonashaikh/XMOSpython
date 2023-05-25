@@ -81,10 +81,6 @@
  * ----------------------------------------------------------------------------
 */
 
-    #define  PARSE_SINGLE_INPUT   0
-    #define  PARSE_FILE_INPUT     1
-    #define  PARSE_EVAL_INPUT     2
-
 /* ----------------------------------------------------------------------------
  *                           INCLUDE
  * ----------------------------------------------------------------------------
@@ -102,7 +98,8 @@
   #endif
 
   #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
-         extern "C"{ char * FnRunTheCommand(char *commad, uint8_t type); }
+         extern "C"{ char * FnRunTheCommand(char *ByteCode, uint8_t BytecodeORStr);
+                     char * FnCommandReceive(void); }
   #endif
   
 /* ----------------------------------------------------------------------------
@@ -110,7 +107,6 @@
  * ----------------------------------------------------------------------------
 */
   interface MicroPythonInterface { void FnExecute( char * unsafe string); };
-  extern port _Port1D;
 
 /* ----------------------------------------------------------------------------
  *                          FUNCTION DEFINITION
@@ -123,10 +119,8 @@
  * Details	    : main function, start of the code
  * *********************************************************************/
 #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
-  //void FnSender(chanend SendCommand, chanend ReceiveCommad)
   void FnSender(client interface MicroPythonInterface upy)
   {
-     //GPIOINTRWrapper( );
       unsafe
       {
          char * unsafe command = 
@@ -165,8 +159,6 @@
 // void FnReceiver(chanend ReceiveCommad, chanend SendCommand)
   void FnReceiver(server interface MicroPythonInterface upy)
   {
-
-    //GPIOINTRWrapper( );
     unsafe 
     {  
       while (SET)
@@ -174,8 +166,7 @@
         select 
           {
               case upy.FnExecute(char * unsafe string): 
-              printf ("RECEIVED CMD=\n\r%s\n\r",string);
-              FnRunTheCommand(string,PARSE_FILE_INPUT); 
+              FnRunTheCommand(string,SET); 
               break ;
               default: break; // to make the select non-blockable 
           }
@@ -198,31 +189,14 @@
 int main( )
 {
 
-  #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
-        printf("Warning! Terminal interpreter is not available!\n\r");      
-        //chan ReceiveCommad, SendCommand; 
-        interface MicroPythonInterface upy;
-        
-        par
-        { 
-          unsafe
-                {
-                    char * unsafe command = 
-                    "from gpio import PortWrite\n"
-                    "from gpio import PORT4C\n"                    
- //                   "from delay import *\n"
-
-                    "while True:\n"
-                    //"  delaymSec(10)\n"
-                    "  PortWrite(PORT4C,0x0F)\n"
-                    //"  delaymSec(10)\n"
-                    "  PortWrite(PORT4C,0x00)\n";        
-                    FnRunTheCommand(command,PARSE_FILE_INPUT); 
-                }     
-          //GPIOInterrupt( );
-          //FnSender  (upy);    
-          //FnReceiver(upy);          
-        }
+ #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
+          printf("Warning! Terminal interpreter is not available!\n\r"); 
+          interface MicroPythonInterface mpy;
+          par
+          {
+            FnSender  (mpy);
+            FnReceiver(mpy);
+          }
 
   #endif
 
@@ -230,7 +204,7 @@ int main( )
           printf("Warning! Terminal interpreter is activated!\n\r");  
           par
           { 
-            FnMPInterpreterConsole( );  
+            FnMPInterpreterConsole( );
           }  
   #endif  
 

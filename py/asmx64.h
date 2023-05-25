@@ -30,7 +30,6 @@
 #include "misc.h"
 #include "asmbase.h"
 
-
 // AMD64 calling convention is:
 //  - args pass in: RDI, RSI, RDX, RCX, R08, R09
 //  - return value in RAX

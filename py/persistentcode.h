@@ -29,8 +29,7 @@
 #include "mpprint.h"
 #include "reader.h"
 #include "emitglue.h"
-
-    
+ 
 // The current version of .mpy files. A bytecode-only .mpy file can be loaded
 // as long as MPY_VERSION matches, but a native .mpy (i.e. one with an arch
 // set) must also match MPY_SUB_VERSION. This allows 3 additional updates to
@@ -112,9 +111,9 @@ enum {
     MP_PERSISTENT_OBJ_TUPLE,
 };
 
-mp_compiled_module_t mp_raw_code_load(mp_reader_t *reader, mp_module_context_t *ctx);
-mp_compiled_module_t mp_raw_code_load_mem(const byte *buf, size_t len, mp_module_context_t *ctx);
-mp_compiled_module_t mp_raw_code_load_file(const char *filename, mp_module_context_t *ctx);
+void mp_raw_code_load(mp_reader_t *reader, mp_compiled_module_t *ctx);
+void mp_raw_code_load_mem(const byte *buf, size_t len, mp_compiled_module_t *ctx);
+void mp_raw_code_load_file(const char *filename, mp_compiled_module_t *ctx);
 
 void mp_raw_code_save(mp_compiled_module_t *cm, mp_print_t *print);
 void mp_raw_code_save_file(mp_compiled_module_t *cm, const char *filename);

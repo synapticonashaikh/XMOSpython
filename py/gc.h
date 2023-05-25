@@ -29,7 +29,7 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include "mpconfig.h"
-
+#include "mpprint.h"
 
 void gc_init(void *start, void *end);
 
@@ -73,8 +73,7 @@ typedef struct _gc_info_t {
 } gc_info_t;
 
 void gc_info(gc_info_t *info);
-void gc_dump_info(void);
-void gc_dump_alloc_table(void);
-
+void gc_dump_info(const mp_print_t *print);
+void gc_dump_alloc_table(const mp_print_t *print);
 
 #endif // MICROPY_INCLUDED_PY_GC_H

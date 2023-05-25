@@ -93,6 +93,8 @@
  *                          GLOBAL VARIABLE DECLARATION
  * ----------------------------------------------------------------------------
 */
+
+
  	  port _Port1A  = PORT1A  ;
     port _Port1B  = PORT1B  ;
     port _Port1C  = PORT1C  ;
@@ -152,6 +154,7 @@ inline int32_t FnPortWrite(uint32_t uiport,uint32_t state)
 
     switch (uiport)
     {
+     
         /*IO ports-1BIT*/	
         case PORT1A: _Port1A <: state ; break;
         case PORT1B: _Port1B <: state ; break;
@@ -203,6 +206,7 @@ inline int32_t FnPortRead(uint32_t uiport)
  int support, state = ERROR;
  switch (uiport)
     {
+     
         /*IO ports-1BIT*/	
         case PORT1A:   _Port1A @ support :> state ; break;
         case PORT1B:   _Port1B @ support :> state ; break;
@@ -236,8 +240,8 @@ inline int32_t FnPortRead(uint32_t uiport)
         case PORT16A: _Port16A @ support :> state ; break; 
         case PORT16B: _Port16B @ support :> state ; break; 
         /*IO ports-32BITS*/
-        case PORT32A: _Port32A @ support :> state ; break; 
-    }
+        case PORT32A: _Port32A @ support :> state ; break;       
+    }   
   return state;
 }
 

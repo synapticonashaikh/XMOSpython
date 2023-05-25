@@ -23,7 +23,7 @@ build/py/modmicropython.o: ../../py/modmicropython.c \
  /usr/include/x86_64-linux-gnu/bits/floatn.h \
  /usr/include/x86_64-linux-gnu/bits/floatn-common.h ../../py/builtin.h \
  ../../py/obj.h /usr/include/assert.h ../../py/mpconfig.h \
- ../../py/mpconfigport.h \
+ ../pyheader/mpconfigport.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
@@ -72,7 +72,7 @@ build/py/modmicropython.o: ../../py/modmicropython.c \
  /usr/include/x86_64-linux-gnu/bits/floatn.h :
  /usr/include/x86_64-linux-gnu/bits/floatn-common.h ../../py/builtin.h :
  ../../py/obj.h /usr/include/assert.h ../../py/mpconfig.h :
- ../../py/mpconfigport.h :
+ ../pyheader/mpconfigport.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h :
  /usr/include/x86_64-linux-gnu/bits/wchar.h :
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h :

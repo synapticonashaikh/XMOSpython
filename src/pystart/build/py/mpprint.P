@@ -29,7 +29,7 @@ build/py/mpprint.o: ../../py/mpprint.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
  /usr/include/strings.h ../../py/mphal.h ../../py/mpconfig.h \
- ../../py/mpconfigport.h /usr/include/alloca.h ../../py/mphalport.h \
+ ../pyheader/mpconfigport.h /usr/include/alloca.h ../../py/mphalport.h \
  ../../py/virtpin.h ../../py/obj.h ../../py/misc.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
  build/genhdr/compressed.data.h ../../py/qstr.h \
@@ -45,7 +45,7 @@ build/py/mpprint.o: ../../py/mpprint.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min.h \
  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h ../../py/objlist.h \
  ../../py/objexcept.h ../../py/objtuple.h build/genhdr/root_pointers.h \
- ../../py/pystack.h ../../py/formatfloat.h
+ ../../py/pystack.h
 ../../py/mpprint.c /usr/include/stdc-predef.h :
  /usr/include/assert.h /usr/include/features.h :
  /usr/include/features-time64.h :
@@ -77,7 +77,7 @@ build/py/mpprint.o: ../../py/mpprint.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h :
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h :
  /usr/include/strings.h ../../py/mphal.h ../../py/mpconfig.h :
- ../../py/mpconfigport.h /usr/include/alloca.h ../../py/mphalport.h :
+ ../pyheader/mpconfigport.h /usr/include/alloca.h ../../py/mphalport.h :
  ../../py/virtpin.h ../../py/obj.h ../../py/misc.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h :
  build/genhdr/compressed.data.h ../../py/qstr.h :
@@ -93,4 +93,4 @@ build/py/mpprint.o: ../../py/mpprint.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min.h :
  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h ../../py/objlist.h :
  ../../py/objexcept.h ../../py/objtuple.h build/genhdr/root_pointers.h :
- ../../py/pystack.h ../../py/formatfloat.h :
+ ../../py/pystack.h :

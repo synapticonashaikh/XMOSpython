@@ -148,10 +148,10 @@
     //as the system is working on 100Mhz, the unit time of a cycle is 10ns
     #define    uiUnitTimeMul (uint8_t)10
     #define    ui10nSec      (uint8_t)1 
-    #define    ui100nSec     (uint8_t)(ui10nSec   * uiUnitTimeMul)
+    #define    ui100nSec     (uint64_t)(ui10nSec   * uiUnitTimeMul)
 
-    #define    ui1uSec       (uint16_t)(ui100nSec * uiUnitTimeMul)
-    #define    ui10uSec      (uint16_t)(ui1uSec   * uiUnitTimeMul)
+    #define    ui1uSec       (uint64_t)(ui100nSec * uiUnitTimeMul)
+    #define    ui10uSec      (uint64_t)(ui1uSec   * uiUnitTimeMul)
     #define    ui100uSec     (uint64_t)(ui10uSec  * uiUnitTimeMul)
 
     #define    ui1mSec       (uint64_t)(ui100uSec * uiUnitTimeMul)
@@ -180,13 +180,18 @@
 		#include <stdarg.h>
 		#include <stddef.h>
 
-#ifdef __XC__ 
-        /*XMOS related hedaer*/
-        #include <platform.h>
+	#ifdef USE_SDO_MODULES
+		#include "sdo.h"
+		#include <dictionary_symbols.h>
+	#endif
+
+/*XMOS related hedaer*/
+#ifdef __XC__
+	#include <platform.h>
         #include <xs1.h>
         #include <timer.h>
         #include <flash.h>
-	#include <print.h>							  
+	#include <print.h>
 #endif
 
 /* ----------------------------------------------------------------------------
@@ -241,9 +246,7 @@
 
 	/*********Timer structure **********/
 	typedef struct 
-	{
-
-		//timer    stTime;
+	{	
 		uint64_t uiCompareTime;
 		TIMERF	 TimerFlag;
 
@@ -251,12 +254,12 @@
 		uint8_t  uiTime10uSec ;     
 		uint8_t  uiTime100uSec ;     
 
-		uint8_t  uiTime1mSec  ;
-		uint8_t  uiTime10mSec ;		
-		uint8_t  uiTime100mSec;    
-		uint8_t  uiTime1Sec ;
-		uint8_t  uiTime1Min ;
-		uint8_t  uiTime1Hour;
+		uint8_t  uiTime1mSec   ;
+		uint8_t  uiTime10mSec  ;		
+		uint8_t  uiTime100mSec ;    
+		uint8_t  uiTime1Sec  ;
+		uint8_t  uiTime1Min  ;
+		uint8_t  uiTime1Hour ;
 
 	}TIMER0;
 
@@ -271,7 +274,6 @@
  *                          GLOBAL VARIABLE DECLARATION
  * ----------------------------------------------------------------------------
 */
- 
 
 
 /* ---------------------------------------------------------------------------
@@ -290,7 +292,33 @@
 	int  FnStartTheTimerIrq(uint32_t duration);
 
 	void GPIOInterrupt  (void);
-    void GPIOINTRWrapper(void);	
+    	void GPIOINTRWrapper(void);	
 
+	#ifdef USE_SDO_MODULES
+			void FnSetObjectValue( uint16_t index_, uint8_t subindex, size_t capacity, uint8_t *value, 
+								CoeRequestOrigin request_origin  , int complete_access );
+	#else
+			void FnSetObjectValue( uint16_t index_, uint8_t subindex, size_t capacity, uint8_t *value, 
+								uint8_t request_origin, int complete_access );
+	#endif   
+
+			int  	 FnReadObject(uint16_t index_,uint16_t subindex, uint8_t capacity);
+			
+			void  	 FnSetControlword(uint16_t uiControlwrd);	
+			uint16_t FnGetControlword(void);
+			
+			uint16_t FnGetErrorStatus(void);
+
+			void     FnSetTargetTorque(int16_t Torque);
+			uint16_t FnGetTargetTorque(void);
+			
+			void 	 FnSetModesOfOperation(int8_t ucModes);
+			uint8_t  FnGetModesOfOperation(void);
+			
+			void FnSetI2TEnableDisable(uint8_t I2TEnDS);
+
+			int FnStartTheTimerIrq(uint32_t uiTime);
+
+			void FnGPIOInterruptEnable(void);
 
 #endif /*__HEADER_H_*/

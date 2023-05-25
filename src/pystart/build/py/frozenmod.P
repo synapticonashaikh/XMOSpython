@@ -18,7 +18,7 @@ build/py/frozenmod.o: ../../py/frozenmod.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h ../../py/lexer.h \
- ../../py/mpconfig.h ../../py/mpconfigport.h /usr/include/alloca.h \
+ ../../py/mpconfig.h ../pyheader/mpconfigport.h /usr/include/alloca.h \
  ../../py/qstr.h ../../py/misc.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
  build/genhdr/compressed.data.h build/genhdr/qstrdefs.generated.h \
@@ -56,7 +56,7 @@ build/py/frozenmod.o: ../../py/frozenmod.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h :
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h :
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h ../../py/lexer.h :
- ../../py/mpconfig.h ../../py/mpconfigport.h /usr/include/alloca.h :
+ ../../py/mpconfig.h ../pyheader/mpconfigport.h /usr/include/alloca.h :
  ../../py/qstr.h ../../py/misc.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h :
  build/genhdr/compressed.data.h build/genhdr/qstrdefs.generated.h :

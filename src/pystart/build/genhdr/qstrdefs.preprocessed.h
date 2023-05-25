@@ -6,8 +6,8 @@
 # 1 "<stdin>"
 # 29 "<stdin>"
 # 1 "../../py/mpconfig.h" 1
-# 76 "../../py/mpconfig.h"
-# 1 "../../py/mpconfigport.h" 1
+# 75 "../../py/mpconfig.h"
+# 1 "../pyheader/mpconfigport.h" 1
 # 1 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h" 1 3 4
 # 9 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h" 3 4
 # 1 "/usr/include/stdint.h" 1 3 4
@@ -241,7 +241,7 @@ typedef unsigned long int uintptr_t;
 typedef __intmax_t intmax_t;
 typedef __uintmax_t uintmax_t;
 # 10 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h" 2 3 4
-# 2 "../../py/mpconfigport.h" 2
+# 2 "../pyheader/mpconfigport.h" 2
 
 # 1 "/usr/include/alloca.h" 1 3 4
 # 24 "/usr/include/alloca.h" 3 4
@@ -263,16 +263,14 @@ extern void *alloca (size_t __size) __attribute__ ((__nothrow__ , __leaf__));
 
 
 
-# 4 "../../py/mpconfigport.h" 2
-# 25 "../../py/mpconfigport.h"
+# 4 "../pyheader/mpconfigport.h" 2
+# 25 "../pyheader/mpconfigport.h"
 
-# 25 "../../py/mpconfigport.h"
+# 25 "../pyheader/mpconfigport.h"
 typedef intptr_t mp_int_t;
 typedef uintptr_t mp_uint_t;
 typedef long mp_off_t;
-# 77 "../../py/mpconfig.h" 2
-# 789 "../../py/mpconfig.h"
-typedef float mp_float_t;
+# 76 "../../py/mpconfig.h" 2
 # 30 "<stdin>" 2
 
 
@@ -321,8 +319,6 @@ Q(AssertionError)
 
 Q(AssertionError)
 
-Q(AssertionError)
-
 Q(AttributeError)
 
 Q(AttributeError)
@@ -346,6 +342,8 @@ Q(Exception)
 Q(GeneratorExit)
 
 Q(GeneratorExit)
+
+Q(I2TEnDs)
 
 Q(IRQ_FALLING)
 
@@ -388,6 +386,10 @@ Q(NoneType)
 Q(NotImplementedError)
 
 Q(NotImplementedError)
+
+Q(OBJDITC)
+
+Q(OBJDITC)
 
 Q(OSError)
 
@@ -463,9 +465,23 @@ Q(PrintGM)
 
 Q(PrintTM)
 
+Q(ReadControlWord)
+
+Q(ReadErrorStatus)
+
+Q(ReadModesofOperation)
+
+Q(ReadObjectValue)
+
+Q(ReadTargetTorque)
+
 Q(RuntimeError)
 
 Q(RuntimeError)
+
+Q(SetObjectValue)
+
+Q(SetTargetTorque)
 
 Q(StopIteration)
 
@@ -489,6 +505,10 @@ Q(ValueError)
 
 Q(ValueError)
 
+Q(WriteControlWord)
+
+Q(WriteModesofOperation)
+
 Q(ZeroDivisionError)
 
 Q(ZeroDivisionError)
@@ -503,18 +523,6 @@ Q(__build_class__)
 
 Q(__call__)
 
-Q(__class__)
-
-Q(__class__)
-
-Q(__class__)
-
-Q(__class__)
-
-Q(__class__)
-
-Q(__complex__)
-
 Q(__contains__)
 
 Q(__delitem__)
@@ -528,8 +536,6 @@ Q(__eq__)
 Q(__eq__)
 
 Q(__exit__)
-
-Q(__float__)
 
 Q(__ge__)
 
@@ -573,10 +579,6 @@ Q(__main__)
 
 Q(__main__)
 
-Q(__module__)
-
-Q(__name__)
-
 Q(__name__)
 
 Q(__name__)
@@ -619,10 +621,6 @@ Q(__path__)
 
 Q(__path__)
 
-Q(__qualname__)
-
-Q(__repl_print__)
-
 Q(__repl_print__)
 
 Q(__repr__)
@@ -645,41 +643,7 @@ Q(_brace_open__colon__hash_o_brace_close_)
 
 Q(_brace_open__colon__hash_x_brace_close_)
 
-Q(_lt_dictcomp_gt_)
-
-Q(_lt_dictcomp_gt_)
-
-Q(_lt_genexpr_gt_)
-
-Q(_lt_genexpr_gt_)
-
-Q(_lt_lambda_gt_)
-
-Q(_lt_lambda_gt_)
-
-Q(_lt_listcomp_gt_)
-
-Q(_lt_listcomp_gt_)
-
-Q(_lt_module_gt_)
-
-Q(_lt_module_gt_)
-
-Q(_lt_setcomp_gt_)
-
-Q(_lt_setcomp_gt_)
-
-Q(_lt_stdin_gt_)
-
-Q(_lt_stdin_gt_)
-
-Q(_lt_string_gt_)
-
 Q(_space_)
-
-Q(_star_)
-
-Q(_star_)
 
 Q(abs)
 
@@ -709,8 +673,6 @@ Q(builtins)
 
 Q(builtins)
 
-Q(bytecode)
-
 Q(bytes)
 
 Q(bytes)
@@ -734,12 +696,6 @@ Q(close)
 Q(close)
 
 Q(closure)
-
-Q(complex)
-
-Q(complex)
-
-Q(const)
 
 Q(copy)
 
@@ -777,19 +733,11 @@ Q(endswith)
 
 Q(errno)
 
-Q(eval)
-
-Q(exec)
-
 Q(extend)
 
 Q(find)
 
 Q(flags)
-
-Q(float)
-
-Q(float)
 
 Q(format)
 
@@ -837,15 +785,9 @@ Q(hash)
 
 Q(healthinfo)
 
-Q(heap_lock)
-
-Q(heap_unlock)
-
 Q(hex)
 
 Q(id)
-
-Q(imag)
 
 Q(index)
 
@@ -917,17 +859,7 @@ Q(map)
 
 Q(map)
 
-Q(micropython)
-
-Q(micropython)
-
-Q(micropython)
-
 Q(module)
-
-Q(mul)
-
-Q(mul10)
 
 Q(myport)
 
@@ -940,8 +872,6 @@ Q(object)
 Q(object)
 
 Q(oct)
-
-Q(opt_level)
 
 Q(ord)
 
@@ -960,10 +890,6 @@ Q(print)
 Q(range)
 
 Q(range)
-
-Q(range)
-
-Q(real)
 
 Q(remove)
 
@@ -984,8 +910,6 @@ Q(round)
 Q(rsplit)
 
 Q(rstrip)
-
-Q(schedule)
 
 Q(send)
 
@@ -1018,8 +942,6 @@ Q(strcat)
 Q(strip)
 
 Q(sum)
-
-Q(super)
 
 Q(super)
 

@@ -84,17 +84,18 @@
 #ifndef __interrupt_h__
 #define __interrupt_h__
 
+
+	#include "py/mphal.h"
+	#include "py/mpirq.h"
+	#include "py/obj.h"
+	#include "header.h"
+	#include "py/runtime.h"
+	#include "mpconfig.h"
+
 /* ----------------------------------------------------------------------------
  *                           Includes
  * ----------------------------------------------------------------------------
 */
-  #include "py/mphal.h"
-  #include "py/mpirq.h"
-  #include "py/obj.h"
-  #include "header.h"
-  #include "py/runtime.h"
-  #include "mpconfig.h"
-  
 
 #define store_args0(c) \
   asm("kentsp 20; stw %0, sp[1]; krestsp 20"::"r"(c));

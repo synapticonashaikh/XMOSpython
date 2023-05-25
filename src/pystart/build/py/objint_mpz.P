@@ -25,7 +25,7 @@ build/py/objint_mpz.o: ../../py/objint_mpz.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h \
  /usr/include/x86_64-linux-gnu/bits/floatn.h \
  /usr/include/x86_64-linux-gnu/bits/floatn-common.h /usr/include/assert.h \
- ../../py/parsenumbase.h ../../py/mpconfig.h ../../py/mpconfigport.h \
+ ../../py/parsenumbase.h ../../py/mpconfig.h ../pyheader/mpconfigport.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
@@ -45,14 +45,7 @@ build/py/objint_mpz.o: ../../py/objint_mpz.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min.h \
  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h ../../py/objlist.h \
  ../../py/objexcept.h ../../py/objtuple.h build/genhdr/root_pointers.h \
- ../../py/pystack.h /usr/include/math.h \
- /usr/include/x86_64-linux-gnu/bits/math-vector.h \
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h \
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h \
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h \
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h \
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h
+ ../../py/pystack.h
 ../../py/objint_mpz.c /usr/include/stdc-predef.h :
  /usr/include/string.h :
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h :
@@ -80,7 +73,7 @@ build/py/objint_mpz.o: ../../py/objint_mpz.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/stdio_lim.h :
  /usr/include/x86_64-linux-gnu/bits/floatn.h :
  /usr/include/x86_64-linux-gnu/bits/floatn-common.h /usr/include/assert.h :
- ../../py/parsenumbase.h ../../py/mpconfig.h ../../py/mpconfigport.h :
+ ../../py/parsenumbase.h ../../py/mpconfig.h ../pyheader/mpconfigport.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h :
  /usr/include/x86_64-linux-gnu/bits/wchar.h :
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h :
@@ -100,11 +93,4 @@ build/py/objint_mpz.o: ../../py/objint_mpz.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min.h :
  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h ../../py/objlist.h :
  ../../py/objexcept.h ../../py/objtuple.h build/genhdr/root_pointers.h :
- ../../py/pystack.h /usr/include/math.h :
- /usr/include/x86_64-linux-gnu/bits/math-vector.h :
- /usr/include/x86_64-linux-gnu/bits/libm-simd-decl-stubs.h :
- /usr/include/x86_64-linux-gnu/bits/flt-eval-method.h :
- /usr/include/x86_64-linux-gnu/bits/fp-logb.h :
- /usr/include/x86_64-linux-gnu/bits/fp-fast.h :
- /usr/include/x86_64-linux-gnu/bits/mathcalls-helper-functions.h :
- /usr/include/x86_64-linux-gnu/bits/mathcalls.h :
+ ../../py/pystack.h :

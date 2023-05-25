@@ -84,13 +84,14 @@
 	//#define PORT_MODE_OUTPUT  2
 
     #define IRQ_FALLING (1)
-    #define IRQ_RISING (2)
+    #define IRQ_RISING  (2)
 
 /* ----------------------------------------------------------------------------
  *                           Includes
  * ----------------------------------------------------------------------------
 */
 
+    #include "runtime.h"
     #include "header.h"
     #include "interrupt.h" 
 
@@ -209,6 +210,7 @@ STATIC mp_obj_t gpiopin_irq(size_t n_args, const mp_obj_t *pos_args, mp_map_t *k
      }
 
     //GPIOInterrupt( );//args[ARG_trigger].u_int
+
     return mp_const_none;
 
 }

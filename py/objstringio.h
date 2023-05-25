@@ -28,7 +28,6 @@
 
 #include "obj.h"
 
-
 typedef struct _mp_obj_stringio_t {
     mp_obj_base_t base;
     vstr_t *vstr;

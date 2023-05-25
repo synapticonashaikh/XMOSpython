@@ -30,7 +30,7 @@ build/py/vm.o: ../../py/vm.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/strings_fortified.h \
  /usr/include/x86_64-linux-gnu/bits/string_fortified.h \
  /usr/include/assert.h ../../py/emitglue.h ../../py/obj.h \
- ../../py/mpconfig.h ../../py/mpconfigport.h \
+ ../../py/mpconfig.h ../pyheader/mpconfigport.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
@@ -82,7 +82,7 @@ build/py/vm.o: ../../py/vm.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/strings_fortified.h :
  /usr/include/x86_64-linux-gnu/bits/string_fortified.h :
  /usr/include/assert.h ../../py/emitglue.h ../../py/obj.h :
- ../../py/mpconfig.h ../../py/mpconfigport.h :
+ ../../py/mpconfig.h ../pyheader/mpconfigport.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h :
  /usr/include/x86_64-linux-gnu/bits/wchar.h :
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h :

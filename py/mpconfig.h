@@ -26,11 +26,10 @@
 #ifndef MICROPY_INCLUDED_PY_MPCONFIG_H
 #define MICROPY_INCLUDED_PY_MPCONFIG_H
 
-
 // Current version of MicroPython
 #define MICROPY_VERSION_MAJOR 1
-#define MICROPY_VERSION_MINOR 19
-#define MICROPY_VERSION_MICRO 1
+#define MICROPY_VERSION_MINOR 20
+#define MICROPY_VERSION_MICRO 0
 
 // Combined version as a 32-bit number for convenience
 #define MICROPY_VERSION ( \
@@ -310,7 +309,7 @@
 
 // Whether to support loading of persistent code
 #ifndef MICROPY_PERSISTENT_CODE_LOAD
-#define MICROPY_PERSISTENT_CODE_LOAD (0)
+#define MICROPY_PERSISTENT_CODE_LOAD (1)
 #endif
 
 // Whether to support saving of persistent code
@@ -509,6 +508,11 @@
 // Whether to enable a simple VM stack overflow check
 #ifndef MICROPY_DEBUG_VM_STACK_OVERFLOW
 #define MICROPY_DEBUG_VM_STACK_OVERFLOW (0)
+#endif
+
+// Whether to enable extra instrumentation for valgrind
+#ifndef MICROPY_DEBUG_VALGRIND
+#define MICROPY_DEBUG_VALGRIND (0)
 #endif
 
 /*****************************************************************************/
@@ -898,6 +902,16 @@ typedef double mp_float_t;
 // Whether to use internally defined *printf() functions (otherwise external ones)
 #ifndef MICROPY_USE_INTERNAL_PRINTF
 #define MICROPY_USE_INTERNAL_PRINTF (1)
+#endif
+
+// The mp_print_t printer used for printf output when MICROPY_USE_INTERNAL_PRINTF is enabled
+#ifndef MICROPY_INTERNAL_PRINTF_PRINTER
+#define MICROPY_INTERNAL_PRINTF_PRINTER (&mp_plat_print)
+#endif
+
+// Whether to support mp_sched_vm_abort to asynchronously abort to the top level.
+#ifndef MICROPY_ENABLE_VM_ABORT
+#define MICROPY_ENABLE_VM_ABORT (0)
 #endif
 
 // Support for internal scheduler
@@ -1312,6 +1326,11 @@ typedef double mp_float_t;
 #define MICROPY_PY_CMATH (MICROPY_CONFIG_ROM_LEVEL_AT_LEAST_EXTRA_FEATURES)
 #endif
 
+// Whether to provide "micropython" module
+#ifndef MICROPY_PY_MICROPYTHON
+#define MICROPY_PY_MICROPYTHON (MICROPY_CONFIG_ROM_LEVEL_AT_LEAST_CORE_FEATURES)
+#endif
+
 // Whether to provide "gc" module
 #ifndef MICROPY_PY_GC
 #define MICROPY_PY_GC (MICROPY_CONFIG_ROM_LEVEL_AT_LEAST_CORE_FEATURES)
@@ -1449,10 +1468,19 @@ typedef double mp_float_t;
 #define MICROPY_PY_USELECT_SELECT (1)
 #endif
 
-// Whether to provide "utime" module functions implementation
-// in terms of mp_hal_* functions.
-#ifndef MICROPY_PY_UTIME_MP_HAL
-#define MICROPY_PY_UTIME_MP_HAL (0)
+// Whether to provide the "utime" module
+#ifndef MICROPY_PY_UTIME
+#define MICROPY_PY_UTIME (MICROPY_CONFIG_ROM_LEVEL_AT_LEAST_BASIC_FEATURES)
+#endif
+
+// Whether to provide utime.gmtime/localtime/mktime functions
+#ifndef MICROPY_PY_UTIME_GMTIME_LOCALTIME_MKTIME
+#define MICROPY_PY_UTIME_GMTIME_LOCALTIME_MKTIME (0)
+#endif
+
+// Whether to provide utime.time/time_ns functions
+#ifndef MICROPY_PY_UTIME_TIME_TIME_NS
+#define MICROPY_PY_UTIME_TIME_TIME_NS (0)
 #endif
 
 // Period of values returned by utime.ticks_ms(), ticks_us(), ticks_cpu()
@@ -1632,6 +1660,11 @@ typedef double mp_float_t;
 #define MICROPY_PY_MACHINE_SOFTSPI (0)
 #endif
 
+// Whether to provide the "machine.Timer" class
+#ifndef MICROPY_PY_MACHINE_TIMER
+#define MICROPY_PY_MACHINE_TIMER (0)
+#endif
+
 // The default backlog value for socket.listen(backlog)
 #ifndef MICROPY_PY_USOCKET_LISTEN_BACKLOG_DEFAULT
 #define MICROPY_PY_USOCKET_LISTEN_BACKLOG_DEFAULT (2)
@@ -1719,6 +1752,10 @@ typedef double mp_float_t;
 
 #ifndef MICROPY_WRAP_MP_SCHED_SCHEDULE
 #define MICROPY_WRAP_MP_SCHED_SCHEDULE(f) f
+#endif
+
+#ifndef MICROPY_WRAP_MP_SCHED_VM_ABORT
+#define MICROPY_WRAP_MP_SCHED_VM_ABORT(f) f
 #endif
 
 /*****************************************************************************/

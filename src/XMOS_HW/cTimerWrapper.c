@@ -78,6 +78,7 @@
  *                           Includes
  * ----------------------------------------------------------------------------
 */
+
     #include "header.h"	
     #include "interrupt.h"    
     #include <hwtimer.h>  
@@ -132,6 +133,7 @@ void FnTimerInterruptUpdate(hwtimer_t Var)
     asm volatile("setd res[%0], %1"::"r"(Var),"r"(time));
     asm volatile("setc res[%0], %1"::"r"(Var),"r"(XS1_SETC_COND_AFTER));
 }    
+
 /***********************************************************************
  * Function Name: main 
  * Arguments	: void
@@ -143,6 +145,7 @@ void FnTimerInterruptStop(hwtimer_t Var)
     DISABLE_INTERRUPTS( );
     asm volatile("setc res[%0], %1"::"r"(Var),"r"(XS1_SETC_COND_NONE));
 }
+
 /***********************************************************************
  * Function Name: main 
  * Arguments	: void
@@ -161,9 +164,7 @@ void FnTimerInterruptStart(hwtimer_t Var, uint32_t TimeInMsec)
  * Details	    : main function, start of the code
  * *********************************************************************/
 void FnTimerInterruptInit(hwtimer_t Var)
-{
-    FnTimerInterruptUpdate(Var);
-}
+{ FnTimerInterruptUpdate(Var); }
 
 /***********************************************************************
  * Function Name: main 

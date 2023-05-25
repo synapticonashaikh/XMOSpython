@@ -19,7 +19,7 @@ build/py/objdict.o: ../../py/objdict.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h ../../py/mpconfig.h \
- ../../py/mpconfigport.h /usr/include/alloca.h ../../py/mpthread.h \
+ ../pyheader/mpconfigport.h /usr/include/alloca.h ../../py/mpthread.h \
  ../../py/misc.h /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
  build/genhdr/compressed.data.h ../../py/nlr.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h \
@@ -56,7 +56,7 @@ build/py/objdict.o: ../../py/objdict.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h :
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h :
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h ../../py/mpconfig.h :
- ../../py/mpconfigport.h /usr/include/alloca.h ../../py/mpthread.h :
+ ../pyheader/mpconfigport.h /usr/include/alloca.h ../../py/mpthread.h :
  ../../py/misc.h /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h :
  build/genhdr/compressed.data.h ../../py/nlr.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h :

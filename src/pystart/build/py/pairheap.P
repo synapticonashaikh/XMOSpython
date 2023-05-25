@@ -7,7 +7,7 @@ build/py/pairheap.o: ../../py/pairheap.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/long-double.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs.h \
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h ../../py/obj.h \
- ../../py/mpconfig.h ../../py/mpconfigport.h \
+ ../../py/mpconfig.h ../pyheader/mpconfigport.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/x86_64-linux-gnu/bits/types.h \
@@ -31,7 +31,7 @@ build/py/pairheap.o: ../../py/pairheap.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/long-double.h :
  /usr/include/x86_64-linux-gnu/gnu/stubs.h :
  /usr/include/x86_64-linux-gnu/gnu/stubs-64.h ../../py/obj.h :
- ../../py/mpconfig.h ../../py/mpconfigport.h :
+ ../../py/mpconfig.h ../pyheader/mpconfigport.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h :
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h :
  /usr/include/x86_64-linux-gnu/bits/types.h :

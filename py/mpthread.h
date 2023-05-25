@@ -28,7 +28,6 @@
 
 #include "mpconfig.h"
 
-
 #if MICROPY_PY_THREAD
 
 struct _mp_state_thread_t;

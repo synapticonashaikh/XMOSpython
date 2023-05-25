@@ -39,9 +39,8 @@
 #ifdef __XC__
 mp_pairheap_t *mp_pairheap_meld(__attribute__(( fptrgroup("Aatif") ))mp_pairheap_lt_t lt, mp_pairheap_t *heap1, mp_pairheap_t *heap2) 
 #else
-mp_pairheap_t *mp_pairheap_meld(mp_pairheap_lt_t lt, mp_pairheap_t *heap1, mp_pairheap_t *heap2) 
+mp_pairheap_t *mp_pairheap_meld(mp_pairheap_lt_t lt, mp_pairheap_t *heap1, mp_pairheap_t *heap2) {
 #endif
-{
     if (heap1 == NULL) {
         return heap2;
     }

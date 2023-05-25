@@ -233,7 +233,11 @@ STATIC mp_obj_t bytes_make_new(const mp_obj_type_t *type_in, size_t n_args, size
 
     if (mp_obj_is_str(args[0])) {
         if (n_args < 2 || n_args > 3) {
+            #if MICROPY_ERROR_REPORTING <= MICROPY_ERROR_REPORTING_TERSE
             goto wrong_args;
+            #else
+            mp_raise_TypeError(MP_ERROR_TEXT("string argument without an encoding"));
+            #endif
         }
         GET_STR_DATA_LEN(args[0], str_data, str_len);
         GET_STR_HASH(args[0], str_hash);
@@ -1114,7 +1118,7 @@ STATIC vstr_t mp_obj_str_format_helper(const char *str, const char *top, int *ar
                 arg = key_elem->value;
             }
             if (field_name < field_name_top) {
-                mp_raise_NotImplementedError(MP_ERROR_TEXT("attributes not supported yet"));
+                mp_raise_NotImplementedError(MP_ERROR_TEXT("attributes not supported"));
             }
         } else {
             if (*arg_i < 0) {
@@ -1846,11 +1850,10 @@ MP_DEFINE_CONST_FUN_OBJ_2(str_rpartition_obj, str_rpartition);
 
 // Supposedly not too critical operations, so optimize for code size
 #ifdef __XC__  
-STATIC mp_obj_t str_caseconv(__attribute__(( fptrgroup("Aatif") ))unichar (*op)(unichar),__attribute__(( fptrgroup("Aatif") ))mp_obj_t self_in) 
+STATIC mp_obj_t str_caseconv(__attribute__(( fptrgroup("Aatif") ))unichar (*op)(unichar),__attribute__(( fptrgroup("Aatif") ))mp_obj_t self_in) {
 #else
-STATIC mp_obj_t str_caseconv(unichar (*op)(unichar),mp_obj_t self_in) 
+STATIC mp_obj_t str_caseconv(unichar (*op)(unichar), mp_obj_t self_in) {
 #endif
-{
     GET_STR_DATA_LEN(self_in, self_data, self_len);
     vstr_t vstr;
     vstr_init_len(&vstr, self_len);
@@ -1872,11 +1875,10 @@ STATIC mp_obj_t str_upper(mp_obj_t self_in) {
 MP_DEFINE_CONST_FUN_OBJ_1(str_upper_obj, str_upper);
 
 #ifdef __XC__  
-STATIC mp_obj_t str_uni_istype(__attribute__(( fptrgroup("Aatif") ))bool (*f)(unichar), mp_obj_t self_in) 
+STATIC mp_obj_t str_uni_istype(__attribute__(( fptrgroup("Aatif") ))bool (*f)(unichar), mp_obj_t self_in) {
 #else
-STATIC mp_obj_t str_uni_istype(bool (*f)(unichar), mp_obj_t self_in) 
+STATIC mp_obj_t str_uni_istype(bool (*f)(unichar), mp_obj_t self_in) {
 #endif
-{
     GET_STR_DATA_LEN(self_in, self_data, self_len);
 
     if (self_len == 0) {

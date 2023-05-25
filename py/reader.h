@@ -33,8 +33,7 @@
 // it can be called again after returning MP_READER_EOF, and in that case must return MP_READER_EOF
 #define MP_READER_EOF ((mp_uint_t)(-1))
 
-typedef struct _mp_reader_t 
-{
+typedef struct _mp_reader_t {
 #ifdef __XC__      
     __attribute__(( fptrgroup("Aatif") ))void *data;
     __attribute__(( fptrgroup("Aatif") ))mp_uint_t (*readbyte)(void *data);

@@ -29,7 +29,6 @@
 
 #include "emitglue.h"
 
-
 #if MICROPY_PY_SYS_SETTRACE
 
 #define mp_prof_is_executing MP_STATE_THREAD(prof_callback_is_executing)
@@ -79,6 +78,4 @@ void mp_prof_print_instr(const byte *ip, mp_code_state_t *code_state);
 #endif
 
 #endif // MICROPY_PY_SYS_SETTRACE
-
-
 #endif // MICROPY_INCLUDED_PY_PROFILING_H

@@ -23,7 +23,7 @@ build/py/showbc.o: ../../py/showbc.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/floatn.h \
  /usr/include/x86_64-linux-gnu/bits/floatn-common.h /usr/include/assert.h \
  ../../py/bc0.h ../../py/emitglue.h ../../py/obj.h ../../py/mpconfig.h \
- ../../py/mpconfigport.h \
+ ../pyheader/mpconfigport.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
@@ -70,7 +70,7 @@ build/py/showbc.o: ../../py/showbc.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/floatn.h :
  /usr/include/x86_64-linux-gnu/bits/floatn-common.h /usr/include/assert.h :
  ../../py/bc0.h ../../py/emitglue.h ../../py/obj.h ../../py/mpconfig.h :
- ../../py/mpconfigport.h :
+ ../pyheader/mpconfigport.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h :
  /usr/include/x86_64-linux-gnu/bits/wchar.h :
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h :

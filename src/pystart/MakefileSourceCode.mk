@@ -14,6 +14,7 @@ SRC_C +=  $(HARDWAREL)cTerminal.c
 ifeq ($(ENABLE_DISABLE_OWN_MODULE), 1)
 SRC_C +=  $(HARDWAREL)xcGPIO.xc
 SRC_C +=  $(HARDWAREL)cGPIOWrapper.c
+SRC_C +=  $(HARDWAREL)ObjDitch.c
 SRC_C +=  $(HARDWAREL)xcTimer.xc
 SRC_C +=  $(HARDWAREL)cTimerWrapper.c
 SRC_C +=  $(HARDWAREL)xcTimerinterrupt.xc
@@ -22,6 +23,7 @@ SRC_C +=  $(HARDWAREL)xcTimerinterrupt.xc
 SRC_C +=  $(MODULEL)modmyport.c
 SRC_C +=  $(MODULEL)modgpio.c
 SRC_C +=  $(MODULEL)modtimer.c
+SRC_C +=  $(MODULEL)modcoeobj.c
 endif
 
 #add the library for reading the commands at interpretor
@@ -31,5 +33,6 @@ ifeq ($(ENABLE_DISABLE_OWN_MODULE), 1)
 SRC_QSTR += $(MODULEL)modmyport.c
 SRC_QSTR += $(MODULEL)modtimer.c
 SRC_QSTR += $(MODULEL)modgpio.c
-SRC_QSTR += $(ROOTL)py/mpirq.c
-endif 
+SRC_QSTR += $(PYLIBL)/mpirq.c
+SRC_QSTR += $(MODULEL)modcoeobj.c
+endif

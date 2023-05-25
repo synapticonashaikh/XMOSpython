@@ -1,5 +1,6 @@
 build/py/emitnxtensawin.o: ../../py/emitnxtensawin.c \
- /usr/include/stdc-predef.h ../../py/mpconfig.h ../../py/mpconfigport.h \
+ /usr/include/stdc-predef.h ../../py/mpconfig.h \
+ ../pyheader/mpconfigport.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -17,7 +18,8 @@ build/py/emitnxtensawin.o: ../../py/emitnxtensawin.c \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h /usr/include/alloca.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
 ../../py/emitnxtensawin.c :
- /usr/include/stdc-predef.h ../../py/mpconfig.h ../../py/mpconfigport.h :
+ /usr/include/stdc-predef.h ../../py/mpconfig.h :
+ ../pyheader/mpconfigport.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h :
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h :
  /usr/include/features.h /usr/include/features-time64.h :

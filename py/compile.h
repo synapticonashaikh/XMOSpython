@@ -38,11 +38,10 @@ mp_obj_t mp_compile(mp_parse_tree_t *parse_tree, qstr source_file, bool is_repl)
 
 #if MICROPY_PERSISTENT_CODE_SAVE
 // this has the same semantics as mp_compile
-mp_compiled_module_t mp_compile_to_raw_code(mp_parse_tree_t *parse_tree, qstr source_file, bool is_repl, mp_module_context_t *globals);
+void mp_compile_to_raw_code(mp_parse_tree_t *parse_tree, qstr source_file, bool is_repl, mp_compiled_module_t *cm);
 #endif
 
 // this is implemented in runtime.c
 mp_obj_t mp_parse_compile_execute(mp_lexer_t *lex, mp_parse_input_kind_t parse_input_kind, mp_obj_dict_t *globals, mp_obj_dict_t *locals);
-
 
 #endif // MICROPY_INCLUDED_PY_COMPILE_H

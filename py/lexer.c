@@ -356,6 +356,9 @@ STATIC void parse_string_literal(mp_lexer_t *lex, bool is_raw, bool is_fstring) 
                     vstr_add_byte(&lex->vstr, '{');
                     next_char(lex);
                 } else {
+                    // wrap each argument in (), e.g.
+                    // f"{a,b,}, {c}" --> "{}".format((a,b), (c),)
+                    vstr_add_byte(&lex->fstring_args, '(');
                     // remember the start of this argument (if we need it for f'{a=}').
                     size_t i = lex->fstring_args.len;
                     // extract characters inside the { until we reach the
@@ -382,7 +385,9 @@ STATIC void parse_string_literal(mp_lexer_t *lex, bool is_raw, bool is_fstring) 
                         // remove the trailing '='
                         lex->fstring_args.len--;
                     }
-                    // comma-separate args
+                    // close the paren-wrapped arg to .format().
+                    vstr_add_byte(&lex->fstring_args, ')');
+                    // comma-separate args to .format().
                     vstr_add_byte(&lex->fstring_args, ',');
                 }
                 vstr_add_byte(&lex->vstr, '{');
@@ -880,11 +885,10 @@ mp_lexer_t *mp_lexer_new_from_fd(qstr filename, int fd, bool close_fd) {
 #endif
 
 #ifdef __XC__
-void mp_lexer_free(__attribute__(( fptrgroup("Aatif") ))mp_lexer_t *lex) 
+void mp_lexer_free(__attribute__(( fptrgroup("Aatif") ))mp_lexer_t *lex) {
 #else
-void mp_lexer_free(mp_lexer_t *lex) 
+void mp_lexer_free(mp_lexer_t *lex) {
 #endif
-{
     if (lex) {
         lex->reader.close(lex->reader.data);
         vstr_clear(&lex->vstr);

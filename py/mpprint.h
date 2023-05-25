@@ -45,18 +45,15 @@
 #define MP_PYTHON_PRINTER &mp_plat_print
 #endif
 
-
 typedef void (*mp_print_strn_t)(void *data, const char *str, size_t len);
 
-
-typedef struct _mp_print_t 
-{
+typedef struct _mp_print_t {
 #ifdef __XC__ 
    __attribute__(( fptrgroup("Aatif") ))void *data;
    __attribute__(( fptrgroup("Aatif") ))mp_print_strn_t print_strn;
 #else
-   void *data;
-   mp_print_strn_t print_strn;
+    void *data;
+    mp_print_strn_t print_strn;
 #endif   
 } mp_print_t;
 

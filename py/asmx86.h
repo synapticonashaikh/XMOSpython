@@ -30,7 +30,6 @@
 #include "misc.h"
 #include "asmbase.h"
 
-
 // x86 cdecl calling convention is:
 //  - args passed on the stack in reverse order
 //  - return value in EAX

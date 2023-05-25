@@ -30,7 +30,7 @@ build/py/compile.o: ../../py/compile.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
  /usr/include/strings.h /usr/include/assert.h ../../py/scope.h \
  ../../py/parse.h ../../py/obj.h ../../py/mpconfig.h \
- ../../py/mpconfigport.h /usr/include/alloca.h ../../py/misc.h \
+ ../pyheader/mpconfigport.h /usr/include/alloca.h ../../py/misc.h \
  build/genhdr/compressed.data.h ../../py/qstr.h \
  build/genhdr/qstrdefs.generated.h ../../py/mpprint.h ../../py/runtime0.h \
  ../../py/emitglue.h ../../py/bc.h ../../py/runtime.h ../../py/mpstate.h \
@@ -50,7 +50,7 @@ build/py/compile.o: ../../py/compile.c /usr/include/stdc-predef.h \
  /usr/include/errno.h /usr/include/x86_64-linux-gnu/bits/errno.h \
  /usr/include/linux/errno.h /usr/include/x86_64-linux-gnu/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
- ../../py/smallint.h ../../py/grammar.h
+ ../../py/smallint.h
 ../../py/compile.c /usr/include/stdc-predef.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h :
@@ -83,7 +83,7 @@ build/py/compile.o: ../../py/compile.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h :
  /usr/include/strings.h /usr/include/assert.h ../../py/scope.h :
  ../../py/parse.h ../../py/obj.h ../../py/mpconfig.h :
- ../../py/mpconfigport.h /usr/include/alloca.h ../../py/misc.h :
+ ../pyheader/mpconfigport.h /usr/include/alloca.h ../../py/misc.h :
  build/genhdr/compressed.data.h ../../py/qstr.h :
  build/genhdr/qstrdefs.generated.h ../../py/mpprint.h ../../py/runtime0.h :
  ../../py/emitglue.h ../../py/bc.h ../../py/runtime.h ../../py/mpstate.h :
@@ -103,4 +103,4 @@ build/py/compile.o: ../../py/compile.c /usr/include/stdc-predef.h \
  /usr/include/errno.h /usr/include/x86_64-linux-gnu/bits/errno.h :
  /usr/include/linux/errno.h /usr/include/x86_64-linux-gnu/asm/errno.h :
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h :
- ../../py/smallint.h ../../py/grammar.h :
+ ../../py/smallint.h :

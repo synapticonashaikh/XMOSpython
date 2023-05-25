@@ -1,5 +1,5 @@
 build/py/smallint.o: ../../py/smallint.c /usr/include/stdc-predef.h \
- ../../py/smallint.h ../../py/mpconfig.h ../../py/mpconfigport.h \
+ ../../py/smallint.h ../../py/mpconfig.h ../pyheader/mpconfigport.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -21,7 +21,7 @@ build/py/smallint.o: ../../py/smallint.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
  /usr/include/strings.h build/genhdr/compressed.data.h
 ../../py/smallint.c /usr/include/stdc-predef.h :
- ../../py/smallint.h ../../py/mpconfig.h ../../py/mpconfigport.h :
+ ../../py/smallint.h ../../py/mpconfig.h ../pyheader/mpconfigport.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h :
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h :
  /usr/include/features.h /usr/include/features-time64.h :

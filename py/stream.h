@@ -30,7 +30,6 @@
 #include "obj.h"
 #include "mperrno.h"
 
-
 #define MP_STREAM_ERROR ((mp_uint_t)-1)
 
 // Stream ioctl request codes

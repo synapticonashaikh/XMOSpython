@@ -6,8 +6,6 @@ Q(AssertionError)
 
 Q(AssertionError)
 
-Q(AssertionError)
-
 Q(AttributeError)
 
 Q(AttributeError)
@@ -31,6 +29,8 @@ Q(Exception)
 Q(GeneratorExit)
 
 Q(GeneratorExit)
+
+Q(I2TEnDs)
 
 Q(IRQ_FALLING)
 
@@ -73,6 +73,10 @@ Q(NoneType)
 Q(NotImplementedError)
 
 Q(NotImplementedError)
+
+Q(OBJDITC)
+
+Q(OBJDITC)
 
 Q(OSError)
 
@@ -148,9 +152,23 @@ Q(PrintGM)
 
 Q(PrintTM)
 
+Q(ReadControlWord)
+
+Q(ReadErrorStatus)
+
+Q(ReadModesofOperation)
+
+Q(ReadObjectValue)
+
+Q(ReadTargetTorque)
+
 Q(RuntimeError)
 
 Q(RuntimeError)
+
+Q(SetObjectValue)
+
+Q(SetTargetTorque)
 
 Q(StopIteration)
 
@@ -174,6 +192,10 @@ Q(ValueError)
 
 Q(ValueError)
 
+Q(WriteControlWord)
+
+Q(WriteModesofOperation)
+
 Q(ZeroDivisionError)
 
 Q(ZeroDivisionError)
@@ -188,18 +210,6 @@ Q(__build_class__)
 
 Q(__call__)
 
-Q(__class__)
-
-Q(__class__)
-
-Q(__class__)
-
-Q(__class__)
-
-Q(__class__)
-
-Q(__complex__)
-
 Q(__contains__)
 
 Q(__delitem__)
@@ -213,8 +223,6 @@ Q(__eq__)
 Q(__eq__)
 
 Q(__exit__)
-
-Q(__float__)
 
 Q(__ge__)
 
@@ -258,10 +266,6 @@ Q(__main__)
 
 Q(__main__)
 
-Q(__module__)
-
-Q(__name__)
-
 Q(__name__)
 
 Q(__name__)
@@ -304,10 +308,6 @@ Q(__path__)
 
 Q(__path__)
 
-Q(__qualname__)
-
-Q(__repl_print__)
-
 Q(__repl_print__)
 
 Q(__repr__)
@@ -330,41 +330,7 @@ Q(_brace_open__colon__hash_o_brace_close_)
 
 Q(_brace_open__colon__hash_x_brace_close_)
 
-Q(_lt_dictcomp_gt_)
-
-Q(_lt_dictcomp_gt_)
-
-Q(_lt_genexpr_gt_)
-
-Q(_lt_genexpr_gt_)
-
-Q(_lt_lambda_gt_)
-
-Q(_lt_lambda_gt_)
-
-Q(_lt_listcomp_gt_)
-
-Q(_lt_listcomp_gt_)
-
-Q(_lt_module_gt_)
-
-Q(_lt_module_gt_)
-
-Q(_lt_setcomp_gt_)
-
-Q(_lt_setcomp_gt_)
-
-Q(_lt_stdin_gt_)
-
-Q(_lt_stdin_gt_)
-
-Q(_lt_string_gt_)
-
 Q(_space_)
-
-Q(_star_)
-
-Q(_star_)
 
 Q(abs)
 
@@ -394,8 +360,6 @@ Q(builtins)
 
 Q(builtins)
 
-Q(bytecode)
-
 Q(bytes)
 
 Q(bytes)
@@ -419,12 +383,6 @@ Q(close)
 Q(close)
 
 Q(closure)
-
-Q(complex)
-
-Q(complex)
-
-Q(const)
 
 Q(copy)
 
@@ -462,19 +420,11 @@ Q(endswith)
 
 Q(errno)
 
-Q(eval)
-
-Q(exec)
-
 Q(extend)
 
 Q(find)
 
 Q(flags)
-
-Q(float)
-
-Q(float)
 
 Q(format)
 
@@ -522,15 +472,9 @@ Q(hash)
 
 Q(healthinfo)
 
-Q(heap_lock)
-
-Q(heap_unlock)
-
 Q(hex)
 
 Q(id)
-
-Q(imag)
 
 Q(index)
 
@@ -602,17 +546,7 @@ Q(map)
 
 Q(map)
 
-Q(micropython)
-
-Q(micropython)
-
-Q(micropython)
-
 Q(module)
-
-Q(mul)
-
-Q(mul10)
 
 Q(myport)
 
@@ -625,8 +559,6 @@ Q(object)
 Q(object)
 
 Q(oct)
-
-Q(opt_level)
 
 Q(ord)
 
@@ -645,10 +577,6 @@ Q(print)
 Q(range)
 
 Q(range)
-
-Q(range)
-
-Q(real)
 
 Q(remove)
 
@@ -669,8 +597,6 @@ Q(round)
 Q(rsplit)
 
 Q(rstrip)
-
-Q(schedule)
 
 Q(send)
 
@@ -703,8 +629,6 @@ Q(strcat)
 Q(strip)
 
 Q(sum)
-
-Q(super)
 
 Q(super)
 

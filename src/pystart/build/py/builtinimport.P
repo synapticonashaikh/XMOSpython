@@ -29,7 +29,7 @@ build/py/builtinimport.o: ../../py/builtinimport.c \
  /usr/include/stdint.h /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h ../../py/mpconfig.h \
- ../../py/mpconfigport.h /usr/include/alloca.h ../../py/qstr.h \
+ ../pyheader/mpconfigport.h /usr/include/alloca.h ../../py/qstr.h \
  ../../py/misc.h /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
  build/genhdr/compressed.data.h build/genhdr/qstrdefs.generated.h \
  ../../py/reader.h ../../py/obj.h ../../py/mpprint.h ../../py/runtime0.h \
@@ -77,7 +77,7 @@ build/py/builtinimport.o: ../../py/builtinimport.c \
  /usr/include/stdint.h /usr/include/x86_64-linux-gnu/bits/wchar.h :
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h :
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h ../../py/mpconfig.h :
- ../../py/mpconfigport.h /usr/include/alloca.h ../../py/qstr.h :
+ ../pyheader/mpconfigport.h /usr/include/alloca.h ../../py/qstr.h :
  ../../py/misc.h /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h :
  build/genhdr/compressed.data.h build/genhdr/qstrdefs.generated.h :
  ../../py/reader.h ../../py/obj.h ../../py/mpprint.h ../../py/runtime0.h :

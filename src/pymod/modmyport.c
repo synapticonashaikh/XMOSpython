@@ -87,7 +87,7 @@
  * ----------------------------------------------------------------------------
 */
 
-    #include "../../py/runtime.h"
+    #include "runtime.h"
     #include "header.h"
 
 
@@ -148,8 +148,8 @@ MP_REGISTER_MODULE(MP_QSTR_myport, myport_module);
  * *********************************************************************/
 STATIC mp_obj_t board_clockinfo(void) 
 {
-    char buffer [50]= {'\0'}; 
     int a = 1;
+    char buffer [50]= {'\0'}; 
     sprintf(buffer,"this is just for test=%d\n\r",a);
     mp_printf(&mp_plat_print, buffer);
     return mp_const_none;
@@ -164,7 +164,8 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_0(board_clockinfo_obj, board_clockinfo);
  * *********************************************************************/
 STATIC mp_obj_t board_healthinfo(mp_obj_t a) 
 {
-   return MP_OBJ_NEW_SMALL_INT(100);
+  int abc = 200;
+   return MP_OBJ_NEW_SMALL_INT(abc);
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(board_healthinfo_obj, board_healthinfo);
 
@@ -224,7 +225,6 @@ STATIC mp_obj_t board_strcat(mp_obj_t a, mp_obj_t b)
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_2(board_strcat_obj, board_strcat);
 
-
 /***********************************************************************
  * Function Name: main 
  * Arguments	  : void
@@ -234,12 +234,12 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(board_strcat_obj, board_strcat);
 STATIC const mp_rom_map_elem_t board_module_globals_table[] = 
 {
      { MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_board) },
-     { MP_ROM_QSTR(MP_QSTR_clockinfo), MP_ROM_PTR(&board_clockinfo_obj) },
-     { MP_ROM_QSTR(MP_QSTR_healthinfo), MP_ROM_PTR(&board_healthinfo_obj) },
+     { MP_ROM_QSTR(MP_QSTR_clockinfo),  MP_ROM_PTR(&board_clockinfo_obj) },
+     { MP_ROM_QSTR(MP_QSTR_healthinfo), MP_ROM_PTR(&board_healthinfo_obj)},
      { MP_ROM_QSTR(MP_QSTR_add), MP_ROM_PTR(&board_add_obj) },
     #if MICROPY_FLOAT_IMPL == MICROPY_FLOAT_IMPL_FLOAT   
-        { MP_ROM_QSTR(MP_QSTR_mul), MP_ROM_PTR(&board_mul_obj) },    
-        { MP_ROM_QSTR(MP_QSTR_mul10),  MP_ROM_PTR(&board_mul10_obj) },
+        { MP_ROM_QSTR(MP_QSTR_mul),   MP_ROM_PTR(&board_mul_obj) },    
+        { MP_ROM_QSTR(MP_QSTR_mul10), MP_ROM_PTR(&board_mul10_obj) },
     #endif    
      { MP_ROM_QSTR(MP_QSTR_strcat), MP_ROM_PTR(&board_strcat_obj)},
 

@@ -28,7 +28,7 @@ build/py/emitglue.o: ../../py/emitglue.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
  /usr/include/strings.h /usr/include/assert.h ../../py/emitglue.h \
- ../../py/obj.h ../../py/mpconfig.h ../../py/mpconfigport.h \
+ ../../py/obj.h ../../py/mpconfig.h ../pyheader/mpconfigport.h \
  /usr/include/alloca.h ../../py/misc.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
  build/genhdr/compressed.data.h ../../py/qstr.h \
@@ -74,7 +74,7 @@ build/py/emitglue.o: ../../py/emitglue.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h :
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h :
  /usr/include/strings.h /usr/include/assert.h ../../py/emitglue.h :
- ../../py/obj.h ../../py/mpconfig.h ../../py/mpconfigport.h :
+ ../../py/obj.h ../../py/mpconfig.h ../pyheader/mpconfigport.h :
  /usr/include/alloca.h ../../py/misc.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h :
  build/genhdr/compressed.data.h ../../py/qstr.h :

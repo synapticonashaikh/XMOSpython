@@ -29,7 +29,6 @@
 #include <stddef.h>
 #include <stdint.h>
 
-
 #ifdef _MSC_VER
 #include "mpconfig.h" // For inline.
 #endif
@@ -97,5 +96,7 @@ int ringbuf_get16(ringbuf_t *r);
 int ringbuf_peek16(ringbuf_t *r);
 int ringbuf_put16(ringbuf_t *r, uint16_t v);
 
+int ringbuf_get_bytes(ringbuf_t *r, uint8_t *data, size_t data_len);
+int ringbuf_put_bytes(ringbuf_t *r, const uint8_t *data, size_t data_len);
 
 #endif // MICROPY_INCLUDED_PY_RINGBUF_H

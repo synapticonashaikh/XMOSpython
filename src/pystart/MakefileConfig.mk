@@ -8,6 +8,8 @@ HEADERSL  =../pyheader/
 HARDWAREL =../XMOS_HW/
 TARGETL	  =../XMOS_Target/
 PYLIBL	  =$(ROOTL)py
+SDOL 	  = $(SOMANET_SOFTWAREL)sc_drive/module_canopen_interface/object_dictionary
+COEL 	  = $(SOMANET_SOFTWAREL)sc_drive/module_communication_interface/include/
 
 #enable/ disable debug message 
 ENABLE_DISABLE_DEBUGG_MESSAGE = 0
@@ -16,7 +18,7 @@ ENABLE_DISABLE_DEBUGG_MESSAGE = 0
 ENABLE_DISABLE_OWN_MODULE = 1
 
 #enable/ disable float functionality
-ENABLE_DISABLE_FLOAT_FUNCTIONALITY = 1
+ENABLE_DISABLE_FLOAT_FUNCTIONALITY = 0
 
 #define the code version
 #for the terminal interpreter, use DCODE_WITH_PYTHON_INTRACTIVE_TERMINAL
@@ -37,10 +39,10 @@ endif
 BUILD_DIR = build
 
 #target file which has the clock and other definitions
-XCTarget  = $(TARGETL)C2X.xn
+#XCTarget  = $(TARGETL)C2X.xn
 #XCTarget = -target= ../targets/C2X.xn
-XCTarget  = -target=XCORE-AI-EXPLORER
 #XCTarget = -target=XCORE-200-EXPLORER
+XCTarget  = -target=XCORE-AI-EXPLORER
 
 #define the compiler
 CMP = xcc $(XCTarget)
@@ -52,6 +54,8 @@ INC += -I$(ROOTL)
 INC += -I$(PYLIBL)
 INC += -I$(HEADERSL)
 INC += -I$(BUILD_DIR)
+INC += -I$(SDOL)
+INC += -I$(COEL) 
 INC += -I$(BUILD_DIR)/genhdr/
 
 #remove the unwaned warning of unused variables
@@ -68,6 +72,7 @@ FLAG_SIGN_COMPARE 	 = -Wno-sign-compare
 FLAG_OPT 		     = -Os
 #geneterate the report of the compilation
 FLAG_REPORT 		 = -report
+
 
 #flags with respect to XMOS core
 LDFLAGS +=$(INC)

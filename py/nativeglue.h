@@ -31,7 +31,6 @@
 #include "persistentcode.h"
 #include "stream.h"
 
-
 typedef enum {
     MP_F_CONST_NONE_OBJ = 0,
     MP_F_CONST_FALSE_OBJ,
@@ -180,6 +179,5 @@ extern const mp_fun_table_t mp_fun_table;
 // This only needs to be an independent pointer, content doesn't matter.
 extern const int mp_fun_table;
 #endif
-
 
 #endif // MICROPY_INCLUDED_PY_NATIVEGLUE_H

@@ -20,7 +20,7 @@ build/py/objdeque.o: ../../py/objdeque.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h ../../py/mpconfig.h ../../py/mpconfigport.h \
+ /usr/include/strings.h ../../py/mpconfig.h ../pyheader/mpconfigport.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/wchar.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h \
@@ -47,7 +47,7 @@ build/py/objdeque.o: ../../py/objdeque.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h :
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h :
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h :
- /usr/include/strings.h ../../py/mpconfig.h ../../py/mpconfigport.h :
+ /usr/include/strings.h ../../py/mpconfig.h ../pyheader/mpconfigport.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h :
  /usr/include/x86_64-linux-gnu/bits/wchar.h :
  /usr/include/x86_64-linux-gnu/bits/stdint-intn.h :

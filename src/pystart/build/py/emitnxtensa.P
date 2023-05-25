@@ -1,5 +1,5 @@
 build/py/emitnxtensa.o: ../../py/emitnxtensa.c /usr/include/stdc-predef.h \
- ../../py/mpconfig.h ../../py/mpconfigport.h \
+ ../../py/mpconfig.h ../pyheader/mpconfigport.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -17,7 +17,7 @@ build/py/emitnxtensa.o: ../../py/emitnxtensa.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/stdint-uintn.h /usr/include/alloca.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h
 ../../py/emitnxtensa.c /usr/include/stdc-predef.h :
- ../../py/mpconfig.h ../../py/mpconfigport.h :
+ ../../py/mpconfig.h ../pyheader/mpconfigport.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h :
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h :
  /usr/include/features.h /usr/include/features-time64.h :

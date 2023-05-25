@@ -59,13 +59,8 @@ STATIC void stdio_obj_print(const mp_print_t *print, mp_obj_t self_in, mp_print_
 
 STATIC mp_uint_t stdio_read(mp_obj_t self_in, void *buf, mp_uint_t size, int *errcode) {
     sys_stdio_obj_t *self = MP_OBJ_TO_PTR(self_in);
-    if (self->fd == STDIO_FD_IN) 
-    {
-        #ifdef MPY_DEBUGG_ENABLE
-            printf("DEBUGG: in stdio_read function!\n\r");
-        #endif             
-        for (uint i = 0; i < size; i++)
-         {
+    if (self->fd == STDIO_FD_IN) {
+        for (uint i = 0; i < size; i++) {
             int c = mp_hal_stdin_rx_chr();
             if (c == '\r') {
                 c = '\n';
@@ -149,14 +144,9 @@ STATIC mp_uint_t stdio_buffer_read(mp_obj_t self_in, void *buf, mp_uint_t size, 
     return size;
 }
 
-STATIC mp_uint_t stdio_buffer_write(mp_obj_t self_in, const void *buf, mp_uint_t size, int *errcode) 
-{
-
-   #ifdef MPY_DEBUGG_ENABLE
-          printf("DEBUGG: in stdio_buffer_write function!\n\r");
-   #endif  
-   mp_hal_stdout_tx_strn(buf, size);
-   return size;
+STATIC mp_uint_t stdio_buffer_write(mp_obj_t self_in, const void *buf, mp_uint_t size, int *errcode) {
+    mp_hal_stdout_tx_strn(buf, size);
+    return size;
 }
 
 STATIC const mp_stream_p_t stdio_buffer_obj_stream_p = {

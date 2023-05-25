@@ -1,5 +1,5 @@
 build/py/emitnx86.o: ../../py/emitnx86.c /usr/include/stdc-predef.h \
- ../../py/mpconfig.h ../../py/mpconfigport.h \
+ ../../py/mpconfig.h ../pyheader/mpconfigport.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h \
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h \
  /usr/include/features.h /usr/include/features-time64.h \
@@ -39,7 +39,7 @@ build/py/emitnx86.o: ../../py/emitnx86.c /usr/include/stdc-predef.h \
  /usr/include/linux/errno.h /usr/include/x86_64-linux-gnu/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h
 ../../py/emitnx86.c /usr/include/stdc-predef.h :
- ../../py/mpconfig.h ../../py/mpconfigport.h :
+ ../../py/mpconfig.h ../pyheader/mpconfigport.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h :
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h :
  /usr/include/features.h /usr/include/features-time64.h :

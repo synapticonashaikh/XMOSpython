@@ -28,7 +28,7 @@ build/py/asmx64.o: ../../py/asmx64.c /usr/include/stdc-predef.h \
  /usr/include/string.h \
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
- /usr/include/strings.h ../../py/mpconfig.h ../../py/mpconfigport.h \
+ /usr/include/strings.h ../../py/mpconfig.h ../pyheader/mpconfigport.h \
  /usr/include/alloca.h
 ../../py/asmx64.c /usr/include/stdc-predef.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h :
@@ -60,5 +60,5 @@ build/py/asmx64.o: ../../py/asmx64.c /usr/include/stdc-predef.h \
  /usr/include/string.h :
  /usr/include/x86_64-linux-gnu/bits/types/locale_t.h :
  /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h :
- /usr/include/strings.h ../../py/mpconfig.h ../../py/mpconfigport.h :
+ /usr/include/strings.h ../../py/mpconfig.h ../pyheader/mpconfigport.h :
  /usr/include/alloca.h :
