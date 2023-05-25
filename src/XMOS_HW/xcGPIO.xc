@@ -187,6 +187,7 @@ inline int32_t FnPortWrite(uint32_t uiport,uint32_t state)
         /*IO ports-32BITS*/
         case PORT32A: _Port32A <: state ; break; 
     }
+    delay_milliseconds(10) ;
     return state;
 }
 
