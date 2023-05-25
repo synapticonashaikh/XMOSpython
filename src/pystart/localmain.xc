@@ -208,8 +208,9 @@ int main( )
           unsafe
                 {
                     char * unsafe command = 
-                    "from gpio import *\n"
-                    "from delay import *\n"
+                    "from gpio import PortWrite\n"
+                    "from gpio import PORT4C\n"                    
+ //                   "from delay import *\n"
 
                     "while True:\n"
                     //"  delaymSec(10)\n"
