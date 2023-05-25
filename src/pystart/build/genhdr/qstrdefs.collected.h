@@ -6,8 +6,6 @@ Q(AssertionError)
 
 Q(AssertionError)
 
-Q(AssertionError)
-
 Q(AttributeError)
 
 Q(AttributeError)
@@ -212,16 +210,6 @@ Q(__build_class__)
 
 Q(__call__)
 
-Q(__class__)
-
-Q(__class__)
-
-Q(__class__)
-
-Q(__class__)
-
-Q(__class__)
-
 Q(__contains__)
 
 Q(__delitem__)
@@ -278,10 +266,6 @@ Q(__main__)
 
 Q(__main__)
 
-Q(__module__)
-
-Q(__name__)
-
 Q(__name__)
 
 Q(__name__)
@@ -324,10 +308,6 @@ Q(__path__)
 
 Q(__path__)
 
-Q(__qualname__)
-
-Q(__repl_print__)
-
 Q(__repl_print__)
 
 Q(__repr__)
@@ -350,41 +330,7 @@ Q(_brace_open__colon__hash_o_brace_close_)
 
 Q(_brace_open__colon__hash_x_brace_close_)
 
-Q(_lt_dictcomp_gt_)
-
-Q(_lt_dictcomp_gt_)
-
-Q(_lt_genexpr_gt_)
-
-Q(_lt_genexpr_gt_)
-
-Q(_lt_lambda_gt_)
-
-Q(_lt_lambda_gt_)
-
-Q(_lt_listcomp_gt_)
-
-Q(_lt_listcomp_gt_)
-
-Q(_lt_module_gt_)
-
-Q(_lt_module_gt_)
-
-Q(_lt_setcomp_gt_)
-
-Q(_lt_setcomp_gt_)
-
-Q(_lt_stdin_gt_)
-
-Q(_lt_stdin_gt_)
-
-Q(_lt_string_gt_)
-
 Q(_space_)
-
-Q(_star_)
-
-Q(_star_)
 
 Q(abs)
 
@@ -413,8 +359,6 @@ Q(bound_method)
 Q(builtins)
 
 Q(builtins)
-
-Q(bytecode)
 
 Q(bytes)
 
@@ -475,10 +419,6 @@ Q(end)
 Q(endswith)
 
 Q(errno)
-
-Q(eval)
-
-Q(exec)
 
 Q(extend)
 
@@ -606,8 +546,6 @@ Q(map)
 
 Q(map)
 
-Q(micropython)
-
 Q(module)
 
 Q(myport)
@@ -635,8 +573,6 @@ Q(popitem)
 Q(pow)
 
 Q(print)
-
-Q(range)
 
 Q(range)
 
@@ -693,8 +629,6 @@ Q(strcat)
 Q(strip)
 
 Q(sum)
-
-Q(super)
 
 Q(super)
 

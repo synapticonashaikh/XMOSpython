@@ -213,7 +213,9 @@ char * FnRunTheCommand(char *ByteCode,uint8_t BytecodeORStr)
 
     if (BytecodeORStr == SET)
     {
-      do_str(ByteCode, PARSE_FILE_INPUT);
+      #if MICROPY_ENABLE_COMPILER  
+          do_str(ByteCode, PARSE_FILE_INPUT);
+      #endif    
     }
     else
     {
