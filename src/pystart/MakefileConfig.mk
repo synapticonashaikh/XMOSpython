@@ -39,13 +39,14 @@ endif
 BUILD_DIR = build
 
 #target file which has the clock and other definitions
-#XCTarget  = $(TARGETL)C2X.xn
+#XCTarget = $(TARGETL)C2X.xn
 #XCTarget = -target= ../targets/C2X.xn
 #XCTarget = -target=XCORE-200-EXPLORER
 XCTarget  = -target=XCORE-AI-EXPLORER
 
 #define the compiler
-CMP = xcc $(XCTarget)
+#CMP = xcc $(XCTarget)
+CMP = cc
 #xflash --verbose --target XCORE-200-EXPLORER --boot-partition-size 0x90000  output.xe
 
 #include the all required path
@@ -61,7 +62,7 @@ INC += -I$(BUILD_DIR)/genhdr/
 #remove the unwaned warning of unused variables
 FLAG_UNUSED_VAR 	 = -Wno-unused-variable
 #remove the unwaned warning of function pointer
-FLAG_FUNTION_POINTER = -Wno-xcore-fptrgroup
+#FLAG_FUNTION_POINTER = -Wno-xcore-fptrgroup
 #remove unwanted warning of unsed parameter
 FLAG_UNSED_PARA    	 = -Wno-unused-parameter
 #remove the unwanted warning of missing field
@@ -71,7 +72,7 @@ FLAG_SIGN_COMPARE 	 = -Wno-sign-compare
 #set the optimisation level
 FLAG_OPT 		     = -Os
 #geneterate the report of the compilation
-FLAG_REPORT 		 = -report
+#FLAG_REPORT 		 = -report
 
 
 #flags with respect to XMOS core

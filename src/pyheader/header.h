@@ -246,7 +246,9 @@
 
 	/*********Timer structure **********/
 	typedef struct 
-	{	
+	{
+
+		//timer    stTime;
 		uint64_t uiCompareTime;
 		TIMERF	 TimerFlag;
 
@@ -285,9 +287,9 @@
 	void FndelaymSec (uint32_t uiTime);
 	void FndelaySec	 (uint32_t uiTime);
 
-	int32_t FnPortWrite(uint32_t uiport,uint32_t state);
-	int32_t FnPortRead (uint32_t uiport);
-	void    FnToggle(void);
+	int32_t FnPortWrite (uint32_t uiport,uint32_t state);
+	int32_t FnPortRead  (uint32_t uiport);
+	void 	FnPortToggle(uint32_t uiport);
 	
 	int  FnStartTheTimerIrq(uint32_t duration);
 

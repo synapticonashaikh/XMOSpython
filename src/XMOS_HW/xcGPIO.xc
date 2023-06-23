@@ -190,7 +190,7 @@ inline int32_t FnPortWrite(uint32_t uiport,uint32_t state)
         /*IO ports-32BITS*/
         case PORT32A: _Port32A <: state ; break; 
     }
-    delay_milliseconds(10) ;
+    delay_milliseconds(10); 
     return state;
 }
 
@@ -206,7 +206,6 @@ inline int32_t FnPortRead(uint32_t uiport)
  int support, state = ERROR;
  switch (uiport)
     {
-     
         /*IO ports-1BIT*/	
         case PORT1A:   _Port1A @ support :> state ; break;
         case PORT1B:   _Port1B @ support :> state ; break;
@@ -240,8 +239,9 @@ inline int32_t FnPortRead(uint32_t uiport)
         case PORT16A: _Port16A @ support :> state ; break; 
         case PORT16B: _Port16B @ support :> state ; break; 
         /*IO ports-32BITS*/
-        case PORT32A: _Port32A @ support :> state ; break;       
+        case PORT32A: _Port32A @ support :> state ; break;     
     }   
+delay_milliseconds(10);         
   return state;
 }
 
@@ -252,12 +252,8 @@ inline int32_t FnPortRead(uint32_t uiport)
  * Return Type	: int
  * Details	    : main function, start of the code
  * *********************************************************************/
-void FnToggle(void)
+void FnPortToggle(uint32_t uiport)
 {
-  static uint8_t toggy = 1;
-
-       toggy = !toggy;
-      _Port1L <: toggy;   
-      //FndelayuSec(1);
- }
+   FnPortWrite(uiport,!FnPortRead(uiport));
+}
 

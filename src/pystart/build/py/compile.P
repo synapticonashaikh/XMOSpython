@@ -50,7 +50,7 @@ build/py/compile.o: ../../py/compile.c /usr/include/stdc-predef.h \
  /usr/include/errno.h /usr/include/x86_64-linux-gnu/bits/errno.h \
  /usr/include/linux/errno.h /usr/include/x86_64-linux-gnu/asm/errno.h \
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h \
- ../../py/smallint.h
+ ../../py/smallint.h ../../py/grammar.h
 ../../py/compile.c /usr/include/stdc-predef.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/stdint.h /usr/include/stdint.h :
@@ -103,4 +103,4 @@ build/py/compile.o: ../../py/compile.c /usr/include/stdc-predef.h \
  /usr/include/errno.h /usr/include/x86_64-linux-gnu/bits/errno.h :
  /usr/include/linux/errno.h /usr/include/x86_64-linux-gnu/asm/errno.h :
  /usr/include/asm-generic/errno.h /usr/include/asm-generic/errno-base.h :
- ../../py/smallint.h :
+ ../../py/smallint.h ../../py/grammar.h :

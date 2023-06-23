@@ -1,6 +1,18 @@
+'break'/'continue' outside loop
+
+'yield' outside function
+
+* arg after **
+
+*x must be assignment target
+
 3-arg pow() not supported
 
+LHS of keyword arg must be an id
+
 __init__() should return None
+
+argument name reused
 
 argument num/types mismatch
 
@@ -10,11 +22,21 @@ bad format string
 
 bad typecode
 
+bytecode overflow
+
+can't assign to expression
+
+can't assign to expression
+
 can't convert to int
 
 can't convert to str implicitly
 
 can't create instance
+
+can't declare nonlocal in outer code
+
+can't delete expression
 
 can't import name %q
 
@@ -25,6 +47,8 @@ can't send non-None value to a just-started generator
 chr() arg not in range(256)
 
 decimal numbers not supported
+
+default 'except' must be last
 
 dict update sequence has wrong length
 
@@ -54,6 +78,10 @@ generator raised StopIteration
 
 generator raised StopIteration
 
+identifier redefined as global
+
+identifier redefined as nonlocal
+
 incompatible .mpy arch
 
 incompatible .mpy file
@@ -65,6 +93,20 @@ index out of range
 indices must be integers
 
 int() arg 2 must be >= 2 and <= 36
+
+invalid micropython decorator
+
+invalid micropython decorator
+
+invalid syntax
+
+invalid syntax
+
+invalid syntax
+
+invalid syntax
+
+invalid syntax
 
 invalid syntax for integer
 
@@ -83,6 +125,8 @@ memory allocation failed, allocating %u bytes
 memory allocation failed, heap is locked
 
 module not found
+
+multiple *x in assignment
 
 multiple bases have instance lay-out conflict
 
@@ -104,9 +148,13 @@ negative shift count
 
 no active exception to reraise
 
+no binding for nonlocal found
+
 no such attribute
 
 no such attribute
+
+non-default argument follows default argument
 
 object doesn't support item assignment
 
@@ -138,11 +186,11 @@ pop from empty list
 
 popitem(): dictionary is empty
 
+positional arg after **
+
+positional arg after keyword arg
+
 rsplit(None,n)
-
-script compilation not supported
-
-script compilation not supported
 
 small int overflow
 
@@ -158,6 +206,10 @@ stream operation not supported
 
 substring not found
 
+super() can't find self
+
+too many args
+
 tuple index out of range
 
 tuple index out of range
@@ -168,7 +220,13 @@ type isn't an acceptable base type
 
 type takes 1 or 3 arguments
 
+unexpected indent
+
 unexpected keyword argument
+
+unicode name escapes
+
+unindent doesn't match any outer indent level
 
 unsupported type for operator
 

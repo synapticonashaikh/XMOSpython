@@ -183,7 +183,7 @@ void FnReceiveProcess(char *Data)
                     char * uc1Space = strchr (ucChar,' ');  uc1Space ++;   
                     char * uc2Space = strrchr(ucChar,' '); *uc2Space = RESET;
                     uiCodeSize = strtol(uc1Space,NULL,(uint8_t)10);
-                    sprintf(cprint,"Status: code size = %d\n\r",uiCodeSize);
+                    sprintf(cprint,"Status: code size = %lu\n\r",uiCodeSize);
                     FnTransmitCharacter(cprint);  
                  }
                else goto down1;  

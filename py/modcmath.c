@@ -24,7 +24,7 @@
  * THE SOFTWARE.
  */
 
-#include "py/builtin.h"
+#include "builtin.h"
 
 #if MICROPY_PY_BUILTINS_FLOAT && MICROPY_PY_BUILTINS_COMPLEX && MICROPY_PY_CMATH
 

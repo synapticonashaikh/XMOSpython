@@ -145,12 +145,12 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(gpio_PortWrite_obj, gpio_PortWrite);
  * Return Type	: int
  * Details	    : main function, start of the code 
  * *********************************************************************/
-STATIC mp_obj_t gpio_Toggle(void) 
+STATIC mp_obj_t gpio_Toggle(mp_obj_t a) 
 {
-  FnToggle();
+  FnPortToggle(MP_OBJ_SMALL_INT_VALUE(a));
   return mp_const_none; 
 }
-STATIC MP_DEFINE_CONST_FUN_OBJ_0(gpio_Toggle_obj, gpio_Toggle);
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(gpio_Toggle_obj, gpio_Toggle);
 
 
 /***********************************************************************

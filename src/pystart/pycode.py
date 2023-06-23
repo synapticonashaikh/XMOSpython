@@ -4,7 +4,7 @@ from delay import *
 print('CODE STARTED')
 while True:
 	PortWrite(PORT4C,0x0F)
-	delaySec(1)
+	delaymSec(10)
 	PortWrite(PORT4C,0x00)
-	delaySec(1)
+	delaymSec(10)
 	

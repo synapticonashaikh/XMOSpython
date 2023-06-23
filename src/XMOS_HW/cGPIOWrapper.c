@@ -85,6 +85,7 @@
 */
 
     #include <stdio.h>
+    
     #include <xcore/triggerable.h>
     #include <xcore/port.h>
     #include <xcore/interrupt.h>

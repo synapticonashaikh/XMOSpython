@@ -124,26 +124,14 @@
       unsafe
       {
          char * unsafe command = 
-        // "from gpio import *\n"
 
-        // "def GPOICallback(self):\n"
-        // "    print('callback function!')\n"
-
-        // "pirq(handler=GPOICallback)\n"
-        // "count = 0\n"
-        // "while True:\n"
-        // "      pass\n";
-
-
-      "from gpio import *\n"
-      "from delay import *\n"
-
+      "from delay import delaySec\n"
+      "from delay import delaymSec\n"
+      "Count = 1\n"
       "while True:\n"
-      "  delaymSec(10)\n"
-      "  PortWrite(PORT4C,0x0F)\n"
-      "  delaymSec(10)\n"
-      "  PortWrite(PORT4C,0x00)\n";        
-
+      "   print('Time MS =' + str(Count))\n"
+      "   delaymSec(100)\n"
+      "   Count = Count + 1\n";
       upy.FnExecute(command);
       
       while (SET);
@@ -165,7 +153,8 @@
       {
         select 
           {
-              case upy.FnExecute(char * unsafe string): 
+              case upy.FnExecute(char * unsafe string):
+              printf("Script received!\n%s",string);
               FnRunTheCommand(string,SET); 
               break ;
               default: break; // to make the select non-blockable 
