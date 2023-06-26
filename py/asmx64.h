@@ -26,9 +26,9 @@
 #ifndef MICROPY_INCLUDED_PY_ASMX64_H
 #define MICROPY_INCLUDED_PY_ASMX64_H
 
-#include "mpconfig.h"
-#include "misc.h"
-#include "asmbase.h"
+#include "py/mpconfig.h"
+#include "py/misc.h"
+#include "py/asmbase.h"
 
 // AMD64 calling convention is:
 //  - args pass in: RDI, RSI, RDX, RCX, R08, R09

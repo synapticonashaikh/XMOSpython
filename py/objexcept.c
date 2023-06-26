@@ -30,13 +30,13 @@
 #include <assert.h>
 #include <stdio.h>
 
-#include "objlist.h"
-#include "objstr.h"
-#include "objtuple.h"
-#include "objtype.h"
-#include "runtime.h"
-#include "gc.h"
-#include "mperrno.h"
+#include "py/objlist.h"
+#include "py/objstr.h"
+#include "py/objtuple.h"
+#include "py/objtype.h"
+#include "py/runtime.h"
+#include "py/gc.h"
+#include "py/mperrno.h"
 
 #if MICROPY_ROM_TEXT_COMPRESSION && !defined(NO_QSTR)
 // Extract the MP_MAX_UNCOMPRESSED_TEXT_LEN macro from "genhdr/compressed.data.h".
@@ -178,7 +178,7 @@ void mp_obj_exception_print(const mp_print_t *print, mp_obj_t o_in, mp_print_kin
             return;
         }
 
-        #if MICROPY_PY_UERRNO
+        #if MICROPY_PY_ERRNO
         // try to provide a nice OSError error message
         if (o->base.type == &mp_type_OSError && o->args->len > 0 && o->args->len < 3 && mp_obj_is_small_int(o->args->items[0])) {
             qstr qst = mp_errno_to_str(o->args->items[0]);

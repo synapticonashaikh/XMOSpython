@@ -26,7 +26,7 @@
 
 #include <stdio.h>
 
-#include "runtime.h"
+#include "py/runtime.h"
 
 #if MICROPY_ENABLE_PYSTACK
 

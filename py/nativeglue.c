@@ -29,10 +29,10 @@
 #include <string.h>
 #include <assert.h>
 
-#include "runtime.h"
-#include "smallint.h"
-#include "nativeglue.h"
-#include "gc.h"
+#include "py/runtime.h"
+#include "py/smallint.h"
+#include "py/nativeglue.h"
+#include "py/gc.h"
 
 #if MICROPY_DEBUG_VERBOSE // print debugging info
 #define DEBUG_printf DEBUG_printf

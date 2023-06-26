@@ -30,14 +30,14 @@
 #include <string.h>
 #include <assert.h>
 
-#include "scope.h"
-#include "emit.h"
-#include "compile.h"
-#include "runtime.h"
-#include "asmbase.h"
-#include "nativeglue.h"
-#include "persistentcode.h"
-#include "smallint.h"
+#include "py/scope.h"
+#include "py/emit.h"
+#include "py/compile.h"
+#include "py/runtime.h"
+#include "py/asmbase.h"
+#include "py/nativeglue.h"
+#include "py/persistentcode.h"
+#include "py/smallint.h"
 
 #if MICROPY_ENABLE_COMPILER
 
@@ -49,14 +49,14 @@ typedef enum {
 // define rules with a compile function
 #define DEF_RULE(rule, comp, kind, ...) PN_##rule,
 #define DEF_RULE_NC(rule, kind, ...)
-    #include "grammar.h"
+    #include "py/grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
     PN_const_object, // special node for a constant, generic Python object
 // define rules without a compile function
 #define DEF_RULE(rule, comp, kind, ...)
 #define DEF_RULE_NC(rule, kind, ...) PN_##rule,
-    #include "grammar.h"
+    #include "py/grammar.h"
 #undef DEF_RULE
 #undef DEF_RULE_NC
 } pn_kind_t;
@@ -2761,7 +2761,7 @@ STATIC const compile_function_t compile_function[] = {
 #define c(f) compile_##f
 #define DEF_RULE(rule, comp, kind, ...) comp,
 #define DEF_RULE_NC(rule, kind, ...)
-    #include "grammar.h"
+    #include "py/grammar.h"
 #undef c
 #undef DEF_RULE
 #undef DEF_RULE_NC
@@ -2798,11 +2798,11 @@ STATIC void compile_node(compiler_t *comp, mp_parse_node_t pn) {
         mp_parse_node_struct_t *pns = (mp_parse_node_struct_t *)pn;
         EMIT_ARG(set_source_line, pns->source_line);
         assert(MP_PARSE_NODE_STRUCT_KIND(pns) <= PN_const_object);
-        #ifdef __XC__
+	#ifdef __XC__
          __attribute__(( fptrgroup("Aatif") ))compile_function_t f = compile_function[MP_PARSE_NODE_STRUCT_KIND(pns)];
-        #else
-        compile_function_t f = compile_function[MP_PARSE_NODE_STRUCT_KIND(pns)];       
-        #endif 
+	#else
+        compile_function_t f = compile_function[MP_PARSE_NODE_STRUCT_KIND(pns)];
+	#endif
         f(comp, pns);
     }
 }

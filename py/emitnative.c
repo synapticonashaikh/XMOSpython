@@ -46,10 +46,10 @@
 #include <string.h>
 #include <assert.h>
 
-#include "emit.h"
-#include "nativeglue.h"
-#include "objfun.h"
-#include "objstr.h"
+#include "py/emit.h"
+#include "py/nativeglue.h"
+#include "py/objfun.h"
+#include "py/objstr.h"
 
 #if MICROPY_DEBUG_VERBOSE // print debugging info
 #define DEBUG_PRINT (1)

@@ -31,10 +31,10 @@
 #include <string.h>
 #include <assert.h>
 
-#include "binary.h"
-#include "smallint.h"
-#include "objint.h"
-#include "runtime.h"
+#include "py/binary.h"
+#include "py/smallint.h"
+#include "py/objint.h"
+#include "py/runtime.h"
 
 // Helpers to work with binary-encoded data
 

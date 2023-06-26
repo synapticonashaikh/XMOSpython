@@ -205,6 +205,9 @@ char * FnRunTheCommand(char *ByteCode,uint8_t BytecodeORStr)
 {
     
     static char *ret  = "Sucess!";
+    int stack_dummy;
+    stack_top = (char *)&stack_dummy;    
+    
     #if MICROPY_ENABLE_GC
         gc_init(heap, heap + sizeof(heap));
     #endif

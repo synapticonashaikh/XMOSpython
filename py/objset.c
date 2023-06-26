@@ -28,8 +28,8 @@
 #include <string.h>
 #include <assert.h>
 
-#include "runtime.h"
-#include "builtin.h"
+#include "py/runtime.h"
+#include "py/builtin.h"
 
 #if MICROPY_PY_BUILTINS_SET
 

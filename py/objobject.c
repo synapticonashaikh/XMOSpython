@@ -26,8 +26,8 @@
 
 #include <stdlib.h>
 
-#include "objtype.h"
-#include "runtime.h"
+#include "py/objtype.h"
+#include "py/runtime.h"
 
 typedef struct _mp_obj_object_t {
     mp_obj_base_t base;

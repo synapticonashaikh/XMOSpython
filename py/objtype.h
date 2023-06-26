@@ -26,7 +26,7 @@
 #ifndef MICROPY_INCLUDED_PY_OBJTYPE_H
 #define MICROPY_INCLUDED_PY_OBJTYPE_H
 
-#include "obj.h"
+#include "py/obj.h"
 
 // instance object
 // creating an instance of a class makes one of these objects

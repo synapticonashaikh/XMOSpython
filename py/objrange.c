@@ -26,7 +26,7 @@
 
 #include <stdlib.h>
 
-#include "runtime.h"
+#include "py/runtime.h"
 
 /******************************************************************************/
 /* range iterator                                                             */

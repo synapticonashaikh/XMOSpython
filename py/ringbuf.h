@@ -30,7 +30,7 @@
 #include <stdint.h>
 
 #ifdef _MSC_VER
-#include "mpconfig.h" // For inline.
+#include "py/mpconfig.h" // For inline.
 #endif
 
 typedef struct _ringbuf_t {

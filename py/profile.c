@@ -24,10 +24,10 @@
  * THE SOFTWARE.
  */
 
-#include "profile.h"
-#include "bc0.h"
-#include "gc.h"
-#include "objfun.h"
+#include "py/profile.h"
+#include "py/bc0.h"
+#include "py/gc.h"
+#include "py/objfun.h"
 
 #if MICROPY_PY_SYS_SETTRACE
 
@@ -177,7 +177,6 @@ MP_DEFINE_CONST_OBJ_TYPE(
     MP_QSTR_code,
     MP_TYPE_FLAG_NONE,
     print, code_print,
-    unary_op, mp_generic_unary_op,
     attr, code_attr
     );
 
@@ -247,7 +246,6 @@ MP_DEFINE_CONST_OBJ_TYPE(
     MP_QSTR_frame,
     MP_TYPE_FLAG_NONE,
     print, frame_print,
-    unary_op, mp_generic_unary_op,
     attr, frame_attr
     );
 

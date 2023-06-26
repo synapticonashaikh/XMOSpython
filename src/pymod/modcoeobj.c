@@ -116,7 +116,7 @@ STATIC mp_obj_t OBJDITC_SetObjectValue(mp_obj_t arg_in)
 { 
 
     char      buffer [50]= {'\0'};
-    sprintf  (buffer,"Length of list=%d\n\r",
+    sprintf  (buffer,"Length of list=%ld\n\r",
     mp_obj_get_int(mp_obj_len(arg_in))); mp_printf(&mp_plat_print, buffer);
 
     /*check if the list is of 6 element*/

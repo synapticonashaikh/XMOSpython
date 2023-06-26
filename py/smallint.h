@@ -26,8 +26,8 @@
 #ifndef MICROPY_INCLUDED_PY_SMALLINT_H
 #define MICROPY_INCLUDED_PY_SMALLINT_H
 
-#include "mpconfig.h"
-#include "misc.h"
+#include "py/mpconfig.h"
+#include "py/misc.h"
 
 // Functions for small integer arithmetic
 

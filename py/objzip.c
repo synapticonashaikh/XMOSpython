@@ -27,8 +27,8 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#include "objtuple.h"
-#include "runtime.h"
+#include "py/objtuple.h"
+#include "py/runtime.h"
 
 typedef struct _mp_obj_zip_t {
     mp_obj_base_t base;

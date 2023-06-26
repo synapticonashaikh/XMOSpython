@@ -27,7 +27,7 @@
 #ifndef MICROPY_INCLUDED_PY_PROFILING_H
 #define MICROPY_INCLUDED_PY_PROFILING_H
 
-#include "emitglue.h"
+#include "py/emitglue.h"
 
 #if MICROPY_PY_SYS_SETTRACE
 

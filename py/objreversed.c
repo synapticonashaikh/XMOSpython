@@ -27,7 +27,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#include "runtime.h"
+#include "py/runtime.h"
 
 #if MICROPY_PY_BUILTINS_REVERSED
 

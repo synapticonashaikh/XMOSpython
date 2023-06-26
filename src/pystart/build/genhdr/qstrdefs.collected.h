@@ -324,6 +324,8 @@ Q(__path__)
 
 Q(__path__)
 
+Q(__path__)
+
 Q(__qualname__)
 
 Q(__repl_print__)

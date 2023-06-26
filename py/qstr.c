@@ -28,10 +28,10 @@
 #include <string.h>
 #include <stdio.h>
 
-#include "mpstate.h"
-#include "qstr.h"
-#include "gc.h"
-#include "runtime.h"
+#include "py/mpstate.h"
+#include "py/qstr.h"
+#include "py/gc.h"
+#include "py/runtime.h"
 
 // NOTE: we are using linear arrays to store and search for qstr's (unique strings, interned strings)
 // ultimately we will replace this with a static hash table of some kind

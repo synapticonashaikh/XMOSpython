@@ -30,14 +30,14 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "mphal.h"
-#include "mpprint.h"
-#include "obj.h"
-#include "objint.h"
-#include "runtime.h"
+#include "py/mphal.h"
+#include "py/mpprint.h"
+#include "py/obj.h"
+#include "py/objint.h"
+#include "py/runtime.h"
 
 #if MICROPY_PY_BUILTINS_FLOAT
-#include "formatfloat.h"
+#include "py/formatfloat.h"
 #endif
 
 static const char pad_spaces[] = "                ";

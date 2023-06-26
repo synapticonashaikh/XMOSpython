@@ -27,7 +27,7 @@
 #ifndef MICROPY_INCLUDED_PY_BC_H
 #define MICROPY_INCLUDED_PY_BC_H
 
-#include "runtime.h"
+#include "py/runtime.h"
 
 // bytecode layout:
 //

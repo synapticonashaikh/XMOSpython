@@ -52,9 +52,9 @@ build/py/runtime.o: ../../py/runtime.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h ../../py/objlist.h \
  ../../py/objexcept.h ../../py/objtuple.h build/genhdr/root_pointers.h \
  ../../py/pystack.h ../../py/objstr.h ../../py/objarray.h \
- ../../py/objtype.h ../../py/objmodule.h ../../py/objgenerator.h \
- ../../py/smallint.h ../../py/builtin.h ../../py/stackctrl.h \
- ../../py/gc.h
+ ../../py/objtype.h ../../py/objmodule.h build/genhdr/moduledefs.h \
+ ../../py/objgenerator.h ../../py/smallint.h ../../py/builtin.h \
+ ../../py/stackctrl.h ../../py/gc.h
 ../../py/runtime.c /usr/include/stdc-predef.h :
  /usr/include/assert.h /usr/include/features.h :
  /usr/include/features-time64.h :
@@ -109,6 +109,6 @@ build/py/runtime.o: ../../py/runtime.c /usr/include/stdc-predef.h \
  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h ../../py/objlist.h :
  ../../py/objexcept.h ../../py/objtuple.h build/genhdr/root_pointers.h :
  ../../py/pystack.h ../../py/objstr.h ../../py/objarray.h :
- ../../py/objtype.h ../../py/objmodule.h ../../py/objgenerator.h :
- ../../py/smallint.h ../../py/builtin.h ../../py/stackctrl.h :
- ../../py/gc.h :
+ ../../py/objtype.h ../../py/objmodule.h build/genhdr/moduledefs.h :
+ ../../py/objgenerator.h ../../py/smallint.h ../../py/builtin.h :
+ ../../py/stackctrl.h ../../py/gc.h :

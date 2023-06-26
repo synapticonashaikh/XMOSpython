@@ -26,8 +26,8 @@
 #ifndef MICROPY_INCLUDED_PY_ASMXTENSA_H
 #define MICROPY_INCLUDED_PY_ASMXTENSA_H
 
-#include "misc.h"
-#include "asmbase.h"
+#include "py/misc.h"
+#include "py/asmbase.h"
 
 // calling conventions:
 // up to 6 args in a2-a7

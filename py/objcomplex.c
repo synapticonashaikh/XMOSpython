@@ -28,13 +28,13 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include "parsenum.h"
-#include "runtime.h"
+#include "py/parsenum.h"
+#include "py/runtime.h"
 
 #if MICROPY_PY_BUILTINS_COMPLEX
 
 #include <math.h>
-#include "formatfloat.h"
+#include "py/formatfloat.h"
 
 typedef struct _mp_obj_complex_t {
     mp_obj_base_t base;

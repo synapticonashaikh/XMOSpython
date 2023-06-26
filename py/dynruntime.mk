@@ -131,7 +131,7 @@ $(CONFIG_H): $(SRC)
 
 # Build .o from .c source files
 $(BUILD)/%.o: %.c $(CONFIG_H) Makefile
-	$(ECHO) "CC $<"
+#	$(ECHO) "CC $<"
 	$(Q)$(CROSS)gcc $(CFLAGS) -o $@ -c $<
 
 # Build .o from .S source files

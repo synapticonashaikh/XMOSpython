@@ -28,9 +28,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "smallint.h"
-#include "objint.h"
-#include "runtime.h"
+#include "py/smallint.h"
+#include "py/objint.h"
+#include "py/runtime.h"
 
 #if MICROPY_PY_BUILTINS_FLOAT
 #include <math.h>
@@ -119,6 +119,8 @@ mp_obj_t mp_obj_int_unary_op(mp_unary_op_t op, mp_obj_t o_in) {
             self->val = -self->val;
             return MP_OBJ_FROM_PTR(self);
         }
+        case MP_UNARY_OP_INT_MAYBE:
+            return o_in;
         default:
             return MP_OBJ_NULL;      // op not supported
     }

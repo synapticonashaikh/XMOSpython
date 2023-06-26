@@ -24,7 +24,7 @@
  * THE SOFTWARE.
  */
 
-#include "obj.h"
+#include "py/obj.h"
 
 #if MICROPY_ERROR_REPORTING == MICROPY_ERROR_REPORTING_DETAILED
 STATIC void cell_print(const mp_print_t *print, mp_obj_t o_in, mp_print_kind_t kind) {

@@ -28,13 +28,13 @@
 #include <assert.h>
 #include <string.h>
 
-#include "mpconfig.h"
+#include "py/mpconfig.h"
 
 // wrapper around everything in this file
 #if MICROPY_EMIT_THUMB || MICROPY_EMIT_INLINE_THUMB
 
-#include "mpstate.h"
-#include "asmthumb.h"
+#include "py/mpstate.h"
+#include "py/asmthumb.h"
 
 #ifdef _MSC_VER
 #include <intrin.h>

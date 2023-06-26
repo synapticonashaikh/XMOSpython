@@ -28,9 +28,9 @@
 #include <string.h>
 #include <assert.h>
 
-#include "reader.h"
-#include "lexer.h"
-#include "runtime.h"
+#include "py/reader.h"
+#include "py/lexer.h"
+#include "py/runtime.h"
 
 #if MICROPY_ENABLE_COMPILER
 

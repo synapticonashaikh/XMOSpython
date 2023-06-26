@@ -46,7 +46,7 @@ build/py/modmicropython.o: ../../py/modmicropython.c \
  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h ../../py/objlist.h \
  ../../py/objexcept.h ../../py/objtuple.h build/genhdr/root_pointers.h \
  ../../py/pystack.h ../../py/gc.h ../../py/mphal.h ../../py/mphalport.h \
- ../../py/virtpin.h
+ ../../py/virtpin.h ../../py/obj.h
 ../../py/modmicropython.c :
  /usr/include/stdc-predef.h /usr/include/stdio.h :
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h :
@@ -95,4 +95,4 @@ build/py/modmicropython.o: ../../py/modmicropython.c \
  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h ../../py/objlist.h :
  ../../py/objexcept.h ../../py/objtuple.h build/genhdr/root_pointers.h :
  ../../py/pystack.h ../../py/gc.h ../../py/mphal.h ../../py/mphalport.h :
- ../../py/virtpin.h :
+ ../../py/virtpin.h ../../py/obj.h :

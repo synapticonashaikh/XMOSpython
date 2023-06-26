@@ -27,10 +27,10 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-#include "runtime.h"
-#include "parsenumbase.h"
-#include "parsenum.h"
-#include "smallint.h"
+#include "py/runtime.h"
+#include "py/parsenumbase.h"
+#include "py/parsenum.h"
+#include "py/smallint.h"
 
 #if MICROPY_PY_BUILTINS_FLOAT
 #include <math.h>
@@ -214,7 +214,7 @@ static void accept_digit(mp_float_t *p_dec_val, int dig, int *p_exp_extra, int i
         }
     }
 }
-#endif // MICROPY_BUILTINS_FLOAT
+#endif // MICROPY_PY_BUILTINS_FLOAT
 
 #if MICROPY_PY_BUILTINS_COMPLEX
 mp_obj_t mp_parse_num_decimal(const char *str, size_t len, bool allow_imag, bool force_complex, mp_lexer_t *lex)

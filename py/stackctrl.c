@@ -24,8 +24,8 @@
  * THE SOFTWARE.
  */
 
-#include "runtime.h"
-#include "stackctrl.h"
+#include "py/runtime.h"
+#include "py/stackctrl.h"
 
 void mp_stack_ctrl_init(void) {
     #if __GNUC__ >= 13

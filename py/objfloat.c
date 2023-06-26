@@ -29,13 +29,13 @@
 #include <string.h>
 #include <assert.h>
 
-#include "parsenum.h"
-#include "runtime.h"
+#include "py/parsenum.h"
+#include "py/runtime.h"
 
 #if MICROPY_PY_BUILTINS_FLOAT
 
 #include <math.h>
-#include "formatfloat.h"
+#include "py/formatfloat.h"
 
 #if MICROPY_OBJ_REPR != MICROPY_OBJ_REPR_C && MICROPY_OBJ_REPR != MICROPY_OBJ_REPR_D
 

@@ -33,7 +33,7 @@ build/py/builtinhelp.o: ../../py/builtinhelp.c /usr/include/stdc-predef.h \
  ../../py/misc.h /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
  build/genhdr/compressed.data.h ../../py/qstr.h \
  build/genhdr/qstrdefs.generated.h ../../py/mpprint.h ../../py/runtime0.h \
- ../../py/objmodule.h
+ ../../py/objmodule.h build/genhdr/moduledefs.h
 ../../py/builtinhelp.c /usr/include/stdc-predef.h :
  /usr/include/stdio.h :
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h :
@@ -69,4 +69,4 @@ build/py/builtinhelp.o: ../../py/builtinhelp.c /usr/include/stdc-predef.h \
  ../../py/misc.h /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h :
  build/genhdr/compressed.data.h ../../py/qstr.h :
  build/genhdr/qstrdefs.generated.h ../../py/mpprint.h ../../py/runtime0.h :
- ../../py/objmodule.h :
+ ../../py/objmodule.h build/genhdr/moduledefs.h :

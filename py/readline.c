@@ -28,10 +28,10 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "mpstate.h"
-#include "repl.h"
-#include "mphal.h"
-#include "readline.h"
+#include "py/mpstate.h"
+#include "py/repl.h"
+#include "py/mphal.h"
+#include "py/readline.h"
 
 #if 0 // print debugging info
 #define DEBUG_PRINT (1)
@@ -550,11 +550,12 @@ void readline_init(vstr_t *line, const char *prompt) {
         // start with auto-indent enabled
         rl.auto_indent_state = AUTO_INDENT_ENABLED;
     }
-    readline_auto_indent( );
+    readline_auto_indent();
     #endif
 }
 
-int readline(vstr_t *line, const char *prompt) {
+int readline(vstr_t *line, const char *prompt) 
+{
     readline_init(line, prompt);
     for (;;) {
         int c = mp_hal_stdin_rx_chr(); if (c == 10)c = 13; 

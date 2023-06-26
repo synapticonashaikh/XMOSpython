@@ -27,12 +27,12 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "runtime.h"
-#include "stackctrl.h"
+#include "py/runtime.h"
+#include "py/stackctrl.h"
 
 #if MICROPY_PY_THREAD
 
-#include "mpthread.h"
+#include "py/mpthread.h"
 
 #if MICROPY_DEBUG_VERBOSE // print debugging info
 #define DEBUG_PRINT (1)

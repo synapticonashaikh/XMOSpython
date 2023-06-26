@@ -27,7 +27,7 @@
 
 #include <string.h>
 
-#include "runtime.h"
+#include "py/runtime.h"
 
 // Helpers for sequence types
 

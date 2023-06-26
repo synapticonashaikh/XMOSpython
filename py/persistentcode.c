@@ -29,16 +29,16 @@
 #include <string.h>
 #include <assert.h>
 
-#include "reader.h"
-#include "nativeglue.h"
-#include "persistentcode.h"
-#include "bc0.h"
-#include "objstr.h"
-#include "mpthread.h"
+#include "py/reader.h"
+#include "py/nativeglue.h"
+#include "py/persistentcode.h"
+#include "py/bc0.h"
+#include "py/objstr.h"
+#include "py/mpthread.h"
 
 #if MICROPY_PERSISTENT_CODE_LOAD || MICROPY_PERSISTENT_CODE_SAVE
 
-#include "smallint.h"
+#include "py/smallint.h"
 
 #define QSTR_LAST_STATIC MP_QSTR_zip
 
@@ -458,7 +458,7 @@ void mp_raw_code_load_file(const char *filename, mp_compiled_module_t *context) 
 
 #if MICROPY_PERSISTENT_CODE_SAVE
 
-#include "objstr.h"
+#include "py/objstr.h"
 
 STATIC void mp_print_bytes(mp_print_t *print, const byte *data, size_t len) {
     print->print_strn(print->data, (const char *)data, len);

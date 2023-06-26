@@ -28,8 +28,8 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-#include "emit.h"
-#include "runtime.h"
+#include "py/emit.h"
+#include "py/runtime.h"
 
 #if MICROPY_WARNINGS
 

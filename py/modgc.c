@@ -24,9 +24,9 @@
  * THE SOFTWARE.
  */
 
-#include "mpstate.h"
-#include "obj.h"
-#include "gc.h"
+#include "py/mpstate.h"
+#include "py/obj.h"
+#include "py/gc.h"
 
 #if MICROPY_PY_GC && MICROPY_ENABLE_GC
 

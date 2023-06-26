@@ -27,7 +27,7 @@
 #define MICROPY_INCLUDED_PY_MPHAL_H
 
 #include <stdint.h>
-#include "mpconfig.h"
+#include "py/mpconfig.h"
 
 #ifdef MICROPY_MPHALPORT_H
 #include MICROPY_MPHALPORT_H
@@ -87,7 +87,7 @@ uint64_t mp_hal_time_ns(void);
 #define mp_hal_get_pin_obj(pin) (pin)
 #define mp_hal_pin_read(pin) mp_virtual_pin_read(pin)
 #define mp_hal_pin_write(pin, v) mp_virtual_pin_write(pin, v)
-#include "virtpin.h"
+#include "py/virtpin.h"
 #endif
 
 #endif // MICROPY_INCLUDED_PY_MPHAL_H

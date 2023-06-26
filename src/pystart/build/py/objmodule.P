@@ -60,7 +60,7 @@ build/py/objmodule.o: ../../py/objmodule.c /usr/include/stdc-predef.h \
  ../../py/qstr.h build/genhdr/qstrdefs.generated.h ../../py/mpprint.h \
  ../../py/runtime0.h ../../py/objlist.h ../../py/objexcept.h \
  ../../py/objtuple.h build/genhdr/root_pointers.h ../../py/pystack.h \
- ../../py/objmodule.h ../../py/builtin.h build/genhdr/moduledefs.h
+ ../../py/objmodule.h build/genhdr/moduledefs.h ../../py/builtin.h
 ../../py/objmodule.c /usr/include/stdc-predef.h :
  /usr/include/stdlib.h :
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h :
@@ -123,4 +123,4 @@ build/py/objmodule.o: ../../py/objmodule.c /usr/include/stdc-predef.h \
  ../../py/qstr.h build/genhdr/qstrdefs.generated.h ../../py/mpprint.h :
  ../../py/runtime0.h ../../py/objlist.h ../../py/objexcept.h :
  ../../py/objtuple.h build/genhdr/root_pointers.h ../../py/pystack.h :
- ../../py/objmodule.h ../../py/builtin.h build/genhdr/moduledefs.h :
+ ../../py/objmodule.h build/genhdr/moduledefs.h ../../py/builtin.h :

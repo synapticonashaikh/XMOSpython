@@ -27,8 +27,8 @@
 #ifndef MICROPY_INCLUDED_PY_ASMARM_H
 #define MICROPY_INCLUDED_PY_ASMARM_H
 
-#include "misc.h"
-#include "asmbase.h"
+#include "py/misc.h"
+#include "py/asmbase.h"
 
 #define ASM_ARM_REG_R0  (0)
 #define ASM_ARM_REG_R1  (1)

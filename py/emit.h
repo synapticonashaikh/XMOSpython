@@ -26,8 +26,8 @@
 #ifndef MICROPY_INCLUDED_PY_EMIT_H
 #define MICROPY_INCLUDED_PY_EMIT_H
 
-#include "lexer.h"
-#include "scope.h"
+#include "py/lexer.h"
+#include "py/scope.h"
 
 /* Notes on passes:
  * We don't know exactly the opcodes in pass 1 because they depend on the

@@ -29,19 +29,19 @@
 #include <stdint.h>
 #include <string.h>
 
-#include "compile.h"
-#include "runtime.h"
-#include "repl.h"
-#include "gc.h"
-#include "frozenmod.h"
-#include "mphal.h"
+#include "py/compile.h"
+#include "py/runtime.h"
+#include "py/repl.h"
+#include "py/gc.h"
+#include "py/frozenmod.h"
+#include "py/mphal.h"
 #if MICROPY_HW_ENABLE_USB
 #include "irq.h"
 #include "usb.h"
 #endif
-#include "readline.h"
-#include "pyexec.h"
-#include "mpversion.h"
+#include "py/readline.h"
+#include "py/pyexec.h"
+#include "py/mpversion.h"
 
 pyexec_mode_kind_t pyexec_mode_kind = PYEXEC_MODE_FRIENDLY_REPL;
 int pyexec_system_exit = 0;

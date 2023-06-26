@@ -23,8 +23,8 @@ build/py/repl.o: ../../py/repl.c /usr/include/stdc-predef.h \
  ../../py/misc.h /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h \
  build/genhdr/compressed.data.h ../../py/qstr.h \
  build/genhdr/qstrdefs.generated.h ../../py/mpprint.h ../../py/runtime0.h \
- ../../py/objmodule.h ../../py/runtime.h ../../py/mpstate.h \
- ../../py/mpthread.h ../../py/nlr.h \
+ ../../py/objmodule.h build/genhdr/moduledefs.h ../../py/runtime.h \
+ ../../py/mpstate.h ../../py/mpthread.h ../../py/nlr.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h \
  /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h \
  /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h \
@@ -60,8 +60,8 @@ build/py/repl.o: ../../py/repl.c /usr/include/stdc-predef.h \
  ../../py/misc.h /usr/lib/gcc/x86_64-linux-gnu/11/include/stdbool.h :
  build/genhdr/compressed.data.h ../../py/qstr.h :
  build/genhdr/qstrdefs.generated.h ../../py/mpprint.h ../../py/runtime0.h :
- ../../py/objmodule.h ../../py/runtime.h ../../py/mpstate.h :
- ../../py/mpthread.h ../../py/nlr.h :
+ ../../py/objmodule.h build/genhdr/moduledefs.h ../../py/runtime.h :
+ ../../py/mpstate.h ../../py/mpthread.h ../../py/nlr.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/limits.h :
  /usr/lib/gcc/x86_64-linux-gnu/11/include/syslimits.h :
  /usr/include/limits.h /usr/include/x86_64-linux-gnu/bits/posix1_lim.h :

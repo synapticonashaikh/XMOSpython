@@ -26,7 +26,7 @@
 
 #include <stdint.h>
 
-#include "unicode.h"
+#include "py/unicode.h"
 
 // attribute flags
 #define FL_PRINT (0x01)

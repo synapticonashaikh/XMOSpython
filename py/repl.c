@@ -25,11 +25,11 @@
  */
 
 #include <string.h>
-#include "obj.h"
-#include "objmodule.h"
-#include "runtime.h"
-#include "builtin.h"
-#include "repl.h"
+#include "py/obj.h"
+#include "py/objmodule.h"
+#include "py/runtime.h"
+#include "py/builtin.h"
+#include "py/repl.h"
 
 #if MICROPY_HELPER_REPL
 
@@ -162,8 +162,8 @@ STATIC bool test_qstr(mp_obj_t obj, qstr name) {
         return dest[0] != MP_OBJ_NULL;
     } else {
         // try builtin module
-        return mp_map_lookup((mp_map_t *)&mp_builtin_module_map,
-            MP_OBJ_NEW_QSTR(name), MP_MAP_LOOKUP);
+        return mp_map_lookup((mp_map_t *)&mp_builtin_module_map, MP_OBJ_NEW_QSTR(name), MP_MAP_LOOKUP) ||
+               mp_map_lookup((mp_map_t *)&mp_builtin_extensible_module_map, MP_OBJ_NEW_QSTR(name), MP_MAP_LOOKUP);
     }
 }
 

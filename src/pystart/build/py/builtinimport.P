@@ -44,8 +44,8 @@ build/py/builtinimport.o: ../../py/builtinimport.c \
  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min.h \
  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h ../../py/objlist.h \
  ../../py/objexcept.h ../../py/objtuple.h build/genhdr/root_pointers.h \
- ../../py/pystack.h ../../py/objmodule.h ../../py/persistentcode.h \
- ../../py/builtin.h ../../py/frozenmod.h
+ ../../py/pystack.h ../../py/objmodule.h build/genhdr/moduledefs.h \
+ ../../py/persistentcode.h ../../py/builtin.h ../../py/frozenmod.h
 ../../py/builtinimport.c :
  /usr/include/stdc-predef.h /usr/include/stdio.h :
  /usr/include/x86_64-linux-gnu/bits/libc-header-start.h :
@@ -92,5 +92,5 @@ build/py/builtinimport.o: ../../py/builtinimport.c \
  /usr/include/x86_64-linux-gnu/bits/pthread_stack_min.h :
  /usr/include/x86_64-linux-gnu/bits/posix2_lim.h ../../py/objlist.h :
  ../../py/objexcept.h ../../py/objtuple.h build/genhdr/root_pointers.h :
- ../../py/pystack.h ../../py/objmodule.h ../../py/persistentcode.h :
- ../../py/builtin.h ../../py/frozenmod.h :
+ ../../py/pystack.h ../../py/objmodule.h build/genhdr/moduledefs.h :
+ ../../py/persistentcode.h ../../py/builtin.h ../../py/frozenmod.h :

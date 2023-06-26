@@ -27,9 +27,9 @@
 
 #include <stdio.h>
 
-#include "runtime.h"
-#include "gc.h"
-#include "mpirq.h"
+#include "py/runtime.h"
+#include "py/gc.h"
+#include "py/mpirq.h"
 
 #if MICROPY_ENABLE_SCHEDULER
 
@@ -87,7 +87,7 @@ void mp_irq_handler(mp_irq_obj_t *self) {
                 mp_printf(MICROPY_ERROR_PRINTER, "Uncaught exception in IRQ callback handler\n");
                 mp_obj_print_exception(MICROPY_ERROR_PRINTER, MP_OBJ_FROM_PTR(nlr.ret_val));
             }
-            gc_unlock();
+            gc_unlock( );
             mp_sched_unlock();
         } else {
             // Schedule call to user function

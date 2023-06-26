@@ -24,22 +24,22 @@
  * THE SOFTWARE.
  */
 
-#include "mpconfig.h"
-#include "misc.h"
+#include "py/mpconfig.h"
+#include "py/misc.h"
 #if MICROPY_FLOAT_IMPL != MICROPY_FLOAT_IMPL_NONE
 
 #include <assert.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <math.h>
-#include "formatfloat.h"
+#include "py/formatfloat.h"
 
 /***********************************************************************
 
   Routine for converting a arbitrary floating
   point number into a string.
 
-  The code in this funcion was inspired from Fred Bayer's pdouble.c.
+  The code in this function was inspired from Fred Bayer's pdouble.c.
   Since pdouble.c was released as Public Domain, I'm releasing this
   code as public domain as well.
 

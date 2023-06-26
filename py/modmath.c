@@ -24,8 +24,8 @@
  * THE SOFTWARE.
  */
 
-#include "builtin.h"
-#include "runtime.h"
+#include "py/builtin.h"
+#include "py/runtime.h"
 
 #if MICROPY_PY_BUILTINS_FLOAT && MICROPY_PY_MATH
 

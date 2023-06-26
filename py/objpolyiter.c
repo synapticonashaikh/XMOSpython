@@ -26,7 +26,7 @@
 
 #include <stdlib.h>
 
-#include "runtime.h"
+#include "py/runtime.h"
 
 // This is universal iterator type which calls "iternext" method stored in
 // particular object instance. (So, each instance of this time can have its

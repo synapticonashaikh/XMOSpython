@@ -126,6 +126,7 @@ static const mp_raw_code_t raw_code_frozentest__lt_module_gt_ = {
         .n_def_pos_args = 0,
         .qstr_block_name_idx = 1,
         .line_info = fun_data_frozentest__lt_module_gt_ + 3,
+        .line_info_top = fun_data_frozentest__lt_module_gt_ + 9,
         .opcodes = fun_data_frozentest__lt_module_gt_ + 9,
     },
     .line_of_definition = 0,

@@ -29,9 +29,9 @@
 #include <string.h>
 #include <assert.h>
 
-#include "bc0.h"
-#include "bc.h"
-#include "objfun.h"
+#include "py/bc0.h"
+#include "py/bc.h"
+#include "py/objfun.h"
 
 #if MICROPY_DEBUG_VERBOSE // print debugging info
 #define DEBUG_PRINT (1)

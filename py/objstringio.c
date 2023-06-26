@@ -28,10 +28,10 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "objstr.h"
-#include "objstringio.h"
-#include "runtime.h"
-#include "stream.h"
+#include "py/objstr.h"
+#include "py/objstringio.h"
+#include "py/runtime.h"
+#include "py/stream.h"
 
 #if MICROPY_PY_IO
 

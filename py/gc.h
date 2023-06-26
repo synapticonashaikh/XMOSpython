@@ -28,8 +28,7 @@
 
 #include <stdbool.h>
 #include <stddef.h>
-#include "mpconfig.h"
-#include "mpprint.h"
+#include "py/mpprint.h"
 
 void gc_init(void *start, void *end);
 

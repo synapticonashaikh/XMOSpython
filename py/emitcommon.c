@@ -26,8 +26,8 @@
 
 #include <assert.h>
 
-#include "emit.h"
-#include "nativeglue.h"
+#include "py/emit.h"
+#include "py/nativeglue.h"
 
 #if MICROPY_ENABLE_COMPILER
 

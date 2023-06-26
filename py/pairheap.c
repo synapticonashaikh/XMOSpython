@@ -24,7 +24,7 @@
  * THE SOFTWARE.
  */
 
-#include "pairheap.h"
+#include "py/pairheap.h"
 
 // The mp_pairheap_t.next pointer can take one of the following values:
 //   - NULL: the node is the top of the heap

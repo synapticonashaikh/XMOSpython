@@ -24,7 +24,7 @@
  * THE SOFTWARE.
  */
 
-#include "mpstate.h"
+#include "py/mpstate.h"
 
 #if MICROPY_NLR_XTENSA
 

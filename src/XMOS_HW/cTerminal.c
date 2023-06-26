@@ -135,7 +135,7 @@ void mp_hal_stdout_tx_strn(const char *str, mp_uint_t len)
 
 /***********************************************************************
  * Function Name : main 
- * Arguments	 : void
+ * Arguments	   : void
  * Return Type	 : int
  * Details	     : main function, start of the code
  * *********************************************************************/
@@ -183,7 +183,7 @@ void FnReceiveProcess(char *Data)
                     char * uc1Space = strchr (ucChar,' ');  uc1Space ++;   
                     char * uc2Space = strrchr(ucChar,' '); *uc2Space = RESET;
                     uiCodeSize = strtol(uc1Space,NULL,(uint8_t)10);
-                    sprintf(cprint,"Status: code size = %lu\n\r",uiCodeSize);
+                    sprintf(cprint,"Status: code size = %u\n\r",uiCodeSize);
                     FnTransmitCharacter(cprint);  
                  }
                else goto down1;  

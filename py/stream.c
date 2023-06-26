@@ -28,9 +28,9 @@
 #include <string.h>
 #include <unistd.h>
 
-#include "objstr.h"
-#include "stream.h"
-#include "runtime.h"
+#include "py/objstr.h"
+#include "py/stream.h"
+#include "py/runtime.h"
 
 // This file defines generic Python stream read/write methods which
 // dispatch to the underlying stream interface of an object.

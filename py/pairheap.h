@@ -36,7 +36,7 @@
 // https://www.cs.cmu.edu/~sleator/papers/pairing-heaps.pdf
 
 #include <assert.h>
-#include "obj.h"
+#include "py/obj.h"
 
 // This struct forms the nodes of the heap and is intended to be extended, by
 // placing it first in another struct, to include additional information for the

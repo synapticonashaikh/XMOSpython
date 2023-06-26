@@ -27,10 +27,10 @@
 #include <unistd.h> // for ssize_t
 #include <string.h>
 
-#include "mpconfig.h"
+#include "py/mpconfig.h"
 #if MICROPY_PY_COLLECTIONS_DEQUE
 
-#include "runtime.h"
+#include "py/runtime.h"
 
 typedef struct _mp_obj_deque_t {
     mp_obj_base_t base;

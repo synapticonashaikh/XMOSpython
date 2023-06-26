@@ -27,8 +27,8 @@
 #include <stdio.h>
 #include <assert.h>
 
-#include "bc0.h"
-#include "emitglue.h"
+#include "py/bc0.h"
+#include "py/emitglue.h"
 
 #if MICROPY_DEBUG_PRINTERS
 
