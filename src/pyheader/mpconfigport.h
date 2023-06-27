@@ -31,7 +31,7 @@ typedef long mp_off_t;
 //#endif
 
 #define MICROPY_HW_BOARD_NAME "INTEGERO"
-#define MICROPY_HW_MCU_NAME "XCORE-200"
+#define MICROPY_HW_MCU_NAME "XCORE-AI"
 
 #ifdef __linux__
 #define MICROPY_MIN_USE_STDOUT (1)

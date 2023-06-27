@@ -81,7 +81,7 @@
  * ----------------------------------------------------------------------------
 */
     //this heap memroy stores the data
-    #define _STATIC_HEAP_SIZE (uint16_t)3000
+    #define _STATIC_HEAP_SIZE (uint16_t)10000
  
     #define  PARSE_SINGLE_INPUT   0
     #define  PARSE_FILE_INPUT     1
@@ -105,6 +105,10 @@
     #include "persistentcode.h"
     #include "bc.h"
     #include "reader.h"
+
+    #define  PARSE_SINGLE_INPUT   0
+    #define  PARSE_FILE_INPUT     1
+    #define  PARSE_EVAL_INPUT     2
 
 /* ----------------------------------------------------------------------------
  *                          EXTERNAL FUNCTION
@@ -160,7 +164,9 @@ void do_str(const char *src, mp_parse_input_kind_t input_kind)
  * Return Type	: int
  * Details	    : main function, start of the code
  * *********************************************************************/
-#pragma stackfunction 1000
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
+        #pragma stackfunction 1000
+#endif
 int FnMPInterpreterConsole(void) 
 { 
     int stack_dummy;
@@ -200,14 +206,16 @@ int FnMPInterpreterConsole(void)
  * Return Type	: int
  * Details	    : main function, start of the code
  * *********************************************************************/
-#pragma stackfunction 1000
-char * FnRunTheCommand(char *ByteCode,uint8_t BytecodeORStr)
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
+    #pragma stackfunction 1000
+#endif
+char * FnRunTheCommand(char *ByteCode, uint32_t CodeLen, uint8_t BytecodeORStr)
 {
-    
-    static char *ret  = "Sucess!";
+
     int stack_dummy;
     stack_top = (char *)&stack_dummy;    
-    
+    static char *ret  = "Sucess!";
+
     #if MICROPY_ENABLE_GC
         gc_init(heap, heap + sizeof(heap));
     #endif
@@ -216,14 +224,17 @@ char * FnRunTheCommand(char *ByteCode,uint8_t BytecodeORStr)
 
     if (BytecodeORStr == SET)
     {
-      #if MICROPY_ENABLE_COMPILER  
+      #ifdef USE_LOCAL_MAIN  
+            printf("Script:\n%s",(char *)ByteCode, strlen(ByteCode));  
+      #endif
+      #if MICROPY_ENABLE_COMPILER
           do_str(ByteCode, PARSE_FILE_INPUT);
       #endif    
     }
     else
     {
         mp_reader_t reader;
-        mp_reader_new_mem(&reader,(byte *)ByteCode, sizeof(ByteCode), 0);
+        mp_reader_new_mem(&reader,(byte *)ByteCode, CodeLen, 0);
         mp_module_context_t *context = m_new_obj(mp_module_context_t);
         context->module.globals = mp_globals_get();
         mp_compiled_module_t compiled_module;
@@ -246,6 +257,9 @@ char * FnRunTheCommand(char *ByteCode,uint8_t BytecodeORStr)
  * Details	    : main function, start of the code
  * *********************************************************************/
 #if MICROPY_ENABLE_GC
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
+    #pragma stackfunction 1000
+#endif
 void gc_collect(void) 
 {
     // WARNING: This gc_collect implementation doesn't try to get root

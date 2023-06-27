@@ -175,7 +175,6 @@
 		#include <string.h>	
 		#include <signal.h>
 		#include <math.h>
-		#include <time.h>
 		#include <errno.h>           			
 		#include <stdarg.h>
 		#include <stddef.h>
@@ -188,10 +187,7 @@
 /*XMOS related hedaer*/
 #ifdef __XC__
 	#include <platform.h>
-        #include <xs1.h>
-        #include <timer.h>
-        #include <flash.h>
-	#include <print.h>
+	#include <xs1.h>
 #endif
 
 /* ----------------------------------------------------------------------------
@@ -296,31 +292,18 @@
 	void GPIOInterrupt  (void);
     	void GPIOINTRWrapper(void);	
 
-	#ifdef USE_SDO_MODULES
-			void FnSetObjectValue( uint16_t index_, uint8_t subindex, size_t capacity, uint8_t *value, 
-								CoeRequestOrigin request_origin  , int complete_access );
-	#else
-			void FnSetObjectValue( uint16_t index_, uint8_t subindex, size_t capacity, uint8_t *value, 
-								uint8_t request_origin, int complete_access );
-	#endif   
-
-			int  	 FnReadObject(uint16_t index_,uint16_t subindex, uint8_t capacity);
-			
-			void  	 FnSetControlword(uint16_t uiControlwrd);	
-			uint16_t FnGetControlword(void);
-			
-			uint16_t FnGetErrorStatus(void);
-
-			void     FnSetTargetTorque(int16_t Torque);
-			uint16_t FnGetTargetTorque(void);
-			
-			void 	 FnSetModesOfOperation(int8_t ucModes);
-			uint8_t  FnGetModesOfOperation(void);
-			
-			void FnSetI2TEnableDisable(uint8_t I2TEnDS);
-
-			int FnStartTheTimerIrq(uint32_t uiTime);
-
-			void FnGPIOInterruptEnable(void);
+	void 	 FnSetObjectValue( uint16_t index_, uint8_t subindex, size_t capacity, uint8_t *value);
+	int  	 FnReadObject(uint16_t index_,uint16_t subindex, uint8_t capacity);
+	void  	 FnSetControlword(uint16_t uiControlwrd);	
+	uint16_t FnGetControlword(void);
+	uint16_t FnGetErrorStatus(void);
+	void     FnSetTargetTorque(int16_t Torque);
+	uint16_t FnGetTargetTorque(void);
+	void 	 FnSetTargetVelocity(int16_t Velocity);
+	void 	 FnSetModesOfOperation(int8_t ucModes);
+	uint8_t  FnGetModesOfOperation(void);
+	void 	 FnSetI2TEnableDisable(uint8_t I2TEnDS);
+	int  	 FnStartTheTimerIrq(uint32_t uiTime);
+	void 	 FnGPIOInterruptEnable(void);
 
 #endif /*__HEADER_H_*/

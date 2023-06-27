@@ -96,42 +96,31 @@
  *                          GLOBAL VARIABLE DECLARATION
  * ----------------------------------------------------------------------------
 */
+    uint16_t Dummy=RESET;
+/* ----------------------------------------------------------------------------
+ *                          FUNCTION DEFINITION
+ * ----------------------------------------------------------------------------
+*/
 /***********************************************************************
  * Function Name: main 
  * Arguments	  : void
  * Return Type	: int
  * Details	    : main function, start of the code
  * *********************************************************************/
- #ifdef USE_SDO_MODULES
-void FnSetObjectValue( uint16_t index_, uint8_t subindex, size_t capacity, uint8_t *value, 
-                       CoeRequestOrigin request_origin, int complete_access )
-#else
-void FnSetObjectValue( uint16_t index_, uint8_t subindex, size_t capacity, uint8_t *value, 
-                       uint8_t request_origin, int complete_access )
-#endif                       
+void FnSetObjectValue( uint16_t index_, uint8_t subindex, size_t capacity, uint8_t *value)
 { 
-
     #ifdef USE_SDO_MODULES
         size_t  bytecount = sdo_get_bytecount_by_object_index(index_, subindex);
-        uint8_t tmpvalue[MAX_VALUE_BUFFER] = { 0 };
-        unsigned int objpos = 0; int error  = 0;
+        uint8_t tmpvalue[MAX_VALUE_BUFFER]     = { RESET };
+        unsigned int objpos = RESET; int error =   RESET;
 
         error = sdo_find_object_position(index_, &objpos);
         if (error == SDO_NO_ERROR) 
         {
             memcpy(&tmpvalue, value, capacity);
-            if (complete_access) 
-            {
-                error = sdo_set_all_values_by_object_position(
-                objpos, subindex, (uint8_t *)&tmpvalue,
-                bytecount, request_origin); 
-            } 
-            else 
-            {   error = sdo_set_value_by_object_position(
-                objpos, subindex, (uint8_t *)&tmpvalue,
-                bytecount, request_origin);
-            }
-
+            error = sdo_set_all_values_by_object_position(
+            objpos, subindex, (uint8_t *)&tmpvalue,
+            bytecount, REQUEST_FROM_APP); 
             /* For simple objects there is no lengthy processing necessary. */
             sdo_clear_value_busy_at_position(objpos, subindex);
         }
@@ -177,8 +166,11 @@ int FnReadObject(uint16_t index_,uint16_t subindex, uint8_t capacity)
 void FnSetControlword(uint16_t uiControlwrd)
 {
     #ifdef USE_SDO_MODULES
-       od_write_value_by_subitem_pos(OD_SUBITEMPOS_CONTROLWORD, (uint8_t *)&uiControlwrd,sizeof(uiControlwrd));
-   #endif 
+       od_write_value_by_subitem_pos(OD_SUBITEMPOS_CONTROLWORD_0x6040_0, 
+       (uint8_t *)&uiControlwrd,sizeof(uiControlwrd));
+    #else
+         Dummy = uiControlwrd;
+    #endif   
 }
 
 /***********************************************************************
@@ -191,10 +183,10 @@ uint16_t FnGetControlword(void)
 {
     #ifdef USE_SDO_MODULES
        uint16_t  ReadControlWord;
-       sdo_get_value_by_subitem_position_unsafe(OD_SUBITEMPOS_CONTROLWORD,(uint8_t *)&ReadControlWord); 
+       sdo_get_value_by_subitem_position_unsafe(OD_SUBITEMPOS_CONTROLWORD_0x6040_0,(uint8_t *)&ReadControlWord); 
        return ReadControlWord; 
    #else
-        return RESET;
+        return Dummy;
    #endif 
 } 
 
@@ -208,10 +200,10 @@ uint16_t FnGetErrorStatus(void)
 {
     #ifdef USE_SDO_MODULES
        uint16_t  ReadErrorStatus;
-       sdo_get_value_by_subitem_position_unsafe(OD_SUBITEMPOS_ERROR_CODE,(uint8_t *)&ReadErrorStatus); 
+       sdo_get_value_by_subitem_position_unsafe(OD_SUBITEMPOS_ERROR_CODE_0x603F_0,(uint8_t *)&ReadErrorStatus); 
        return ReadErrorStatus; 
    #else
-        return RESET;
+        return Dummy;
    #endif 
 }
 
@@ -224,7 +216,9 @@ uint16_t FnGetErrorStatus(void)
 void FnSetModesOfOperation(int8_t ucModes)
 {
    #ifdef USE_SDO_MODULES
-          od_write_value_by_subitem_pos (OD_SUBITEMPOS_MODES_OF_OPERATION, (uint8_t *)&ucModes, sizeof(ucModes));
+          od_write_value_by_subitem_pos (OD_SUBITEMPOS_MODES_OF_OPERATION_0x6060_0, (uint8_t *)&ucModes, sizeof(ucModes));
+   #else
+         Dummy = ucModes;          
    #endif       
 }
 
@@ -238,10 +232,10 @@ uint8_t FnGetModesOfOperation(void)
 {
     #ifdef USE_SDO_MODULES
            uint8_t ucModes ;
-           od_write_value_by_subitem_pos(OD_SUBITEMPOS_MODES_OF_OPERATION, (uint8_t *)&ucModes, sizeof(ucModes));
+           od_write_value_by_subitem_pos(OD_SUBITEMPOS_MODES_OF_OPERATION_0x6060_0, (uint8_t *)&ucModes, sizeof(ucModes));
            return ucModes;
     #else
-          return RESET; 
+          return Dummy; 
     #endif
 }
 
@@ -255,8 +249,30 @@ void FnSetTargetTorque(int16_t Torque)
 {
     #ifdef USE_SDO_MODULES
            od_write_value_by_subitem_pos 
-           (OD_SUBITEMPOS_TARGET_TORQUE, (uint8_t *)&Torque, sizeof(Torque));
-    #endif    
+           (OD_SUBITEMPOS_TARGET_TORQUE_0x6071_0, (uint8_t *)&Torque, sizeof(Torque));
+    #else
+         Dummy = Torque;              
+    #endif 
+
+}
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	: void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
+void FnSetTargetVelocity(int16_t Velocity)
+{
+    #ifdef USE_SDO_MODULES
+           od_write_value_by_subitem_pos 
+           (OD_SUBITEMPOS_TARGET_VELOCITY_0x60FF_0, (uint8_t *)&Velocity, sizeof(Velocity));
+    #else
+         Dummy = Velocity;    
+    #endif 
+
+    // static int a = SET;
+    // FnPortWrite(PORT1M,a); a = !a;
 }
 
 /***********************************************************************
@@ -270,10 +286,10 @@ uint16_t FnGetTargetTorque(void)
    #ifdef USE_SDO_MODULES
        uint16_t TargetTorque;
        sdo_get_value_by_subitem_position_unsafe
-       (OD_SUBITEMPOS_TARGET_TORQUE,(uint8_t *)&TargetTorque); 
+       (OD_SUBITEMPOS_TARGET_TORQUE_0x6071_0,(uint8_t *)&TargetTorque); 
        return  TargetTorque;
    #else
-        return RESET;
+        return Dummy;
    #endif 
 
 }
@@ -288,7 +304,9 @@ void FnSetI2TEnableDisable(uint8_t I2TEnDS)
 { 
   #ifdef USE_SDO_MODULES
          od_write_value_by_subitem_pos 
-         (OD_SUBITEMPOS_I2T_AND_STALL_PROTECTION_ENABLED,
+         (OD_SUBITEMPOS_I2T_AND_STALL_PROTECTION_ENABLED_0x200A_1,
          (uint8_t *)&I2TEnDS, sizeof(I2TEnDS));
+    #else
+         Dummy = I2TEnDS;          
   #endif    
 }

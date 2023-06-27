@@ -20,6 +20,9 @@ ENABLE_DISABLE_OWN_MODULE = 1
 #enable/ disable float functionality
 ENABLE_DISABLE_FLOAT_FUNCTIONALITY = 0
 
+#enable/ disable float functionality
+ENABLE_DISABLE_GPIO_IRQ=-DENABLE_DISABLE_GPIO_IRQ=0
+
 #define the code version
 #for the terminal interpreter, use DCODE_WITH_PYTHON_INTRACTIVE_TERMINAL
 #without terminal use DCODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
@@ -72,21 +75,25 @@ FLAG_SIGN_COMPARE 	 = -Wno-sign-compare
 #set the optimisation level
 FLAG_OPT 		     = -Os
 #geneterate the report of the compilation
-#FLAG_REPORT 		 = -report
+FLAG_REPORT 		 = -report
+#pragma compatibilty with XMOS
+FLAG_PRAGMA 		 = -Wunknown-pragmas 
 
 #format
-FLAG_FORMAT			 = -Wno-format
+FLAG_FORMAT		= -Wno-format
 
 #flags with respect to XMOS core
 LDFLAGS +=$(INC)
-LDFLAGS +=$(FLAG_UNUSED_VAR) 
+LDFLAGS +=$(FLAG_UNUSED_VAR)
 LDFLAGS +=$(FLAG_UNSED_PARA)
-LDFLAGS +=$(FLAG_MISSING_FEILD) 
-LDFLAGS +=$(FLAG_SIGN_COMPARE) 
+LDFLAGS +=$(FLAG_MISSING_FEILD)
+LDFLAGS +=$(FLAG_SIGN_COMPARE)
 LDFLAGS +=$(FLAG_FUNTION_POINTER)
 LDFLAGS +=$(FLAG_OPT)
 LDFLAGS +=$(FLAG_REPORT)
 LDFLAGS +=$(FLOAT_FLAG)
 LDFLAGS +=$(DEFINE_CODE_VERSION)
 LDFLAGS +=$(FLAG_FORMAT)
+LDFLAGS +=$(ENABLE_DISABLE_GPIO_IRQ)
+LDFLAGS +=$(FLAG_PRAGMA)
 

@@ -86,51 +86,101 @@
  * ----------------------------------------------------------------------------
 */
 
-	/*Standard Header files*/
-	  #include "header.h"      
+   /*Standard Header files*/
+    #include "header.h"      
     #include "unistd.h"
     #include "string.h"
     #include "mpconfig.h"
 
-    #define _SERAIL_MODE_COMMAND    1     
-    #define _SERAIL_MODE_DATA       2     
+#ifdef USE_LOCAL_MAIN
 
-    #define _SERIAL_RX_SIZE         1000
-    #define _CODE_BUFFER_SIZE       5000
+#elif defined SOMANET_SOFTWARE_MAIN
+      #include <filesystem/spiffs_xc_wrapper.h>
+#endif
 
+/* ----------------------------------------------------------------------------
+ *                          MACROS
+ * ----------------------------------------------------------------------------
+*/
+#ifdef  USE_LOCAL_MAIN
+        #define _SERAIL_MODE_COMMAND    1     
+        #define _SERAIL_MODE_DATA       2     
+        #define _SERIAL_RX_SIZE         1000
+        #define _CODE_BUFFER_SIZE       5000
+#elif defined SOMANET_SOFTWARE_MAIN
+
+        #define _ERROR_FOPEN   (int8_t)-2
+        #define _ERROR_FREAD   (int8_t)-3
+        #define _ERROR_FSIZE   (int8_t)-4
+        #define _ERROR_FSEEK   (int8_t)-5
+        #define _ERROR_FWRITE  (int8_t)-6
+
+        #define _LOG_FILE (char *)"PythonLog.log"
+        #define _LOG_MAX_SIZE  (uint16_t)5000
+        #define _LOG_ROLL_OVER (uint16_t)3000
+#endif
 
 /* ----------------------------------------------------------------------------
  *                          GLOBAL VARIABLE DECLARATION
  * ----------------------------------------------------------------------------
 */
+#ifdef  USE_LOCAL_MAIN
         char ReciverBuffer[_SERIAL_RX_SIZE], 
-        CodeBuffer[_CODE_BUFFER_SIZE],
-        SingleChar ;
+        CodeBuffer[_CODE_BUFFER_SIZE], SingleChar ;
         uint32_t ReceiveCount = RESET, CodeReceiveCount = RESET;
         uint8_t ucMode = _SERAIL_MODE_COMMAND ;
         char  cprint[100]; 
-        uint32_t uiCodeSize = RESET;
+        uint32_t uiCodeSize = RESET;       
+#elif defined SOMANET_SOFTWARE_MAIN
+
+
+#endif
+
+/* ----------------------------------------------------------------------------
+ *                          FUNCTION DECLARATION 
+ * ----------------------------------------------------------------------------
+*/
+#ifdef  USE_LOCAL_MAIN
+
+#elif defined SOMANET_SOFTWARE_MAIN
+    int FnWriteLogs(char *str, unsigned long int len);
+#endif
 
 /* ----------------------------------------------------------------------------
  *                          GLOBAL VARIABLE DECLARATION
  * ----------------------------------------------------------------------------
 */
+// Send string of given length
+/***********************************************************************
+ * Function Name : main 
+ * Arguments	   : void
+ * Return Type	 : int
+ * Details	     : main function, start of the code
+ * *********************************************************************/
+void mp_hal_stdout_tx_strn(const char *str, mp_uint_t len) 
+{ 
+unsigned char d;   
+#ifdef USE_LOCAL_MAIN
+    if(len != RESET )
+    d = write(STDOUT_FILENO, str, len); fflush(stdout);
+#elif defined SOMANET_SOFTWARE_MAIN
+    if(len != RESET )
+       d =FnWriteLogs((char *)str, len);
+#endif
+}
 
 // Receive single character
+/***********************************************************************
+ * Function Name : main 
+ * Arguments	   : void
+ * Return Type	 : int
+ * Details	     : main function, start of the code
+ * *********************************************************************/
 int mp_hal_stdin_rx_chr(void) 
 {      
   unsigned char c = 0, d;
   d = read(STDIN_FILENO, &c, 1);   
   return c;
-}  
-
-// Send string of given length
-void mp_hal_stdout_tx_strn(const char *str, mp_uint_t len) 
-{ 
-    unsigned char d;   
-    if(len!= RESET )
-    d = write(STDOUT_FILENO, str, len);
-    fflush(stdout);
 }
 
 /***********************************************************************
@@ -139,6 +189,45 @@ void mp_hal_stdout_tx_strn(const char *str, mp_uint_t len)
  * Return Type	 : int
  * Details	     : main function, start of the code
  * *********************************************************************/
+#ifdef SOMANET_SOFTWARE_MAIN
+int FnWriteLogs(char *str, unsigned long int len)
+{
+
+    char TempFile[(uint16_t)3002]; int fileW =  RESET;
+    int fileD = iSPIFFS_open(_LOG_FILE, SPIFFS_O_CREAT | SPIFFS_O_RDWR | SPIFFS_O_APPEND ); 
+     if( fileD<RESET) return _ERROR_FOPEN;
+     int fileS = iSPIFFS_get_size(fileD);
+     if( fileS<RESET) return _ERROR_FSIZE;
+      
+  
+    //if( fileS >= _LOG_MAX_SIZE || (fileS + len) >= _LOG_MAX_SIZE )
+      {
+        //  int fileL=  iSPIFFS_seek(fileD,_LOG_ROLL_OVER,SPIFFS_SEEK_SET);
+        //  if( fileL<RESET) return _ERROR_FSEEK;
+        //  memset(TempFile,RESET,sizeof(TempFile));       
+        //  int fileR = iSPIFFS_read(fileD,TempFile, fileS - _LOG_ROLL_OVER);
+        //  if( fileR<RESET) return _ERROR_FREAD;
+        //  iSPIFFS_close(fileD);
+        //  fileD = iSPIFFS_open (_LOG_FILE, SPIFFS_O_RDWR | SPIFFS_O_TRUNC );
+        //  if(fileD<RESET) return _ERROR_FOPEN; 
+        //  fileW = iSPIFFS_write(fileD,TempFile,fileS-_LOG_ROLL_OVER);
+        //  if(fileW<RESET) return _ERROR_FWRITE;
+      }
+       fileW = iSPIFFS_write(fileD,(char *)str,len);
+       if(fileW<RESET) return _ERROR_FWRITE;
+      iSPIFFS_close(fileD);
+ return RESET;  
+}
+
+#endif
+
+/***********************************************************************
+ * Function Name : main 
+ * Arguments	   : void
+ * Return Type	 : int
+ * Details	     : main function, start of the code
+ * *********************************************************************/
+#ifdef USE_LOCAL_MAIN
 int FnReceiveCharacter(void)
 {      
     unsigned char c = RESET, d;
@@ -183,7 +272,7 @@ void FnReceiveProcess(char *Data)
                     char * uc1Space = strchr (ucChar,' ');  uc1Space ++;   
                     char * uc2Space = strrchr(ucChar,' '); *uc2Space = RESET;
                     uiCodeSize = strtol(uc1Space,NULL,(uint8_t)10);
-                    sprintf(cprint,"Status: code size = %u\n\r",uiCodeSize);
+                    sprintf(cprint,"Status: code size = %lu\n\r",uiCodeSize);
                     FnTransmitCharacter(cprint);  
                  }
                else goto down1;  
@@ -248,4 +337,4 @@ char * FnCommandReceive(void)
 
         }
 }
-
+#endif

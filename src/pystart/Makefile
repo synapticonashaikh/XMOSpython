@@ -34,7 +34,7 @@ endif
 dependency: $(OBJ) $(BUILD)/_frozen_mpy.c
 
 output.xe:
-	$(CMP) $(LDFLAGS) $(SRC_C) $(SRC_PY) -o $@
+	$(CMP) $(LDFLAGS) $(SRC_C) $(SRC_PY) $(PROCESSING_FLAG) -o $@
 	rm -rf ../py
 #	rm -rf build	
 

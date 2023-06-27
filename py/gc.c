@@ -430,6 +430,9 @@ STATIC void gc_sweep(void) {
     }
 }
 
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
+    #pragma stackfunction 1000    
+#endif    
 void gc_collect_start(void) {
     GC_ENTER();
     MP_STATE_THREAD(gc_lock_depth)++;
@@ -468,6 +471,9 @@ static void *gc_get_ptr(void **ptrs, int i) {
     return ptrs[i];
 }
 
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
+    #pragma stackfunction 1000
+#endif    
 void gc_collect_root(void **ptrs, size_t len) {
     #if !MICROPY_GC_SPLIT_HEAP
     mp_state_mem_area_t *area = &MP_STATE_MEM(area);

@@ -169,7 +169,9 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_0(delay_PrintTM_obj, delay_PrintTM);
  * Return Type	: int
  * Details	    : main function, start of the code 
  * *********************************************************************/
-#pragma stackfunction 1000
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
+      #pragma stackfunction 1000
+#endif
 STATIC mp_obj_t delay_irq(size_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_args) 
 {
 
@@ -192,13 +194,12 @@ STATIC mp_obj_t delay_irq(size_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_
       // Update IRQ data.
         irq = m_new_obj(machine_pin_irq_obj_t);
         irq->base.base.type = &mp_irq_type;
-        irq->base.parent  = MP_OBJ_FROM_PTR(self);
+        irq->base.parent    = MP_OBJ_FROM_PTR(self);
         MP_STATE_PORT(machine_timer_irq_objects[eic_id]) = irq;
-        irq->base.handler = args[ARG_handler].u_obj;
+        irq->base.handler   = args[ARG_handler].u_obj;
      }
 
      FnStartTheTimerIrq(args[ARG_duration].u_int);
-
     return mp_const_none;
 
 }

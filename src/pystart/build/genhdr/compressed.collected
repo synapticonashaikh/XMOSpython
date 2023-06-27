@@ -10,6 +10,8 @@
 
 LHS of keyword arg must be an id
 
+List must have length of exactly 4
+
 __init__() should return None
 
 argument name reused

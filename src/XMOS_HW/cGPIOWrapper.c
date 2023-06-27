@@ -100,6 +100,8 @@
     #include "py/mpirq.h"
     #include "py/obj.h"
   
+ #if ENABLE_DISABLE_GPIO_IRQ == 1
+
 /* ----------------------------------------------------------------------------
  *                           External Function
  * ----------------------------------------------------------------------------
@@ -123,7 +125,9 @@
  * Return Type	: void
  * Details	    : A callback function
  * *********************************************************************/
-#pragma stackfunction 1000
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
+    #pragma stackfunction 1000
+#endif    
 void CallbackFunction(void)
 {
 
@@ -201,3 +205,5 @@ void GPIOInterrupt(void)
     triggerable_enable_trigger(_Port4D);
     GPIOINTRWrapper( );
 }
+
+#endif

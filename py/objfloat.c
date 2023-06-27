@@ -200,8 +200,8 @@ mp_obj_t mp_obj_new_float(mp_float_t value) {
     return MP_OBJ_FROM_PTR(o);
 }
 
-#ifdef __XC__ 
-#pragma stackfunction 1000   
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
+       #pragma stackfunction 1000   
 #endif
 mp_float_t mp_obj_float_get(mp_obj_t self_in) {
     //assert(mp_obj_is_float(self_in));

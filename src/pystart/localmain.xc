@@ -80,13 +80,14 @@
  *                           MACROS
  * ----------------------------------------------------------------------------
 */
-
+#ifdef USE_LOCAL_MAIN
 /* ----------------------------------------------------------------------------
  *                           INCLUDE
  * ----------------------------------------------------------------------------
 */
   	/*Standard Header files*/
-	  #include "header.h"    
+	  #include "header.h"
+    #include <safestring.h>    
 
 /* ----------------------------------------------------------------------------
  *                          EXTERNAL FUNCTION
@@ -98,7 +99,7 @@
   #endif
 
   #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
-         extern "C"{ char * FnRunTheCommand(char *ByteCode, uint8_t BytecodeORStr);
+         extern "C"{ char * FnRunTheCommand(char *ByteCode, uint32_t CodeLen, uint8_t BytecodeORStr);
                      char * FnCommandReceive(void); }
   #endif
   
@@ -112,6 +113,7 @@
  *                          FUNCTION DEFINITION
  * ----------------------------------------------------------------------------
 */
+
 /***********************************************************************
  * Function Name: main 
  * Arguments	  : void
@@ -121,10 +123,10 @@
 #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
   void FnSender(client interface MicroPythonInterface upy)
   {
-      unsafe
-      {
-         char * unsafe command = 
 
+    unsafe 
+    {
+      char * command= 
       "from delay import delaySec\n"
       "from delay import delaymSec\n"
       "Count = 1\n"
@@ -132,10 +134,9 @@
       "   print('Time MS =' + str(Count))\n"
       "   delaymSec(100)\n"
       "   Count = Count + 1\n";
-      upy.FnExecute(command);
-      
+      upy.FnExecute(command);      
+    }
       while (SET);
-      }
   }
 
 /***********************************************************************
@@ -154,8 +155,7 @@
         select 
           {
               case upy.FnExecute(char * unsafe string):
-              printf("Script received!\n%s",string);
-              FnRunTheCommand(string,SET); 
+              FnRunTheCommand(string,RESET,SET);
               break ;
               default: break; // to make the select non-blockable 
           }
@@ -199,3 +199,5 @@ int main( )
 
   return RESET;
 }
+
+#endif

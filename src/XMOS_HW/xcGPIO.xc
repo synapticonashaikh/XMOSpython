@@ -88,50 +88,55 @@
 
 	/**********Standard Header Files*********/		
      #include "header.h"
-
+     #ifdef SOMANET_SOFTWARE_MAIN     
+            #include CORE_BOARD_REQUIRED_BSP
+     #endif
 /* ----------------------------------------------------------------------------
  *                          GLOBAL VARIABLE DECLARATION
  * ----------------------------------------------------------------------------
 */
 
+ 	//   port _Port1A  = PORT1A  ;
+  //   port _Port1B  = PORT1B  ;
+  //   port _Port1C  = PORT1C  ;
+  //   port _Port1D  = PORT1D  ;
+  //   port _Port1E  = PORT1E  ;
+  //   port _Port1F  = PORT1F  ;
+  //   port _Port1G  = PORT1G  ;
+  //   port _Port1H  = PORT1H  ;
+  //   port _Port1I  = PORT1I  ;
+  //   port _Port1J  = PORT1J  ;
+  //   port _Port1K  = PORT1K  ;
+  //   port _Port1L  = PORT1L  ;
+       #ifdef SOMANET_SOFTWARE_MAIN  
+              port _Port1M  = TILE_0_PORT_1BIT_70  ;
+       #endif       
+  //   port _Port1N  = PORT1N  ;
+  //   port _Port1O  = PORT1O  ;
+  //   port _Port1P  = PORT1P  ;
 
- 	  port _Port1A  = PORT1A  ;
-    port _Port1B  = PORT1B  ;
-    port _Port1C  = PORT1C  ;
-    port _Port1D  = PORT1D  ;
-    port _Port1E  = PORT1E  ;
-    port _Port1F  = PORT1F  ;
-    port _Port1G  = PORT1G  ;
-    port _Port1H  = PORT1H  ;
-    port _Port1I  = PORT1I  ;
-    port _Port1J  = PORT1J  ;
-    port _Port1K  = PORT1K  ;
-    port _Port1L  = PORT1L  ;
-    port _Port1M  = PORT1M  ;
-    port _Port1N  = PORT1N  ;
-    port _Port1O  = PORT1O  ;
-    port _Port1P  = PORT1P  ;
+	// /*IO ports-4BITS*/
+  //   port _Port4A  = PORT4A  ;
+  //   port _Port4B  = PORT4B  ;
+       #ifdef USE_LOCAL_MAIN    
+            port _Port4C  = PORT4C  ;
+       #endif       
+  //   port _Port4D  = PORT4D  ;
+  //   port _Port4E  = PORT4E  ;
+  //   port _Port4F  = PORT4F  ;
 
-	/*IO ports-4BITS*/
-    port _Port4A  = PORT4A  ;
-    port _Port4B  = PORT4B  ;
-    port _Port4C  = PORT4C  ;
-    port _Port4D  = PORT4D  ;
-    port _Port4E  = PORT4E  ;
-    port _Port4F  = PORT4F  ;
+	// /*IO ports-8BITS*/
+  //   port _Port8A  =  PORT8A  ;
+  //   port _Port8B  =  PORT8B  ;
+  //   port _Port8C  =  PORT8C  ;
+  //   port _Port8D  =  PORT8D  ;
 
-	/*IO ports-8BITS*/
-    port _Port8A  =  PORT8A  ;
-    port _Port8B  =  PORT8B  ;
-    port _Port8C  =  PORT8C  ;
-    port _Port8D  =  PORT8D  ;
+	// /*IO ports-16BITS*/
+  //   port _Port16A = PORT16A  ;
+  //   port _Port16B = PORT16B  ;
 
-	/*IO ports-16BITS*/
-    port _Port16A = PORT16A  ;
-    port _Port16B = PORT16B  ;
-
-	/*IO ports-32BITS*/
-    port _Port32A = PORT32A  ;   
+	// /*IO ports-32BITS*/
+  //   port _Port32A = PORT32A  ;   
 
 /* ----------------------------------------------------------------------------
  *                           important command
@@ -154,43 +159,46 @@ inline int32_t FnPortWrite(uint32_t uiport,uint32_t state)
 
     switch (uiport)
     {
-     
-        /*IO ports-1BIT*/	
-        case PORT1A: _Port1A <: state ; break;
-        case PORT1B: _Port1B <: state ; break;
-        case PORT1C: _Port1C <: state ; break;  
-        case PORT1D: _Port1D <: state ; break;  
-        case PORT1E: _Port1E <: state ; break;  
-        case PORT1F: _Port1F <: state ; break;  
-        case PORT1G: _Port1G <: state ; break;  
-        case PORT1H: _Port1H <: state ; break;  
-        case PORT1I: _Port1I <: state ; break;  
-        case PORT1J: _Port1J <: state ; break;  
-        case PORT1K: _Port1K <: state ; break;  
-        case PORT1L: _Port1L <: state ; break;  
-        case PORT1M: _Port1M <: state ; break;  
-        case PORT1N: _Port1N <: state ; break;  
-        case PORT1O: _Port1O <: state ; break;  
-        case PORT1P: _Port1P <: state ; break;  
-        /*IO ports-4BITS*/
-        case PORT4A: _Port4A <: state ; break; 
-        case PORT4B: _Port4B <: state ; break; 
-        case PORT4C: _Port4C <: state ; break; 
-        case PORT4D: _Port4D <: state ; break; 
-        case PORT4E: _Port4E <: state ; break; 
-        case PORT4F: _Port4F <: state ; break; 
-        /*IO ports-8BITS*/
-        case PORT8A: _Port8A <: state ; break; 
-        case PORT8B: _Port8B <: state ; break; 
-        case PORT8C: _Port8C <: state ; break; 
-        case PORT8D: _Port8D <: state ; break; 
-        /*IO ports-16BITS*/
-        case PORT16A: _Port16A <: state ; break; 
-        case PORT16B: _Port16B <: state ; break; 
-        /*IO ports-32BITS*/
-        case PORT32A: _Port32A <: state ; break; 
+        // /*IO ports-1BIT*/	
+        // case PORT1A: _Port1A <: state ; break;
+        // case PORT1B: _Port1B <: state ; break;
+        // case PORT1C: _Port1C <: state ; break;  
+        // case PORT1D: _Port1D <: state ; break;  
+        // case PORT1E: _Port1E <: state ; break;  
+        // case PORT1F: _Port1F <: state ; break;  
+        // case PORT1G: _Port1G <: state ; break;  
+        // case PORT1H: _Port1H <: state ; break;  
+        // case PORT1I: _Port1I <: state ; break;  
+        // case PORT1J: _Port1J <: state ; break;  
+        // case PORT1K: _Port1K <: state ; break;  
+        // case PORT1L: _Port1L <: state ; break; 
+        #ifdef SOMANET_SOFTWARE_MAIN
+              case PORT1M: _Port1M <: state ; break;
+        #endif        
+        // case PORT1N: _Port1N <: state ; break;  
+        // case PORT1O: _Port1O <: state ; break;  
+        // case PORT1P: _Port1P <: state ; break;  
+        // /*IO ports-4BITS*/
+        // case PORT4A: _Port4A <: state ; break; 
+        // case PORT4B: _Port4B <: state ; break; 
+        #ifdef USE_LOCAL_MAIN  
+           case PORT4C: _Port4C <: state ; break; 
+        #endif   
+        // case PORT4D: _Port4D <: state ; break; 
+        // case PORT4E: _Port4E <: state ; break; 
+        // case PORT4F: _Port4F <: state ; break; 
+        // /*IO ports-8BITS*/
+        // case PORT8A: _Port8A <: state ; break; 
+        // case PORT8B: _Port8B <: state ; break; 
+        // case PORT8C: _Port8C <: state ; break; 
+        // case PORT8D: _Port8D <: state ; break; 
+        // /*IO ports-16BITS*/
+        // case PORT16A: _Port16A <: state ; break; 
+        // case PORT16B: _Port16B <: state ; break; 
+        // /*IO ports-32BITS*/
+        // case PORT32A: _Port32A <: state ; break; 
+        default:  break;
     }
-    delay_milliseconds(10); 
     return state;
 }
 
@@ -207,41 +215,45 @@ inline int32_t FnPortRead(uint32_t uiport)
  switch (uiport)
     {
         /*IO ports-1BIT*/	
-        case PORT1A:   _Port1A @ support :> state ; break;
-        case PORT1B:   _Port1B @ support :> state ; break;
-        case PORT1C:   _Port1C @ support :> state ; break;  
-        case PORT1D:   _Port1D @ support :> state ; break;  
-        case PORT1E:   _Port1E @ support :> state ; break;  
-        case PORT1F:   _Port1F @ support :> state ; break;  
-        case PORT1G:   _Port1G @ support :> state ; break;  
-        case PORT1H:   _Port1H @ support :> state ; break;  
-        case PORT1I:   _Port1I @ support :> state ; break;  
-        case PORT1J:   _Port1J @ support :> state ; break;  
-        case PORT1K:   _Port1K @ support :> state ; break;  
-        case PORT1L:   _Port1L @ support :> state ; break;  
-        case PORT1M:   _Port1M @ support :> state ; break;  
-        case PORT1N:   _Port1N @ support :> state ; break;  
-        case PORT1O:   _Port1O @ support :> state ; break;  
-        case PORT1P:   _Port1P @ support :> state ; break;  
-        /*IO ports-4BITS*/
-        case PORT4A:   _Port4A @ support :> state ; break; 
-        case PORT4B:   _Port4B @ support :> state ; break; 
-        case PORT4C:   _Port4C @ support :> state ; break; 
-        case PORT4D:   _Port4D @ support :> state ; break; 
-        case PORT4E:   _Port4E @ support :> state ; break; 
-        case PORT4F:   _Port4F @ support :> state ; break; 
-        /*IO ports-8BITS*/
-        case PORT8A:   _Port8A @ support :> state ; break; 
-        case PORT8B:   _Port8B @ support :> state ; break; 
-        case PORT8C:   _Port8C @ support :> state ; break; 
-        case PORT8D:   _Port8D @ support :> state ; break; 
-        /*IO ports-16BITS*/
-        case PORT16A: _Port16A @ support :> state ; break; 
-        case PORT16B: _Port16B @ support :> state ; break; 
-        /*IO ports-32BITS*/
-        case PORT32A: _Port32A @ support :> state ; break;     
-    }   
-delay_milliseconds(10);         
+        // case PORT1A:   _Port1A @ support :> state ; break;
+        // case PORT1B:   _Port1B @ support :> state ; break;
+        // case PORT1C:   _Port1C @ support :> state ; break;  
+        // case PORT1D:   _Port1D @ support :> state ; break;  
+        // case PORT1E:   _Port1E @ support :> state ; break;  
+        // case PORT1F:   _Port1F @ support :> state ; break;  
+        // case PORT1G:   _Port1G @ support :> state ; break;  
+        // case PORT1H:   _Port1H @ support :> state ; break;  
+        // case PORT1I:   _Port1I @ support :> state ; break;  
+        // case PORT1J:   _Port1J @ support :> state ; break;  
+        // case PORT1K:   _Port1K @ support :> state ; break;  
+        // case PORT1L:   _Port1L @ support :> state ; break;
+        #ifdef SOMANET_SOFTWARE_MAIN 
+           case PORT1M:   _Port1M @ support :> state ; break;
+        #endif       
+        // case PORT1N:   _Port1N @ support :> state ; break;  
+        // case PORT1O:   _Port1O @ support :> state ; break;  
+        // case PORT1P:   _Port1P @ support :> state ; break;  
+        // /*IO ports-4BITS*/
+        // case PORT4A:   _Port4A @ support :> state ; break; 
+        // case PORT4B:   _Port4B @ support :> state ; break; 
+        #ifdef USE_LOCAL_MAIN   
+           case PORT4C:   _Port4C @ support :> state ; break;
+        #endif   
+        // case PORT4D:   _Port4D @ support :> state ; break; 
+        // case PORT4E:   _Port4E @ support :> state ; break; 
+        // case PORT4F:   _Port4F @ support :> state ; break; 
+        // /*IO ports-8BITS*/
+        // case PORT8A:   _Port8A @ support :> state ; break; 
+        // case PORT8B:   _Port8B @ support :> state ; break; 
+        // case PORT8C:   _Port8C @ support :> state ; break; 
+        // case PORT8D:   _Port8D @ support :> state ; break; 
+        // /*IO ports-16BITS*/
+        // case PORT16A: _Port16A @ support :> state ; break; 
+        // case PORT16B: _Port16B @ support :> state ; break; 
+        // /*IO ports-32BITS*/
+        // case PORT32A: _Port32A @ support :> state ; break; 
+           default:  break;
+    }
   return state;
 }
 

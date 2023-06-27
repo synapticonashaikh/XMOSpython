@@ -172,7 +172,9 @@ void FnTimerInterruptInit(hwtimer_t Var)
  * Return Type	: int
  * Details	    : main function, start of the code
  * *********************************************************************/
-#pragma stackfunction 1000
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
+    #pragma stackfunction 1000
+#endif    
 void FnTimerIsrHandler (void)
 {
     machine_pin_irq_obj_t *irq1 = 

@@ -181,7 +181,10 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_0(gpio_PrintGM_obj, gpio_PrintGM);
  * Return Type	: int
  * Details	    : main function, start of the code 
  * *********************************************************************/
-#pragma stackfunction 1000
+ #if ENABLE_DISABLE_GPIO_IRQ == 1
+     #if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
+          #pragma stackfunction 1000
+     #endif 
 STATIC mp_obj_t gpiopin_irq(size_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_args) 
 {
 
@@ -215,7 +218,7 @@ STATIC mp_obj_t gpiopin_irq(size_t n_args, const mp_obj_t *pos_args, mp_map_t *k
 
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_KW(pin_irq_obj, 0, gpiopin_irq);
-
+#endif
 /***********************************************************************
  * Function Name: main 
  * Arguments	: void
@@ -229,8 +232,10 @@ STATIC const mp_rom_map_elem_t gpio_module_globals_table[] =
     { MP_ROM_QSTR(MP_QSTR_PortRead),  MP_ROM_PTR(&gpio_PortRead_obj)  },
     { MP_ROM_QSTR(MP_QSTR_PortWrite), MP_ROM_PTR(&gpio_PortWrite_obj) },
     { MP_ROM_QSTR(MP_QSTR_PrintGM),   MP_ROM_PTR(&gpio_PrintGM_obj) },    
-    { MP_ROM_QSTR(MP_QSTR_Toggle),    MP_ROM_PTR(&gpio_Toggle_obj) },        
-    { MP_ROM_QSTR(MP_QSTR_pirq),        MP_ROM_PTR(&pin_irq_obj) },    
+    { MP_ROM_QSTR(MP_QSTR_Toggle),    MP_ROM_PTR(&gpio_Toggle_obj) }, 
+ #if ENABLE_DISABLE_GPIO_IRQ == 1           
+    { MP_ROM_QSTR(MP_QSTR_pirq),        MP_ROM_PTR(&pin_irq_obj) },
+ #endif       
     { MP_ROM_QSTR(MP_QSTR_IRQ_RISING),  MP_ROM_INT(IRQ_RISING) },
     { MP_ROM_QSTR(MP_QSTR_IRQ_FALLING), MP_ROM_INT(IRQ_FALLING) },
 

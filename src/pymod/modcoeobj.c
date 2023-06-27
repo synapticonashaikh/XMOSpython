@@ -113,66 +113,38 @@
  * Details	    : main function, start of the code 
  * *********************************************************************/
 STATIC mp_obj_t OBJDITC_SetObjectValue(mp_obj_t arg_in) 
-{ 
-
-    char      buffer [50]= {'\0'};
-    sprintf  (buffer,"Length of list=%ld\n\r",
-    mp_obj_get_int(mp_obj_len(arg_in))); mp_printf(&mp_plat_print, buffer);
-
-    /*check if the list is of 6 element*/
- if (mp_obj_get_int(mp_obj_len(arg_in)) == (uint8_t)6)
+{
+    /*check if the list is of 4 element*/
+ if (mp_obj_get_int(mp_obj_len(arg_in)) == (uint8_t)4)
   {    
-        mp_int_t index = RESET, subindex = RESET, length = RESET, flag = RESET, acess = RESET;      
-        mp_obj_t  item, iterable = mp_getiter(arg_in, NULL); 
-        uint8_t   OBJ[10];
+        mp_int_t  index = RESET, subindex = RESET, length = RESET;      
+        mp_obj_t  item, iterable = mp_getiter(arg_in, NULL); uint8_t OBJ[50];
+        memset(OBJ,RESET,sizeof(OBJ));
 
         /*parse the first element of the list*/
-        item  = mp_iternext(iterable);
-    if (item != MP_OBJ_STOP_ITERATION || item != MP_OBJ_NULL )
-      { index = mp_obj_get_int(item);
-        sprintf(buffer,"Index of packet=%x\n\r", index);mp_printf(&mp_plat_print, buffer); }
-
+         item  = mp_iternext(iterable);
+    if ( item != MP_OBJ_STOP_ITERATION || item != MP_OBJ_NULL )
+         index = mp_obj_get_int(item);
         /*parse the Second element of the list*/    
         item  = mp_iternext(iterable);
     if (item != MP_OBJ_STOP_ITERATION  || item != MP_OBJ_NULL )
-      { subindex = mp_obj_get_int(item);
-        sprintf(buffer,"SubIndex of packet=%x\n\r", subindex); mp_printf(&mp_plat_print, buffer);  }
-
-        /*parse the third element [nested list] of the list*/           
+        subindex = mp_obj_get_int(item);
+        /*parse the third element [nested list] of the list*/ //[,['a','b']]     
         item  = mp_iternext(iterable);
-    if (item != MP_OBJ_STOP_ITERATION  || item != MP_OBJ_NULL )
+    if (item != MP_OBJ_STOP_ITERATION || item != MP_OBJ_NULL )
       { 
-        sprintf  (buffer,"Length of data list=%d\n\r",
-        mp_obj_get_int(mp_obj_len(item))); mp_printf(&mp_plat_print, buffer);
         for (uint8_t ucLoop = RESET; ucLoop < mp_obj_get_int(mp_obj_len(item)) ; ucLoop++ ) { 
-             OBJ[ucLoop] = mp_obj_get_int(mp_obj_subscr(item, MP_OBJ_NEW_SMALL_INT(ucLoop), MP_OBJ_SENTINEL));
-             sprintf(buffer,"Data [%d]=%x\n\r",ucLoop ,OBJ[ucLoop]); mp_printf(&mp_plat_print, buffer); }
-      }  
+             OBJ[ucLoop] = mp_obj_get_int(mp_obj_subscr(item, MP_OBJ_NEW_SMALL_INT(ucLoop), MP_OBJ_SENTINEL)); }
+      }
         /*parse the fourth element of the list*/
         item  = mp_iternext(iterable);
     if (item != MP_OBJ_STOP_ITERATION  || item != MP_OBJ_NULL )
-      { length = mp_obj_get_int(item);
-        sprintf(buffer,"Length of packet=%x\n\r", length); mp_printf(&mp_plat_print, buffer);  }
-
-        /*parse the fifth element of the list*/
-        item  = mp_iternext(iterable);
-    if (item != MP_OBJ_STOP_ITERATION  || item != MP_OBJ_NULL )
-      { flag = mp_obj_get_int(item);
-        sprintf(buffer,"Flag of packet=%x\n\r", flag); mp_printf(&mp_plat_print, buffer);  }
-
-        /*parse the fifth element of the list*/
-        item  = mp_iternext(iterable);
-    if (item != MP_OBJ_STOP_ITERATION
-    ||  item != MP_OBJ_NULL )
-      { acess = mp_obj_get_int(item);
-        sprintf(buffer,"access of packet=%x\n\r", acess); mp_printf(&mp_plat_print, buffer);  }
-
-        /*set the object ditctonary! */
-          FnSetObjectValue(index, subindex, length, OBJ, flag, acess );
+        length = mp_obj_get_int(item);
+    /*set the object ditctonary!*/
+    FnSetObjectValue(index, subindex, length, OBJ );
   }
-
-
-    return mp_const_none;
+  else mp_raise_ValueError(MP_ERROR_TEXT("List must have length of exactly 4"));
+  return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_1(OBJDITC_SetObjectValue_obj, OBJDITC_SetObjectValue);
 
@@ -271,7 +243,21 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_1(OBJDITC_SetTargetTorque_obj, OBJDITC_SetTargetT
 
 /***********************************************************************
  * Function Name: main 
- * Arguments	: void
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code 
+ * *********************************************************************/
+STATIC mp_obj_t OBJDITC_SetTargetVelocity(mp_obj_t Velocity) 
+{
+    FnSetTargetVelocity(MP_OBJ_SMALL_INT_VALUE(Velocity));
+    return mp_const_none;
+}
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(OBJDITC_SetTargetVelocity_obj, OBJDITC_SetTargetVelocity);
+
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
  * Return Type	: int
  * Details	    : main function, start of the code 
  * *********************************************************************/
@@ -311,7 +297,8 @@ STATIC const mp_rom_map_elem_t OBJDITC_module_globals_table[ ] =
     { MP_ROM_QSTR(MP_QSTR_ReadControlWord) , MP_ROM_PTR(&OBJDITC_ReadControlWord_obj)},
     { MP_ROM_QSTR(MP_QSTR_ReadErrorStatus) , MP_ROM_PTR(&OBJDITC_ReadErrorStatus_obj)},    
     { MP_ROM_QSTR(MP_QSTR_WriteModesofOperation), MP_ROM_PTR(&OBJDITC_SetModesofOperation_obj)},    
-    { MP_ROM_QSTR(MP_QSTR_ReadModesofOperation),  MP_ROM_PTR(&OBJDITC_ReadModesofOperation_obj)},   
+    { MP_ROM_QSTR(MP_QSTR_ReadModesofOperation),  MP_ROM_PTR(&OBJDITC_ReadModesofOperation_obj)}, 
+    { MP_ROM_QSTR(MP_QSTR_SetTargetVelocity), MP_ROM_PTR(&OBJDITC_SetTargetVelocity_obj)},      
     { MP_ROM_QSTR(MP_QSTR_SetTargetTorque),   MP_ROM_PTR(&OBJDITC_SetTargetTorque_obj)},        
     { MP_ROM_QSTR(MP_QSTR_ReadTargetTorque),  MP_ROM_PTR(&OBJDITC_ReadTargetTorque_obj)},   
     { MP_ROM_QSTR(MP_QSTR_I2TEnDs),           MP_ROM_PTR(&OBJDITC_I2TEnDs_obj)},   

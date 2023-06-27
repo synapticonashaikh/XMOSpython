@@ -122,7 +122,7 @@ def make_version_header(repo_path, filename):
 
     # Only write the file if we need to
     if write_file:
-        print("GEN %s" % filename)
+        #print("GEN %s" % filename)
         with open(filename, "w") as f:
             f.write(file_data)
 

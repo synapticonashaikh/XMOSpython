@@ -485,6 +485,8 @@ Q(SetObjectValue)
 
 Q(SetTargetTorque)
 
+Q(SetTargetVelocity)
+
 Q(StopIteration)
 
 Q(StopIteration)
@@ -837,8 +839,6 @@ Q(handler)
 
 Q(handler)
 
-Q(handler)
-
 Q(hard)
 
 Q(hasattr)
@@ -939,8 +939,6 @@ Q(oct)
 
 Q(ord)
 
-Q(pirq)
-
 Q(pop)
 
 Q(pop)
@@ -1022,8 +1020,6 @@ Q(throw)
 Q(tirq)
 
 Q(to_bytes)
-
-Q(trigger)
 
 Q(trigger)
 

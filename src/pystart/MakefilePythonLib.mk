@@ -42,7 +42,9 @@ SRC_PY += $(ROOTL)py/modstruct.c
 SRC_PY += $(ROOTL)py/modsys.c
 SRC_PY += $(ROOTL)py/modthread.c
 SRC_PY += $(ROOTL)py/moderrno.c
+ifeq ($(ENABLE_DISABLE_OWN_MODULE), 1)
 SRC_PY += $(ROOTL)py/mpirq.c
+endif
 SRC_PY += $(ROOTL)py/mpprint.c
 SRC_PY += $(ROOTL)py/mpstate.c
 SRC_PY += $(ROOTL)py/mpz.c
