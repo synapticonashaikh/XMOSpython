@@ -95,14 +95,13 @@
  * ----------------------------------------------------------------------------
 */
 
-    /*set the timer for 100ns */
-    timer    stTime;
+    /*set the timer for 100ns */ 
+    extern timer varTimerInterrupt;
 
 /* ----------------------------------------------------------------------------
  *                           Fnction Definitions
  * ----------------------------------------------------------------------------
 */
-
 
 /* ----------------------------------------------------------------------------
  *                           important command
@@ -114,16 +113,17 @@
 
 /***********************************************************************
  * Function Name: main 
- * Arguments	  : void
- * Return Type	: int
+ * Arguments	 : void
+ * Return Type	 : int
  * Details	    : main function, start of the code
  * *********************************************************************/
 inline void FndelayuSec(uint32_t uiTime)
 {
    uint64_t  uiTimeTotal;
-   stTime :> uiTimeTotal;
+   varTimerInterrupt :> uiTimeTotal;
    uiTimeTotal = uiTimeTotal + (uiTime * ui1uSec) ;   
-   stTime when timerafter(uiTimeTotal) :> void;   
+   varTimerInterrupt when timerafter(uiTimeTotal) :> void;   
+
 }
 
 /***********************************************************************
@@ -135,9 +135,9 @@ inline void FndelayuSec(uint32_t uiTime)
 inline void FndelaymSec(uint32_t uiTime)
 {
    uint64_t  uiTimeTotal;
-   stTime :> uiTimeTotal;
+   varTimerInterrupt :> uiTimeTotal;
    uiTimeTotal = uiTimeTotal + (uiTime * ui1mSec) ;     
-   stTime when timerafter(uiTimeTotal) :> void;  
+   varTimerInterrupt when timerafter(uiTimeTotal) :> void;  
 }
 
 /***********************************************************************
@@ -149,7 +149,7 @@ inline void FndelaymSec(uint32_t uiTime)
 inline void FndelaySec(uint32_t uiTime)
 {
    uint64_t uiTimeTotal;
-   stTime :> uiTimeTotal;
+   varTimerInterrupt :> uiTimeTotal;
    uiTimeTotal = uiTimeTotal + (uiTime * ui1Sec) ;     
-   stTime when timerafter(uiTimeTotal) :> void;  
+   varTimerInterrupt when timerafter(uiTimeTotal) :> void;  
 }

@@ -103,10 +103,10 @@ typedef struct _mp_emit_common_t {
 } mp_emit_common_t;
 
 typedef struct _mp_emit_method_table_id_ops_t {
-    #ifdef __XC__
+    #if defined (__XC__) || defined(SOMANET_SOFTWARE_MAIN)  || defined(USE_LOCAL_MAIN)
     __attribute__(( fptrgroup("Aatif") ))void (*local)(emit_t *emit, qstr qst, mp_uint_t local_num, int kind);
     __attribute__(( fptrgroup("Aatif") ))void (*global)(emit_t *emit, qstr qst, int kind);
-   #else
+    #else
     void (*local)(emit_t *emit, qstr qst, mp_uint_t local_num, int kind);
     void (*global)(emit_t *emit, qstr qst, int kind);
    #endif 

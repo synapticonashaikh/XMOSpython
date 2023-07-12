@@ -36,8 +36,8 @@
 #define NEXT_GET_RIGHTMOST_PARENT(next) ((void *)((uintptr_t)(next) & ~1))
 
 // O(1), stable
-#ifdef __XC__
-mp_pairheap_t *mp_pairheap_meld(__attribute__(( fptrgroup("Aatif") ))mp_pairheap_lt_t lt, mp_pairheap_t *heap1, mp_pairheap_t *heap2) 
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)  
+mp_pairheap_t *mp_pairheap_meld(__attribute__(( fptrgroup("Aatif") ))mp_pairheap_lt_t lt, mp_pairheap_t *heap1, mp_pairheap_t *heap2) {
 #else
 mp_pairheap_t *mp_pairheap_meld(mp_pairheap_lt_t lt, mp_pairheap_t *heap1, mp_pairheap_t *heap2) {
 #endif

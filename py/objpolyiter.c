@@ -36,7 +36,7 @@
 // Any instance should have these 2 fields at the beginning
 typedef struct _mp_obj_polymorph_iter_t {
     mp_obj_base_t base;
-#ifdef __XC__         
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)      
     __attribute__(( fptrgroup("Aatif") ))mp_fun_1_t iternext;
 #else
     mp_fun_1_t iternext;

@@ -884,7 +884,7 @@ mp_lexer_t *mp_lexer_new_from_fd(qstr filename, int fd, bool close_fd) {
 
 #endif
 
-#ifdef __XC__
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
 void mp_lexer_free(__attribute__(( fptrgroup("Aatif") ))mp_lexer_t *lex) {
 #else
 void mp_lexer_free(mp_lexer_t *lex) {

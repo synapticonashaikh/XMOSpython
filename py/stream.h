@@ -69,7 +69,7 @@ struct mp_stream_seek_t {
 typedef struct _mp_stream_p_t {
     // On error, functions should return MP_STREAM_ERROR and fill in *errcode (values
     // are implementation-dependent, but will be exposed to user, e.g. via exception).
-#ifdef __XC__       
+#if defined (__XC__) || defined(SOMANET_SOFTWARE_MAIN)|| defined(USE_LOCAL_MAIN)    
     __attribute__(( fptrgroup("Aatif") ))mp_uint_t (*read)(mp_obj_t obj, void *buf, mp_uint_t size, int *errcode);
     __attribute__(( fptrgroup("Aatif") ))mp_uint_t (*write)(mp_obj_t obj, const void *buf, mp_uint_t size, int *errcode);
     __attribute__(( fptrgroup("Aatif") ))mp_uint_t (*ioctl)(mp_obj_t obj, mp_uint_t request, uintptr_t arg, int *errcode);

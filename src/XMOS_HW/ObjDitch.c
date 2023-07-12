@@ -159,9 +159,9 @@ int FnReadObject(uint16_t index_,uint16_t subindex, uint8_t capacity)
 
 /***********************************************************************
  * Function Name: main 
- * Arguments	  : void
+ * Arguments    : void
  * Return Type	: int
- * Details	    : main function, start of the code
+ * Details	: main function, start of the code
  * *********************************************************************/
 void FnSetControlword(uint16_t uiControlwrd)
 {
@@ -253,7 +253,6 @@ void FnSetTargetTorque(int16_t Torque)
     #else
          Dummy = Torque;              
     #endif 
-
 }
 
 /***********************************************************************
@@ -286,7 +285,7 @@ uint16_t FnGetTargetTorque(void)
    #ifdef USE_SDO_MODULES
        uint16_t TargetTorque;
        sdo_get_value_by_subitem_position_unsafe
-       (OD_SUBITEMPOS_TARGET_TORQUE_0x6071_0,(uint8_t *)&TargetTorque); 
+       (OD_SUBITEMPOS_TARGET_TORQUE_0x6071_0,(uint8_t *)&TargetTorque);
        return  TargetTorque;
    #else
         return Dummy;

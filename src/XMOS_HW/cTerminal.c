@@ -74,13 +74,6 @@
                                                                                                                                                                                                    
 		        In order to be irreplaceable, one must always be different
   *************************************************************************************/
-
-/* ----------------------------------------------------------------------------
- *                           MACROS
- * ----------------------------------------------------------------------------
-*/
-
-
 /* ----------------------------------------------------------------------------
  *                           Includes
  * ----------------------------------------------------------------------------
@@ -132,8 +125,9 @@
         char  cprint[100]; 
         uint32_t uiCodeSize = RESET;       
 #elif defined SOMANET_SOFTWARE_MAIN
-
-
+        uint8_t WriteLogCounter = RESET;
+        int  WriteLogLength [(uint8_t)9];        
+        char WriteLogBuffer [(uint8_t)9][(uint16_t)300];
 #endif
 
 /* ----------------------------------------------------------------------------
@@ -159,14 +153,25 @@
  * *********************************************************************/
 void mp_hal_stdout_tx_strn(const char *str, mp_uint_t len) 
 { 
-unsigned char d;   
-#ifdef USE_LOCAL_MAIN
-    if(len != RESET )
-    d = write(STDOUT_FILENO, str, len); fflush(stdout);
-#elif defined SOMANET_SOFTWARE_MAIN
-    if(len != RESET )
-       d =FnWriteLogs((char *)str, len);
-#endif
+  unsigned char d;   
+  #ifdef USE_LOCAL_MAIN
+      if(len != RESET )
+      d = write(STDOUT_FILENO, str, len); fflush(stdout);
+  #elif defined SOMANET_SOFTWARE_MAIN
+      #ifndef DISABLE_LOG  
+        if(((len != RESET  )&&(len < 301))
+        && ((str[0] != '\n')&&(str[1] != '\n')))
+          {  
+            if(WriteLogCounter < 9 )
+              {
+                  WriteLogLength[WriteLogCounter] = len;
+                  memset(WriteLogBuffer[WriteLogCounter],RESET,sizeof(WriteLogBuffer[WriteLogCounter]));
+                  memcpy(WriteLogBuffer[WriteLogCounter],str,WriteLogLength[WriteLogCounter]);
+                  WriteLogCounter++;
+              }              
+          }
+      #endif
+  #endif
 }
 
 // Receive single character
@@ -182,44 +187,6 @@ int mp_hal_stdin_rx_chr(void)
   d = read(STDIN_FILENO, &c, 1);   
   return c;
 }
-
-/***********************************************************************
- * Function Name : main 
- * Arguments	   : void
- * Return Type	 : int
- * Details	     : main function, start of the code
- * *********************************************************************/
-#ifdef SOMANET_SOFTWARE_MAIN
-int FnWriteLogs(char *str, unsigned long int len)
-{
-
-    char TempFile[(uint16_t)3002]; int fileW =  RESET;
-    int fileD = iSPIFFS_open(_LOG_FILE, SPIFFS_O_CREAT | SPIFFS_O_RDWR | SPIFFS_O_APPEND ); 
-     if( fileD<RESET) return _ERROR_FOPEN;
-     int fileS = iSPIFFS_get_size(fileD);
-     if( fileS<RESET) return _ERROR_FSIZE;
-      
-  
-    //if( fileS >= _LOG_MAX_SIZE || (fileS + len) >= _LOG_MAX_SIZE )
-      {
-        //  int fileL=  iSPIFFS_seek(fileD,_LOG_ROLL_OVER,SPIFFS_SEEK_SET);
-        //  if( fileL<RESET) return _ERROR_FSEEK;
-        //  memset(TempFile,RESET,sizeof(TempFile));       
-        //  int fileR = iSPIFFS_read(fileD,TempFile, fileS - _LOG_ROLL_OVER);
-        //  if( fileR<RESET) return _ERROR_FREAD;
-        //  iSPIFFS_close(fileD);
-        //  fileD = iSPIFFS_open (_LOG_FILE, SPIFFS_O_RDWR | SPIFFS_O_TRUNC );
-        //  if(fileD<RESET) return _ERROR_FOPEN; 
-        //  fileW = iSPIFFS_write(fileD,TempFile,fileS-_LOG_ROLL_OVER);
-        //  if(fileW<RESET) return _ERROR_FWRITE;
-      }
-       fileW = iSPIFFS_write(fileD,(char *)str,len);
-       if(fileW<RESET) return _ERROR_FWRITE;
-      iSPIFFS_close(fileD);
- return RESET;  
-}
-
-#endif
 
 /***********************************************************************
  * Function Name : main 
@@ -262,9 +229,9 @@ void FnReceiveProcess(char *Data)
 
          if ( strstr(Data, "# check $") != RESET)
             { FnTransmitCharacter("Device is active!\n\r");         }
-    else if ( strstr(Data, "# status $") != RESET )     
+    else if ( strstr(Data, "# status $") != RESET )
             {  FnTransmitCharacter("Status: Code is standby!\n\r"); }
-    else if ( strstr(Data, "# codesize") != RESET )     
+    else if ( strstr(Data, "# codesize") != RESET )
             {   
               if (strchr(Data, '$') != RESET )
                  {
@@ -277,16 +244,16 @@ void FnReceiveProcess(char *Data)
                  }
                else goto down1;  
             }
-    else if ( strstr(Data, "# modechange $") != RESET )     
+    else if ( strstr(Data, "# modechange $") != RESET )
             {
               if( uiCodeSize !=  RESET )
                 { ucMode      = _SERAIL_MODE_DATA;
                   FnTransmitCharacter("Status: Mode Changed\n\rSend Code: "); }            
               else goto down1;  
             }
-    else   {  down1: 
+    else   {  down1:
               sprintf(cprint,"unknow data = %s",Data);
-              FnTransmitCharacter(cprint);  }       
+              FnTransmitCharacter(cprint); }
 }
 
 

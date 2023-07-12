@@ -112,32 +112,27 @@
  * Return Type	: int
  * Details	    : main function, start of the code 
  * *********************************************************************/
-STATIC mp_obj_t myport_info(void) 
-{
-    mp_printf(&mp_plat_print, "Just a debugg message to print\n");
-    return mp_const_none;
-}
-STATIC MP_DEFINE_CONST_FUN_OBJ_0(myport_info_obj, myport_info);
 
-/***********************************************************************
- * Function Name: main 
- * Arguments	: void
- * Return Type	: int
- * Details	    : main function, start of the code 
- * *********************************************************************/
+STATIC mp_obj_t myport_function1(void)
+{
+    //mp_printf(&mp_plat_print, "Just a debugg message to print\n");
+    return mp_const_none;
+}STATIC MP_DEFINE_CONST_FUN_OBJ_0(myport_Fun_obj, myport_function1);
+
 STATIC const mp_rom_map_elem_t myport_module_globals_table[] = 
 {
     { MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_myport) },
-    { MP_ROM_QSTR(MP_QSTR_info), MP_ROM_PTR(&myport_info_obj) },
-};
-STATIC MP_DEFINE_CONST_DICT(myport_module_globals, myport_module_globals_table);
+    { MP_ROM_QSTR(MP_QSTR_Fun1), MP_ROM_PTR(&myport_Fun_obj) }, 
+};STATIC MP_DEFINE_CONST_DICT(myport_module_globals, myport_module_globals_table);
 
 const mp_obj_module_t myport_module = 
 {
     .base    = { &mp_type_module },
     .globals = (mp_obj_dict_t *)&myport_module_globals,
-};
-MP_REGISTER_MODULE(MP_QSTR_myport, myport_module);
+};MP_REGISTER_MODULE(MP_QSTR_myport, myport_module);
+
+
+
 
 /***********************************************************************
  * Function Name: main 
@@ -145,7 +140,7 @@ MP_REGISTER_MODULE(MP_QSTR_myport, myport_module);
  * Return Type	: int
  * Details	    : main function, start of the code 
  * *********************************************************************/
-STATIC mp_obj_t board_clockinfo(void) 
+/* STATIC mp_obj_t board_clockinfo(void) 
 {
     int a = 1;
     char buffer [50]= {'\0'}; 
@@ -153,7 +148,7 @@ STATIC mp_obj_t board_clockinfo(void)
     mp_printf(&mp_plat_print, buffer);
     return mp_const_none;
 }
-STATIC MP_DEFINE_CONST_FUN_OBJ_0(board_clockinfo_obj, board_clockinfo);
+STATIC MP_DEFINE_CONST_FUN_OBJ_0(board_clockinfo_obj, board_clockinfo); */
 
 /***********************************************************************
  * Function Name: main 
@@ -161,24 +156,23 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_0(board_clockinfo_obj, board_clockinfo);
  * Return Type	: int
  * Details	    : main function, start of the code 
  * *********************************************************************/
-STATIC mp_obj_t board_healthinfo(mp_obj_t a) 
+/*STATIC mp_obj_t board_healthinfo(mp_obj_t a) 
 {
   int abc = 200;
    return MP_OBJ_NEW_SMALL_INT(abc);
 }
-STATIC MP_DEFINE_CONST_FUN_OBJ_1(board_healthinfo_obj, board_healthinfo);
+STATIC MP_DEFINE_CONST_FUN_OBJ_1(board_healthinfo_obj, board_healthinfo); */
 
 /***********************************************************************
  * Function Name : main 
- * Arguments	  : void
- * Return Type	: int
- * Details	    : main function, start of the code 
+ * Arguments	 : void
+ * Return Type	 : int
+ * Details	 : main function, start of the code 
  * *********************************************************************/
-STATIC mp_obj_t board_add(mp_obj_t a, mp_obj_t b) 
+/*STATIC mp_obj_t board_add(mp_obj_t a, mp_obj_t b) 
 {
    return MP_OBJ_NEW_SMALL_INT(MP_OBJ_SMALL_INT_VALUE(a) + MP_OBJ_SMALL_INT_VALUE(b));
-}
-STATIC MP_DEFINE_CONST_FUN_OBJ_2(board_add_obj, board_add);
+} STATIC MP_DEFINE_CONST_FUN_OBJ_2(board_add_obj, board_add); */
 
 /***********************************************************************
  * Function Name: main 
@@ -187,11 +181,10 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(board_add_obj, board_add);
  * Details	    : main function, start of the code 
  * *********************************************************************/
 #if MICROPY_FLOAT_IMPL == MICROPY_FLOAT_IMPL_FLOAT
-STATIC mp_obj_t board_mul(mp_obj_t a, mp_obj_t b) 
+/*STATIC mp_obj_t board_mul(mp_obj_t a, mp_obj_t b) 
 {    
    return mp_obj_new_float((mp_float_t)(mp_obj_float_get(a) * mp_obj_float_get(b) ));
-}
-STATIC MP_DEFINE_CONST_FUN_OBJ_2(board_mul_obj, board_mul);
+}STATIC MP_DEFINE_CONST_FUN_OBJ_2(board_mul_obj, board_mul); */
 #endif
 
 /***********************************************************************
@@ -201,13 +194,12 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(board_mul_obj, board_mul);
  * Details	    : main function, start of the code 
  * *********************************************************************/
 #if MICROPY_FLOAT_IMPL == MICROPY_FLOAT_IMPL_FLOAT
-STATIC mp_obj_t board_mul10(mp_obj_t a) 
+/* STATIC mp_obj_t board_mul10(mp_obj_t a) 
 {
    mp_float_t f;
    mp_obj_get_float_maybe(a,&f);
    return mp_obj_new_float(f * 10);
-}
-STATIC MP_DEFINE_CONST_FUN_OBJ_1(board_mul10_obj, board_mul10);
+} STATIC MP_DEFINE_CONST_FUN_OBJ_1(board_mul10_obj, board_mul10); */
 #endif
 
 /***********************************************************************
@@ -216,13 +208,12 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_1(board_mul10_obj, board_mul10);
  * Return Type	: int
  * Details	    : main function, start of the code 
  * *********************************************************************/
-STATIC mp_obj_t board_strcat(mp_obj_t a, mp_obj_t b) 
+/*STATIC mp_obj_t board_strcat(mp_obj_t a, mp_obj_t b) 
 {
   strcat((char *)mp_obj_str_get_str(a),mp_obj_str_get_str(b));
   return mp_obj_new_str(mp_obj_str_get_str(a),strlen(mp_obj_str_get_str(a)));
 
-}
-STATIC MP_DEFINE_CONST_FUN_OBJ_2(board_strcat_obj, board_strcat);
+}STATIC MP_DEFINE_CONST_FUN_OBJ_2(board_strcat_obj, board_strcat); */
 
 /***********************************************************************
  * Function Name: main 
@@ -230,11 +221,11 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_2(board_strcat_obj, board_strcat);
  * Return Type	: int
  * Details	    : main function, start of the code 
  * *********************************************************************/
-STATIC const mp_rom_map_elem_t board_module_globals_table[] = 
+/*STATIC const mp_rom_map_elem_t board_module_globals_table[] = 
 {
      { MP_OBJ_NEW_QSTR(MP_QSTR___name__), MP_OBJ_NEW_QSTR(MP_QSTR_board) },
-     { MP_ROM_QSTR(MP_QSTR_clockinfo),  MP_ROM_PTR(&board_clockinfo_obj) },
-     { MP_ROM_QSTR(MP_QSTR_healthinfo), MP_ROM_PTR(&board_healthinfo_obj)},
+     { MP_ROM_QSTR(MP_QSTR_clockinfo),    MP_ROM_PTR(&board_clockinfo_obj) },
+     { MP_ROM_QSTR(MP_QSTR_healthinfo),   MP_ROM_PTR(&board_healthinfo_obj)},
      { MP_ROM_QSTR(MP_QSTR_add), MP_ROM_PTR(&board_add_obj) },
     #if MICROPY_FLOAT_IMPL == MICROPY_FLOAT_IMPL_FLOAT   
         { MP_ROM_QSTR(MP_QSTR_mul),   MP_ROM_PTR(&board_mul_obj) },    
@@ -242,12 +233,10 @@ STATIC const mp_rom_map_elem_t board_module_globals_table[] =
     #endif    
      { MP_ROM_QSTR(MP_QSTR_strcat), MP_ROM_PTR(&board_strcat_obj)},
 
-};
-STATIC MP_DEFINE_CONST_DICT(board_module_globals, board_module_globals_table);
+};STATIC MP_DEFINE_CONST_DICT(board_module_globals, board_module_globals_table);
 
 const mp_obj_module_t board_module = 
 {
     .base    = { &mp_type_module },
     .globals = (mp_obj_dict_t *)&board_module_globals,
-};
-MP_REGISTER_MODULE(MP_QSTR_board, board_module);
+};MP_REGISTER_MODULE(MP_QSTR_board, board_module);*/

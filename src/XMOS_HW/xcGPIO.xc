@@ -120,8 +120,8 @@
   //   port _Port4B  = PORT4B  ;
        #ifdef USE_LOCAL_MAIN    
             port _Port4C  = PORT4C  ;
+       in   port _Port4D  = PORT4D  ;            
        #endif       
-  //   port _Port4D  = PORT4D  ;
   //   port _Port4E  = PORT4E  ;
   //   port _Port4F  = PORT4F  ;
 
@@ -215,33 +215,37 @@ inline int32_t FnPortRead(uint32_t uiport)
  switch (uiport)
     {
         /*IO ports-1BIT*/	
-        // case PORT1A:   _Port1A @ support :> state ; break;
-        // case PORT1B:   _Port1B @ support :> state ; break;
-        // case PORT1C:   _Port1C @ support :> state ; break;  
-        // case PORT1D:   _Port1D @ support :> state ; break;  
-        // case PORT1E:   _Port1E @ support :> state ; break;  
-        // case PORT1F:   _Port1F @ support :> state ; break;  
-        // case PORT1G:   _Port1G @ support :> state ; break;  
-        // case PORT1H:   _Port1H @ support :> state ; break;  
-        // case PORT1I:   _Port1I @ support :> state ; break;  
-        // case PORT1J:   _Port1J @ support :> state ; break;  
-        // case PORT1K:   _Port1K @ support :> state ; break;  
-        // case PORT1L:   _Port1L @ support :> state ; break;
+        /*
+        case PORT1A:   _Port1A @ support :> state ; break;
+        case PORT1B:   _Port1B @ support :> state ; break;
+        case PORT1C:   _Port1C @ support :> state ; break;  
+        case PORT1D:   _Port1D @ support :> state ; break;  
+        case PORT1E:   _Port1E @ support :> state ; break;  
+        case PORT1F:   _Port1F @ support :> state ; break;  
+        case PORT1G:   _Port1G @ support :> state ; break;  
+        case PORT1H:   _Port1H @ support :> state ; break;  
+        case PORT1I:   _Port1I @ support :> state ; break;  
+        case PORT1J:   _Port1J @ support :> state ; break;  
+        case PORT1K:   _Port1K @ support :> state ; break;  
+        case PORT1L:   _Port1L @ support :> state ; break;
+        case PORT1N:   _Port1N @ support :> state ; break;  
+        case PORT1O:   _Port1O @ support :> state ; break;  
+        case PORT1P:   _Port1P @ support :> state ; break;           
+        */
         #ifdef SOMANET_SOFTWARE_MAIN 
            case PORT1M:   _Port1M @ support :> state ; break;
         #endif       
-        // case PORT1N:   _Port1N @ support :> state ; break;  
-        // case PORT1O:   _Port1O @ support :> state ; break;  
-        // case PORT1P:   _Port1P @ support :> state ; break;  
-        // /*IO ports-4BITS*/
-        // case PORT4A:   _Port4A @ support :> state ; break; 
-        // case PORT4B:   _Port4B @ support :> state ; break; 
+        /*IO ports-4BITS*/
+        /*
+        case PORT4A:   _Port4A @ support :> state ; break; 
+        case PORT4B:   _Port4B @ support :> state ; break;         
+        case PORT4E:   _Port4E @ support :> state ; break; 
+        case PORT4F:   _Port4F @ support :> state ; break; 
+        */
         #ifdef USE_LOCAL_MAIN   
-           case PORT4C:   _Port4C @ support :> state ; break;
-        #endif   
-        // case PORT4D:   _Port4D @ support :> state ; break; 
-        // case PORT4E:   _Port4E @ support :> state ; break; 
-        // case PORT4F:   _Port4F @ support :> state ; break; 
+           case PORT4C:   _Port4C @ support :> state ; break; 
+           case PORT4D:   _Port4D @ support :> state ; break;
+        #endif           
         // /*IO ports-8BITS*/
         // case PORT8A:   _Port8A @ support :> state ; break; 
         // case PORT8B:   _Port8B @ support :> state ; break; 
@@ -252,7 +256,7 @@ inline int32_t FnPortRead(uint32_t uiport)
         // case PORT16B: _Port16B @ support :> state ; break; 
         // /*IO ports-32BITS*/
         // case PORT32A: _Port32A @ support :> state ; break; 
-           default:  break;
+           default: break;
     }
   return state;
 }

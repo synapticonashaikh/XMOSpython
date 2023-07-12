@@ -101,7 +101,9 @@
  *                           Global Variable
  * ----------------------------------------------------------------------------
 */ 
-    hwtimer_t varTimerInterrupt;   
+    hwtimer_t varTimerInterrupt;
+    uint8_t   ucTimerIRQFlag = RESET ;
+    uint32_t  ucTimerIRQTime = RESET ;
 
 /* ----------------------------------------------------------------------------
  *                           Function Definition
@@ -109,38 +111,64 @@
 */ 
 /***********************************************************************
  * Function Name: main 
- * Arguments	: void
+ * Arguments	  : void
  * Return Type	: int
  * Details	    : main function, start of the code
  * *********************************************************************/
 void FnTimerInterruptHandler(void)
 {
-    FnTimerIsrHandler( );
+
+  static int ucTimerCount = RESET;
+
+    if( ucTimerIRQFlag == SET)
+    {
+            ucTimerCount ++;
+      if (  ucTimerCount == ucTimerIRQTime)
+          { ucTimerCount = RESET;
+            FnTimerIsrHandler( ); }
+    }
+    else 
+    ucTimerCount = RESET ;
+
+    #if ENABLE_DISABLE_GPIO_IRQ == 1
+      if( ucGpioIRQFlag == SET )
+        { FnGPIOIntrCheck();}
+    #endif  
+
+
     FnTimerInterruptInit(varTimerInterrupt);
 }                             
 /***********************************************************************
  * Function Name: main 
- * Arguments	: void
+ * Arguments	  : void
  * Return Type	: int
  * Details	    : main function, start of the code
  * *********************************************************************/
 unsigned FnTimerInterruptGetTime(hwtimer_t Var)
 { unsigned time; Var :> time; return time; }                                                           
 
-/* ----------------------------------------------------------------------------
- *                           Start of the code
- * ----------------------------------------------------------------------------
-*/ 
 /***********************************************************************
  * Function Name: main 
- * Arguments	: void
+ * Arguments	  : void
  * Return Type	: int
  * Details	    : main function, start of the code
  * *********************************************************************/
 int FnStartTheTimerIrq(uint32_t uiTime)
 {
-    /*start should come before init (to update the time)*/   
-    FnTimerInterruptInit (varTimerInterrupt);     
-    FnTimerInterruptStart(varTimerInterrupt ,uiTime);
+    /*start should come before init (to update the time)*/
+    ucTimerIRQFlag = SET;    
+    ucTimerIRQTime = uiTime;
     return RESET;
+}
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
+void FnEnableTheTimerIRQ(void)
+{
+  FnTimerInterruptInit (varTimerInterrupt);     
+  FnTimerInterruptStart(varTimerInterrupt ,SET);//1 ms
 }

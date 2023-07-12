@@ -39,8 +39,9 @@
 
 const mp_arg_t mp_irq_init_args[] = {
     { MP_QSTR_handler, MP_ARG_OBJ, {.u_rom_obj = MP_ROM_NONE} },
-    { MP_QSTR_trigger, MP_ARG_INT, {.u_int = 0} },
-    { MP_QSTR_hard, MP_ARG_BOOL, {.u_bool = false} },
+    { MP_QSTR_trigger, MP_ARG_INT, {.u_int = 0}},
+    { MP_QSTR_PortPin, MP_ARG_INT, {.u_int = 0}},
+    { MP_QSTR_hard,   MP_ARG_BOOL, {.u_bool = false}},
 };
 
 /******************************************************************************

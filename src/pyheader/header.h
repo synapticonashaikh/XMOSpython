@@ -92,43 +92,50 @@
 	#define  ERROR 	   (int8_t)-1	
 
 	/*IO ports-1BIT*/	
-    #define PORT1A  0x10200//XS1_PORT_1A
-    #define PORT1B  0x10000//XS1_PORT_1B
-    #define PORT1C  0x10100//XS1_PORT_1C
-    #define PORT1D  0x10300//XS1_PORT_1D
-    #define PORT1E  0x10600//XS1_PORT_1E
-    #define PORT1F  0x10400//XS1_PORT_1F
-    #define PORT1G  0x10500//XS1_PORT_1G
-    #define PORT1H  0x10700//XS1_PORT_1H
-    #define PORT1I  0x10a00//XS1_PORT_1I
-    #define PORT1J  0x10800//XS1_PORT_1J
-    #define PORT1K  0x10900//XS1_PORT_1K
-    #define PORT1L  0x10b00//XS1_PORT_1L
-    #define PORT1M  0x10c00//XS1_PORT_1M
-    #define PORT1N  0x10d00//XS1_PORT_1N
-    #define PORT1O  0x10e00//XS1_PORT_1O
-    #define PORT1P  0x10f00//XS1_PORT_1P
+    #define PORT1A  (uint32_t)0x10200//XS1_PORT_1A
+    #define PORT1B  (uint32_t)0x10000//XS1_PORT_1B
+    #define PORT1C  (uint32_t)0x10100//XS1_PORT_1C
+    #define PORT1D  (uint32_t)0x10300//XS1_PORT_1D
+    #define PORT1E  (uint32_t)0x10600//XS1_PORT_1E
+    #define PORT1F  (uint32_t)0x10400//XS1_PORT_1F
+    #define PORT1G  (uint32_t)0x10500//XS1_PORT_1G
+    #define PORT1H  (uint32_t)0x10700//XS1_PORT_1H
+    #define PORT1I  (uint32_t)0x10a00//XS1_PORT_1I
+    #define PORT1J  (uint32_t)0x10800//XS1_PORT_1J
+    #define PORT1K  (uint32_t)0x10900//XS1_PORT_1K
+    #define PORT1L  (uint32_t)0x10b00//XS1_PORT_1L
+    #define PORT1M  (uint32_t)0x10c00//XS1_PORT_1M
+    #define PORT1N  (uint32_t)0x10d00//XS1_PORT_1N
+    #define PORT1O  (uint32_t)0x10e00//XS1_PORT_1O
+    #define PORT1P  (uint32_t)0x10f00//XS1_PORT_1P
 
 	/*IO ports-4BITS*/
-    #define PORT4A  0x40000//XS1_PORT_4A
-    #define PORT4B  0x40100//XS1_PORT_4B
-    #define PORT4C  0x40200//XS1_PORT_4C
-    #define PORT4D  0x40300//XS1_PORT_4D
-    #define PORT4E  0x40400//XS1_PORT_4E
-    #define PORT4F  0x40500//XS1_PORT_4F
+    #define PORT4A  (uint32_t)0x40000//XS1_PORT_4A
+    #define PORT4B  (uint32_t)0x40100//XS1_PORT_4B
+    #define PORT4C  (uint32_t)0x40200//XS1_PORT_4C
+    #define PORT4D  (uint32_t)0x40300//XS1_PORT_4D
+    #define PORT4E  (uint32_t)0x40400//XS1_PORT_4E
+    #define PORT4F  (uint32_t)0x40500//XS1_PORT_4F
 
 	/*IO ports-8BITS*/
-    #define PORT8A  0x80000//XS1_PORT_8A
-    #define PORT8B  0x80100//XS1_PORT_8B
-    #define PORT8C  0x80200//XS1_PORT_8C
-    #define PORT8D  0x80300//XS1_PORT_8D
+    #define PORT8A  (uint32_t)0x80000//XS1_PORT_8A
+    #define PORT8B  (uint32_t)0x80100//XS1_PORT_8B
+    #define PORT8C  (uint32_t)0x80200//XS1_PORT_8C
+    #define PORT8D  (uint32_t)0x80300//XS1_PORT_8D
 
 	/*IO ports-16BITS*/
-    #define PORT16A  0x100000//XS1_PORT_16A
-    #define PORT16B  0x100100//XS1_PORT_16B
+    #define PORT16A  (uint32_t)0x100000//XS1_PORT_16A
+    #define PORT16B  (uint32_t)0x100100//XS1_PORT_16B
 
-	/*IO ports-32BITS*/
-    #define PORT32A  0x200000//XS1_PORT_32A	
+	/* IO ports-32BITS */
+    #define PORT32A  (uint32_t)0x200000//XS1_PORT_32A	
+
+	/* GPIO IQR definition*/
+    #define IRQ_FALLING (1)
+    #define IRQ_RISING  (2)
+
+    #define DEFAULT_PORT (uint32_t)0x10b00//XS1_PORT_1L
+
 
 	/*tile nuumber*/
 	#define TILE0		(uint8_t)0
@@ -272,8 +279,12 @@
  *                          GLOBAL VARIABLE DECLARATION
  * ----------------------------------------------------------------------------
 */
+	extern uint8_t   ucTimerIRQFlag ;
+    extern uint32_t  ucTimerIRQTime ;
 
-
+ #if ENABLE_DISABLE_GPIO_IRQ == 1
+	 extern uint8_t  ucGpioIRQFlag ;
+#endif
 /* ---------------------------------------------------------------------------
 *                           FUNCTIONS DECLARATION
 * ----------------------------------------------------------------------------
@@ -286,11 +297,11 @@
 	int32_t FnPortWrite (uint32_t uiport,uint32_t state);
 	int32_t FnPortRead  (uint32_t uiport);
 	void 	FnPortToggle(uint32_t uiport);
-	
-	int  FnStartTheTimerIrq(uint32_t duration);
-
-	void GPIOInterrupt  (void);
-    	void GPIOINTRWrapper(void);	
+	void GPIOInterrupt  (uint32_t uiPort, uint8_t ucMode);
+	#if ENABLE_DISABLE_GPIO_IRQ == 1
+		void FnGPIOIntrCheck(void);
+		void FnGPIOCallbackFunction(void);
+	#endif
 
 	void 	 FnSetObjectValue( uint16_t index_, uint8_t subindex, size_t capacity, uint8_t *value);
 	int  	 FnReadObject(uint16_t index_,uint16_t subindex, uint8_t capacity);
@@ -304,6 +315,6 @@
 	uint8_t  FnGetModesOfOperation(void);
 	void 	 FnSetI2TEnableDisable(uint8_t I2TEnDS);
 	int  	 FnStartTheTimerIrq(uint32_t uiTime);
-	void 	 FnGPIOInterruptEnable(void);
+	void 	 FnEnableTheTimerIRQ(void);	
 
 #endif /*__HEADER_H_*/

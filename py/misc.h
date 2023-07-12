@@ -153,7 +153,7 @@ static inline const byte *utf8_next_char(const byte *s) {
     return s + 1;
 }
 static inline size_t utf8_charlen(const byte *str, size_t len) {
-    (void)str;
+    //(void)str;
     return len;
 }
 #endif

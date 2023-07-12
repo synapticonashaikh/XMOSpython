@@ -1,5 +1,6 @@
 Q(handler)
 Q(trigger)
+Q(PortPin)
 Q(hard)
 Q(flags)
 Q(trigger)

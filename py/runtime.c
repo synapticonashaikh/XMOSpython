@@ -1287,7 +1287,7 @@ mp_obj_t mp_getiter(mp_obj_t o_in, mp_obj_iter_buf_t *iter_buf) {
             // mp_obj_instance_getiter is special, it will allocate only if needed
             iter_buf = m_new_obj(mp_obj_iter_buf_t);
         }
-#ifdef __XC__         
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)         
         __attribute__(( fptrgroup("Aatif") ))mp_getiter_fun_t getiter;
 #else
         mp_getiter_fun_t getiter;
@@ -1297,7 +1297,7 @@ mp_obj_t mp_getiter(mp_obj_t o_in, mp_obj_iter_buf_t *iter_buf) {
         } else {
             getiter = (mp_getiter_fun_t)MP_OBJ_TYPE_GET_SLOT(type, iter);
         }
-#ifdef __XC__         
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)         
         __attribute__(( fptrgroup("Aatif") ))mp_obj_t iter = getiter(o_in, iter_buf);
 #else
         mp_obj_t iter = getiter(o_in, iter_buf);

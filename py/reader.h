@@ -34,7 +34,7 @@
 #define MP_READER_EOF ((mp_uint_t)(-1))
 
 typedef struct _mp_reader_t {
-#ifdef __XC__      
+#if defined (__XC__) || defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)      
     __attribute__(( fptrgroup("Aatif") ))void *data;
     __attribute__(( fptrgroup("Aatif") ))mp_uint_t (*readbyte)(void *data);
     __attribute__(( fptrgroup("Aatif") ))void (*close)(void *data);

@@ -79,28 +79,21 @@
  *                           Macros
  * ----------------------------------------------------------------------------
 */
+ #if ENABLE_DISABLE_GPIO_IRQ == 1
+
 /* ----------------------------------------------------------------------------
  *                           Includes
  * ----------------------------------------------------------------------------
 */
-
-    #include <stdio.h>
-    
-    #include <xcore/triggerable.h>
-    #include <xcore/port.h>
-    #include <xcore/interrupt.h>
-    #include <xcore/interrupt_wrappers.h>
     #include "header.h"
-    #include "interrupt.h"
-
+    #include "interrupt.h" 
     #include "py/runtime.h"
     #include "mpconfig.h"
     #include "header.h"
     #include "py/mphal.h"
     #include "py/mpirq.h"
     #include "py/obj.h"
-  
- #if ENABLE_DISABLE_GPIO_IRQ == 1
+
 
 /* ----------------------------------------------------------------------------
  *                           External Function
@@ -111,9 +104,11 @@
  * ----------------------------------------------------------------------------
 */
 
-  uint8_t RisingFallingEdge;  //current code generates on rising edge!
-  uint8_t uifeedback,uiStatus;
-  extern port_t _Port4D;
+  static uint8_t RisingFallingEdge = RESET;
+  static uint8_t uiStatus  = RESET;
+  uint8_t    ucGpioIRQFlag = RESET;
+  uint32_t   uiReadPort    = RESET;
+  static int uifeedback    = RESET;
 
 /* ----------------------------------------------------------------------------
  *                           Fnction Definitions
@@ -128,25 +123,12 @@
 #if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
     #pragma stackfunction 1000
 #endif    
-void CallbackFunction(void)
+void FnGPIOCallbackFunction(void)
 {
-
     machine_pin_irq_obj_t *irq1 = 
     MP_STATE_PORT (machine_pin_irq_objects[0]);
     mp_irq_handler(&irq1->base);
 }
-
-/***********************************************************************
- * Function Name: DEFINE_INTERRUPT_PERMITTED 
- * Arguments	  : 
- * Return Type	: 
- * Details	    : 
- * *********************************************************************/
-  DEFINE_INTERRUPT_PERMITTED(interrupt_handlers, void, interruptable_task, void)
-  {
-    interrupt_unmask_all( ); 
-    //interrupt_mask_all( );
-  }
 
 /***********************************************************************
  * Function Name: DEFINE_INTERRUPT_CALLBACK 
@@ -154,56 +136,44 @@ void CallbackFunction(void)
  * Return Type	: 
  * Details	    : 
  * *********************************************************************/
-  DEFINE_INTERRUPT_CALLBACK (interrupt_handlers, interrupt_task, button)
-  {
-    //To manipulate the interrupt trigger to get the interrupt on the rising edge only.
-    RisingFallingEdge = !RisingFallingEdge;
-    port_set_trigger_in_not_equal(_Port4D, RisingFallingEdge); //change the trigger for the port/ pin
-    uifeedback = SET & port_peek(_Port4D); //read the current status
+void FnGPIOIntrCheck(void)
+{
+    if ( uiReadPort != RESET )
+    {
+      uifeedback = FnPortRead(uiReadPort); //read the current status
+      if (( uifeedback == SET ) 
+      &&  ( uiStatus == RESET ))
+          { uiStatus  =   SET;
+          if (RisingFallingEdge == IRQ_RISING)
+              FnGPIOCallbackFunction( );  
+              printf("IRQ 1!\n");
+          }
+      else 
+      if (( uifeedback == RESET ) 
+      &&  ( uiStatus   ==   SET )) 
+          { uiStatus    = RESET; 
+            if (RisingFallingEdge == IRQ_FALLING)
+                FnGPIOCallbackFunction( );
+                printf("IRQ 2!\n");
+          }
+          printf("%d ",uifeedback);         
+    }  
+}
 
-    if (( uifeedback == SET ) 
-    &&  ( uiStatus == RESET ))
-        { uiStatus  =   SET;
-        }
-
-    else 
-    if (( uifeedback == RESET ) 
-    &&  ( uiStatus   ==   SET )) 
-        { uiStatus    = RESET; 
-          CallbackFunction( );      
-        }
-  }
-/***********************************************************************
- * Function Name: FnGpioRead 
- * Arguments	  : void
- * Return Type	: int
- * Details	    : 
- * *********************************************************************/
-int FnGpioRead(port_t PortVar)
-{ return port_peek(PortVar);}
-/***********************************************************************
- * Function Name: GPIOINTRWrapper 
- * Arguments	  : void
- * Return Type	: void
- * Details	    : 
- * *********************************************************************/
-void GPIOINTRWrapper(void)
-{ INTERRUPT_PERMITTED(interruptable_task)( ); }
 /***********************************************************************
  * Function Name: GPIOInterrupt 
  * Arguments	  : void
  * Return Type	: void
  * Details	    : 
  * *********************************************************************/
-void GPIOInterrupt(void)
+void GPIOInterrupt(uint32_t uiPort, uint8_t ucMode)
 {
-    port_enable(_Port4D);
-    triggerable_setup_interrupt_callback
-    (_Port4D, &_Port4D, INTERRUPT_CALLBACK(interrupt_task));
-    port_set_trigger_in_not_equal(_Port4D, RESET);
-    port_clear_trigger_in(_Port4D);
-    triggerable_enable_trigger(_Port4D);
-    GPIOINTRWrapper( );
+
+  ucGpioIRQFlag     = SET;
+  RisingFallingEdge = ucMode;
+  uiReadPort        = uiPort;
+  uiStatus = FnPortRead(uiReadPort);
+
 }
 
 #endif

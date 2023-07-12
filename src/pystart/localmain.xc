@@ -86,8 +86,7 @@
  * ----------------------------------------------------------------------------
 */
   	/*Standard Header files*/
-	  #include "header.h"
-    #include <safestring.h>    
+	  #include "header.h"    
 
 /* ----------------------------------------------------------------------------
  *                          EXTERNAL FUNCTION
@@ -123,20 +122,26 @@
 #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
   void FnSender(client interface MicroPythonInterface upy)
   {
+      unsafe
+      {
+        char * unsafe command = 
+       "from delay import *\n"
+       "from gpio import *\n"
+       "Count = 0\n"
+       "def FnPrintData(self):\n"
+       "    global Count\n"
+       "    Count = Count + 1\n"
+       "    print('C ' +str(Count))\n"
+       "pirq(handler=FnPrintData,trigger=IRQ_RISING,PortPin=PORT4D)\n"
+       "while True:\n"
+       "       pass\n";
+          // "while True:\n"
+          // "   if PortRead(PORT4D) == 1:\n"
+          // "      FnPrintData()\n";
 
-    unsafe 
-    {
-      char * command= 
-      "from delay import delaySec\n"
-      "from delay import delaymSec\n"
-      "Count = 1\n"
-      "while True:\n"
-      "   print('Time MS =' + str(Count))\n"
-      "   delaymSec(100)\n"
-      "   Count = Count + 1\n";
-      upy.FnExecute(command);      
-    }
-      while (SET);
+        upy.FnExecute(command);
+        while (SET);
+      }
   }
 
 /***********************************************************************
@@ -154,8 +159,8 @@
       {
         select 
           {
-              case upy.FnExecute(char * unsafe string):
-              FnRunTheCommand(string,RESET,SET);
+              case upy.FnExecute(char * unsafe string): 
+                     FnRunTheCommand(string,RESET,SET); 
               break ;
               default: break; // to make the select non-blockable 
           }
@@ -186,7 +191,6 @@ int main( )
             FnSender  (mpy);
             FnReceiver(mpy);
           }
-
   #endif
 
   #ifdef CODE_WITH_PYTHON_INTRACTIVE_TERMINAL
@@ -199,5 +203,4 @@ int main( )
 
   return RESET;
 }
-
 #endif

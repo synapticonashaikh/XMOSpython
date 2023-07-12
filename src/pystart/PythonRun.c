@@ -212,6 +212,7 @@ int FnMPInterpreterConsole(void)
 char * FnRunTheCommand(char *ByteCode, uint32_t CodeLen, uint8_t BytecodeORStr)
 {
 
+    FndelaySec(2);
     int stack_dummy;
     stack_top = (char *)&stack_dummy;    
     static char *ret  = "Sucess!";
@@ -224,15 +225,17 @@ char * FnRunTheCommand(char *ByteCode, uint32_t CodeLen, uint8_t BytecodeORStr)
 
     if (BytecodeORStr == SET)
     {
-      #ifdef USE_LOCAL_MAIN  
+      #ifdef USE_LOCAL_MAIN
             printf("Script:\n%s",(char *)ByteCode, strlen(ByteCode));  
       #endif
       #if MICROPY_ENABLE_COMPILER
+          FnEnableTheTimerIRQ( ); //enable the timer
           do_str(ByteCode, PARSE_FILE_INPUT);
-      #endif    
+      #endif
     }
     else
     {
+        FnEnableTheTimerIRQ( ); //enable the timer interrupt
         mp_reader_t reader;
         mp_reader_new_mem(&reader,(byte *)ByteCode, CodeLen, 0);
         mp_module_context_t *context = m_new_obj(mp_module_context_t);
@@ -244,7 +247,7 @@ char * FnRunTheCommand(char *ByteCode, uint32_t CodeLen, uint8_t BytecodeORStr)
         mp_call_function_0(module_fun);
     }
 
-    /*deinit*/
+    /*deinit*/ 
     mp_deinit( );
 
     return ret;

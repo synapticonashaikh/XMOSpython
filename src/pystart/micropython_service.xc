@@ -178,7 +178,6 @@ void FnMicroPythonService(server interface MicroPythonInterface i_mpy,
    /*Enable the microypthon Service*/
    i_mpy.service_ready( );
 
-
    ProcessStatus = SET;
 
    uint8_t log_buf[] = {"MicroPython: Code Started!\n"};
@@ -198,13 +197,13 @@ void FnMicroPythonService(server interface MicroPythonInterface i_mpy,
                   i_storage.write_log(LOGTYPE_INFO, log_buf, strlen(log_buf));
                   }
 
-                  char FileName []= "UserScript.mpy", RXcommand[1000];
+                  char FileName []= "UserScript.py", RXcommand[1500];
                   memset(RXcommand,'\0',  sizeof(RXcommand));            
                   int fileD = i_filesystem.open_file (FileName ,strlen(FileName) ,SPIFFS_O_RDONLY);
                   int FileS = i_filesystem.get_file_size(fileD);
                   int fileR = i_filesystem.read(fileD,RXcommand,FileS);
                   int fileC = i_filesystem.close_file(fileD);
-                  FnRunTheCommand(RXcommand,FileS,RESET); 
+                  FnRunTheCommand(RXcommand,FileS,SET); 
               }
             } break; 
       }

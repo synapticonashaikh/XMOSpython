@@ -455,7 +455,7 @@ typedef struct _mp_map_elem_t {
 } mp_map_elem_t;
 
 typedef struct _mp_rom_map_elem_t {
-#ifdef __XC__     
+#if defined (__XC__) || defined(SOMANET_SOFTWARE_MAIN)  || defined(USE_LOCAL_MAIN) 
     __attribute__(( fptrgroup("Aatif") ))mp_rom_obj_t key;
     __attribute__(( fptrgroup("Aatif") ))mp_rom_obj_t value;
 #else

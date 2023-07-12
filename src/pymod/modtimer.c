@@ -81,20 +81,21 @@
  * ----------------------------------------------------------------------------
 */
 
-
 /* ----------------------------------------------------------------------------
  *                           Includes
  * ----------------------------------------------------------------------------
 */
 
     #include "runtime.h"
-    #include "interrupt.h" 
+    #include "interrupt.h"
+    #include "header.h"
+
 
 /* ----------------------------------------------------------------------------
  *                          GLOBAL VARIABLE DECLARATION
  * ----------------------------------------------------------------------------
 */
-
+ 
 /* ----------------------------------------------------------------------------
  *                           important command
  * ----------------------------------------------------------------------------
@@ -179,7 +180,7 @@ STATIC mp_obj_t delay_irq(size_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_
     static const mp_arg_t allowed_args[] = {
         { MP_QSTR_handler,  MP_ARG_OBJ,  {.u_rom_obj = MP_ROM_NONE }},
         { MP_QSTR_duration, MP_ARG_INT,  {.u_int     = 1000 }},
-    };
+};
     
     pin_obj_t *self = MP_OBJ_TO_PTR(pos_args[0]);
     mp_arg_val_t args[MP_ARRAY_SIZE(allowed_args)];
@@ -196,7 +197,7 @@ STATIC mp_obj_t delay_irq(size_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_
         irq->base.base.type = &mp_irq_type;
         irq->base.parent    = MP_OBJ_FROM_PTR(self);
         MP_STATE_PORT(machine_timer_irq_objects[eic_id]) = irq;
-        irq->base.handler   = args[ARG_handler].u_obj;
+        irq->base.handler = args[ARG_handler].u_obj;
      }
 
      FnStartTheTimerIrq(args[ARG_duration].u_int);

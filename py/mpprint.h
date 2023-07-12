@@ -48,7 +48,7 @@
 typedef void (*mp_print_strn_t)(void *data, const char *str, size_t len);
 
 typedef struct _mp_print_t {
-#ifdef __XC__ 
+#if defined (__XC__) || defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN) 
    __attribute__(( fptrgroup("Aatif") ))void *data;
    __attribute__(( fptrgroup("Aatif") ))mp_print_strn_t print_strn;
 #else

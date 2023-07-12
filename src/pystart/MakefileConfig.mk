@@ -1,6 +1,7 @@
 
 #define root locations
 ROOTL = ../../
+SOMANET_SOFTWAREL = ../../../../
 
 #define the distributed location
 MODULEL   =../pymod/
@@ -11,17 +12,17 @@ PYLIBL	  =$(ROOTL)py
 SDOL 	  = $(SOMANET_SOFTWAREL)sc_drive/module_canopen_interface/object_dictionary
 COEL 	  = $(SOMANET_SOFTWAREL)sc_drive/module_communication_interface/include/
 
-#enable/ disable debug message 
-ENABLE_DISABLE_DEBUGG_MESSAGE = 0
+#enable/ disable debug messages 
+ENABLE_DISABLE_DEBUGG_MESSAGE =0
 
 #enable/ disable our own created modules 
-ENABLE_DISABLE_OWN_MODULE = 1
+ENABLE_DISABLE_OWN_MODULE =1
 
 #enable/ disable float functionality
-ENABLE_DISABLE_FLOAT_FUNCTIONALITY = 0
+ENABLE_DISABLE_FLOAT_FUNCTIONALITY =0
 
 #enable/ disable float functionality
-ENABLE_DISABLE_GPIO_IRQ=-DENABLE_DISABLE_GPIO_IRQ=0
+ENABLE_DISABLE_GPIO_IRQ=-DENABLE_DISABLE_GPIO_IRQ=1
 
 #define the code version
 #for the terminal interpreter, use DCODE_WITH_PYTHON_INTRACTIVE_TERMINAL
@@ -78,7 +79,6 @@ FLAG_OPT 		     = -Os
 FLAG_REPORT 		 = -report
 #pragma compatibilty with XMOS
 FLAG_PRAGMA 		 = -Wunknown-pragmas 
-
 #format
 FLAG_FORMAT		= -Wno-format
 

@@ -40,7 +40,7 @@
 #define DEBUG_printf(...) (void)0
 #endif
 
-#ifdef __XC__
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
 void mp_encode_uint(void *env,  __attribute__(( fptrgroup("Aatif") ))mp_encode_uint_allocator_t allocator, mp_uint_t val) {
 #else
 void mp_encode_uint(void *env, mp_encode_uint_allocator_t allocator, mp_uint_t val) {

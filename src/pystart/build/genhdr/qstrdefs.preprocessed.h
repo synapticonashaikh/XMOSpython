@@ -341,6 +341,8 @@ Q(Exception)
 
 Q(Exception)
 
+Q(Fun1)
+
 Q(GeneratorExit)
 
 Q(GeneratorExit)
@@ -458,6 +460,8 @@ Q(PORT8B)
 Q(PORT8C)
 
 Q(PORT8D)
+
+Q(PortPin)
 
 Q(PortRead)
 
@@ -617,8 +621,6 @@ Q(__name__)
 
 Q(__name__)
 
-Q(__name__)
-
 Q(__ne__)
 
 Q(__new__)
@@ -705,8 +707,6 @@ Q(_star_)
 
 Q(abs)
 
-Q(add)
-
 Q(all)
 
 Q(any)
@@ -716,10 +716,6 @@ Q(append)
 Q(args)
 
 Q(bin)
-
-Q(board)
-
-Q(board)
 
 Q(bool)
 
@@ -748,8 +744,6 @@ Q(classmethod)
 Q(clear)
 
 Q(clear)
-
-Q(clockinfo)
 
 Q(close)
 
@@ -845,8 +839,6 @@ Q(hasattr)
 
 Q(hash)
 
-Q(healthinfo)
-
 Q(hex)
 
 Q(id)
@@ -856,8 +848,6 @@ Q(index)
 Q(index)
 
 Q(index)
-
-Q(info)
 
 Q(insert)
 
@@ -939,6 +929,8 @@ Q(oct)
 
 Q(ord)
 
+Q(pirq)
+
 Q(pop)
 
 Q(pop)
@@ -1000,8 +992,6 @@ Q(staticmethod)
 Q(str)
 
 Q(str)
-
-Q(strcat)
 
 Q(strip)
 

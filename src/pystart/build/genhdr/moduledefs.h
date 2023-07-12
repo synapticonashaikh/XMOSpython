@@ -8,10 +8,6 @@ extern const struct _mp_obj_module_t mp_module___main__;
 #undef MODULE_DEF___MAIN__
 #define MODULE_DEF___MAIN__ { MP_ROM_QSTR(MP_QSTR___main__), MP_ROM_PTR(&mp_module___main__) },
 
-extern const struct _mp_obj_module_t board_module;
-#undef MODULE_DEF_BOARD
-#define MODULE_DEF_BOARD { MP_ROM_QSTR(MP_QSTR_board), MP_ROM_PTR(&board_module) },
-
 extern const struct _mp_obj_module_t mp_module_builtins;
 #undef MODULE_DEF_BUILTINS
 #define MODULE_DEF_BUILTINS { MP_ROM_QSTR(MP_QSTR_builtins), MP_ROM_PTR(&mp_module_builtins) },
@@ -30,7 +26,6 @@ extern const struct _mp_obj_module_t myport_module;
 
 
 #define MICROPY_REGISTERED_MODULES \
-    MODULE_DEF_BOARD \
     MODULE_DEF_BUILTINS \
     MODULE_DEF_DELAY \
     MODULE_DEF_GPIO \
