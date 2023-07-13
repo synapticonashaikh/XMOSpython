@@ -120,7 +120,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_1(gpio_PortRead_obj, gpio_PortRead);
 
 /***********************************************************************
  * Function Name: main 
- * Arguments	: void
+ * Arguments	  : void
  * Return Type	: int
  * Details	    : main function, start of the code 
  * *********************************************************************/

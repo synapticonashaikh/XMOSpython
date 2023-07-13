@@ -109,6 +109,12 @@
   interface MicroPythonInterface { void FnExecute( char * unsafe string); };
 
 /* ----------------------------------------------------------------------------
+ *                          EXTERN VARIABLE DECLARATION
+ * ----------------------------------------------------------------------------
+*/
+  extern uint8_t    ucDummyPin ;
+
+/* ----------------------------------------------------------------------------
  *                          FUNCTION DEFINITION
  * ----------------------------------------------------------------------------
 */
@@ -127,17 +133,20 @@
         char * unsafe command = 
        "from delay import *\n"
        "from gpio import *\n"
-       "Count = 0\n"
-       "def FnPrintData(self):\n"
-       "    global Count\n"
-       "    Count = Count + 1\n"
-       "    print('C ' +str(Count))\n"
-       "pirq(handler=FnPrintData,trigger=IRQ_RISING,PortPin=PORT4D)\n"
+       "Loop1 = 0\n"
+       "Loop2 = 0\n"        
+       "def CallBack1(self):\n"
+       "    global Loop1\n"
+       "    Loop1 = Loop1 + 1\n"
+       "    print('Count1 = ' + str(Loop1))\n"
+       "def CallBack2(self):\n"
+       "    global Loop2\n"
+       "    Loop2 = Loop2 + 1\n"
+       "    print('Count2 = ' + str(Loop2))\n"
+       "tirq(handler=CallBack2,duration=2000,instance=1)\n"
+       "tirq(handler=CallBack1,duration=400,instance=2)\n"
        "while True:\n"
-       "       pass\n";
-          // "while True:\n"
-          // "   if PortRead(PORT4D) == 1:\n"
-          // "      FnPrintData()\n";
+       "      pass";
 
         upy.FnExecute(command);
         while (SET);
@@ -169,6 +178,44 @@
   }
 #endif
 
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	  : void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
+void FnRandomFunction(void)
+{
+
+    /*set the timer for 100ns*/ 
+    timer localtimer; 
+
+    uint32_t  ucLocalCounter= RESET ;
+    uint64_t  uiTimeTotal;
+    localtimer :> uiTimeTotal;
+    
+    while (SET)
+    {  
+      uiTimeTotal = uiTimeTotal + ui1mSec ;       
+      localtimer when timerafter(uiTimeTotal) :> void;
+
+      ucLocalCounter++;
+      if(ucLocalCounter == 300)
+         ucDummyPin = SET;
+
+      if(ucLocalCounter == 500)
+         ucDummyPin = RESET;
+
+      if(ucLocalCounter == 1000)
+         ucLocalCounter = RESET;
+    
+    }
+}
+
+uint8_t FnReadDummy(void)
+{
+    return ucDummyPin;
+}
 
 /* ----------------------------------------------------------------------------
  *                         START OF THE CODE
@@ -190,6 +237,7 @@ int main( )
           {
             FnSender  (mpy);
             FnReceiver(mpy);
+            //FnRandomFunction();
           }
   #endif
 

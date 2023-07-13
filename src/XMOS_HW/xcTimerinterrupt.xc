@@ -95,15 +95,15 @@
     extern void FnTimerInterruptStart(hwtimer_t Var, uint32_t TimeInMsec); 
     extern void FnTimerInterruptInit (hwtimer_t Var);    
     extern void FnTimerInterruptStop (hwtimer_t Var);    
-    extern void FnTimerIsrHandler    (void);
+    extern void FnTimerIsrHandler    (uint8_t ucIRQInstance);
 
 /* ----------------------------------------------------------------------------
  *                           Global Variable
  * ----------------------------------------------------------------------------
 */ 
-    hwtimer_t varTimerInterrupt;
-    uint8_t   ucTimerIRQFlag = RESET ;
-    uint32_t  ucTimerIRQTime = RESET ;
+    hwtimer_t varTimerInterrupt ;
+    uint8_t   ucTimerIRQFlag[(uint8_t)2] ;
+    uint32_t  ucTimerIRQTime[(uint8_t)2] ;
 
 /* ----------------------------------------------------------------------------
  *                           Function Definition
@@ -118,23 +118,26 @@
 void FnTimerInterruptHandler(void)
 {
 
-  static int ucTimerCount = RESET;
+  static int ucTimerCount[(uint8_t)2] ;
 
-    if( ucTimerIRQFlag == SET)
-    {
-            ucTimerCount ++;
-      if (  ucTimerCount == ucTimerIRQTime)
-          { ucTimerCount = RESET;
-            FnTimerIsrHandler( ); }
-    }
-    else 
-    ucTimerCount = RESET ;
+  for (uint8_t ucLoop=RESET; ucLoop < (uint8_t)2;ucLoop++)
+      {
+        if( ucTimerIRQFlag[RESET] == SET)
+        {
+               ucTimerCount[ucLoop] ++;
+          if ( ucTimerCount[ucLoop] == ucTimerIRQTime[ucLoop])
+             { ucTimerCount[ucLoop]  = RESET;
+               FnTimerIsrHandler(ucLoop);  }
+        }
+        else 
+        ucTimerCount[ucLoop] = RESET;
+      }
+
 
     #if ENABLE_DISABLE_GPIO_IRQ == 1
       if( ucGpioIRQFlag == SET )
-        { FnGPIOIntrCheck();}
-    #endif  
-
+        { FnGPIOIntrCheck();   }
+    #endif
 
     FnTimerInterruptInit(varTimerInterrupt);
 }                             
@@ -153,11 +156,11 @@ unsigned FnTimerInterruptGetTime(hwtimer_t Var)
  * Return Type	: int
  * Details	    : main function, start of the code
  * *********************************************************************/
-int FnStartTheTimerIrq(uint32_t uiTime)
+int FnStartTheTimerIrq(uint32_t uiTime,uint8_t uiInstance)
 {
     /*start should come before init (to update the time)*/
-    ucTimerIRQFlag = SET;    
-    ucTimerIRQTime = uiTime;
+    ucTimerIRQFlag[uiInstance] = SET;
+    ucTimerIRQTime[uiInstance] = uiTime;
     return RESET;
 }
 
@@ -170,5 +173,5 @@ int FnStartTheTimerIrq(uint32_t uiTime)
 void FnEnableTheTimerIRQ(void)
 {
   FnTimerInterruptInit (varTimerInterrupt);     
-  FnTimerInterruptStart(varTimerInterrupt ,SET);//1 ms
+  FnTimerInterruptStart(varTimerInterrupt , 250);//1 ms
 }

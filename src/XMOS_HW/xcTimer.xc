@@ -96,7 +96,7 @@
 */
 
     /*set the timer for 100ns */ 
-    extern timer varTimerInterrupt;
+    timer varTimerInterrupt1;
 
 /* ----------------------------------------------------------------------------
  *                           Fnction Definitions
@@ -119,37 +119,36 @@
  * *********************************************************************/
 inline void FndelayuSec(uint32_t uiTime)
 {
-   uint64_t  uiTimeTotal;
-   varTimerInterrupt :> uiTimeTotal;
-   uiTimeTotal = uiTimeTotal + (uiTime * ui1uSec) ;   
-   varTimerInterrupt when timerafter(uiTimeTotal) :> void;   
-
+   uint64_t uiTimeTotal;
+   varTimerInterrupt1 :> uiTimeTotal;
+   uiTimeTotal = uiTimeTotal + (uiTime * ui1uSec);
+   varTimerInterrupt1 when timerafter(uiTimeTotal) :> void;
 }
 
 /***********************************************************************
  * Function Name: main 
- * Arguments	  : void
- * Return Type	: int
+ * Arguments	 : void
+ * Return Type	 : int
  * Details	    : main function, start of the code
  * *********************************************************************/
 inline void FndelaymSec(uint32_t uiTime)
 {
    uint64_t  uiTimeTotal;
-   varTimerInterrupt :> uiTimeTotal;
+   varTimerInterrupt1 :> uiTimeTotal;
    uiTimeTotal = uiTimeTotal + (uiTime * ui1mSec) ;     
-   varTimerInterrupt when timerafter(uiTimeTotal) :> void;  
+   varTimerInterrupt1 when timerafter(uiTimeTotal) :> void;  
 }
 
 /***********************************************************************
  * Function Name: main 
- * Arguments	  : void
- * Return Type	: int
+ * Arguments	 : void
+ * Return Type	 : int
  * Details	    : main function, start of the code
  * *********************************************************************/
 inline void FndelaySec(uint32_t uiTime)
 {
    uint64_t uiTimeTotal;
-   varTimerInterrupt :> uiTimeTotal;
+   varTimerInterrupt1 :> uiTimeTotal;
    uiTimeTotal = uiTimeTotal + (uiTime * ui1Sec) ;     
-   varTimerInterrupt when timerafter(uiTimeTotal) :> void;  
+   varTimerInterrupt1 when timerafter(uiTimeTotal) :> void;  
 }

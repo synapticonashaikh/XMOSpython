@@ -279,8 +279,8 @@
  *                          GLOBAL VARIABLE DECLARATION
  * ----------------------------------------------------------------------------
 */
-	extern uint8_t   ucTimerIRQFlag ;
-    extern uint32_t  ucTimerIRQTime ;
+	// extern uint8_t   ucTimerIRQFlag[] ;
+    // extern uint32_t  ucTimerIRQTime ;
 
  #if ENABLE_DISABLE_GPIO_IRQ == 1
 	 extern uint8_t  ucGpioIRQFlag ;
@@ -314,7 +314,7 @@
 	void 	 FnSetModesOfOperation(int8_t ucModes);
 	uint8_t  FnGetModesOfOperation(void);
 	void 	 FnSetI2TEnableDisable(uint8_t I2TEnDS);
-	int  	 FnStartTheTimerIrq(uint32_t uiTime);
+	int 	 FnStartTheTimerIrq(uint32_t uiTime,uint8_t uiInstance);
 	void 	 FnEnableTheTimerIRQ(void);	
 
 #endif /*__HEADER_H_*/

@@ -8,6 +8,8 @@
 
 3-arg pow() not supported
 
+INVALID INSTANCE
+
 LHS of keyword arg must be an id
 
 List must have length of exactly 4

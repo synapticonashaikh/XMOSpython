@@ -120,7 +120,7 @@
   //   port _Port4B  = PORT4B  ;
        #ifdef USE_LOCAL_MAIN    
             port _Port4C  = PORT4C  ;
-       in   port _Port4D  = PORT4D  ;            
+            port _Port4D  = PORT4D  ;            
        #endif       
   //   port _Port4E  = PORT4E  ;
   //   port _Port4F  = PORT4F  ;
@@ -211,7 +211,7 @@ inline int32_t FnPortWrite(uint32_t uiport,uint32_t state)
 inline int32_t FnPortRead(uint32_t uiport)
 {
 
- int support, state = ERROR;
+ int support, state = ERROR; 
  switch (uiport)
     {
         /*IO ports-1BIT*/	
@@ -272,4 +272,3 @@ void FnPortToggle(uint32_t uiport)
 {
    FnPortWrite(uiport,!FnPortRead(uiport));
 }
-

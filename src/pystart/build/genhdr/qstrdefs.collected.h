@@ -538,6 +538,8 @@ Q(index)
 
 Q(insert)
 
+Q(instance)
+
 Q(int)
 
 Q(int)

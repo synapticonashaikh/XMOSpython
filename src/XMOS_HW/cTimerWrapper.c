@@ -126,7 +126,7 @@ void FnTimerInterruptUpdate(hwtimer_t Var)
     DISABLE_INTERRUPTS( );
     asm volatile("setc res[%0], %1"::"r"(Var),"r"(XS1_SETC_COND_NONE));
     time = FnTimerInterruptGetTime(Var);
-    time += (ui1mSec * globalTimer);
+    time += (ui1uSec * globalTimer);
     asm volatile("setd res[%0], %1"::"r"(Var),"r"(time));
     asm volatile("setc res[%0], %1"::"r"(Var),"r"(XS1_SETC_COND_AFTER));
 }    
@@ -151,7 +151,7 @@ void FnTimerInterruptStop(hwtimer_t Var)
  * *********************************************************************/
 void FnTimerInterruptStart(hwtimer_t Var, uint32_t TimeInMsec)
 {
-    globalTimer = TimeInMsec ;
+    globalTimer = TimeInMsec;
     set_interrupt_handler(FnTimerInterruptHandler, 1, Var, 0);
 }
 /***********************************************************************
@@ -172,9 +172,9 @@ void FnTimerInterruptInit(hwtimer_t Var)
 #if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
     #pragma stackfunction 1000
 #endif    
-void FnTimerIsrHandler (void)
+void FnTimerIsrHandler (uint8_t ucIRQInstance)
 {
     machine_pin_irq_obj_t *irq1 = 
-    MP_STATE_PORT(machine_timer_irq_objects[1]);
+    MP_STATE_PORT(machine_timer_irq_objects[ucIRQInstance]);
     mp_irq_handler(&irq1->base);
 }

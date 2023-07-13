@@ -1,5 +1,6 @@
 Q(handler)
 Q(duration)
+Q(instance)
 Q(__name__)
 Q(delay)
 Q(delayuSec)

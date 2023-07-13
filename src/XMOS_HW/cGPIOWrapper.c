@@ -88,8 +88,6 @@
     #include "header.h"
     #include "interrupt.h" 
     #include "py/runtime.h"
-    #include "mpconfig.h"
-    #include "header.h"
     #include "py/mphal.h"
     #include "py/mpirq.h"
     #include "py/obj.h"
@@ -109,6 +107,9 @@
   uint8_t    ucGpioIRQFlag = RESET;
   uint32_t   uiReadPort    = RESET;
   static int uifeedback    = RESET;
+
+  uint8_t    ucDummyPin    = RESET;
+  extern uint8_t FnReadDummy(void);
 
 /* ----------------------------------------------------------------------------
  *                           Fnction Definitions
@@ -140,24 +141,25 @@ void FnGPIOIntrCheck(void)
 {
     if ( uiReadPort != RESET )
     {
-      uifeedback = FnPortRead(uiReadPort); //read the current status
+     // uifeedback = FnPortRead(uiReadPort); //read the current status
+        uifeedback = FnReadDummy( );
       if (( uifeedback == SET ) 
       &&  ( uiStatus == RESET ))
           { uiStatus  =   SET;
           if (RisingFallingEdge == IRQ_RISING)
-              FnGPIOCallbackFunction( );  
-              printf("IRQ 1!\n");
+             {FnGPIOCallbackFunction( );  
+              printf("IRQ 1!\n");}
           }
       else 
       if (( uifeedback == RESET ) 
       &&  ( uiStatus   ==   SET )) 
           { uiStatus    = RESET; 
             if (RisingFallingEdge == IRQ_FALLING)
-                FnGPIOCallbackFunction( );
-                printf("IRQ 2!\n");
+               {FnGPIOCallbackFunction( );
+                printf("IRQ 2!\n"); }
           }
-          printf("%d ",uifeedback);         
-    }  
+         // printf("%d",uifeedback);         
+    }
 }
 
 /***********************************************************************
@@ -172,7 +174,8 @@ void GPIOInterrupt(uint32_t uiPort, uint8_t ucMode)
   ucGpioIRQFlag     = SET;
   RisingFallingEdge = ucMode;
   uiReadPort        = uiPort;
-  uiStatus = FnPortRead(uiReadPort);
+  //uiStatus = FnPortRead(uiReadPort);
+   uiStatus = FnReadDummy( );
 
 }
 
