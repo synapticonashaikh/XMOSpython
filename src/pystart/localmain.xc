@@ -112,7 +112,6 @@
  *                          EXTERN VARIABLE DECLARATION
  * ----------------------------------------------------------------------------
 */
-  extern uint8_t    ucDummyPin ;
 
 /* ----------------------------------------------------------------------------
  *                          FUNCTION DEFINITION
@@ -143,10 +142,11 @@
        "    global Loop2\n"
        "    Loop2 = Loop2 + 1\n"
        "    print('Count2 = ' + str(Loop2))\n"
+       "delaySec(1)\n"
        "tirq(handler=CallBack2,duration=2000,instance=1)\n"
-       "tirq(handler=CallBack1,duration=400,instance=2)\n"
+       "tirq(handler=CallBack1,duration=500,instance=0)\n"
        "while True:\n"
-       "      pass";
+       "      pass\n";
 
         upy.FnExecute(command);
         while (SET);
@@ -169,7 +169,8 @@
         select 
           {
               case upy.FnExecute(char * unsafe string): 
-                     FnRunTheCommand(string,RESET,SET); 
+                     FnRunTheCommand(string,RESET,SET);
+                     printf("Script closed!\n");
               break ;
               default: break; // to make the select non-blockable 
           }
@@ -196,25 +197,17 @@ void FnRandomFunction(void)
     
     while (SET)
     {  
-      uiTimeTotal = uiTimeTotal + ui1mSec ;       
+      uiTimeTotal = uiTimeTotal + ui1Sec ;       
       localtimer when timerafter(uiTimeTotal) :> void;
 
-      ucLocalCounter++;
-      if(ucLocalCounter == 300)
-         ucDummyPin = SET;
-
-      if(ucLocalCounter == 500)
-         ucDummyPin = RESET;
-
-      if(ucLocalCounter == 1000)
-         ucLocalCounter = RESET;
-    
+          ucLocalCounter ++;
+      if( ucLocalCounter == 10 )
+         {
+           //ucLocalCounter = RESET;
+           printf("Stoping the script!\n");
+           FnStopTheScript( );
+         }
     }
-}
-
-uint8_t FnReadDummy(void)
-{
-    return ucDummyPin;
 }
 
 /* ----------------------------------------------------------------------------
@@ -237,7 +230,7 @@ int main( )
           {
             FnSender  (mpy);
             FnReceiver(mpy);
-            //FnRandomFunction();
+            FnRandomFunction( );
           }
   #endif
 

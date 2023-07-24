@@ -63,24 +63,24 @@ INC += -I$(SDOL)
 INC += -I$(COEL) 
 INC += -I$(BUILD_DIR)/genhdr/
 
-#remove the unwaned warning of unused variables
-FLAG_UNUSED_VAR 	 = -Wno-unused-variable
-#remove the unwaned warning of function pointer
+#remove the unwanted warning of unused variables
+FLAG_UNUSED_VAR = -Wno-unused-variable
+#remove unwanted warning of an unused parameter
+FLAG_UNSED_PARA = -Wno-unused-parameter
+#remove the unwanted warning of the function pointer
 FLAG_FUNTION_POINTER = -Wno-xcore-fptrgroup
-#remove unwanted warning of unsed parameter
-FLAG_UNSED_PARA    	 = -Wno-unused-parameter
 #remove the unwanted warning of missing field
-FLAG_MISSING_FEILD   = -Wno-missing-field-initializers
+FLAG_MISSING_FEILD = -Wno-missing-field-initializers
 #remove the unwanted warning of sign comparison
-FLAG_SIGN_COMPARE 	 = -Wno-sign-compare 
+FLAG_SIGN_COMPARE = -Wno-sign-compare 
 #set the optimisation level
-FLAG_OPT 		     = -Os
+FLAG_OPT = -Os
 #geneterate the report of the compilation
-FLAG_REPORT 		 = -report
-#pragma compatibilty with XMOS
-FLAG_PRAGMA 		 = -Wunknown-pragmas 
+FLAG_REPORT = -report
+#pragma compatibility with XMOS
+FLAG_PRAGMA = -Wunknown-pragmas 
 #format
-FLAG_FORMAT		= -Wno-format
+FLAG_FORMAT = -Wno-format
 
 #flags with respect to XMOS core
 LDFLAGS +=$(INC)
@@ -92,8 +92,8 @@ LDFLAGS +=$(FLAG_FUNTION_POINTER)
 LDFLAGS +=$(FLAG_OPT)
 LDFLAGS +=$(FLAG_REPORT)
 LDFLAGS +=$(FLOAT_FLAG)
-LDFLAGS +=$(DEFINE_CODE_VERSION)
 LDFLAGS +=$(FLAG_FORMAT)
-LDFLAGS +=$(ENABLE_DISABLE_GPIO_IRQ)
 LDFLAGS +=$(FLAG_PRAGMA)
+LDFLAGS +=$(ENABLE_DISABLE_GPIO_IRQ)
+LDFLAGS +=$(DEFINE_CODE_VERSION)
 

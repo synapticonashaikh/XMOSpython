@@ -1184,7 +1184,7 @@ void mp_obj_slice_indices(mp_obj_t self_in, mp_int_t length, mp_bound_slice_t *r
 typedef struct _mp_obj_fun_builtin_fixed_t {
     mp_obj_base_t base;
     union {
-#ifdef __XC__            
+#if defined (__XC__) || defined(SOMANET_SOFTWARE_MAIN)  || defined(USE_LOCAL_MAIN)        
         __attribute__(( fptrgroup("Aatif") ))mp_fun_0_t _0;
         __attribute__(( fptrgroup("Aatif") ))mp_fun_1_t _1;
         __attribute__(( fptrgroup("Aatif") ))mp_fun_2_t _2;
@@ -1202,7 +1202,7 @@ typedef struct _mp_obj_fun_builtin_var_t {
     mp_obj_base_t base;
     uint32_t sig; // see MP_OBJ_FUN_MAKE_SIG
     union {
-#ifdef __XC__         
+#if defined (__XC__) || defined(SOMANET_SOFTWARE_MAIN)  || defined(USE_LOCAL_MAIN)       
         __attribute__(( fptrgroup("Aatif") ))mp_fun_var_t var;
         __attribute__(( fptrgroup("Aatif") ))mp_fun_kw_t kw;
 #else

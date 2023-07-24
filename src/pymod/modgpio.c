@@ -120,7 +120,7 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_1(gpio_PortRead_obj, gpio_PortRead);
 
 /***********************************************************************
  * Function Name: main 
- * Arguments	  : void
+ * Arguments	: void
  * Return Type	: int
  * Details	    : main function, start of the code 
  * *********************************************************************/
@@ -173,27 +173,25 @@ STATIC MP_DEFINE_CONST_FUN_OBJ_0(gpio_PrintGM_obj, gpio_PrintGM);
  * Return Type	: int
  * Details	    : main function, start of the code 
  * *********************************************************************/
-#if ENABLE_DISABLE_GPIO_IRQ == 1
-  #if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
-      #pragma stackfunction 1000
-  #endif 
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
+    #pragma stackfunction 1000
+#endif 
 STATIC mp_obj_t gpiopin_irq(size_t n_args, const mp_obj_t *pos_args, mp_map_t *kw_args) 
 {
-
-    enum { ARG_handler, ARG_trigger, ARG_PortPin };
+#if ENABLE_DISABLE_GPIO_IRQ == 1
+    enum { ARG_handler, ARG_trigger};
     static const mp_arg_t allowed_args[] = {
-        { MP_QSTR_handler, MP_ARG_OBJ,  {.u_rom_obj = MP_ROM_NONE }},      
-        { MP_QSTR_trigger, MP_ARG_INT,  {.u_int     = IRQ_RISING  }},
-        { MP_QSTR_PortPin, MP_ARG_INT,  {.u_int     = RESET}},          
+        { MP_QSTR_handler, MP_ARG_OBJ,  {.u_rom_obj = MP_ROM_NONE }},
+        { MP_QSTR_trigger, MP_ARG_INT,  {.u_int     = IRQ_RISING }},
     };
     
     pin_obj_t *self = MP_OBJ_TO_PTR(pos_args[0]);
     mp_arg_val_t args[MP_ARRAY_SIZE(allowed_args)];
     mp_arg_parse_all(n_args , pos_args, kw_args, MP_ARRAY_SIZE(allowed_args), allowed_args, args);
 
-    // Get the IRQ object.
-    uint8_t eic_id = 0;
-    machine_pin_irq_obj_t *irq = MP_STATE_PORT(machine_pin_irq_objects[eic_id]);
+     // Get the IRQ object.
+     uint8_t eic_id = 0;
+     machine_pin_irq_obj_t *irq = MP_STATE_PORT(machine_pin_irq_objects[eic_id]);
 
     if (n_args > 1 || kw_args->used != 0 ) 
      {  
@@ -202,14 +200,15 @@ STATIC mp_obj_t gpiopin_irq(size_t n_args, const mp_obj_t *pos_args, mp_map_t *k
         irq->base.base.type = &mp_irq_type;
         irq->base.parent    = MP_OBJ_FROM_PTR(self);
         MP_STATE_PORT(machine_pin_irq_objects[eic_id]) = irq;
-        irq->base.handler   = args[ARG_handler].u_obj;
+        irq->base.handler = args[ARG_handler].u_obj;
      }
-    
-    GPIOInterrupt(args[ARG_PortPin].u_int,args[ARG_trigger].u_int);
-    return mp_const_none; 
+
+    //GPIOInterrupt( );//args[ARG_trigger].u_int
+#endif
+    return mp_const_none;
 }
 STATIC MP_DEFINE_CONST_FUN_OBJ_KW(pin_irq_obj, 0, gpiopin_irq);
-#endif
+
 /***********************************************************************
  * Function Name: main 
  * Arguments	: void
@@ -224,7 +223,7 @@ STATIC const mp_rom_map_elem_t gpio_module_globals_table[] =
     { MP_ROM_QSTR(MP_QSTR_PortWrite), MP_ROM_PTR(&gpio_PortWrite_obj) },
     { MP_ROM_QSTR(MP_QSTR_PrintGM),   MP_ROM_PTR(&gpio_PrintGM_obj) },    
     { MP_ROM_QSTR(MP_QSTR_Toggle),    MP_ROM_PTR(&gpio_Toggle_obj) },
-    { MP_ROM_QSTR(MP_QSTR_pirq),        MP_ROM_PTR(&pin_irq_obj) }, 
+    { MP_ROM_QSTR(MP_QSTR_pirq),        MP_ROM_PTR(&pin_irq_obj) },
     { MP_ROM_QSTR(MP_QSTR_IRQ_RISING),  MP_ROM_INT(IRQ_RISING) },
     { MP_ROM_QSTR(MP_QSTR_IRQ_FALLING), MP_ROM_INT(IRQ_FALLING) },
 

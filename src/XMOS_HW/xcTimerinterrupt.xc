@@ -118,19 +118,19 @@
 void FnTimerInterruptHandler(void)
 {
 
-  static int ucTimerCount[(uint8_t)2] ;
+  static uint32_t uiTimerCount[(uint8_t)2] ;
 
-  for (uint8_t ucLoop=RESET; ucLoop < (uint8_t)2;ucLoop++)
+  for (uint8_t ucLoop=RESET; ucLoop < (uint8_t)2; ucLoop++)
       {
-        if( ucTimerIRQFlag[RESET] == SET)
+        if( ucTimerIRQFlag[ucLoop] == SET)
         {
-               ucTimerCount[ucLoop] ++;
-          if ( ucTimerCount[ucLoop] == ucTimerIRQTime[ucLoop])
-             { ucTimerCount[ucLoop]  = RESET;
+               uiTimerCount[ucLoop] ++;
+          if ( uiTimerCount[ucLoop] == ucTimerIRQTime[ucLoop])
+             { uiTimerCount[ucLoop]  = RESET;
                FnTimerIsrHandler(ucLoop);  }
         }
         else 
-        ucTimerCount[ucLoop] = RESET;
+        uiTimerCount[ucLoop] = RESET;
       }
 
 
@@ -143,18 +143,18 @@ void FnTimerInterruptHandler(void)
 }                             
 /***********************************************************************
  * Function Name: main 
- * Arguments	  : void
+ * Arguments	: void
  * Return Type	: int
- * Details	    : main function, start of the code
+ * Details	: main function, start of the code
  * *********************************************************************/
 unsigned FnTimerInterruptGetTime(hwtimer_t Var)
 { unsigned time; Var :> time; return time; }                                                           
 
 /***********************************************************************
  * Function Name: main 
- * Arguments	  : void
+ * Arguments	: void
  * Return Type	: int
- * Details	    : main function, start of the code
+ * Details	: main function, start of the code
  * *********************************************************************/
 int FnStartTheTimerIrq(uint32_t uiTime,uint8_t uiInstance)
 {
@@ -173,5 +173,5 @@ int FnStartTheTimerIrq(uint32_t uiTime,uint8_t uiInstance)
 void FnEnableTheTimerIRQ(void)
 {
   FnTimerInterruptInit (varTimerInterrupt);     
-  FnTimerInterruptStart(varTimerInterrupt , 250);//1 ms
+  FnTimerInterruptStart(varTimerInterrupt , 1);//1 ms
 }

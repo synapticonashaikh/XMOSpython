@@ -211,7 +211,7 @@ inline int32_t FnPortWrite(uint32_t uiport,uint32_t state)
 inline int32_t FnPortRead(uint32_t uiport)
 {
 
- int support, state = ERROR; 
+ int support, state = ERROR;
  switch (uiport)
     {
         /*IO ports-1BIT*/	
@@ -272,3 +272,4 @@ void FnPortToggle(uint32_t uiport)
 {
    FnPortWrite(uiport,!FnPortRead(uiport));
 }
+

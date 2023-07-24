@@ -109,7 +109,6 @@
   static int uifeedback    = RESET;
 
   uint8_t    ucDummyPin    = RESET;
-  extern uint8_t FnReadDummy(void);
 
 /* ----------------------------------------------------------------------------
  *                           Fnction Definitions
@@ -142,7 +141,7 @@ void FnGPIOIntrCheck(void)
     if ( uiReadPort != RESET )
     {
      // uifeedback = FnPortRead(uiReadPort); //read the current status
-        uifeedback = FnReadDummy( );
+        uifeedback = RESET;
       if (( uifeedback == SET ) 
       &&  ( uiStatus == RESET ))
           { uiStatus  =   SET;
@@ -175,7 +174,7 @@ void GPIOInterrupt(uint32_t uiPort, uint8_t ucMode)
   RisingFallingEdge = ucMode;
   uiReadPort        = uiPort;
   //uiStatus = FnPortRead(uiReadPort);
-   uiStatus = FnReadDummy( );
+   uiStatus = RESET;//FnReadDummy( );
 
 }
 

@@ -31,8 +31,8 @@ SRC_QSTR += $(PYLIBL)/readline.c
 SRC_QSTR += $(PYLIBL)/pyexec.c
 ifeq ($(ENABLE_DISABLE_OWN_MODULE), 1)
 SRC_QSTR += $(MODULEL)modmyport.c
-SRC_QSTR += $(MODULEL)modtimer.c
 SRC_QSTR += $(MODULEL)modgpio.c
+SRC_QSTR += $(MODULEL)modtimer.c
 SRC_QSTR += $(PYLIBL)/mpirq.c
 SRC_QSTR += $(MODULEL)modcoeobj.c
 endif

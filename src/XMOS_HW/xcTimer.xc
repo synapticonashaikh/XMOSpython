@@ -96,7 +96,7 @@
 */
 
     /*set the timer for 100ns */ 
-    timer varTimerInterrupt1;
+    extern timer varTimerInterrupt;
 
 /* ----------------------------------------------------------------------------
  *                           Fnction Definitions
@@ -115,14 +115,14 @@
  * Function Name: main 
  * Arguments	 : void
  * Return Type	 : int
- * Details	    : main function, start of the code
+ * Details	 : main function, start of the code
  * *********************************************************************/
 inline void FndelayuSec(uint32_t uiTime)
 {
    uint64_t uiTimeTotal;
-   varTimerInterrupt1 :> uiTimeTotal;
+   varTimerInterrupt :> uiTimeTotal;
    uiTimeTotal = uiTimeTotal + (uiTime * ui1uSec);
-   varTimerInterrupt1 when timerafter(uiTimeTotal) :> void;
+   varTimerInterrupt when timerafter(uiTimeTotal) :> void;
 }
 
 /***********************************************************************
@@ -134,9 +134,9 @@ inline void FndelayuSec(uint32_t uiTime)
 inline void FndelaymSec(uint32_t uiTime)
 {
    uint64_t  uiTimeTotal;
-   varTimerInterrupt1 :> uiTimeTotal;
+   varTimerInterrupt :> uiTimeTotal;
    uiTimeTotal = uiTimeTotal + (uiTime * ui1mSec) ;     
-   varTimerInterrupt1 when timerafter(uiTimeTotal) :> void;  
+   varTimerInterrupt when timerafter(uiTimeTotal) :> void;  
 }
 
 /***********************************************************************
@@ -148,7 +148,7 @@ inline void FndelaymSec(uint32_t uiTime)
 inline void FndelaySec(uint32_t uiTime)
 {
    uint64_t uiTimeTotal;
-   varTimerInterrupt1 :> uiTimeTotal;
+   varTimerInterrupt :> uiTimeTotal;
    uiTimeTotal = uiTimeTotal + (uiTime * ui1Sec) ;     
-   varTimerInterrupt1 when timerafter(uiTimeTotal) :> void;  
+   varTimerInterrupt when timerafter(uiTimeTotal) :> void;  
 }

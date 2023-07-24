@@ -52,13 +52,22 @@ enum {
 };
 
 typedef struct _mp_irq_methods_t {
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
+     __attribute__(( fptrgroup("Aatif") ))mp_irq_trigger_fun_t trigger;
+     __attribute__(( fptrgroup("Aatif") ))mp_irq_info_fun_t info;
+#else
     mp_irq_trigger_fun_t trigger;
     mp_irq_info_fun_t info;
+#endif
 } mp_irq_methods_t;
 
 typedef struct _mp_irq_obj_t {
     mp_obj_base_t base;
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
+     __attribute__(( fptrgroup("Aatif") ))mp_irq_methods_t *methods;
+#else
     mp_irq_methods_t *methods;
+#endif
     mp_obj_t parent;
     mp_obj_t handler;
     bool ishard;

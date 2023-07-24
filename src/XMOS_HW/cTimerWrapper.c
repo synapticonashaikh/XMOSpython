@@ -126,7 +126,7 @@ void FnTimerInterruptUpdate(hwtimer_t Var)
     DISABLE_INTERRUPTS( );
     asm volatile("setc res[%0], %1"::"r"(Var),"r"(XS1_SETC_COND_NONE));
     time = FnTimerInterruptGetTime(Var);
-    time += (ui1uSec * globalTimer);
+    time += (ui1mSec * globalTimer);
     asm volatile("setd res[%0], %1"::"r"(Var),"r"(time));
     asm volatile("setc res[%0], %1"::"r"(Var),"r"(XS1_SETC_COND_AFTER));
 }    

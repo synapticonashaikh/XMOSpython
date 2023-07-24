@@ -108,14 +108,12 @@
  * ----------------------------------------------------------------------------
 */
 
-    #ifdef __XC__
-            interface
-            MicroPythonInterface 
-            { 
-              [[notification]] slave void service_ready(void);
-              void SvStartTheScript(void);
-            };
-    #endif
+#ifdef __XC__
+interface MicroPythonInterface
+{
+  [[notification]] slave void service_ready(void);
+};
+#endif
 
 /* ---------------------------------------------------------------------------
 *                           FUNCTIONS DECLARATION

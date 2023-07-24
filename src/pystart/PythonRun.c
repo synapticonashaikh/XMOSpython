@@ -16,12 +16,12 @@
  ______________________________________________________________________________________
 
   Description:
-	This file contains the source code for a self-practice task by Synapticon GmbH. 
-    It implements the logic of the application's requirements, and it may call API 
-    routines from a different section of the code, such as drivers, system services, 
-    and middleware (if applicable). However, at present, this code is not calling 
+	This file contains the source code for a self-practice task by Synapticon GmbH.
+    It implements the logic of the application's requirements, and it may call API
+    routines from a different section of the code, such as drivers, system services,
+    and middleware (if applicable). However, at present, this code is not calling
     any of the system-specified APIs (such as the "USARTInitialize" and "TimerTasks"
-    functions) of any of the modules in the system. To make the code development 
+    functions) of any of the modules in the system. To make the code development
     environment-friendly, the majority of the code shall be using self-created drivers.
 
  **************************************************************************************
@@ -50,29 +50,29 @@
   ************************************************************************************/
 
   /************************************************************************************
-  ______                                            __      __                                     
- /      \                                          |  \    |  \                                    
-|  $$$$$$\ __    __  _______    ______    ______  _| $$_    \$$  _______   ______   _______        
-| $$___\$$|  \  |  \|       \  |      \  /      \|   $$ \  |  \ /       \ /      \ |       \       
- \$$    \ | $$  | $$| $$$$$$$\  \$$$$$$\|  $$$$$$\\$$$$$$  | $$|  $$$$$$$|  $$$$$$\| $$$$$$$\      
- _\$$$$$$\| $$  | $$| $$  | $$ /      $$| $$  | $$ | $$ __ | $$| $$      | $$  | $$| $$  | $$      
-|  \__| $$| $$__/ $$| $$  | $$|  $$$$$$$| $$__/ $$ | $$|  \| $$| $$_____ | $$__/ $$| $$  | $$      
- \$$    $$ \$$    $$| $$  | $$ \$$    $$| $$    $$  \$$  $$| $$ \$$     \ \$$    $$| $$  | $$      
-  \$$$$$$  _\$$$$$$$ \$$   \$$  \$$$$$$$| $$$$$$$    \$$$$  \$$  \$$$$$$$  \$$$$$$  \$$   \$$      
-          |  \__| $$                    | $$                                                       
-           \$$    $$                    | $$                                                       
-            \$$$$$$                      \$$                                                       
-                          ______                 __        __    __                                
-                         /      \               |  \      |  \  |  \                               
-                        |  $$$$$$\ ______ ____  | $$____  | $$  | $$                               
-                        | $$ __\$$|      \    \ | $$    \ | $$__| $$                               
-                        | $$|    \| $$$$$$\$$$$\| $$$$$$$\| $$    $$                               
-                        | $$ \$$$$| $$ | $$ | $$| $$  | $$| $$$$$$$$                               
-                        | $$__| $$| $$ | $$ | $$| $$__/ $$| $$  | $$                               
-                         \$$    $$| $$ | $$ | $$| $$    $$| $$  | $$                               
-                          \$$$$$$  \$$  \$$  \$$ \$$$$$$$  \$$   \$$                               
-                                                                                                   
-                                                                                                                                                                                                   
+  ______                                            __      __
+ /      \                                          |  \    |  \
+|  $$$$$$\ __    __  _______    ______    ______  _| $$_    \$$  _______   ______   _______
+| $$___\$$|  \  |  \|       \  |      \  /      \|   $$ \  |  \ /       \ /      \ |       \
+ \$$    \ | $$  | $$| $$$$$$$\  \$$$$$$\|  $$$$$$\\$$$$$$  | $$|  $$$$$$$|  $$$$$$\| $$$$$$$\
+ _\$$$$$$\| $$  | $$| $$  | $$ /      $$| $$  | $$ | $$ __ | $$| $$      | $$  | $$| $$  | $$
+|  \__| $$| $$__/ $$| $$  | $$|  $$$$$$$| $$__/ $$ | $$|  \| $$| $$_____ | $$__/ $$| $$  | $$
+ \$$    $$ \$$    $$| $$  | $$ \$$    $$| $$    $$  \$$  $$| $$ \$$     \ \$$    $$| $$  | $$
+  \$$$$$$  _\$$$$$$$ \$$   \$$  \$$$$$$$| $$$$$$$    \$$$$  \$$  \$$$$$$$  \$$$$$$  \$$   \$$
+          |  \__| $$                    | $$
+           \$$    $$                    | $$
+            \$$$$$$                      \$$
+                          ______                 __        __    __
+                         /      \               |  \      |  \  |  \
+                        |  $$$$$$\ ______ ____  | $$____  | $$  | $$
+                        | $$ __\$$|      \    \ | $$    \ | $$__| $$
+                        | $$|    \| $$$$$$\$$$$\| $$$$$$$\| $$    $$
+                        | $$ \$$$$| $$ | $$ | $$| $$  | $$| $$$$$$$$
+                        | $$__| $$| $$ | $$ | $$| $$__/ $$| $$  | $$
+                         \$$    $$| $$ | $$ | $$| $$    $$| $$  | $$
+                          \$$$$$$  \$$  \$$  \$$ \$$$$$$$  \$$   \$$
+
+
 		        In order to be irreplaceable, one must always be different
   *************************************************************************************/
 
@@ -80,9 +80,9 @@
  *                           MACROS
  * ----------------------------------------------------------------------------
 */
-    //this heap memroy stores the data
-    #define _STATIC_HEAP_SIZE (uint16_t)10000
- 
+    // Heap memroy to store the data of 8 KBytes
+    #define _STATIC_HEAP_SIZE (uint16_t)8*1024
+
     #define  PARSE_SINGLE_INPUT   0
     #define  PARSE_FILE_INPUT     1
     #define  PARSE_EVAL_INPUT     2
@@ -93,18 +93,18 @@
 */
     #include "header.h"
 
-    #include "builtin.h"
-    #include "compile.h"
-    #include "runtime.h"
-    #include "repl.h"
-    #include "gc.h"
-    #include "mperrno.h"
-    #include "pyexec.h"
-    #include "readline.h"
-    #include "interrupt_char.h"
-    #include "persistentcode.h"
-    #include "bc.h"
-    #include "reader.h"
+    #include "py/builtin.h"
+    #include "py/compile.h"
+    #include "py/runtime.h"
+    #include "py/repl.h"
+    #include "py/gc.h"
+    #include "py/mperrno.h"
+    #include "py/pyexec.h"
+    #include "py/readline.h"
+    #include "py/interrupt_char.h"
+    #include "py/persistentcode.h"
+    #include "py/bc.h"
+    #include "py/reader.h"
 
     #define  PARSE_SINGLE_INPUT   0
     #define  PARSE_FILE_INPUT     1
@@ -123,6 +123,7 @@
  * ----------------------------------------------------------------------------
 */
     static char *stack_top;
+    uint8_t ucGCInitFlag = RESET;
     #if MICROPY_ENABLE_GC
         static char heap[_STATIC_HEAP_SIZE];
     #endif   
@@ -132,16 +133,16 @@
  * ----------------------------------------------------------------------------
 */
 /***********************************************************************
- * Function Name: main 
+ * Function Name: main
  * Arguments	: void
  * Return Type	: int
- * Details	    : main function, start of the code
+ * Details	: main function, start of the code
  * *********************************************************************/
 #if MICROPY_ENABLE_COMPILER
-void do_str(const char *src, mp_parse_input_kind_t input_kind) 
+void do_str(const char *src, mp_parse_input_kind_t input_kind)
 {
     nlr_buf_t nlr;
-    if ( nlr_push(&nlr) == 0) 
+    if ( nlr_push(&nlr) == 0)
        {
          mp_lexer_t *lex  = mp_lexer_new_from_str_len(MP_QSTR__lt_stdin_gt_, src, strlen(src), 0);
          qstr source_name = lex->source_name;
@@ -149,8 +150,8 @@ void do_str(const char *src, mp_parse_input_kind_t input_kind)
          mp_obj_t module_fun = mp_compile(&parse_tree, source_name, true);
          mp_call_function_0(module_fun);
          nlr_pop( );
-       } 
-    else 
+       }
+    else
        {
          // uncaught exception
          mp_obj_print_exception(&mp_plat_print, (mp_obj_t)nlr.ret_val);
@@ -165,10 +166,29 @@ void do_str(const char *src, mp_parse_input_kind_t input_kind)
  * Details	    : main function, start of the code
  * *********************************************************************/
 #if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
+        #pragma stackfunction 2000
+#endif
+void FnStopTheScript(void)
+{
+  mp_sched_lock( ); gc_lock( );
+  mp_raise_type(&mp_type_SystemExit);
+  mp_sched_unlock(); gc_unlock( );
+
+  /*deinit*/ 
+  mp_deinit( );
+}
+
+/***********************************************************************
+ * Function Name: main 
+ * Arguments	: void
+ * Return Type	: int
+ * Details	    : main function, start of the code
+ * *********************************************************************/
+#if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
         #pragma stackfunction 1000
 #endif
-int FnMPInterpreterConsole(void) 
-{ 
+int FnMPInterpreterConsole(void)
+{
     int stack_dummy;
     stack_top = (char *)&stack_dummy;
 
@@ -176,14 +196,14 @@ int FnMPInterpreterConsole(void)
     gc_init(heap, heap + sizeof(heap));
     #endif
     mp_init( );
-    
+
     #if MICROPY_ENABLE_COMPILER
-        #if MICROPY_REPL_EVENT_DRIVEN         
+        #if MICROPY_REPL_EVENT_DRIVEN
             pyexec_event_repl_init( );
-            for (;;) 
+            for (;;)
             {
                 int c = mp_hal_stdin_rx_chr( );
-                if (pyexec_event_repl_process_char(c)) 
+                if (pyexec_event_repl_process_char(c))
                 {
                     break;
                 }
@@ -201,10 +221,10 @@ int FnMPInterpreterConsole(void)
 }
 
 /***********************************************************************
- * Function Name: main 
- * Arguments	  : void
+ * Function Name: main
+ * Arguments	: void
  * Return Type	: int
- * Details	    : main function, start of the code
+ * Details	: main function, start of the code
  * *********************************************************************/
 #if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
     #pragma stackfunction 1000
@@ -212,13 +232,16 @@ int FnMPInterpreterConsole(void)
 char * FnRunTheCommand(char *ByteCode, uint32_t CodeLen, uint8_t BytecodeORStr)
 {
 
-    FndelaySec(2);
     int stack_dummy;
     stack_top = (char *)&stack_dummy;    
     static char *ret  = "Sucess!";
 
     #if MICROPY_ENABLE_GC
+    if (ucGCInitFlag == RESET)
+    {   ucGCInitFlag = SET;
         gc_init(heap, heap + sizeof(heap));
+        FnEnableTheTimerIRQ( ); //enable the timer
+    }
     #endif
     /*init the mp stack*/
        mp_init( );
@@ -226,10 +249,9 @@ char * FnRunTheCommand(char *ByteCode, uint32_t CodeLen, uint8_t BytecodeORStr)
     if (BytecodeORStr == SET)
     {
       #ifdef USE_LOCAL_MAIN
-            printf("Script:\n%s",(char *)ByteCode, strlen(ByteCode));  
+            printf("Script:\n%s",(char *)ByteCode, strlen(ByteCode));
       #endif
       #if MICROPY_ENABLE_COMPILER
-          FnEnableTheTimerIRQ( ); //enable the timer
           do_str(ByteCode, PARSE_FILE_INPUT);
       #endif
     }
@@ -249,21 +271,20 @@ char * FnRunTheCommand(char *ByteCode, uint32_t CodeLen, uint8_t BytecodeORStr)
 
     /*deinit*/ 
     mp_deinit( );
-
     return ret;
 }
 
 /***********************************************************************
- * Function Name: main 
+ * Function Name: main
  * Arguments	: void
  * Return Type	: int
- * Details	    : main function, start of the code
+ * Details	: main function, start of the code
  * *********************************************************************/
 #if MICROPY_ENABLE_GC
 #if defined(SOMANET_SOFTWARE_MAIN) || defined(USE_LOCAL_MAIN)
     #pragma stackfunction 1000
 #endif
-void gc_collect(void) 
+void gc_collect(void)
 {
     // WARNING: This gc_collect implementation doesn't try to get root
     // pointers from CPU registers, and thus may function incorrectly.
@@ -271,27 +292,27 @@ void gc_collect(void)
     gc_collect_start( );
     gc_collect_root(&dummy, ((mp_uint_t)stack_top - (mp_uint_t)&dummy) / sizeof(mp_uint_t));
     gc_collect_end( );
-    //printing the memory remaining is not necessary   
+    //printing the memory remaining is not necessary
     //gc_dump_info( );
 }
 #endif
 
 /***********************************************************************
- * Function Name: main 
+ * Function Name: main
  * Arguments	: void
  * Return Type	: int
- * Details	    : main function, start of the code
+ * Details	: main function, start of the code
  * *********************************************************************/
-mp_lexer_t *mp_lexer_new_from_file(const char *filename) 
+mp_lexer_t *mp_lexer_new_from_file(const char *filename)
 {  mp_raise_OSError(MP_ENOENT); }
 
-mp_import_stat_t mp_import_stat(const char *path) 
+mp_import_stat_t mp_import_stat(const char *path)
 { return MP_IMPORT_STAT_NO_EXIST;}
 
-void nlr_jump_fail(void *val) 
+void nlr_jump_fail(void *val)
 { while (1) {  }; }
 
-void NORETURN __fatal_error(const char *msg) 
+void NORETURN __fatal_error(const char *msg)
 { while (1) {  }; }
 
 #ifndef NDEBUG
