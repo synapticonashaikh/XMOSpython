@@ -1,0 +1,7 @@
+Q(__name__)
+Q(file)
+Q(fread)
+Q(fwrite)
+Q(APPEND)
+Q(TRUNC)
+Q(file)

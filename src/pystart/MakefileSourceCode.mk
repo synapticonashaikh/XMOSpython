@@ -24,6 +24,7 @@ SRC_C +=  $(MODULEL)modmyport.c
 SRC_C +=  $(MODULEL)modgpio.c
 SRC_C +=  $(MODULEL)modtimer.c
 SRC_C +=  $(MODULEL)modcoeobj.c
+SRC_C +=  $(MODULEL)modfile.c
 endif
 
 #add the library for reading the commands at interpretor
@@ -35,4 +36,5 @@ SRC_QSTR += $(MODULEL)modgpio.c
 SRC_QSTR += $(MODULEL)modtimer.c
 SRC_QSTR += $(PYLIBL)/mpirq.c
 SRC_QSTR += $(MODULEL)modcoeobj.c
+SRC_QSTR += $(MODULEL)modfile.c
 endif

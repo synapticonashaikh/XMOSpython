@@ -1,3 +1,5 @@
+Q(APPEND)
+
 Q(ArithmeticError)
 
 Q(ArithmeticError)
@@ -190,6 +192,8 @@ Q(SystemExit)
 
 Q(SystemExit)
 
+Q(TRUNC)
+
 Q(Toggle)
 
 Q(TypeError)
@@ -285,6 +289,8 @@ Q(__main__)
 Q(__main__)
 
 Q(__module__)
+
+Q(__name__)
 
 Q(__name__)
 
@@ -480,11 +486,17 @@ Q(exec)
 
 Q(extend)
 
+Q(file)
+
+Q(file)
+
 Q(find)
 
 Q(flags)
 
 Q(format)
+
+Q(fread)
 
 Q(from_bytes)
 
@@ -501,6 +513,8 @@ Q(function)
 Q(function)
 
 Q(function)
+
+Q(fwrite)
 
 Q(generator)
 

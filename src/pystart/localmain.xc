@@ -125,33 +125,23 @@
  * Details	    : main function, start of the code
  * *********************************************************************/
 #ifdef CODE_WITHOUT_PYTHON_INTRACTIVE_TERMINAL
-  void FnSender(client interface MicroPythonInterface upy)
-  {
-      unsafe
-      {
+void FnSender(client interface MicroPythonInterface upy)
+{
+    unsafe
+    {
         char * unsafe command = 
-       "from delay import *\n"
-       "from gpio import *\n"
-       "Loop1 = 0\n"
-       "Loop2 = 0\n"        
-       "def CallBack1(self):\n"
-       "    global Loop1\n"
-       "    Loop1 = Loop1 + 1\n"
-       "    print('Count1 = ' + str(Loop1))\n"
-       "def CallBack2(self):\n"
-       "    global Loop2\n"
-       "    Loop2 = Loop2 + 1\n"
-       "    print('Count2 = ' + str(Loop2))\n"
-       "delaySec(1)\n"
-       "tirq(handler=CallBack2,duration=2000,instance=1)\n"
-       "tirq(handler=CallBack1,duration=500,instance=0)\n"
-       "while True:\n"
-       "      pass\n";
+        "from file import *\n"
+        "from delay import *\n"
+        "delaySec(2)\n"
+        "str1 = fread('PythonLog.log',0,100)\n"
+        "print(str1)\n"
+        "while True:\n"
+        "     pass\n";
 
         upy.FnExecute(command);
         while (SET);
-      }
-  }
+    }
+}
 
 /***********************************************************************
  * Function Name: main 

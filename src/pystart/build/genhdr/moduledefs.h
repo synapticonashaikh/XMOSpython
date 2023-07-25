@@ -16,6 +16,10 @@ extern const struct _mp_obj_module_t delay_module;
 #undef MODULE_DEF_DELAY
 #define MODULE_DEF_DELAY { MP_ROM_QSTR(MP_QSTR_delay), MP_ROM_PTR(&delay_module) },
 
+extern const struct _mp_obj_module_t file_module;
+#undef MODULE_DEF_FILE
+#define MODULE_DEF_FILE { MP_ROM_QSTR(MP_QSTR_file), MP_ROM_PTR(&file_module) },
+
 extern const struct _mp_obj_module_t gpio_module;
 #undef MODULE_DEF_GPIO
 #define MODULE_DEF_GPIO { MP_ROM_QSTR(MP_QSTR_gpio), MP_ROM_PTR(&gpio_module) },
@@ -28,6 +32,7 @@ extern const struct _mp_obj_module_t myport_module;
 #define MICROPY_REGISTERED_MODULES \
     MODULE_DEF_BUILTINS \
     MODULE_DEF_DELAY \
+    MODULE_DEF_FILE \
     MODULE_DEF_GPIO \
     MODULE_DEF_MYPORT \
     MODULE_DEF_OBJDITC \

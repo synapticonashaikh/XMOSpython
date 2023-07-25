@@ -8,7 +8,19 @@
 
 3-arg pow() not supported
 
+File is too large
+
+File length is invalid
+
+File name is too long
+
+File name is too long
+
 INVALID INSTANCE
+
+Invalid file flag
+
+Invalid file name
 
 LHS of keyword arg must be an id
 
