@@ -133,8 +133,9 @@ void FnSender(client interface MicroPythonInterface upy)
         "from file import *\n"
         "from delay import *\n"
         "delaySec(2)\n"
-        "str1 = fread('PythonLog.log',0,100)\n"
-        "print(str1)\n"
+        "wr = fwrite('PythonLog.log',APPEND,'ADDED DATA')\n"
+        "str1 = fread('PythonLog.log',0,200)\n"
+        "print(str1)\n"        
         "while True:\n"
         "     pass\n";
 
@@ -191,7 +192,7 @@ void FnRandomFunction(void)
       localtimer when timerafter(uiTimeTotal) :> void;
 
           ucLocalCounter ++;
-      if( ucLocalCounter == 10 )
+      if( ucLocalCounter == 20 )
          {
            //ucLocalCounter = RESET;
            printf("Stoping the script!\n");

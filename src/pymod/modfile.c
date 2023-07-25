@@ -202,8 +202,11 @@ STATIC mp_obj_t file_fwrite(mp_obj_t a,mp_obj_t b,mp_obj_t c)
       while( ucFileCommad != RESET )
            { FndelaymSec((uint8_t)1); }     
 #elif defined(USE_LOCAL_MAIN)
-      if (uiFileFlag == TRUNC)
-          strcpy(ucDummyFile,(char *)mp_obj_str_get_str(c));
+      if ( uiFileFlag == TRUNC )
+          {
+             memset(ucDummyFile, RESET, sizeof(ucDummyFile));
+             strcpy(ucDummyFile,(char *)mp_obj_str_get_str(c));            
+          }
       else
           {
             if((strlen(ucDummyFile) + strlen((char *)mp_obj_str_get_str(c))) < BUFFER_LEN ) 
